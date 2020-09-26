@@ -250,6 +250,8 @@ Public Class F1_Productos
         cbUniVenta.ReadOnly = False
         cbUnidMaxima.ReadOnly = False
         tbConversion.IsInputReadOnly = False
+        tbPrecioVentaNormal.IsInputReadOnly = False
+        tbPrecioVentaMayorista.IsInputReadOnly = False
         _prCrearCarpetaImagenes()
         _prCrearCarpetaTemporal()
         BtAdicionar.Visible = True
@@ -271,6 +273,8 @@ Public Class F1_Productos
         cbgrupo1.ReadOnly = True
         cbgrupo2.ReadOnly = True
         cbgrupo3.ReadOnly = True
+        tbPrecioVentaNormal.IsInputReadOnly = True
+        tbPrecioVentaMayorista.IsInputReadOnly = True
         cbgrupo4.ReadOnly = True
         cbgrupo5.ReadOnly = True
         cbUMed.ReadOnly = True
@@ -314,6 +318,8 @@ Public Class F1_Productos
         UsImg.pbImage.Image = My.Resources.pantalla
 
         armarGrillaDetalleProducto(0)
+        tbPrecioVentaNormal.Value = 0
+        tbPrecioVentaMayorista.Value = 0
     End Sub
 
     Private Sub adicionarFilaDetalleProducto()
@@ -361,7 +367,7 @@ Public Class F1_Productos
                                                 tbConversion.Text,
                                                 IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text),
                                                 IIf(swEstado.Value = True, 1, 0), nameImg,
-                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value)
+                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
 
 
         If res Then
@@ -391,9 +397,9 @@ Public Class F1_Productos
 
         Dim nameImage As String = JGrM_Buscador.GetValue("yfimg")
         If (Modificado = False) Then
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
         Else
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
         End If
         If res Then
 
@@ -581,6 +587,8 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yffact", False))
         listEstCeldas.Add(New Modelo.Celda("yfhact", False))
         listEstCeldas.Add(New Modelo.Celda("yfuact", False))
+        listEstCeldas.Add(New Modelo.Celda("VentaNormal", False))
+        listEstCeldas.Add(New Modelo.Celda("VentaMayorista", False))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo2", True, lbgrupo2.Text.Substring(0, lbgrupo2.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo3", True, lbgrupo3.Text.Substring(0, lbgrupo3.Text.Length - 1).ToUpper, 150))
@@ -617,6 +625,8 @@ Public Class F1_Productos
             cbgrupo4.Value = .GetValue("yfgr4")
             cbgrupo5.Value = .GetValue("yfgr5")
             cbUMed.Value = .GetValue("yfMed")
+            tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
+            tbPrecioVentaMayorista.Value = .GetValue("VentaMayorista")
             cbUniVenta.Value = .GetValue("yfumin")
             cbUnidMaxima.Value = .GetValue("yfusup")
             tbConversion.Value = .GetValue("yfvsup")
@@ -1100,4 +1110,6 @@ Public Class F1_Productos
             Timer1.Enabled = False
         End If
     End Sub
+
+
 End Class
