@@ -420,8 +420,7 @@ Public Class AccesoLogica
                                               _yfgr3 As Integer, _yfgr4 As Integer, _yfMed As Integer, _yfumin As Integer,
                                               _yfusup As Integer, _yfvsup As Double, _yfsmin As Integer, _yfap As Integer,
                                               _yfimg As String, TY0051 As DataTable,
-                                              _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double
-                                              ) As Boolean
+                                              _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String) As Boolean
         Dim _resultado As Boolean
         '@yfnumi ,@yfcprod ,@yfcbarra ,@yfcdprod1 ,@yfcdprod2 ,
         '			@yfgr1 ,@yfgr2 ,@yfgr3 ,@yfgr4 ,@yfMed ,@yfumin ,@yfusup ,@yfvsup ,
@@ -454,6 +453,9 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfgr5", _yfgr5))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaNormal", PrecioVentaNormal))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaMayorista", PrecioVentaMayorista))
+        _listParam.Add(New Datos.DParametro("@yfPrecioVentaMecanico", PrecioVentaMecanico))
+        _listParam.Add(New Datos.DParametro("@yfPrecioCosto", PrecioCosto))
+        _listParam.Add(New Datos.DParametro("@yfCodigoMarca", codigoMarca))
         _listParam.Add(New Datos.DParametro("@TY0051", "", TY0051))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
 
@@ -473,8 +475,7 @@ Public Class AccesoLogica
                                                  _yfgr3 As Integer, _yfgr4 As Integer, _yfMed As Integer,
                                                  _yfumin As Integer, _yfusup As Integer, _yfvsup As Double,
                                                  _yfsmin As Integer, _yfap As Integer, _yfimg As String,
-                                                 TY0051 As DataTable, _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double
-                                              ) As Boolean
+                                                 TY0051 As DataTable, _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -497,7 +498,9 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfvsup", _yfvsup))
         _listParam.Add(New Datos.DParametro("@yfmstk", 0))
         _listParam.Add(New Datos.DParametro("@yfclot", 0))
-
+        _listParam.Add(New Datos.DParametro("@yfPrecioVentaMecanico", PrecioVentaMecanico))
+        _listParam.Add(New Datos.DParametro("@yfPrecioCosto", PrecioCosto))
+        _listParam.Add(New Datos.DParametro("@yfCodigoMarca", codigoMarca))
         _listParam.Add(New Datos.DParametro("@yfsmin", _yfsmin))
         _listParam.Add(New Datos.DParametro("@yfap", _yfap))
         _listParam.Add(New Datos.DParametro("@yfimg", _yfimg))

@@ -252,6 +252,11 @@ Public Class F1_Productos
         tbConversion.IsInputReadOnly = False
         tbPrecioVentaNormal.IsInputReadOnly = False
         tbPrecioVentaMayorista.IsInputReadOnly = False
+        tbCodigoMarca.ReadOnly = False
+        tbPrecioMecanico.IsInputReadOnly = False
+        tbPrecioCosto.IsInputReadOnly = False
+
+
         _prCrearCarpetaImagenes()
         _prCrearCarpetaTemporal()
         BtAdicionar.Visible = True
@@ -275,6 +280,9 @@ Public Class F1_Productos
         cbgrupo3.ReadOnly = True
         tbPrecioVentaNormal.IsInputReadOnly = True
         tbPrecioVentaMayorista.IsInputReadOnly = True
+        tbCodigoMarca.ReadOnly = True
+        tbPrecioMecanico.IsInputReadOnly = True
+        tbPrecioCosto.IsInputReadOnly = True
         cbgrupo4.ReadOnly = True
         cbgrupo5.ReadOnly = True
         cbUMed.ReadOnly = True
@@ -299,6 +307,12 @@ Public Class F1_Productos
         tbCodProd.Clear()
         tbDescPro.Clear()
         tbDescDet.Clear()
+        tbPrecioCosto.Value = 0
+        tbPrecioMecanico.Value = 0
+        tbPrecioVentaMayorista.Value = 0
+        tbPrecioVentaNormal.Value = 0
+        tbCodigoMarca.Clear()
+
         tbDescCort.Clear()
         If (Limpiar = False) Then
             _prSeleccionarCombo(cbgrupo1)
@@ -367,7 +381,7 @@ Public Class F1_Productos
                                                 tbConversion.Text,
                                                 IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text),
                                                 IIf(swEstado.Value = True, 1, 0), nameImg,
-                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
+                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
 
 
         If res Then
@@ -397,9 +411,9 @@ Public Class F1_Productos
 
         Dim nameImage As String = JGrM_Buscador.GetValue("yfimg")
         If (Modificado = False) Then
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
         Else
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
         End If
         If res Then
 
