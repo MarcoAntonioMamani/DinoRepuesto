@@ -641,7 +641,7 @@ Partial Class F1_Productos
         Me.cbgrupo3.SelectedIndex = -1
         Me.cbgrupo3.SelectedItem = Nothing
         Me.cbgrupo3.Size = New System.Drawing.Size(192, 26)
-        Me.cbgrupo3.TabIndex = 2
+        Me.cbgrupo3.TabIndex = 3
         Me.cbgrupo3.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'cbgrupo4
@@ -658,7 +658,7 @@ Partial Class F1_Productos
         Me.cbgrupo4.SelectedIndex = -1
         Me.cbgrupo4.SelectedItem = Nothing
         Me.cbgrupo4.Size = New System.Drawing.Size(192, 26)
-        Me.cbgrupo4.TabIndex = 3
+        Me.cbgrupo4.TabIndex = 4
         Me.cbgrupo4.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'btgrupo1
@@ -750,7 +750,7 @@ Partial Class F1_Productos
         Me.cbUMed.SelectedIndex = -1
         Me.cbUMed.SelectedItem = Nothing
         Me.cbUMed.Size = New System.Drawing.Size(192, 26)
-        Me.cbUMed.TabIndex = 4
+        Me.cbUMed.TabIndex = 5
         Me.cbUMed.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'LabelX8
@@ -839,7 +839,7 @@ Partial Class F1_Productos
         Me.tbCodProd.Name = "tbCodProd"
         Me.tbCodProd.PreventEnterBeep = True
         Me.tbCodProd.Size = New System.Drawing.Size(221, 24)
-        Me.tbCodProd.TabIndex = 1
+        Me.tbCodProd.TabIndex = 0
         '
         'tbCodBarra
         '
@@ -893,7 +893,7 @@ Partial Class F1_Productos
         Me.swEstado.OnTextColor = System.Drawing.Color.White
         Me.swEstado.Size = New System.Drawing.Size(181, 27)
         Me.swEstado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swEstado.TabIndex = 6
+        Me.swEstado.TabIndex = 7
         Me.swEstado.Value = True
         Me.swEstado.ValueObject = "Y"
         '
@@ -1271,7 +1271,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaMayorista.MinValue = 0R
         Me.tbPrecioVentaMayorista.Name = "tbPrecioVentaMayorista"
         Me.tbPrecioVentaMayorista.Size = New System.Drawing.Size(120, 26)
-        Me.tbPrecioVentaMayorista.TabIndex = 221
+        Me.tbPrecioVentaMayorista.TabIndex = 9
         Me.tbPrecioVentaMayorista.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
         '
         'LabelX14
@@ -1307,7 +1307,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaNormal.MinValue = 0R
         Me.tbPrecioVentaNormal.Name = "tbPrecioVentaNormal"
         Me.tbPrecioVentaNormal.Size = New System.Drawing.Size(120, 26)
-        Me.tbPrecioVentaNormal.TabIndex = 219
+        Me.tbPrecioVentaNormal.TabIndex = 8
         Me.tbPrecioVentaNormal.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
         '
         'btgrupo5
@@ -1357,7 +1357,7 @@ Partial Class F1_Productos
         Me.cbgrupo5.SelectedIndex = -1
         Me.cbgrupo5.SelectedItem = Nothing
         Me.cbgrupo5.Size = New System.Drawing.Size(192, 26)
-        Me.cbgrupo5.TabIndex = 216
+        Me.cbgrupo5.TabIndex = 2
         Me.cbgrupo5.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'GroupPanel3
@@ -1577,7 +1577,7 @@ Partial Class F1_Productos
         Me.tbCodigoMarca.Name = "tbCodigoMarca"
         Me.tbCodigoMarca.PreventEnterBeep = True
         Me.tbCodigoMarca.Size = New System.Drawing.Size(221, 24)
-        Me.tbCodigoMarca.TabIndex = 229
+        Me.tbCodigoMarca.TabIndex = 1
         '
         'LabelX17
         '
@@ -1612,7 +1612,7 @@ Partial Class F1_Productos
         Me.tbPrecioMecanico.MinValue = 0R
         Me.tbPrecioMecanico.Name = "tbPrecioMecanico"
         Me.tbPrecioMecanico.Size = New System.Drawing.Size(120, 26)
-        Me.tbPrecioMecanico.TabIndex = 225
+        Me.tbPrecioMecanico.TabIndex = 7
         Me.tbPrecioMecanico.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
         '
         'LabelX18
@@ -1648,7 +1648,7 @@ Partial Class F1_Productos
         Me.tbPrecioCosto.MinValue = 0R
         Me.tbPrecioCosto.Name = "tbPrecioCosto"
         Me.tbPrecioCosto.Size = New System.Drawing.Size(120, 26)
-        Me.tbPrecioCosto.TabIndex = 223
+        Me.tbPrecioCosto.TabIndex = 6
         Me.tbPrecioCosto.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
         '
         'F1_Productos

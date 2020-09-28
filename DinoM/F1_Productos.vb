@@ -603,6 +603,9 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yfuact", False))
         listEstCeldas.Add(New Modelo.Celda("VentaNormal", False))
         listEstCeldas.Add(New Modelo.Celda("VentaMayorista", False))
+        listEstCeldas.Add(New Modelo.Celda("VentaMecanico", False))
+        listEstCeldas.Add(New Modelo.Celda("PrecioCosto", False))
+        listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", False))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo2", True, lbgrupo2.Text.Substring(0, lbgrupo2.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo3", True, lbgrupo3.Text.Substring(0, lbgrupo3.Text.Length - 1).ToUpper, 150))
@@ -641,6 +644,10 @@ Public Class F1_Productos
             cbUMed.Value = .GetValue("yfMed")
             tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
             tbPrecioVentaMayorista.Value = .GetValue("VentaMayorista")
+            tbPrecioCosto.Value = .GetValue("PrecioCosto")
+            tbPrecioMecanico.Value = .GetValue("VentaMecanico")
+            tbCodigoMarca.Text = .GetValue("yfCodigoMarca").ToString
+
             cbUniVenta.Value = .GetValue("yfumin")
             cbUnidMaxima.Value = .GetValue("yfusup")
             tbConversion.Value = .GetValue("yfvsup")
