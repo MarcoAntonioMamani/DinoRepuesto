@@ -1252,7 +1252,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaMayorista.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioVentaMayorista.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioVentaMayorista.Increment = 1.0R
-        Me.tbPrecioVentaMayorista.Location = New System.Drawing.Point(428, 236)
+        Me.tbPrecioVentaMayorista.Location = New System.Drawing.Point(433, 236)
         Me.tbPrecioVentaMayorista.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioVentaMayorista.MinValue = 0R
         Me.tbPrecioVentaMayorista.Name = "tbPrecioVentaMayorista"
@@ -1465,10 +1465,10 @@ Partial Class F1_Productos
         '
         Me.SuperTabControlPanel2.Controls.Add(Me.dgjDetalleProducto)
         Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 33)
+        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 31)
         Me.SuperTabControlPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
-        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(573, 357)
+        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(577, 405)
         Me.SuperTabControlPanel2.TabIndex = 0
         Me.SuperTabControlPanel2.TabItem = Me.SuperTabItem_DetalleProducto
         '
@@ -1478,7 +1478,7 @@ Partial Class F1_Productos
         Me.dgjDetalleProducto.Location = New System.Drawing.Point(0, 0)
         Me.dgjDetalleProducto.Margin = New System.Windows.Forms.Padding(4)
         Me.dgjDetalleProducto.Name = "dgjDetalleProducto"
-        Me.dgjDetalleProducto.Size = New System.Drawing.Size(573, 357)
+        Me.dgjDetalleProducto.Size = New System.Drawing.Size(577, 405)
         Me.dgjDetalleProducto.TabIndex = 0
         '
         'SuperTabItem_DetalleProducto
