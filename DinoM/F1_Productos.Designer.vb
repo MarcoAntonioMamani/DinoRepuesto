@@ -111,6 +111,18 @@ Partial Class F1_Productos
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.GridEX1 = New Janus.Windows.GridEX.GridEX()
+        Me.LabelX19 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX20 = New DevComponents.DotNetBar.LabelX()
+        Me.tbDesde = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.tbHasta = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
+        Me.LabelX21 = New DevComponents.DotNetBar.LabelX()
+        Me.tbMontoDesde = New DevComponents.Editors.IntegerInput()
+        Me.LabelX22 = New DevComponents.DotNetBar.LabelX()
+        Me.IntegerInput1 = New DevComponents.Editors.IntegerInput()
+        Me.LabelX23 = New DevComponents.DotNetBar.LabelX()
+        Me.DoubleInput1 = New DevComponents.Editors.DoubleInput()
+        Me.btNuevoP = New DevComponents.DotNetBar.ButtonX()
+        Me.btGrabarP = New DevComponents.DotNetBar.ButtonX()
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabPrincipal.SuspendLayout()
         Me.SuperTabControlPanelRegistro.SuspendLayout()
@@ -156,9 +168,15 @@ Partial Class F1_Productos
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgjDetalleProducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel3.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.GroupPanel4.SuspendLayout()
         CType(Me.GridEX1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbDesde, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbHasta, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbMontoDesde, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.IntegerInput1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SuperTabPrincipal
@@ -1682,6 +1700,18 @@ Partial Class F1_Productos
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btNuevoP)
+        Me.Panel5.Controls.Add(Me.btGrabarP)
+        Me.Panel5.Controls.Add(Me.DoubleInput1)
+        Me.Panel5.Controls.Add(Me.LabelX23)
+        Me.Panel5.Controls.Add(Me.IntegerInput1)
+        Me.Panel5.Controls.Add(Me.LabelX22)
+        Me.Panel5.Controls.Add(Me.tbMontoDesde)
+        Me.Panel5.Controls.Add(Me.LabelX21)
+        Me.Panel5.Controls.Add(Me.tbHasta)
+        Me.Panel5.Controls.Add(Me.tbDesde)
+        Me.Panel5.Controls.Add(Me.LabelX20)
+        Me.Panel5.Controls.Add(Me.LabelX19)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
@@ -1747,6 +1777,258 @@ Partial Class F1_Productos
         Me.GridEX1.Size = New System.Drawing.Size(571, 202)
         Me.GridEX1.TabIndex = 0
         '
+        'LabelX19
+        '
+        Me.LabelX19.AutoSize = True
+        Me.LabelX19.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX19.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX19.Location = New System.Drawing.Point(18, 22)
+        Me.LabelX19.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX19.Name = "LabelX19"
+        Me.LabelX19.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX19.Size = New System.Drawing.Size(34, 20)
+        Me.LabelX19.TabIndex = 227
+        Me.LabelX19.Text = "Del:"
+        '
+        'LabelX20
+        '
+        Me.LabelX20.AutoSize = True
+        Me.LabelX20.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX20.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX20.Location = New System.Drawing.Point(259, 24)
+        Me.LabelX20.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX20.Name = "LabelX20"
+        Me.LabelX20.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX20.Size = New System.Drawing.Size(25, 20)
+        Me.LabelX20.TabIndex = 228
+        Me.LabelX20.Text = "Al:"
+        '
+        'tbDesde
+        '
+        '
+        '
+        '
+        Me.tbDesde.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbDesde.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbDesde.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
+        Me.tbDesde.ButtonDropDown.Visible = True
+        Me.tbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbDesde.IsPopupCalendarOpen = False
+        Me.tbDesde.Location = New System.Drawing.Point(81, 21)
+        Me.tbDesde.Margin = New System.Windows.Forms.Padding(4)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.tbDesde.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbDesde.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
+        Me.tbDesde.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.tbDesde.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbDesde.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
+        Me.tbDesde.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.tbDesde.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.tbDesde.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.tbDesde.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.tbDesde.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbDesde.MonthCalendar.TodayButtonVisible = True
+        Me.tbDesde.Name = "tbDesde"
+        Me.tbDesde.Size = New System.Drawing.Size(160, 26)
+        Me.tbDesde.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.tbDesde.TabIndex = 229
+        '
+        'tbHasta
+        '
+        '
+        '
+        '
+        Me.tbHasta.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbHasta.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbHasta.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown
+        Me.tbHasta.ButtonDropDown.Visible = True
+        Me.tbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbHasta.IsPopupCalendarOpen = False
+        Me.tbHasta.Location = New System.Drawing.Point(320, 21)
+        Me.tbHasta.Margin = New System.Windows.Forms.Padding(4)
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.tbHasta.MonthCalendar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbHasta.MonthCalendar.CalendarDimensions = New System.Drawing.Size(1, 1)
+        Me.tbHasta.MonthCalendar.ClearButtonVisible = True
+        '
+        '
+        '
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1
+        Me.tbHasta.MonthCalendar.CommandsBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbHasta.MonthCalendar.DisplayMonth = New Date(2017, 2, 1, 0, 0, 0, 0)
+        Me.tbHasta.MonthCalendar.FirstDayOfWeek = System.DayOfWeek.Monday
+        '
+        '
+        '
+        Me.tbHasta.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.tbHasta.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90
+        Me.tbHasta.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.tbHasta.MonthCalendar.NavigationBackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbHasta.MonthCalendar.TodayButtonVisible = True
+        Me.tbHasta.Name = "tbHasta"
+        Me.tbHasta.Size = New System.Drawing.Size(160, 26)
+        Me.tbHasta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.tbHasta.TabIndex = 230
+        '
+        'LabelX21
+        '
+        Me.LabelX21.AutoSize = True
+        Me.LabelX21.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX21.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX21.Location = New System.Drawing.Point(18, 70)
+        Me.LabelX21.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX21.Name = "LabelX21"
+        Me.LabelX21.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX21.Size = New System.Drawing.Size(55, 20)
+        Me.LabelX21.TabIndex = 231
+        Me.LabelX21.Text = "Desde:"
+        '
+        'tbMontoDesde
+        '
+        '
+        '
+        '
+        Me.IntegerInput1.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.IntegerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbMontoDesde.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.tbMontoDesde.Location = New System.Drawing.Point(81, 65)
+        Me.tbMontoDesde.Name = "tbMontoDesde"
+        Me.tbMontoDesde.Size = New System.Drawing.Size(120, 26)
+        Me.tbMontoDesde.TabIndex = 232
+        '
+        'LabelX22
+        '
+        Me.LabelX22.AutoSize = True
+        Me.LabelX22.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX22.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX22.Location = New System.Drawing.Point(259, 65)
+        Me.LabelX22.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX22.Name = "LabelX22"
+        Me.LabelX22.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX22.Size = New System.Drawing.Size(53, 20)
+        Me.LabelX22.TabIndex = 233
+        Me.LabelX22.Text = "Hasta:"
+        '
+        'IntegerInput1
+        '
+        '
+        '
+        '
+        Me.IntegerInput1.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.IntegerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.IntegerInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.IntegerInput1.Location = New System.Drawing.Point(321, 64)
+        Me.IntegerInput1.Name = "IntegerInput1"
+        Me.IntegerInput1.Size = New System.Drawing.Size(120, 26)
+        Me.IntegerInput1.TabIndex = 234
+        '
+        'LabelX23
+        '
+        Me.LabelX23.AutoSize = True
+        Me.LabelX23.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX23.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX23.Location = New System.Drawing.Point(18, 103)
+        Me.LabelX23.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX23.Name = "LabelX23"
+        Me.LabelX23.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX23.Size = New System.Drawing.Size(58, 20)
+        Me.LabelX23.TabIndex = 235
+        Me.LabelX23.Text = "Precio:"
+        '
+        'DoubleInput1
+        '
+        '
+        '
+        '
+        Me.DoubleInput1.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.DoubleInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.DoubleInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.DoubleInput1.Increment = 1.0R
+        Me.DoubleInput1.Location = New System.Drawing.Point(81, 97)
+        Me.DoubleInput1.Name = "DoubleInput1"
+        Me.DoubleInput1.Size = New System.Drawing.Size(130, 26)
+        Me.DoubleInput1.TabIndex = 236
+        '
+        'btNuevoP
+        '
+        Me.btNuevoP.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btNuevoP.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
+        Me.btNuevoP.ImageFixedSize = New System.Drawing.Size(25, 25)
+        Me.btNuevoP.Location = New System.Drawing.Point(78, 158)
+        Me.btNuevoP.Margin = New System.Windows.Forms.Padding(4)
+        Me.btNuevoP.Name = "btNuevoP"
+        Me.btNuevoP.Size = New System.Drawing.Size(163, 49)
+        Me.btNuevoP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btNuevoP.TabIndex = 237
+        Me.btNuevoP.Text = "Nuevo"
+        '
+        'btGrabarP
+        '
+        Me.btGrabarP.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btGrabarP.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
+        Me.btGrabarP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btGrabarP.ImageFixedSize = New System.Drawing.Size(25, 25)
+        Me.btGrabarP.Location = New System.Drawing.Point(259, 158)
+        Me.btGrabarP.Margin = New System.Windows.Forms.Padding(4)
+        Me.btGrabarP.Name = "btGrabarP"
+        Me.btGrabarP.Size = New System.Drawing.Size(163, 49)
+        Me.btGrabarP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btGrabarP.TabIndex = 238
+        Me.btGrabarP.Text = "Guardar"
+        Me.btGrabarP.Tooltip = "AÑADIR CATEGORIA"
+        '
         'F1_Productos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1809,9 +2091,16 @@ Partial Class F1_Productos
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.dgjDetalleProducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel3.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.GroupPanel4.ResumeLayout(False)
         CType(Me.GridEX1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbDesde, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbHasta, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbMontoDesde, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.IntegerInput1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DoubleInput1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1893,4 +2182,16 @@ Partial Class F1_Productos
     Friend WithEvents Panel5 As Panel
     Friend WithEvents GroupPanel4 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents GridEX1 As Janus.Windows.GridEX.GridEX
+    Friend WithEvents LabelX19 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX20 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbHasta As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents tbDesde As DevComponents.Editors.DateTimeAdv.DateTimeInput
+    Friend WithEvents LabelX21 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbMontoDesde As DevComponents.Editors.IntegerInput
+    Friend WithEvents DoubleInput1 As DevComponents.Editors.DoubleInput
+    Friend WithEvents LabelX23 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents IntegerInput1 As DevComponents.Editors.IntegerInput
+    Friend WithEvents LabelX22 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btNuevoP As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btGrabarP As DevComponents.DotNetBar.ButtonX
 End Class
