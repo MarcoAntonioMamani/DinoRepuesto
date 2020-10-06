@@ -420,7 +420,7 @@ Public Class AccesoLogica
                                               _yfgr3 As Integer, _yfgr4 As Integer, _yfMed As Integer, _yfumin As Integer,
                                               _yfusup As Integer, _yfvsup As Double, _yfsmin As Integer, _yfap As Integer,
                                               _yfimg As String, TY0051 As DataTable,
-                                              _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String) As Boolean
+                                              _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String, _dtDescuento As DataTable, _dtImagenes As DataTable) As Boolean
         Dim _resultado As Boolean
         '@yfnumi ,@yfcprod ,@yfcbarra ,@yfcdprod1 ,@yfcdprod2 ,
         '			@yfgr1 ,@yfgr2 ,@yfgr3 ,@yfgr4 ,@yfMed ,@yfumin ,@yfusup ,@yfvsup ,
@@ -457,6 +457,8 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfPrecioCosto", PrecioCosto))
         _listParam.Add(New Datos.DParametro("@yfCodigoMarca", codigoMarca))
         _listParam.Add(New Datos.DParametro("@TY0051", "", TY0051))
+        _listParam.Add(New Datos.DParametro("@TD001", "", _dtDescuento))
+        _listParam.Add(New Datos.DParametro("@TCL0064", "", _dtImagenes))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
 
         If _Tabla.Rows.Count > 0 Then
@@ -475,7 +477,7 @@ Public Class AccesoLogica
                                                  _yfgr3 As Integer, _yfgr4 As Integer, _yfMed As Integer,
                                                  _yfumin As Integer, _yfusup As Integer, _yfvsup As Double,
                                                  _yfsmin As Integer, _yfap As Integer, _yfimg As String,
-                                                 TY0051 As DataTable, _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String) As Boolean
+                                                 TY0051 As DataTable, _yfdetpro As String, _yfgr5 As String, PrecioVentaNormal As Double, PrecioVentaMayorista As Double, PrecioVentaMecanico As Double, PrecioCosto As Double, codigoMarca As String, _dtDescuento As DataTable, _dtImagenes As DataTable) As Boolean
         Dim _resultado As Boolean
 
         Dim _Tabla As DataTable
@@ -510,6 +512,8 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaNormal", PrecioVentaNormal))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaMayorista", PrecioVentaMayorista))
         _listParam.Add(New Datos.DParametro("@TY0051", "", TY0051))
+        _listParam.Add(New Datos.DParametro("@TD001", "", _dtDescuento))
+        _listParam.Add(New Datos.DParametro("@TCL0064", "", _dtImagenes))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
 
         If _Tabla.Rows.Count > 0 Then
@@ -529,6 +533,33 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 3))
         _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_fnGeneralProductosDescuentos(idProducto As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 16))
+        _listParam.Add(New Datos.DParametro("@yfnumi", idProducto))
+        _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prCargarImagenesProducto(ProductoId As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 17))
+        _listParam.Add(New Datos.DParametro("@yfnumi", ProductoId))
+        _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
 
         Return _Tabla

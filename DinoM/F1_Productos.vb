@@ -17,6 +17,13 @@ Public Class F1_Productos
     Public _tab As SuperTabItem
     Public _modulo As SideNavItem
     Public Limpiar As Boolean = False  'Bandera para indicar si limpiar todos los datos o mantener datos ya registrados
+
+
+    Dim TablaImagenes As DataTable
+    Dim TablaInventario As DataTable
+
+    Dim gs_DirPrograma As String = ""
+    Dim gs_RutaImg As String = ""
 #End Region
 #Region "Metodos Privados"
     Private Sub _prIniciarTodo()
@@ -43,7 +50,213 @@ Public Class F1_Productos
         Dim ico As Icon = Icon.FromHandle(blah.GetHicon())
         Me.Icon = ico
 
+        _prEliminarContenidoImage()
     End Sub
+
+    Private Sub _prCrearCarpetaImagenes(carpetaFinal As String)
+        Dim rutaDestino As String = RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal + "\"
+
+        If System.IO.Directory.Exists(RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal) = False Then
+            If System.IO.Directory.Exists(RutaGlobal + "\Imagenes") = False Then
+                System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes")
+                If System.IO.Directory.Exists(RutaGlobal + "\Imagenes\Imagenes Productos") = False Then
+                    System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes\Imagenes Productos")
+                    System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal + "\")
+                End If
+            Else
+                If System.IO.Directory.Exists(RutaGlobal + "\Imagenes\Imagenes Productos") = False Then
+                    System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes\Imagenes Productos")
+                    System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal + "\")
+                Else
+                    If System.IO.Directory.Exists(RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal) = False Then
+                        System.IO.Directory.CreateDirectory(RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal + "\")
+                    End If
+
+                End If
+            End If
+        End If
+    End Sub
+
+
+    Sub _prEliminarContenidoImage()
+        Try
+            My.Computer.FileSystem.DeleteDirectory(gs_RutaImg, FileIO.DeleteDirectoryOption.DeleteAllContents)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Function _fnObtenerNumeroFilasActivas() As Integer
+        Dim n As Integer = -1
+        For i As Integer = 0 To TablaImagenes.Rows.Count - 1 Step 1
+            Dim estado As Integer = TablaImagenes.Rows(i).Item("estado")
+            If (estado = 0 Or estado = 1) Then
+                n += 1
+
+            End If
+        Next
+        Return n
+    End Function
+    Public Sub _prCargarImagen()
+        PanelListImagenes.Controls.Clear()
+
+        pbImgProdu.Image = Nothing
+
+        Dim i As Integer = 0
+        For Each fila As DataRow In TablaImagenes.Rows
+            Dim elemImg As UCLavadero = New UCLavadero
+            Dim rutImg = fila.Item("lhima").ToString
+            Dim estado As Integer = fila.Item("estado")
+
+            If (estado = 0) Then
+                elemImg.pbImg.SizeMode = PictureBoxSizeMode.StretchImage
+                Dim bm As Bitmap = Nothing
+                Dim by As Byte() = fila.Item("img")
+                Dim ms As New MemoryStream(by)
+                bm = New Bitmap(ms)
+
+
+                elemImg.pbImg.Image = bm
+
+                pbImgProdu.SizeMode = PictureBoxSizeMode.StretchImage
+                pbImgProdu.Image = bm
+                elemImg.pbImg.Tag = i
+                elemImg.Dock = DockStyle.Top
+                pbImgProdu.Tag = i
+                AddHandler elemImg.pbImg.MouseEnter, AddressOf pbImg_MouseEnter
+
+                PanelListImagenes.Controls.Add(elemImg)
+                ms.Dispose()
+
+            Else
+                If (estado = 1) Then
+                    If (File.Exists(RutaGlobal + "\Imagenes\Imagenes Productos\ProductosTodos" + rutImg)) Then
+                        Dim bm As Bitmap = New Bitmap(RutaGlobal + "\Imagenes\Imagenes Productos\ProductosTodos" + rutImg)
+                        elemImg.pbImg.SizeMode = PictureBoxSizeMode.StretchImage
+                        elemImg.pbImg.Image = bm
+                        pbImgProdu.SizeMode = PictureBoxSizeMode.StretchImage
+                        pbImgProdu.Image = bm
+                        elemImg.pbImg.Tag = i
+                        elemImg.Dock = DockStyle.Top
+                        pbImgProdu.Tag = i
+                        AddHandler elemImg.pbImg.MouseEnter, AddressOf pbImg_MouseEnter
+
+                        PanelListImagenes.Controls.Add(elemImg)
+                    End If
+
+                End If
+            End If
+
+
+
+
+            i += 1
+        Next
+
+    End Sub
+
+    Private Sub pbImg_MouseEnter(sender As Object, e As EventArgs)
+        Dim pb As PictureBox = CType(sender, PictureBox)
+        pbImgProdu.Image = pb.Image
+        pbImgProdu.Tag = pb.Tag
+
+    End Sub
+
+    Private Function _fnCopiarImagenRutaDefinida() As String
+        'copio la imagen en la carpeta del sistema
+
+        Dim file As New OpenFileDialog()
+        'file.InitialDirectory = gs_RutaImg
+        file.Filter = "Ficheros JPG o JPEG o PNG|*.jpg;*.jpeg;*.png" &
+                      "|Ficheros GIF|*.gif" &
+                      "|Ficheros BMP|*.bmp" &
+                      "|Ficheros PNG|*.png" &
+                      "|Ficheros TIFF|*.tif"
+        If file.ShowDialog() = DialogResult.OK Then
+            Dim ruta As String = file.FileName
+            Dim nombre As String = ""
+
+            If file.CheckFileExists = True Then
+                Dim img As New Bitmap(New Bitmap(ruta), 1000, 800)
+                Dim a As Object = file.GetType.ToString
+
+                Dim da As String = Str(Now.Day).Trim + Str(Now.Month).Trim + Str(Now.Year).Trim + Str(Now.Hour).Trim + Str(Now.Minute).Trim + Str(Now.Second).Trim
+
+                nombre = "\Imagen_" + da + ".jpg".Trim
+
+
+                If (_fnActionNuevo()) Then
+                    Dim mstream = New MemoryStream()
+
+                    img.Save(mstream, System.Drawing.Imaging.ImageFormat.Jpeg)
+
+                    TablaImagenes.Rows.Add(0, 0, nombre, mstream.ToArray(), 0)
+                    mstream.Dispose()
+                    img.Dispose()
+
+                Else
+                    Dim mstream = New MemoryStream()
+
+                    img.Save(mstream, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    TablaImagenes.Rows.Add(0, tbCodigo.Text, nombre, mstream.ToArray(), 0)
+                    mstream.Dispose()
+
+                End If
+
+                'img.Save(RutaTemporal + nombre, System.Drawing.Imaging.ImageFormat.Jpeg)
+
+
+
+
+            End If
+            Return nombre
+        End If
+
+        Return "default.jpg"
+    End Function
+
+    Public Sub _prGuardarImagenes(_ruta As String)
+        PanelListImagenes.Controls.Clear()
+
+
+        For i As Integer = 0 To TablaImagenes.Rows.Count - 1 Step 1
+            Dim estado As Integer = TablaImagenes.Rows(i).Item("estado")
+            If (estado = 0) Then
+
+                Dim bm As Bitmap = Nothing
+                Dim by As Byte() = TablaImagenes.Rows(i).Item("img")
+                Dim ms As New MemoryStream(by)
+                bm = New Bitmap(ms)
+                Try
+                    bm.Save(_ruta + TablaImagenes.Rows(i).Item("lhima"), System.Drawing.Imaging.ImageFormat.Jpeg)
+                Catch ex As Exception
+
+                End Try
+
+
+
+
+            End If
+            If (estado = -1) Then
+                Try
+                    Me.pbImgProdu.Image.Dispose()
+                    Me.pbImgProdu.Image = Nothing
+                    Application.DoEvents()
+                    TablaImagenes.Rows(i).Item("img") = Nothing
+
+
+
+                    If (File.Exists(_ruta + TablaImagenes.Rows(i).Item("lhima"))) Then
+                        My.Computer.FileSystem.DeleteFile(_ruta + TablaImagenes.Rows(i).Item("lhima"))
+                    End If
+
+                Catch ex As Exception
+
+                End Try
+            End If
+        Next
+    End Sub
+
+
 
     Private Sub armarGrillaDetalleProducto(numi As Integer)
         Dim dt As New DataTable
@@ -210,27 +423,7 @@ Public Class F1_Productos
             End If
         End If
     End Sub
-    Private Sub _fnMoverImagenRuta(Folder As String, name As String)
-        'copio la imagen en la carpeta del sistema
-        If (Not name.Equals("Default.jpg") And File.Exists(RutaTemporal + name)) Then
 
-            Dim img As New Bitmap(New Bitmap(RutaTemporal + name), 500, 300)
-
-            UsImg.pbImage.Image.Dispose()
-            UsImg.pbImage.Image = Nothing
-            Try
-                My.Computer.FileSystem.CopyFile(RutaTemporal + name,
-     Folder + name, overwrite:=True)
-
-            Catch ex As System.IO.IOException
-
-
-            End Try
-
-
-
-        End If
-    End Sub
 #End Region
 #Region "METODOS SOBRECARGADOS"
 
@@ -239,7 +432,7 @@ Public Class F1_Productos
         tbCodProd.ReadOnly = False
         tbDescPro.ReadOnly = False
         tbDescDet.ReadOnly = False
-        tbDescCort.ReadOnly = False
+
         cbgrupo1.ReadOnly = False
         cbgrupo2.ReadOnly = False
         cbgrupo3.ReadOnly = False
@@ -251,15 +444,16 @@ Public Class F1_Productos
         cbUnidMaxima.ReadOnly = False
         tbConversion.IsInputReadOnly = False
         tbPrecioVentaNormal.IsInputReadOnly = False
-        tbPrecioVentaMayorista.IsInputReadOnly = False
+
         tbCodigoMarca.ReadOnly = False
         tbPrecioMecanico.IsInputReadOnly = False
         tbPrecioCosto.IsInputReadOnly = False
-
-
+        btNuevoP.Visible = True
+        btGrabarP.Visible = True
         _prCrearCarpetaImagenes()
         _prCrearCarpetaTemporal()
-        BtAdicionar.Visible = True
+        btnDelete.Visible = True
+        btnImagen.Visible = True
         tbStockMinimo.IsInputReadOnly = False
         btExcel.Visible = False
         btnImprimir.Visible = False
@@ -273,13 +467,14 @@ Public Class F1_Productos
         tbCodBarra.ReadOnly = True
         tbCodProd.ReadOnly = True
         tbDescPro.ReadOnly = True
-        tbDescCort.ReadOnly = True
+
         tbDescDet.ReadOnly = True
         cbgrupo1.ReadOnly = True
         cbgrupo2.ReadOnly = True
         cbgrupo3.ReadOnly = True
+        btnDelete.Visible = False
+        btnImagen.Visible = False
         tbPrecioVentaNormal.IsInputReadOnly = True
-        tbPrecioVentaMayorista.IsInputReadOnly = True
         tbCodigoMarca.ReadOnly = True
         tbPrecioMecanico.IsInputReadOnly = True
         tbPrecioCosto.IsInputReadOnly = True
@@ -291,7 +486,15 @@ Public Class F1_Productos
         cbUnidMaxima.ReadOnly = True
         tbConversion.IsInputReadOnly = True
         tbStockMinimo.IsInputReadOnly = True
-        BtAdicionar.Visible = False
+
+
+        tbDesde.IsInputReadOnly = True
+        tbHasta.IsInputReadOnly = True
+        tbMontoDesde.IsInputReadOnly = True
+        tbMontoHasta.IsInputReadOnly = True
+        tbPrecioDescuento.IsInputReadOnly = True
+        btNuevoP.Visible = False
+        btGrabarP.Visible = False
         _prStyleJanus()
         JGrM_Buscador.Focus()
         Limpiar = False
@@ -309,11 +512,10 @@ Public Class F1_Productos
         tbDescDet.Clear()
         tbPrecioCosto.Value = 0
         tbPrecioMecanico.Value = 0
-        tbPrecioVentaMayorista.Value = 0
         tbPrecioVentaNormal.Value = 0
         tbCodigoMarca.Clear()
 
-        tbDescCort.Clear()
+
         If (Limpiar = False) Then
             _prSeleccionarCombo(cbgrupo1)
             _prSeleccionarCombo(cbgrupo2)
@@ -329,11 +531,20 @@ Public Class F1_Productos
             tbStockMinimo.Value = 0
         End If
         tbCodProd.Focus()
-        UsImg.pbImage.Image = My.Resources.pantalla
+        TablaImagenes = L_prCargarImagenesProducto(-1)
+        _prCargarImagen()
+        _prEliminarContenidoImage()
 
         armarGrillaDetalleProducto(0)
         tbPrecioVentaNormal.Value = 0
-        tbPrecioVentaMayorista.Value = 0
+        tbDesde.Value = Now.Date
+        tbHasta.Value = Now.Date
+        tbMontoDesde.Value = 0
+        tbMontoHasta.Value = 0
+        tbPrecioDescuento.Value = 0
+
+        _PCargarGridCategoriasPrecios(-1)
+
     End Sub
 
     Private Sub adicionarFilaDetalleProducto()
@@ -358,7 +569,7 @@ Public Class F1_Productos
         MEP.Clear()
         tbDescPro.BackColor = Color.White
         tbDescDet.BackColor = Color.White
-        tbDescCort.BackColor = Color.White
+
         cbgrupo1.BackColor = Color.White
         cbgrupo2.BackColor = Color.White
         cbgrupo3.BackColor = Color.White
@@ -376,18 +587,18 @@ Public Class F1_Productos
 
 
         Dim res As Boolean = L_fnGrabarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text,
-                                                tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value,
+                                                "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value,
                                                 cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value,
                                                 tbConversion.Text,
                                                 IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text),
                                                 IIf(swEstado.Value = True, 1, 0), nameImg,
-                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
+                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
 
 
         If res Then
             Modificado = False
-            _fnMoverImagenRuta(RutaGlobal + "\Imagenes\Imagenes ProductoDino", nameImg)
-            nameImg = "Default.jpg"
+            _prCrearCarpetaImagenes("ProductosTodos")
+            _prGuardarImagenes(RutaGlobal + "\Imagenes\Imagenes Productos\" + "ProductosTodos" + "\")
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "Código de Producto ".ToUpper + tbCodigo.Text + " Grabado con Exito.".ToUpper,
@@ -411,16 +622,15 @@ Public Class F1_Productos
 
         Dim nameImage As String = JGrM_Buscador.GetValue("yfimg")
         If (Modificado = False) Then
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
         Else
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbDescCort.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioVentaMayorista.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
         End If
         If res Then
 
-            If (Modificado = True) Then
-                _fnMoverImagenRuta(RutaGlobal + "\Imagenes\Imagenes ProductoDino", nameImg)
-                Modificado = False
-            End If
+
+            _prCrearCarpetaImagenes("ProductosTodos")
+            _prGuardarImagenes(RutaGlobal + "\Imagenes\Imagenes Productos\" + "ProductosTodos" + "\")
             nameImg = "Default.jpg"
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
@@ -436,6 +646,7 @@ Public Class F1_Productos
         End If
         _PMInhabilitar()
         _PMPrimerRegistro()
+        _prEliminarContenidoImage()
         Return res
     End Function
 
@@ -449,20 +660,7 @@ Public Class F1_Productos
         Return tabla
     End Function
 
-    Public Sub _PrEliminarImage()
 
-        If (Not (_fnActionNuevo()) And (File.Exists(RutaGlobal + "\Imagenes\Imagenes ProductoDino\Imagen_" + tbCodigo.Text + ".jpg"))) Then
-            UsImg.pbImage.Image.Dispose()
-            UsImg.pbImage.Image = Nothing
-            Try
-                My.Computer.FileSystem.DeleteFile(RutaGlobal + "\Imagenes\Imagenes ProductoDino\Imagen_" + tbCodigo.Text + ".jpg")
-            Catch ex As Exception
-
-            End Try
-
-
-        End If
-    End Sub
     Public Function _fnActionNuevo() As Boolean
         Return tbCodigo.Text = String.Empty And tbCodBarra.ReadOnly = False
     End Function
@@ -482,7 +680,7 @@ Public Class F1_Productos
             Dim mensajeError As String = ""
             Dim res As Boolean = L_fnEliminarProducto(tbCodigo.Text, mensajeError)
             If res Then
-                _PrEliminarImage()
+
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
 
@@ -579,10 +777,10 @@ Public Class F1_Productos
         Dim listEstCeldas As New List(Of Modelo.Celda)
         'a.yfnumi, a.yfcprod, a.yfcbarra, a.yfcdprod1, a.yfcdprod2, a.yfgr1, a.yfgr2, a.yfgr3, a.yfgr4,
         'a.yfMed, a.yfumin, a.yfusup, a.yfmstk, a.yfclot, a.yfsmin, a.yfap, a.yfimg, a.yffact, a.yfhact, a.yfuact
-        listEstCeldas.Add(New Modelo.Celda("yfnumi", True, "Código".ToUpper, 80))
+        listEstCeldas.Add(New Modelo.Celda("yfnumi", True, "ITem".ToUpper, 80))
         listEstCeldas.Add(New Modelo.Celda("yfcprod", True, "Cod.Fab".ToUpper, 100))
-        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", True, "Cod. Proveedor".ToUpper, 140))
-        listEstCeldas.Add(New Modelo.Celda("yfcbarra", True, "Cod.Barra".ToUpper, 140))
+        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", False, "Cod. Proveedor".ToUpper, 140))
+        listEstCeldas.Add(New Modelo.Celda("yfcbarra", False, "Cod.Barra".ToUpper, 140))
         listEstCeldas.Add(New Modelo.Celda("yfcdprod1", True, "Descripcion Producto".ToUpper, 250))
         listEstCeldas.Add(New Modelo.Celda("yfgr1", False))
         listEstCeldas.Add(New Modelo.Celda("yfgr2", False))
@@ -602,10 +800,9 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yfhact", False))
         listEstCeldas.Add(New Modelo.Celda("yfuact", False))
         listEstCeldas.Add(New Modelo.Celda("VentaNormal", False))
-        listEstCeldas.Add(New Modelo.Celda("VentaMayorista", False))
         listEstCeldas.Add(New Modelo.Celda("VentaMecanico", False))
         listEstCeldas.Add(New Modelo.Celda("PrecioCosto", False))
-        listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", False))
+        listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", True, "CodigoMarca", 90))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo2", True, lbgrupo2.Text.Substring(0, lbgrupo2.Text.Length - 1).ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo3", True, lbgrupo3.Text.Substring(0, lbgrupo3.Text.Length - 1).ToUpper, 150))
@@ -613,7 +810,7 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("grupo5", True, "CATEGORÍA".ToUpper, 200))
         listEstCeldas.Add(New Modelo.Celda("Umedida", True, "UMedida".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("UnidMin", True, "UniVenta".ToUpper, 150))
-        listEstCeldas.Add(New Modelo.Celda("Umax", True, "UniMaxima".ToUpper, 150))
+        listEstCeldas.Add(New Modelo.Celda("Umax", True, "UniCaja".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("yfdetprod", False, "Descripcion".ToUpper, 150))
 
         Return listEstCeldas
@@ -634,7 +831,6 @@ Public Class F1_Productos
             tbCodProd.Text = .GetValue("yfcprod").ToString
             tbCodBarra.Text = .GetValue("yfcbarra").ToString
             tbDescPro.Text = .GetValue("yfcdprod1").ToString
-            tbDescCort.Text = .GetValue("yfcdprod2").ToString
             tbDescDet.Text = .GetValue("yfdetprod").ToString
             cbgrupo1.Value = .GetValue("yfgr1")
             cbgrupo2.Value = .GetValue("yfgr2")
@@ -643,7 +839,7 @@ Public Class F1_Productos
             cbgrupo5.Value = .GetValue("yfgr5")
             cbUMed.Value = .GetValue("yfMed")
             tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
-            tbPrecioVentaMayorista.Value = .GetValue("VentaMayorista")
+
             tbPrecioCosto.Value = .GetValue("PrecioCosto")
             tbPrecioMecanico.Value = .GetValue("VentaMecanico")
             tbCodigoMarca.Text = .GetValue("yfCodigoMarca").ToString
@@ -656,24 +852,13 @@ Public Class F1_Productos
             lbFecha.Text = CType(.GetValue("yffact"), Date).ToString("dd/MM/yyyy")
             lbHora.Text = .GetValue("yfhact").ToString
             lbUsuario.Text = .GetValue("yfuact").ToString
-
+            _PCargarGridCategoriasPrecios(.GetValue("yfnumi"))
         End With
+
+
         Dim name As String = JGrM_Buscador.GetValue("yfimg")
-        If name.Equals("Default.jpg") Or Not File.Exists(RutaGlobal + "\Imagenes\Imagenes ProductoDino" + name) Then
-
-            Dim im As New Bitmap(My.Resources.pantalla)
-            UsImg.pbImage.Image = im
-        Else
-            If (File.Exists(RutaGlobal + "\Imagenes\Imagenes ProductoDino" + name)) Then
-                Dim Bin As New MemoryStream
-                Dim im As New Bitmap(New Bitmap(RutaGlobal + "\Imagenes\Imagenes ProductoDino" + name))
-                im.Save(Bin, System.Drawing.Imaging.ImageFormat.Jpeg)
-                UsImg.pbImage.SizeMode = PictureBoxSizeMode.StretchImage
-                UsImg.pbImage.Image = Image.FromStream(Bin)
-                Bin.Dispose()
-
-            End If
-        End If
+        TablaImagenes = L_prCargarImagenesProducto(tbCodigo.Text)
+        _prCargarImagen()
         If (gb_DetalleProducto) Then
             armarGrillaDetalleProducto(CInt(tbCodigo.Text))
         End If
@@ -710,56 +895,40 @@ Public Class F1_Productos
     End Sub
 
 
+    Private Sub btnImagen_Click(sender As Object, e As EventArgs) Handles btnImagen.Click
+        _fnCopiarImagenRutaDefinida()
+        _prCargarImagen()
+    End Sub
+    Public Sub _prEliminarDirectorio(numi As String)
 
-    Private Function _fnCopiarImagenRutaDefinida() As String
-        'copio la imagen en la carpeta del sistema
+        '_prGuardarImagenes(RutaGlobal + "\Imagenes\Imagenes RecepcionVehiculo\" + "Recepcion_" + tbNumeroOrden.Text.Trim + "\")
+        If (File.Exists(RutaGlobal + "\Imagenes\Imagenes Productos\ProductosTodos")) Then
 
-        Dim file As New OpenFileDialog()
-        file.Filter = "Ficheros JPG o JPEG o PNG|*.jpg;*.jpeg;*.png" &
-                      "|Ficheros GIF|*.gif" &
-                      "|Ficheros BMP|*.bmp" &
-                      "|Ficheros PNG|*.png" &
-                      "|Ficheros TIFF|*.tif"
-        If file.ShowDialog() = DialogResult.OK Then
-            Dim ruta As String = file.FileName
+            Try
+                My.Computer.FileSystem.DeleteDirectory(RutaGlobal + "\Imagenes\Imagenes Productos\ProductosTodos", FileIO.UIOption.AllDialogs, FileIO.RecycleOption.SendToRecycleBin)
+            Catch ex As Exception
 
-
-            If file.CheckFileExists = True Then
-                Dim img As New Bitmap(New Bitmap(ruta))
-                Dim imgM As New Bitmap(New Bitmap(ruta))
-                Dim Bin As New MemoryStream
-                imgM.Save(Bin, System.Drawing.Imaging.ImageFormat.Jpeg)
-                Dim a As Object = file.GetType.ToString
-                If (_fnActionNuevo()) Then
-
-                    Dim mayor As Integer
-                    mayor = JGrM_Buscador.GetTotal(JGrM_Buscador.RootTable.Columns("yfnumi"), AggregateFunction.Max)
-                    nameImg = "\Imagen_" + Str(mayor + 1).Trim + ".jpg"
-                    UsImg.pbImage.SizeMode = PictureBoxSizeMode.StretchImage
-                    UsImg.pbImage.Image = Image.FromStream(Bin)
-
-                    img.Save(RutaTemporal + nameImg, System.Drawing.Imaging.ImageFormat.Jpeg)
-                    img.Dispose()
-                Else
-
-                    nameImg = "\Imagen_" + Str(tbCodigo.Text).Trim + ".jpg"
+            End Try
 
 
-                    UsImg.pbImage.Image = Image.FromStream(Bin)
-                    img.Save(RutaTemporal + nameImg, System.Drawing.Imaging.ImageFormat.Jpeg)
-                    Modificado = True
-                    img.Dispose()
-
-                End If
-            End If
-
-            Return nameImg
         End If
 
-        Return "default.jpg"
-    End Function
 
-    Private Sub BtAdicionar_Click(sender As Object, e As EventArgs) Handles BtAdicionar.Click
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim pos As Integer = CType(pbImgProdu.Tag, Integer)
+        If (IsDBNull(TablaImagenes)) Then
+            Return
+
+        End If
+        If (pos >= 0 And TablaImagenes.Rows.Count > 0) Then
+            TablaImagenes.Rows(pos).Item("estado") = -1
+            _prCargarImagen()
+        End If
+    End Sub
+
+    Private Sub BtAdicionar_Click(sender As Object, e As EventArgs)
         _fnCopiarImagenRutaDefinida()
         btnGrabar.Focus()
     End Sub
@@ -1055,6 +1224,78 @@ Public Class F1_Productos
 
     End Sub
 
+
+    Private Sub _PCargarGridCategoriasPrecios(codigoProducto As Integer)
+        Dim dtPreciosDesc As DataTable
+        dtPreciosDesc = L_fnGeneralProductosDescuentos(codigoProducto)
+
+        JGr_Descuentos.DataSource = dtPreciosDesc
+        JGr_Descuentos.RetrieveStructure()
+
+        With JGr_Descuentos.RootTable.Columns("danumi")
+            .Visible = False
+        End With
+        With JGr_Descuentos.RootTable.Columns("estado")
+            .Visible = False
+        End With
+        With JGr_Descuentos.RootTable.Columns("dacanumi")
+            .Caption = "Cod Prod."
+            .Width = 50
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .CellStyle.BackColor = Color.AliceBlue
+            .Visible = False
+        End With
+        With JGr_Descuentos.RootTable.Columns("dacant1")
+            .Caption = "Desde"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.BackColor = Color.AliceBlue
+        End With
+        With JGr_Descuentos.RootTable.Columns("dacant2")
+            .Caption = "Hasta"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.BackColor = Color.AliceBlue
+        End With
+        With JGr_Descuentos.RootTable.Columns("dapreciou")
+            .Caption = "Precio Un."
+            .Width = 120
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.BackColor = Color.AliceBlue
+            .FormatString = "0.0000"
+        End With
+        With JGr_Descuentos.RootTable.Columns("dafinicio")
+            .Caption = "Fecha Inicio"
+            .Width = 180
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.BackColor = Color.AliceBlue
+            .Visible = True
+        End With
+        With JGr_Descuentos.RootTable.Columns("daffin")
+            .Caption = "Fecha Fin"
+            .Width = 180
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.BackColor = Color.AliceBlue
+            .Visible = True
+        End With
+        With JGr_Descuentos.RootTable.Columns("estado")
+            .Visible = True
+        End With
+        'Habilitar Filtradores
+        With JGr_Descuentos
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            '.FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .GroupByBoxVisible = False
+            'diseño de la grilla
+            .VisualStyle = VisualStyle.Office2007
+            '.AllowEdit = InheritableBoolean.False
+        End With
+
+
+    End Sub
+
     Private Sub dgjDetalleProducto_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalleProducto.EditingCell
         If (e.Column.Index = dgjDetalleProducto.RootTable.Columns("yfadesc").Index) Then
             e.Cancel = False
@@ -1096,7 +1337,7 @@ Public Class F1_Productos
         End If
     End Sub
 
-    Private Sub UsImg_Load(sender As Object, e As EventArgs) Handles UsImg.Load
+    Private Sub UsImg_Load(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -1132,5 +1373,58 @@ Public Class F1_Productos
         End If
     End Sub
 
+    Private Sub btNuevoP_Click(sender As Object, e As EventArgs) Handles btNuevoP.Click
+        tbDesde.IsInputReadOnly = False
+        tbHasta.IsInputReadOnly = False
+        tbMontoDesde.IsInputReadOnly = False
+        tbMontoHasta.IsInputReadOnly = False
+        tbPrecioDescuento.IsInputReadOnly = False
+
+        btNuevoP.Enabled = False
+        btGrabarP.Enabled = True
+        tbDesde.Value = Now.Date
+        tbHasta.Value = Now.Date
+        tbMontoDesde.Value = 0
+        tbMontoHasta.Value = 0
+        tbPrecioDescuento.Value = 0
+
+    End Sub
+
+    Private Sub btGrabarP_Click(sender As Object, e As EventArgs) Handles btGrabarP.Click
+
+        If (tbMontoDesde.Value > 0 And tbMontoHasta.Value > 0 And tbPrecioDescuento.Value > 0) Then
+            _prAddDetalleDescuento()
+
+        End If
+        tbDesde.Value = Now.Date
+        tbHasta.Value = Now.Date
+        tbMontoDesde.Value = 0
+        tbMontoHasta.Value = 0
+        tbPrecioDescuento.Value = 0
+        tbDesde.IsInputReadOnly = True
+        tbHasta.IsInputReadOnly = True
+        tbMontoDesde.IsInputReadOnly = True
+        tbMontoHasta.IsInputReadOnly = True
+        tbPrecioDescuento.IsInputReadOnly = True
+
+        btGrabarP.Enabled = False
+        btNuevoP.Enabled = True
+    End Sub
+    Private Sub _prAddDetalleDescuento()
+        'd.danumi , d.dacanumi, d.dacant1, d.dacant2, d.dapreciou, d.dafinicio, d.daffin, 1 as estado
+        Dim Bin As New MemoryStream
+        Dim img As New Bitmap(My.Resources.delete, 28, 28)
+        img.Save(Bin, Imaging.ImageFormat.Png)
+        CType(JGr_Descuentos.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, tbMontoDesde.Value, tbMontoHasta.Value, tbPrecioDescuento.Value, tbDesde.Value.ToString("dd/MM/yyyy"), tbHasta.Value.ToString("dd/MM/yyyy"), 0)
+    End Sub
+
+    Public Function _fnSiguienteNumi()
+        Dim dt As DataTable = CType(JGr_Descuentos.DataSource, DataTable)
+        Dim rows() As DataRow = dt.Select("danumi=MAX(danumi)")
+        If (rows.Count > 0) Then
+            Return rows(rows.Count - 1).Item("danumi")
+        End If
+        Return 1
+    End Function
 
 End Class
