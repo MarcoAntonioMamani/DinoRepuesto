@@ -87,7 +87,9 @@ Public Class Login
             gi_userNumi = dtUsuario.Rows(0).Item("ydnumi")
             gi_userRol = dtUsuario.Rows(0).Item("ydrol")
             gi_userSuc = dtUsuario.Rows(0).Item("ydsuc")
-            'gb_userTodasSuc = IIf(dtUsuario.Rows(0).Item("ydall") = 1, True, False)
+            gi_NumiVenedor = dtUsuario.Rows(0).Item("yd_numiVend")
+            'gb_userTodasSuc = IIf(dtUsuario.Rows(0).Item("ydall") = 1, True, False)yd_numiVend
+
 
             _prDesvenecerPantalla()
             Close()

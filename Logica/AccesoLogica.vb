@@ -360,7 +360,7 @@ Public Class AccesoLogica
     End Function
     Public Shared Function L_Validar_Usuario(_Nom As String, _Pass As String) As DataTable
         Dim _Tabla As DataTable
-        _Tabla = D_Datos_Tabla("ydnumi,yduser,ydrol,ydpass,ydest,ydcant,ydfontsize,ydsuc", "ZY003", "yduser = '" + _Nom + "' AND ydpass = '" + _Pass + "'")
+        _Tabla = D_Datos_Tabla("ydnumi,yduser,ydrol,ydpass,ydest,ydcant,ydfontsize,ydsuc,yd_numiVend", "ZY003", "yduser = '" + _Nom + "' AND ydpass = '" + _Pass + "'")
         Return _Tabla
     End Function
 #End Region
@@ -452,7 +452,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfdetpro", _yfdetpro))
         _listParam.Add(New Datos.DParametro("@yfgr5", _yfgr5))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaNormal", PrecioVentaNormal))
-        _listParam.Add(New Datos.DParametro("@yfPrecioVentaMayorista", PrecioVentaMayorista))
+        _listParam.Add(New Datos.DParametro("@yfPrecioVentaFacturado", PrecioVentaMayorista))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaMecanico", PrecioVentaMecanico))
         _listParam.Add(New Datos.DParametro("@yfPrecioCosto", PrecioCosto))
         _listParam.Add(New Datos.DParametro("@yfCodigoMarca", codigoMarca))
@@ -510,7 +510,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yfdetpro", _yfdetpro))
         _listParam.Add(New Datos.DParametro("@yfgr5", _yfgr5))
         _listParam.Add(New Datos.DParametro("@yfPrecioVentaNormal", PrecioVentaNormal))
-        _listParam.Add(New Datos.DParametro("@yfPrecioVentaMayorista", PrecioVentaMayorista))
+        _listParam.Add(New Datos.DParametro("@yfPrecioVentaFacturado", PrecioVentaMayorista))
         _listParam.Add(New Datos.DParametro("@TY0051", "", TY0051))
         _listParam.Add(New Datos.DParametro("@TD001", "", _dtDescuento))
         _listParam.Add(New Datos.DParametro("@TCL0064", "", _dtImagenes))
@@ -1431,7 +1431,45 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_fnGrabarVenta(ByRef _tanumi As String, _taidCorelativo As String, _tafdoc As String, _taven As Integer, _tatven As Integer, _tafvcr As String, _taclpr As Integer,
+                                           _tamon As Integer, _taobs As String,
+                                           _tadesc As Double, _taice As Double,
+                                           _tatotal As Double, detalle As DataTable, _almacen As Integer, _taprforma As Integer) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+        '    @tanumi ,@taalm,@tafdoc ,@taven  ,@tatven,
+        '@tafvcr ,@taclpr,@tamon ,@taest  ,@taobs ,@tadesc ,@newFecha,@newHora,@tauact,@taproforma
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@tanumi", _tanumi))
+        _listParam.Add(New Datos.DParametro("@taproforma", _taprforma))
+        _listParam.Add(New Datos.DParametro("@taidCore", _taidCorelativo))
+        _listParam.Add(New Datos.DParametro("@taalm", _almacen))
+        _listParam.Add(New Datos.DParametro("@tafdoc", _tafdoc))
+        _listParam.Add(New Datos.DParametro("@taven", _taven))
+        _listParam.Add(New Datos.DParametro("@tatven", _tatven))
+        _listParam.Add(New Datos.DParametro("@tafvcr", _tafvcr))
+        _listParam.Add(New Datos.DParametro("@taclpr", _taclpr))
+        _listParam.Add(New Datos.DParametro("@tamon", _tamon))
+        _listParam.Add(New Datos.DParametro("@taest", 1))
+        _listParam.Add(New Datos.DParametro("@taobs", _taobs))
+        _listParam.Add(New Datos.DParametro("@tadesc", _tadesc))
+        _listParam.Add(New Datos.DParametro("@taice", _taice))
+        _listParam.Add(New Datos.DParametro("@tatotal", _tatotal))
+        _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TV0011", "", detalle))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TV001", _listParam)
 
+
+        If _Tabla.Rows.Count > 0 Then
+            _tanumi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
 
     Public Shared Function L_fnGrabarVenta(ByRef _tanumi As String, _taidCorelativo As String, _tafdoc As String, _taven As Integer, _tatven As Integer, _tafvcr As String, _taclpr As Integer,
                                            _tamon As Integer, _taobs As String,
@@ -1473,7 +1511,78 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
+    Public Shared Function L_fnModificarVenta(_tanumi As String, _tafdoc As String, _taven As Integer, _tatven As Integer, _tafvcr As String, _taclpr As Integer,
+                                           _tamon As Integer, _taobs As String,
+                                           _tadesc As Double, _taice As Double, _tatotal As Double, detalle As DataTable, _almacen As Integer, _taprforma As Integer) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
 
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@tanumi", _tanumi))
+        _listParam.Add(New Datos.DParametro("@taalm", _almacen))
+        _listParam.Add(New Datos.DParametro("@taproforma", _taprforma))
+        _listParam.Add(New Datos.DParametro("@tafdoc", _tafdoc))
+        _listParam.Add(New Datos.DParametro("@taven", _taven))
+        _listParam.Add(New Datos.DParametro("@tatven", _tatven))
+        _listParam.Add(New Datos.DParametro("@tafvcr", _tafvcr))
+        _listParam.Add(New Datos.DParametro("@taclpr", _taclpr))
+        _listParam.Add(New Datos.DParametro("@tamon", _tamon))
+        _listParam.Add(New Datos.DParametro("@taest", 1))
+        _listParam.Add(New Datos.DParametro("@taobs", _taobs))
+        _listParam.Add(New Datos.DParametro("@tadesc", _tadesc))
+        _listParam.Add(New Datos.DParametro("@taice", _taice))
+        _listParam.Add(New Datos.DParametro("@tatotal", _tatotal))
+        _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TV0011", "", detalle))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TV001", _listParam)
+
+
+        If _Tabla.Rows.Count > 0 Then
+            _tanumi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Sub L_Grabar_Factura(_Numi As String, _Fecha As String, _Nfac As String, _NAutoriz As String, _Est As String,
+                                       _NitCli As String, _CodCli As String, _DesCli1 As String, _DesCli2 As String,
+                                       _A As String, _B As String, _C As String, _D As String, _E As String, _F As String,
+                                       _G As String, _H As String, _CodCon As String, _FecLim As String,
+                                       _Imgqr As String, _Alm As String, _Numi2 As String)
+        Dim Sql As String
+        Try
+            Sql = "" + _Numi + ", " _
+                + "'" + _Fecha + "', " _
+                + "" + _Nfac + ", " _
+                + "" + _NAutoriz + ", " _
+                + "" + _Est + ", " _
+                + "'" + _NitCli + "', " _
+                + "" + _CodCli + ", " _
+                + "'" + _DesCli1 + "', " _
+                + "'" + _DesCli2 + "', " _
+                + "" + _A + ", " _
+                + "" + _B + ", " _
+                + "" + _C + ", " _
+                + "" + _D + ", " _
+                + "" + _E + ", " _
+                + "" + _F + ", " _
+                + "" + _G + ", " _
+                + "" + _H + ", " _
+                + "'" + _CodCon + "', " _
+                + "'" + _FecLim + "', " _
+                + "" + _Imgqr + ", " _
+                + "" + _Alm + ", " _
+                + "" + _Numi2 + ""
+
+            D_Insertar_Datos("TFV001", Sql)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Public Shared Function L_fnModificarVenta(_tanumi As String, _tafdoc As String, _taven As Integer, _tatven As Integer, _tafvcr As String, _taclpr As Integer,
                                            _tamon As Integer, _taobs As String,
                                            _tadesc As Double, _taice As Double, _tatotal As Double, detalle As DataTable, _almacen As Integer, _taprforma As Integer, monto As DataTable) As Boolean

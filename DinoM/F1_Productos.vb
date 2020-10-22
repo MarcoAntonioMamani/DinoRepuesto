@@ -432,7 +432,7 @@ Public Class F1_Productos
         tbCodProd.ReadOnly = False
         tbDescPro.ReadOnly = False
         tbDescDet.ReadOnly = False
-
+        tbMedida.ReadOnly = False
         cbgrupo1.ReadOnly = False
         cbgrupo2.ReadOnly = False
         cbgrupo3.ReadOnly = False
@@ -444,7 +444,7 @@ Public Class F1_Productos
         cbUnidMaxima.ReadOnly = False
         tbConversion.IsInputReadOnly = False
         tbPrecioVentaNormal.IsInputReadOnly = False
-
+        tbPrecioFacturado.IsInputReadOnly = False
         tbCodigoMarca.ReadOnly = False
         tbPrecioMecanico.IsInputReadOnly = False
         tbPrecioCosto.IsInputReadOnly = False
@@ -467,7 +467,7 @@ Public Class F1_Productos
         tbCodBarra.ReadOnly = True
         tbCodProd.ReadOnly = True
         tbDescPro.ReadOnly = True
-
+        tbMedida.ReadOnly = True
         tbDescDet.ReadOnly = True
         cbgrupo1.ReadOnly = True
         cbgrupo2.ReadOnly = True
@@ -479,6 +479,7 @@ Public Class F1_Productos
         tbPrecioMecanico.IsInputReadOnly = True
         tbPrecioCosto.IsInputReadOnly = True
         cbgrupo4.ReadOnly = True
+        tbPrecioFacturado.IsInputReadOnly = True
         cbgrupo5.ReadOnly = True
         cbUMed.ReadOnly = True
         swEstado.IsReadOnly = True
@@ -510,11 +511,13 @@ Public Class F1_Productos
         tbCodProd.Clear()
         tbDescPro.Clear()
         tbDescDet.Clear()
+        tbMedida.Clear()
+
         tbPrecioCosto.Value = 0
         tbPrecioMecanico.Value = 0
         tbPrecioVentaNormal.Value = 0
         tbCodigoMarca.Clear()
-
+        tbPrecioFacturado.Value = 0
 
         If (Limpiar = False) Then
             _prSeleccionarCombo(cbgrupo1)
@@ -587,12 +590,12 @@ Public Class F1_Productos
 
 
         Dim res As Boolean = L_fnGrabarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text,
-                                                "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value,
+                                                tbMedida.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value,
                                                 cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value,
                                                 tbConversion.Text,
                                                 IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text),
                                                 IIf(swEstado.Value = True, 1, 0), nameImg,
-                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
+                                                quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioFacturado.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
 
 
         If res Then
@@ -622,9 +625,9 @@ Public Class F1_Productos
 
         Dim nameImage As String = JGrM_Buscador.GetValue("yfimg")
         If (Modificado = False) Then
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbMedida.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, IIf(tbStockMinimo.Text = String.Empty, 0, tbStockMinimo.Text), IIf(swEstado.Value = True, 1, 0), nameImage, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioFacturado.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
         Else
-            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, "", cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, 0, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
+            res = L_fnModificarProducto(tbCodigo.Text, tbCodProd.Text, tbCodBarra.Text, tbDescPro.Text, tbMedida.Text, cbgrupo1.Value, cbgrupo2.Value, cbgrupo3.Value, cbgrupo4.Value, cbUMed.Value, cbUniVenta.Value, cbUnidMaxima.Value, tbConversion.Text, tbStockMinimo.Text, IIf(swEstado.Value = True, 1, 0), nameImg, quitarUltimaFilaVacia(CType(dgjDetalleProducto.DataSource, DataTable).DefaultView.ToTable(False, "yfanumi", "yfayfnumi", "yfasim", "yfadesc", "estado")), tbDescDet.Text, cbgrupo5.Value, tbPrecioVentaNormal.Value, tbPrecioFacturado.Value, tbPrecioMecanico.Value, tbPrecioCosto.Value, tbCodigoMarca.Text, CType(JGr_Descuentos.DataSource, DataTable), TablaImagenes)
         End If
         If res Then
 
@@ -779,7 +782,7 @@ Public Class F1_Productos
         'a.yfMed, a.yfumin, a.yfusup, a.yfmstk, a.yfclot, a.yfsmin, a.yfap, a.yfimg, a.yffact, a.yfhact, a.yfuact
         listEstCeldas.Add(New Modelo.Celda("yfnumi", True, "ITem".ToUpper, 80))
         listEstCeldas.Add(New Modelo.Celda("yfcprod", True, "Cod.Fab".ToUpper, 100))
-        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", False, "Cod. Proveedor".ToUpper, 140))
+        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", False, "Medida".ToUpper, 140))
         listEstCeldas.Add(New Modelo.Celda("yfcbarra", False, "Cod.Barra".ToUpper, 140))
         listEstCeldas.Add(New Modelo.Celda("yfcdprod1", True, "Descripcion Producto".ToUpper, 250))
         listEstCeldas.Add(New Modelo.Celda("yfgr1", False))
@@ -801,6 +804,7 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yfuact", False))
         listEstCeldas.Add(New Modelo.Celda("VentaNormal", False))
         listEstCeldas.Add(New Modelo.Celda("VentaMecanico", False))
+        listEstCeldas.Add(New Modelo.Celda("VentaFacturado", False))
         listEstCeldas.Add(New Modelo.Celda("PrecioCosto", False))
         listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", True, "CodigoMarca", 90))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 150))
@@ -831,6 +835,7 @@ Public Class F1_Productos
             tbCodProd.Text = .GetValue("yfcprod").ToString
             tbCodBarra.Text = .GetValue("yfcbarra").ToString
             tbDescPro.Text = .GetValue("yfcdprod1").ToString
+            tbMedida.Text = .GetValue("yfcdprod2").ToString
             tbDescDet.Text = .GetValue("yfdetprod").ToString
             cbgrupo1.Value = .GetValue("yfgr1")
             cbgrupo2.Value = .GetValue("yfgr2")
@@ -839,7 +844,7 @@ Public Class F1_Productos
             cbgrupo5.Value = .GetValue("yfgr5")
             cbUMed.Value = .GetValue("yfMed")
             tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
-
+            tbPrecioFacturado.Value = .GetValue("VentaFacturado")
             tbPrecioCosto.Value = .GetValue("PrecioCosto")
             tbPrecioMecanico.Value = .GetValue("VentaMecanico")
             tbCodigoMarca.Text = .GetValue("yfCodigoMarca").ToString
@@ -1427,4 +1432,28 @@ Public Class F1_Productos
         Return 1
     End Function
 
+    Private Sub SuperTabControl_Imagenes_DetalleProducto_SelectedTabChanged(sender As Object, e As SuperTabStripSelectedTabChangedEventArgs) Handles SuperTabControl_Imagenes_DetalleProducto.SelectedTabChanged
+
+    End Sub
+
+    Private Sub tbPrecioCosto_ValueChanged(sender As Object, e As EventArgs) Handles tbPrecioCosto.ValueChanged
+
+        If (tbCodBarra.ReadOnly = False) Then
+            Dim PrecioCosto As Double = tbPrecioCosto.Value
+            Dim PrecioVentaFactura As Double
+
+
+            PrecioVentaFactura = (PrecioCosto + (PrecioCosto * 0.25) + (PrecioCosto * 0.16)) * 2
+
+            tbPrecioFacturado.Value = PrecioVentaFactura
+            tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
+            tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.18)
+
+
+
+        End If
+
+
+
+    End Sub
 End Class
