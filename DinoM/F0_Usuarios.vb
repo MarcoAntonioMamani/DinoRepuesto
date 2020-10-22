@@ -158,6 +158,7 @@ Public Class F0_Usuarios
             TextBoxX1.Text = .GetValue("ydpass").ToString
             Tb_Estado.Value = CBool(.GetValue("ydest").ToString)
             tbTodasSucursales.Value = CBool(IIf(.GetValue("ydall") = 1, True, False))
+            swDescuento.Value = CBool(IIf(.GetValue("ydDescuentoGeneral") = 1, True, False))
             Tb_DiasPedidos.Value = CInt(.GetValue("ydcant").ToString)
             Tb_fuenteTam.Value = CInt(.GetValue("ydfontsize").ToString)
 
@@ -241,6 +242,9 @@ Public Class F0_Usuarios
         JGr_Buscador.RetrieveStructure()
 
         With JGr_Buscador.RootTable.Columns("ydnumi")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("ydDescuentoGeneral")
             .Visible = False
         End With
         With JGr_Buscador.RootTable.Columns("ydall")
@@ -467,7 +471,7 @@ Public Class F0_Usuarios
             End If
 
             If _Nuevo Then
-                L_Usuario_Grabar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor)
+                L_Usuario_Grabar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"))
 
                 Tb_Nombre.Focus()
                 ToastNotification.Show(Me, "Codigo Usuario ".ToUpper + Tb_Id.Text + " Grabado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
@@ -476,7 +480,7 @@ Public Class F0_Usuarios
                 _PCargarBuscador()
                 _PLimpiar()
             Else
-                L_Usuario_Modificar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor)
+                L_Usuario_Modificar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"))
 
                 ToastNotification.Show(Me, "Codigo Usuario ".ToUpper + Tb_Id.Text + " Modificado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
 

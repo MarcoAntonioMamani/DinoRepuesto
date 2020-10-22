@@ -161,6 +161,11 @@ Public Class F0_Ventas
         TbNombre2.ReadOnly = True
         cbSucursal.ReadOnly = True
         FilaSelectLote = Nothing
+
+        lbMDescuento.Visible = True
+        lbPDescuento.Visible = True
+        tbMdesc.Visible = True
+        tbPdesc.Visible = True
     End Sub
     Private Sub _prhabilitar()
         SwProforma.IsReadOnly = False
@@ -188,8 +193,19 @@ Public Class F0_Ventas
         If (tbCodigo.Text.Length > 0) Then
             cbSucursal.ReadOnly = True
         Else
-            cbSucursal.ReadOnly = False
+            'cbSucursal.ReadOnly = False
 
+        End If
+        If (gi_DescuentoGeneral = 1) Then
+            lbMDescuento.Visible = True
+            lbPDescuento.Visible = True
+            tbMdesc.Visible = True
+            tbPdesc.Visible = True
+        Else
+            lbMDescuento.Visible = False
+            lbPDescuento.Visible = False
+            tbMdesc.Visible = False
+            tbPdesc.Visible = False
         End If
     End Sub
     Public Sub _prFiltrar()
@@ -264,6 +280,18 @@ Public Class F0_Ventas
                 End If
 
             Next
+
+        End If
+        If (gi_userSuc > 0) Then
+            Dim dt As DataTable = CType(cbSucursal.DataSource, DataTable)
+            For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+
+                If (dt.Rows(i).Item("aanumi") = gi_userSuc) Then
+                    cbSucursal.SelectedIndex = i
+                End If
+
+            Next
+
 
         End If
     End Sub
@@ -1629,7 +1657,7 @@ Public Class F0_Ventas
 
     Private Sub P_prCargarParametro()
         'El sistema factura?
-        GroupPanelFactura.Visible = True 'gb_FacturaEmite
+        GroupPanelFactura.Visible = False 'gb_FacturaEmite
 
         'Si factura, preguntar si, Se incluye el Importe ICE / IEHD / TASAS?
         If (gb_FacturaEmite) Then
