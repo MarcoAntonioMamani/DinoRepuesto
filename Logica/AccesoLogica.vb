@@ -1336,7 +1336,7 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
-    Public Shared Function L_fnListarProductos(_almacen As String, _CatPrecio As String) As DataTable
+    Public Shared Function L_fnListarProductos(_almacen As String, _CatPrecio As String, idCategoria As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
@@ -1345,6 +1345,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@almacen", _almacen))
         _listParam.Add(New Datos.DParametro("@CategoriaPrecio", _CatPrecio))
         _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@IdCategoria", idCategoria))
         _Tabla = D_ProcedimientoConParam("sp_Marco_TV001", _listParam)
 
         Return _Tabla
@@ -1370,7 +1371,7 @@ Public Class AccesoLogica
 
     End Function
 
-    Public Shared Function L_fnListarProductosSinLote(_almacen As String, _CatPrecio As String, _detalle As DataTable) As DataTable
+    Public Shared Function L_fnListarProductosSinLote(_almacen As String, _CatPrecio As String, _detalle As DataTable, idCategoria As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
@@ -1379,8 +1380,18 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@almacen", _almacen))
         _listParam.Add(New Datos.DParametro("@CategoriaPrecio", _CatPrecio))
         _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@IdCategoria", idCategoria))
         _listParam.Add(New Datos.DParametro("@TV0011", "", _detalle))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TV001", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_fnListarCategoriaVentas() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 14))
+        _Tabla = D_ProcedimientoConParam("sp_Marco_TV001", _listParam)
 
         Return _Tabla
     End Function

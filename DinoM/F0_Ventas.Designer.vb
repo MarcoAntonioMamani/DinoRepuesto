@@ -23,8 +23,8 @@ Partial Class F0_Ventas
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F0_Ventas))
-        Dim cbSucursal_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbPrecio_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim cbSucursal_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.SuperTabItem1 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -35,6 +35,9 @@ Partial Class F0_Ventas
         Me.PanelContentSup = New System.Windows.Forms.Panel()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnSearchCliente = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
+        Me.cbPrecio = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
         Me.SwProforma = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.LabelX18 = New DevComponents.DotNetBar.LabelX()
         Me.tbProforma = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -49,12 +52,12 @@ Partial Class F0_Ventas
         Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
+        Me.lbCredito = New DevComponents.DotNetBar.LabelX()
+        Me.tbFechaVenc = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.lbTipoMoneda = New DevComponents.DotNetBar.LabelX()
         Me.swMoneda = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.lbCredito = New DevComponents.DotNetBar.LabelX()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
-        Me.tbFechaVenc = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.swTipoVenta = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.tbFechaVenta = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
@@ -93,8 +96,6 @@ Partial Class F0_Ventas
         Me.lbMDescuento = New DevComponents.DotNetBar.LabelX()
         Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
-        Me.cbPrecio = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,6 +121,7 @@ Partial Class F0_Ventas
         Me.PanelContentSup.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.cbPrecio, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbSucursal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanelFactura2.SuspendLayout()
         CType(Me.dtiFechaFactura, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,7 +143,6 @@ Partial Class F0_Ventas
         CType(Me.tbMdesc, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbtotal, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbPdesc, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cbPrecio, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelSuperior
@@ -506,6 +507,7 @@ Partial Class F0_Ventas
         '
         Me.Panel2.AutoScroll = True
         Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.btnSearchCliente)
         Me.Panel2.Controls.Add(Me.LabelX8)
         Me.Panel2.Controls.Add(Me.cbPrecio)
         Me.Panel2.Controls.Add(Me.SwProforma)
@@ -534,6 +536,54 @@ Partial Class F0_Ventas
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1312, 233)
         Me.Panel2.TabIndex = 234
+        '
+        'btnSearchCliente
+        '
+        Me.btnSearchCliente.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnSearchCliente.BackColor = System.Drawing.Color.Transparent
+        Me.btnSearchCliente.ColorTable = DevComponents.DotNetBar.eButtonColor.Flat
+        Me.btnSearchCliente.Image = Global.DinoM.My.Resources.Resources.search
+        Me.btnSearchCliente.ImageFixedSize = New System.Drawing.Size(25, 23)
+        Me.btnSearchCliente.Location = New System.Drawing.Point(519, 55)
+        Me.btnSearchCliente.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSearchCliente.Name = "btnSearchCliente"
+        Me.btnSearchCliente.Size = New System.Drawing.Size(37, 28)
+        Me.btnSearchCliente.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnSearchCliente.TabIndex = 244
+        Me.btnSearchCliente.Visible = False
+        '
+        'LabelX8
+        '
+        Me.LabelX8.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX8.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX8.Location = New System.Drawing.Point(644, 122)
+        Me.LabelX8.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX8.Name = "LabelX8"
+        Me.LabelX8.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX8.Size = New System.Drawing.Size(172, 28)
+        Me.LabelX8.TabIndex = 243
+        Me.LabelX8.Text = "Cat. Precio:"
+        '
+        'cbPrecio
+        '
+        cbPrecio_DesignTimeLayout.LayoutString = resources.GetString("cbPrecio_DesignTimeLayout.LayoutString")
+        Me.cbPrecio.DesignTimeLayout = cbPrecio_DesignTimeLayout
+        Me.cbPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPrecio.Location = New System.Drawing.Point(849, 120)
+        Me.cbPrecio.Margin = New System.Windows.Forms.Padding(4)
+        Me.cbPrecio.Name = "cbPrecio"
+        Me.cbPrecio.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.cbPrecio.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.cbPrecio.SelectedIndex = -1
+        Me.cbPrecio.SelectedItem = Nothing
+        Me.cbPrecio.Size = New System.Drawing.Size(219, 26)
+        Me.cbPrecio.TabIndex = 242
+        Me.cbPrecio.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'SwProforma
         '
@@ -849,43 +899,6 @@ Partial Class F0_Ventas
         Me.LabelX7.TabIndex = 232
         Me.LabelX7.Text = "Nro de Autorización:"
         '
-        'lbTipoMoneda
-        '
-        Me.lbTipoMoneda.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.lbTipoMoneda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lbTipoMoneda.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbTipoMoneda.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.lbTipoMoneda.Location = New System.Drawing.Point(643, 57)
-        Me.lbTipoMoneda.Margin = New System.Windows.Forms.Padding(4)
-        Me.lbTipoMoneda.Name = "lbTipoMoneda"
-        Me.lbTipoMoneda.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.lbTipoMoneda.Size = New System.Drawing.Size(172, 28)
-        Me.lbTipoMoneda.TabIndex = 235
-        Me.lbTipoMoneda.Text = "Tipo Moneda:"
-        '
-        'swMoneda
-        '
-        '
-        '
-        '
-        Me.swMoneda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swMoneda.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swMoneda.Location = New System.Drawing.Point(849, 57)
-        Me.swMoneda.Margin = New System.Windows.Forms.Padding(4)
-        Me.swMoneda.Name = "swMoneda"
-        Me.swMoneda.OffBackColor = System.Drawing.Color.LawnGreen
-        Me.swMoneda.OffText = "DOLAR"
-        Me.swMoneda.OnBackColor = System.Drawing.Color.Gold
-        Me.swMoneda.OnText = "BOLIVIANO"
-        Me.swMoneda.Size = New System.Drawing.Size(180, 27)
-        Me.swMoneda.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swMoneda.TabIndex = 5
-        Me.swMoneda.Value = True
-        Me.swMoneda.ValueObject = "Y"
-        '
         'lbCredito
         '
         Me.lbCredito.AutoSize = True
@@ -904,41 +917,6 @@ Partial Class F0_Ventas
         Me.lbCredito.TabIndex = 233
         Me.lbCredito.Text = "Vencimiento De Credito:"
         Me.lbCredito.Visible = False
-        '
-        'LabelX5
-        '
-        Me.LabelX5.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX5.Location = New System.Drawing.Point(644, 169)
-        Me.LabelX5.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX5.Size = New System.Drawing.Size(172, 28)
-        Me.LabelX5.TabIndex = 232
-        Me.LabelX5.Text = "Tipo Venta:"
-        Me.LabelX5.Visible = False
-        '
-        'LabelX4
-        '
-        Me.LabelX4.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX4.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX4.Location = New System.Drawing.Point(643, 16)
-        Me.LabelX4.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX4.Name = "LabelX4"
-        Me.LabelX4.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX4.Size = New System.Drawing.Size(172, 28)
-        Me.LabelX4.TabIndex = 231
-        Me.LabelX4.Text = "Fecha Venta:"
         '
         'tbFechaVenc
         '
@@ -987,6 +965,78 @@ Partial Class F0_Ventas
         Me.tbFechaVenc.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.tbFechaVenc.TabIndex = 7
         Me.tbFechaVenc.Visible = False
+        '
+        'lbTipoMoneda
+        '
+        Me.lbTipoMoneda.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbTipoMoneda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbTipoMoneda.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbTipoMoneda.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbTipoMoneda.Location = New System.Drawing.Point(643, 57)
+        Me.lbTipoMoneda.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbTipoMoneda.Name = "lbTipoMoneda"
+        Me.lbTipoMoneda.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbTipoMoneda.Size = New System.Drawing.Size(172, 28)
+        Me.lbTipoMoneda.TabIndex = 235
+        Me.lbTipoMoneda.Text = "Tipo Moneda:"
+        '
+        'swMoneda
+        '
+        '
+        '
+        '
+        Me.swMoneda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swMoneda.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swMoneda.Location = New System.Drawing.Point(849, 57)
+        Me.swMoneda.Margin = New System.Windows.Forms.Padding(4)
+        Me.swMoneda.Name = "swMoneda"
+        Me.swMoneda.OffBackColor = System.Drawing.Color.LawnGreen
+        Me.swMoneda.OffText = "DOLAR"
+        Me.swMoneda.OnBackColor = System.Drawing.Color.Gold
+        Me.swMoneda.OnText = "BOLIVIANO"
+        Me.swMoneda.Size = New System.Drawing.Size(180, 27)
+        Me.swMoneda.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swMoneda.TabIndex = 5
+        Me.swMoneda.Value = True
+        Me.swMoneda.ValueObject = "Y"
+        '
+        'LabelX5
+        '
+        Me.LabelX5.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX5.Location = New System.Drawing.Point(644, 169)
+        Me.LabelX5.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX5.Size = New System.Drawing.Size(172, 28)
+        Me.LabelX5.TabIndex = 232
+        Me.LabelX5.Text = "Tipo Venta:"
+        Me.LabelX5.Visible = False
+        '
+        'LabelX4
+        '
+        Me.LabelX4.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX4.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX4.Location = New System.Drawing.Point(643, 16)
+        Me.LabelX4.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX4.Name = "LabelX4"
+        Me.LabelX4.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX4.Size = New System.Drawing.Size(172, 28)
+        Me.LabelX4.TabIndex = 231
+        Me.LabelX4.Text = "Fecha Venta:"
         '
         'swTipoVenta
         '
@@ -1636,7 +1686,7 @@ Partial Class F0_Ventas
         '
         '
         '
-        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbPDescuento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lbPDescuento.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbPDescuento.ForeColor = System.Drawing.Color.White
         Me.lbPDescuento.Location = New System.Drawing.Point(53, 41)
@@ -1723,39 +1773,6 @@ Partial Class F0_Ventas
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'LabelX8
-        '
-        Me.LabelX8.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX8.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX8.Location = New System.Drawing.Point(644, 122)
-        Me.LabelX8.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX8.Name = "LabelX8"
-        Me.LabelX8.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX8.Size = New System.Drawing.Size(172, 28)
-        Me.LabelX8.TabIndex = 243
-        Me.LabelX8.Text = "Cat. Precio:"
-        '
-        'cbPrecio
-        '
-        cbPrecio_DesignTimeLayout.LayoutString = resources.GetString("cbPrecio_DesignTimeLayout.LayoutString")
-        Me.cbPrecio.DesignTimeLayout = cbPrecio_DesignTimeLayout
-        Me.cbPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPrecio.Location = New System.Drawing.Point(849, 120)
-        Me.cbPrecio.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbPrecio.Name = "cbPrecio"
-        Me.cbPrecio.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
-        Me.cbPrecio.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.cbPrecio.SelectedIndex = -1
-        Me.cbPrecio.SelectedItem = Nothing
-        Me.cbPrecio.Size = New System.Drawing.Size(219, 26)
-        Me.cbPrecio.TabIndex = 242
-        Me.cbPrecio.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
-        '
         'F0_Ventas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1795,6 +1812,7 @@ Partial Class F0_Ventas
         Me.GroupPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.cbPrecio, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbSucursal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanelFactura2.ResumeLayout(False)
         Me.GroupPanelFactura2.PerformLayout()
@@ -1818,7 +1836,6 @@ Partial Class F0_Ventas
         CType(Me.tbMdesc, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbtotal, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbPdesc, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cbPrecio, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1892,4 +1909,5 @@ Partial Class F0_Ventas
     Friend WithEvents PrintDialog1 As System.Windows.Forms.PrintDialog
     Friend WithEvents LabelX8 As DevComponents.DotNetBar.LabelX
     Friend WithEvents cbPrecio As Janus.Windows.GridEX.EditControls.MultiColumnCombo
+    Friend WithEvents btnSearchCliente As DevComponents.DotNetBar.ButtonX
 End Class

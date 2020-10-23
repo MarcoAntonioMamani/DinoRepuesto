@@ -36,10 +36,11 @@ Partial Class ModeloAyuda
         Me.grJBuscador.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grJBuscador.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.grJBuscador.Location = New System.Drawing.Point(0, 0)
+        Me.grJBuscador.Margin = New System.Windows.Forms.Padding(4)
         Me.grJBuscador.Name = "grJBuscador"
         Me.grJBuscador.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grJBuscador.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grJBuscador.Size = New System.Drawing.Size(668, 314)
+        Me.grJBuscador.Size = New System.Drawing.Size(893, 389)
         Me.grJBuscador.TabIndex = 0
         Me.grJBuscador.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -52,8 +53,9 @@ Partial Class ModeloAyuda
         Me.GPPanelP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GPPanelP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GPPanelP.Location = New System.Drawing.Point(0, 0)
+        Me.GPPanelP.Margin = New System.Windows.Forms.Padding(4)
         Me.GPPanelP.Name = "GPPanelP"
-        Me.GPPanelP.Size = New System.Drawing.Size(674, 336)
+        Me.GPPanelP.Size = New System.Drawing.Size(899, 414)
         '
         '
         '
@@ -87,16 +89,18 @@ Partial Class ModeloAyuda
         '
         'ModeloAyuda
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(674, 336)
+        Me.ClientSize = New System.Drawing.Size(899, 414)
         Me.Controls.Add(Me.GPPanelP)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.Name = "ModeloAyuda"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ModeloAyuda"
         CType(Me.grJBuscador, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GPPanelP.ResumeLayout(False)

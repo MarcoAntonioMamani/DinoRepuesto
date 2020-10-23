@@ -760,13 +760,13 @@ Public Class F0_Venta2
         Dim dtname As DataTable = L_fnNameLabel()
         Dim dt As New DataTable
 
-        If (G_Lote = True) Then
-            dt = L_fnListarProductos(cbSucursal.Value, _cliente)  ''1=Almacen
-            'Table_Producto = dt.Copy
-        Else
-            dt = L_fnListarProductosSinLote(cbSucursal.Value, _cliente, CType(grdetalle.DataSource, DataTable))  ''1=Almacen
-            'Table_Producto = dt.Copy
-        End If
+        'If (G_Lote = True) Then
+        '    dt = L_fnListarProductos(cbSucursal.Value, _cliente)  ''1=Almacen
+        '    'Table_Producto = dt.Copy
+        'Else
+        '    dt = L_fnListarProductosSinLote(cbSucursal.Value, _cliente, CType(grdetalle.DataSource, DataTable))  ''1=Almacen
+        '    'Table_Producto = dt.Copy
+        'End If
 
 
 
@@ -2856,13 +2856,13 @@ salirIf:
     End Sub
     Private Sub cargarProductos()
         Dim dt As DataTable
-        If (G_Lote = True) Then
-            dt = L_fnListarProductos(cbSucursal.Value, Str(_CodCliente))  ''1=Almacen
-            Table_Producto = dt.Copy
-        Else
-            dt = L_fnListarProductosSinLote(cbSucursal.Value, Str(_CodCliente), CType(grdetalle.DataSource, DataTable).Clone)  ''1=Almacen
-            Table_Producto = dt.Copy
-        End If
+        'If (G_Lote = True) Then
+        '    dt = L_fnListarProductos(cbSucursal.Value, Str(_CodCliente))  ''1=Almacen
+        '    Table_Producto = dt.Copy
+        'Else
+        '    dt = L_fnListarProductosSinLote(cbSucursal.Value, Str(_CodCliente), CType(grdetalle.DataSource, DataTable).Clone)  ''1=Almacen
+        '    Table_Producto = dt.Copy
+        'End If
     End Sub
     Private Function existeProducto(codigo As String) As Boolean
         Return (Table_Producto.Select("yfcbarra='" + codigo.Trim() + "'", "").Count > 0)
