@@ -459,7 +459,7 @@ Public Class F0_Ventas
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             .FormatString = "0.00"
-            .Caption = "% Ref.".ToUpper
+            .Caption = "% Dif.".ToUpper
         End With
 
         With grdetalle.RootTable.Columns("tbcmin")
