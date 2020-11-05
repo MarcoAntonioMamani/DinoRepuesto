@@ -114,6 +114,11 @@ Module P_Global
     Public gb_mostrarMapa As Boolean = True
     Public gi_userFuente As Integer = 8
     Public gs_user As String = "DEFAULT"
+    Public gs_DescuentoProducto As Double = 0
+    Public gs_VentaFacturado As Integer = 0
+    Public gs_VentaNormal As Integer = 0
+    Public gs_VentaMecanico As Integer = 0
+    Public gs_VentaMayorista As Integer = 0
     Public gi_userNumi As Integer = 0
     Public gi_userRol As Integer = 0
     Public gi_userSuc As Integer = 0

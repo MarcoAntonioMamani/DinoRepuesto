@@ -290,7 +290,7 @@ Public Class AccesoLogica
             _Where = "ZY003.ydnumi=ZY003.ydnumi and ZY002.ybnumi=ZY003.ydrol and TA001.aanumi=ZY003.ydsuc " + _Cadena
         End If
 
-        _Tabla = D_Datos_Tabla("ZY003.ydnumi,ZY003.yduser,ZY003.ydpass,ZY003.ydest,ZY003.ydcant,ZY003.ydfontsize,ZY002.ybnumi,ZY002.ybrol,ZY003.ydsuc,ZY003.ydall,TA001.aabdes,ZY003.ydfact,ZY003.ybhact,ZY003.ybuact,ZY003.yd_numiVend,ZY003.ydDescuentoGeneral", "ZY003,ZY002,TA001", _Where + " order by ydnumi")
+        _Tabla = D_Datos_Tabla("ZY003.ydnumi,ZY003.yduser,ZY003.ydpass,ZY003.ydest,ZY003.ydcant,ZY003.ydfontsize,ZY002.ybnumi,ZY002.ybrol,ZY003.ydsuc,ZY003.ydall,TA001.aabdes,ZY003.ydfact,ZY003.ybhact,ZY003.ybuact,ZY003.yd_numiVend,ZY003.ydDescuentoGeneral,ZY003.DescuentoProducto,ZY003.PrecioVentaNormal,ZY003.PrecioVentaFacturado,ZY003.PrecioMecanico,ZY003.PrecioMayorista", "ZY003,ZY002,TA001", _Where + " order by ydnumi")
         _Ds.Tables.Add(_Tabla)
         Return _Ds
     End Function
@@ -308,7 +308,7 @@ Public Class AccesoLogica
         _Ds.Tables.Add(_Tabla)
         Return _Ds
     End Function
-    Public Shared Sub L_Usuario_Grabar(ByRef _numi As String, _user As String, _pass As String, _rol As String, _estado As String, _cantDias As String, _tamFuente As String, _suc As String, _allSuc As String, _numiVend As String, _descuento As String)
+    Public Shared Sub L_Usuario_Grabar(ByRef _numi As String, _user As String, _pass As String, _rol As String, _estado As String, _cantDias As String, _tamFuente As String, _suc As String, _allSuc As String, _numiVend As String, _descuento As String, DescuentoProducto As String, VentaFacturado As String, VentaNormal As String, VentaMecanico As String, VentaMayorista As String)
         Dim _Actualizacion As String
         Dim _Err As Boolean
         Dim _Tabla As DataTable
@@ -322,13 +322,13 @@ Public Class AccesoLogica
         _Actualizacion = "'" + Date.Now.Date.ToString("yyyy/MM/dd") + "', '" + Now.Hour.ToString + ":" + Now.Minute.ToString + "' ,'" + L_Usuario + "'"
 
         Dim Sql As String
-        Sql = _numi + ",'" + _user + "'," + _rol + ",'" + _pass + "','" + _estado + "'," + _cantDias + "," + _tamFuente + "," + _suc + "," + _allSuc + "," + _Actualizacion + "," + _numiVend + "," + _descuento
+        Sql = _numi + ",'" + _user + "'," + _rol + ",'" + _pass + "','" + _estado + "'," + _cantDias + "," + _tamFuente + "," + _suc + "," + _allSuc + "," + _Actualizacion + "," + _numiVend + "," + _descuento + "," + DescuentoProducto + "," + VentaNormal + "," + VentaFacturado + "," + VentaMecanico + "," + VentaMayorista
         _Err = D_Insertar_Datos("ZY003", Sql)
     End Sub
-    Public Shared Sub L_Usuario_Modificar(_numi As String, _user As String, _pass As String, _rol As String, _estado As String, _cantDias As String, _tamFuente As String, _suc As String, _allSuc As String, _numiVend As String, _Descuento As String)
+    Public Shared Sub L_Usuario_Modificar(_numi As String, _user As String, _pass As String, _rol As String, _estado As String, _cantDias As String, _tamFuente As String, _suc As String, _allSuc As String, _numiVend As String, _Descuento As String, DescuentoProducto As String, VentaFacturado As String, VentaNormal As String, VentaMecanico As String, VentaMayorista As String)
         Dim _Err As Boolean
         Dim Sql, _where As String
-
+        'ZY003.DescuentoProducto, ZY003.PrecioVentaNormal, ZY003.PrecioVentaFacturado, ZY003.PrecioMecanico, ZY003.PrecioMayorista
         Sql = "yduser = '" + _user + "' , " +
         "ydpass = '" + _pass + "' , " +
         "ydrol = " + _rol + " , " +
@@ -338,7 +338,12 @@ Public Class AccesoLogica
         "ydsuc = " + _suc + " , " +
         "ydall = " + _allSuc + " , " +
         "yd_numiVend = " + _numiVend + " , " +
-        "ydDescuentoGeneral = " + _Descuento
+        "ydDescuentoGeneral = " + _Descuento + " , " +
+         "DescuentoProducto = " + DescuentoProducto + " , " +
+         "PrecioVentaNormal = " + VentaNormal + " , " +
+          "PrecioVentaFacturado = " + VentaFacturado + " , " +
+           "PrecioMecanico = " + VentaMecanico + " , " +
+            "PrecioMayorista = " + VentaMayorista
 
         _where = "ydnumi = " + _numi
         _Err = D_Modificar_Datos("ZY003", Sql, _where)
@@ -361,7 +366,7 @@ Public Class AccesoLogica
     End Function
     Public Shared Function L_Validar_Usuario(_Nom As String, _Pass As String) As DataTable
         Dim _Tabla As DataTable
-        _Tabla = D_Datos_Tabla("ydnumi,yduser,ydrol,ydpass,ydest,ydcant,ydfontsize,ydsuc,yd_numiVend,ydDescuentoGeneral", "ZY003", "yduser = '" + _Nom + "' AND ydpass = '" + _Pass + "'")
+        _Tabla = D_Datos_Tabla("ydnumi,yduser,ydrol,ydpass,ydest,ydcant,ydfontsize,ydsuc,yd_numiVend,ydDescuentoGeneral,DescuentoProducto,PrecioVentaNormal,PrecioVentaFacturado,PrecioMecanico,PrecioMayorista", "ZY003", "yduser = '" + _Nom + "' AND ydpass = '" + _Pass + "'")
         Return _Tabla
     End Function
 #End Region

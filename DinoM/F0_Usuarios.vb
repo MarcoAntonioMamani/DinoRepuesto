@@ -152,6 +152,7 @@ Public Class F0_Usuarios
         If (IsNothing(CType(JGr_Buscador.DataSource, DataTable))) Then
             Return
         End If
+        'ZY003.DescuentoProducto, ZY003.PrecioVentaNormal, ZY003.PrecioVentaFacturado, ZY003.PrecioMecanico, ZY003.PrecioMayorista
         With JGr_Buscador
             Tb_Id.Text = .GetValue("ydnumi").ToString
             Tb_Nombre.Text = .GetValue("yduser").ToString
@@ -165,6 +166,12 @@ Public Class F0_Usuarios
             JMC_Categoria.Value = CInt(.GetValue("ybnumi").ToString)
             tbSuc.Value = CInt(.GetValue("ydsuc").ToString)
             NumiVendedor = CInt(.GetValue("yd_numiVend").ToString)
+            tbDescuento.Value = IIf(IsDBNull(.GetValue("DescuentoProducto")), 0, .GetValue("DescuentoProducto"))
+            swVentaFacturado.Value = IIf(IsDBNull(.GetValue("PrecioVentaFacturado")), False, .GetValue("PrecioVentaFacturado"))
+            swVentaNormal.Value = IIf(IsDBNull(.GetValue("PrecioVentaNormal")), False, .GetValue("PrecioVentaNormal"))
+            swVentaMecanico.Value = IIf(IsDBNull(.GetValue("PrecioMecanico")), False, .GetValue("PrecioMecanico"))
+            swVentaMayorista.Value = IIf(IsDBNull(.GetValue("PrecioMayorista")), False, .GetValue("PrecioMayorista"))
+
             Dim _tabla As DataTable = L_fnListarEmpleado()
             If _tabla.Rows.Count > 0 Then
                 Dim fila As DataRow() = _tabla.Select("ydnumi= " + NumiVendedor.ToString, "")
@@ -199,6 +206,12 @@ Public Class F0_Usuarios
         btnModificar.Enabled = True
         btnEliminar.Enabled = True
         btnGrabar.Enabled = False
+
+        tbDescuento.IsInputReadOnly = True
+        swVentaFacturado.IsReadOnly = True
+        swVentaMayorista.IsReadOnly = True
+        swVentaMecanico.IsReadOnly = True
+        swVentaNormal.IsReadOnly = True
 
         JMC_Categoria.ReadOnly = True
         Tb_Estado.IsReadOnly = True
@@ -240,6 +253,24 @@ Public Class F0_Usuarios
         JGr_Buscador.BoundMode = BoundMode.Bound
         JGr_Buscador.DataSource = _Dsencabezado.Tables(0) ' _Dsencabezado.Tables(0) ' dt
         JGr_Buscador.RetrieveStructure()
+
+        'ZY003.DescuentoProducto, ZY003.PrecioVentaNormal, ZY003.PrecioVentaFacturado, ZY003.PrecioMecanico, ZY003.PrecioMayorista
+        With JGr_Buscador.RootTable.Columns("DescuentoProducto")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("PrecioVentaNormal")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("PrecioVentaFacturado")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("PrecioMecanico")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("PrecioMayorista")
+            .Visible = False
+        End With
+
 
         With JGr_Buscador.RootTable.Columns("ydnumi")
             .Visible = False
@@ -358,6 +389,12 @@ Public Class F0_Usuarios
         btnModificar.Enabled = False
         btnEliminar.Enabled = False
         btnGrabar.Enabled = True
+
+        tbDescuento.IsInputReadOnly = False
+        swVentaFacturado.IsReadOnly = False
+        swVentaMayorista.IsReadOnly = False
+        swVentaMecanico.IsReadOnly = False
+        swVentaNormal.IsReadOnly = False
     End Sub
 
     Private Sub _PLimpiar()
@@ -373,6 +410,12 @@ Public Class F0_Usuarios
         tbSuc.SelectedIndex = -1
         tbVendedor.Clear()
         LblPaginacion.Text = String.Empty
+
+        tbDescuento.Value = 8
+        swVentaFacturado.Value = False
+        swVentaMayorista.Value = False
+        swVentaMecanico.Value = False
+        swVentaNormal.Value = False
     End Sub
 
     Public Function P_Validar() As Boolean
@@ -471,7 +514,7 @@ Public Class F0_Usuarios
             End If
 
             If _Nuevo Then
-                L_Usuario_Grabar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"))
+                L_Usuario_Grabar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"), tbDescuento.Value, IIf(swVentaFacturado.Value = True, "1", "0"), IIf(swVentaNormal.Value = True, "1", "0"), IIf(swVentaMecanico.Value = True, "1", "0"), IIf(swVentaMayorista.Value = True, "1", "0"))
 
                 Tb_Nombre.Focus()
                 ToastNotification.Show(Me, "Codigo Usuario ".ToUpper + Tb_Id.Text + " Grabado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
@@ -480,7 +523,7 @@ Public Class F0_Usuarios
                 _PCargarBuscador()
                 _PLimpiar()
             Else
-                L_Usuario_Modificar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"))
+                L_Usuario_Modificar(Tb_Id.Text, Tb_Nombre.Text, TextBoxX1.Text, JMC_Categoria.Value, Tb_Estado.Value, Tb_DiasPedidos.Value, Tb_fuenteTam.Value, tbSuc.Value, IIf(tbTodasSucursales.Value = True, "1", "0"), NumiVendedor, IIf(swDescuento.Value = True, "1", "0"), tbDescuento.Value, IIf(swVentaFacturado.Value = True, "1", "0"), IIf(swVentaNormal.Value = True, "1", "0"), IIf(swVentaMecanico.Value = True, "1", "0"), IIf(swVentaMayorista.Value = True, "1", "0"))
 
                 ToastNotification.Show(Me, "Codigo Usuario ".ToUpper + Tb_Id.Text + " Modificado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
 
@@ -717,6 +760,17 @@ Public Class F0_Usuarios
         Else
             Me.Opacity = 100
             Timer1.Enabled = False
+        End If
+    End Sub
+
+    Private Sub tbDescuento_ValueChanged(sender As Object, e As EventArgs) Handles tbDescuento.ValueChanged
+        If (tbDescuento.Value > 100) Then
+
+            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+            ToastNotification.Show(Me, "El Valor Maximo Debe ser 100 %", img, 4000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            tbDescuento.Value = 100
+            tbDescuento.Focus()
+
         End If
     End Sub
 End Class

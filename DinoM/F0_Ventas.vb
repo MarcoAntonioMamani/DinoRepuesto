@@ -108,6 +108,11 @@ Public Class F0_Ventas
     Private Sub _prCargarComboPrecio(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo)
         Dim dt As New DataTable
         dt = L_fnListarPrecios()
+        dt.Rows.Add(50, "Mayorista")
+
+
+
+
         With mCombo
             .DropDownList.Columns.Clear()
             .DropDownList.Columns.Add("ygnumi").Width = 60
@@ -117,6 +122,48 @@ Public Class F0_Ventas
             .ValueMember = "ygnumi"
             .DisplayMember = "ygdesc"
             .DataSource = dt
+            .Refresh()
+        End With
+        If (dt.Rows.Count > 0) Then
+            mCombo.SelectedIndex = 0
+        End If
+    End Sub
+
+    Private Sub _prCargarComboPrecioLimpiar(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo)
+        Dim dt As New DataTable
+        dt = L_fnListarPrecios()
+        dt.Rows.Add(50, "Mayorista")
+
+        Dim dt2 As DataTable = dt.Copy
+        dt2.Rows.Clear()
+
+        For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+            If (dt.Rows(i).Item("ygnumi") = 80 And gs_VentaFacturado = 1) Then
+                dt2.ImportRow(dt.Rows(i))
+            End If
+            If (dt.Rows(i).Item("ygnumi") = 70 And gs_VentaNormal = 1) Then
+                dt2.ImportRow(dt.Rows(i))
+            End If
+            If (dt.Rows(i).Item("ygnumi") = 1100 And gs_VentaMecanico = 1) Then
+                dt2.ImportRow(dt.Rows(i))
+            End If
+            If (dt.Rows(i).Item("ygnumi") = 50 And gs_VentaMayorista = 1) Then
+                dt2.ImportRow(dt.Rows(i))
+            End If
+
+        Next
+
+
+
+        With mCombo
+            .DropDownList.Columns.Clear()
+            .DropDownList.Columns.Add("ygnumi").Width = 60
+            .DropDownList.Columns("ygnumi").Caption = "COD"
+            .DropDownList.Columns.Add("ygdesc").Width = 500
+            .DropDownList.Columns("ygdesc").Caption = "Precios"
+            .ValueMember = "ygnumi"
+            .DisplayMember = "ygdesc"
+            .DataSource = dt2
             .Refresh()
         End With
         If (dt.Rows.Count > 0) Then
@@ -228,6 +275,8 @@ Public Class F0_Ventas
             tbMdesc.Visible = False
             tbPdesc.Visible = False
         End If
+
+        _prCargarComboPrecioLimpiar(cbPrecio)
     End Sub
     Public Sub _prFiltrar()
         'cargo el buscador
@@ -262,13 +311,13 @@ Public Class F0_Ventas
         tbIce.Value = 0
         tbtotal.Value = 0
         With grdetalle.RootTable.Columns("img")
-            .Width = 70
+            .Width = 40
             .Caption = "Eliminar"
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("imgAdd")
-            .Width = 70
+            .Width = 40
             .Caption = "Nuevo"
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = True
@@ -440,29 +489,44 @@ Public Class F0_Ventas
         With grdetalle.RootTable.Columns("CodigoFabrica")
             .Caption = "Cod.Fabrica"
             .Width = 100
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("CodigoMarca")
             .Caption = "Cod.Marca"
             .Width = 100
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("Medida")
             .Caption = "Medida"
             .Width = 90
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
 
         With grdetalle.RootTable.Columns("CategoriaProducto")
             .Caption = "Cat.Producto"
             .Width = 140
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
 
         End With
         With grdetalle.RootTable.Columns("producto")
             .Caption = "Productos"
-            .Width = 250
-            .Visible = False
+            .Width = 220
+            .MaxLines = 200
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
+            .Visible = True
 
         End With
         With grdetalle.RootTable.Columns("tbest")
@@ -478,7 +542,7 @@ Public Class F0_Ventas
             .Caption = "Pre. Ref."
         End With
         With grdetalle.RootTable.Columns("tbPorcentajeReferencia")
-            .Width = 70
+            .Width = 60
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             .FormatString = "0.00"
@@ -486,7 +550,7 @@ Public Class F0_Ventas
         End With
 
         With grdetalle.RootTable.Columns("tbcmin")
-            .Width = 80
+            .Width = 75
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             .FormatString = "0.00"
@@ -500,7 +564,7 @@ Public Class F0_Ventas
         With grdetalle.RootTable.Columns("unidad")
             .Width = 70
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-            .Visible = True
+            .Visible = False
             .Caption = "Unidad"
         End With
         With grdetalle.RootTable.Columns("tbpbas")
@@ -574,13 +638,13 @@ Public Class F0_Ventas
             .Visible = False
         End With
         With grdetalle.RootTable.Columns("img")
-            .Width = 70
+            .Width = 40
             .Caption = "Eliminar"
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = False
         End With
         With grdetalle.RootTable.Columns("imgAdd")
-            .Width = 70
+            .Width = 40
             .Caption = "Nuevo"
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = False
@@ -833,26 +897,41 @@ Public Class F0_Ventas
         With grProductos.RootTable.Columns("CodigoFabrica")
             .Width = 100
             .Caption = "CodigoFabrica"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
         With grProductos.RootTable.Columns("Medida")
-            .Width = 100
+            .Width = 90
             .Caption = "Medida"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = gb_CodigoBarra
         End With
         With grProductos.RootTable.Columns("Marca")
-            .Width = 100
+            .Width = 90
             .Caption = "Cod.Marca"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
         With grProductos.RootTable.Columns("Categoria")
             .Width = 100
             .Caption = "Categoria"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Visible = True
         End With
         With grProductos.RootTable.Columns("yfcdprod1")
-            .Width = 200
+            .Width = 300
             .Visible = True
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
             .Caption = "Descripcion"
         End With
 
@@ -1455,6 +1534,11 @@ Public Class F0_Ventas
         '        a.tbpcos, a.tblote, a.tbfechaVenc, a.tbptot2, a.tbfact, a.tbhact, a.tbuact, 1 As estado, Cast(null As Image) As img,
         '        (Sum(inv.iccven) + a.tbcmin) as stock
 
+        If (grProductos.GetValue("Stock") <= 0) Then
+            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+            ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            Return
+        End If
 
         Dim pos As Integer = -1
         grdetalle.Row = grdetalle.RowCount - 1
@@ -2551,7 +2635,7 @@ salirIf:
                 'grdetalle.SetValue("tbcmin", 1)
                 'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
             Else
-                If (grdetalle.GetValue("tbporc") > 0 And grdetalle.GetValue("tbporc") <= 100) Then
+                If (grdetalle.GetValue("tbporc") > 0 And grdetalle.GetValue("tbporc") <= gs_DescuentoProducto) Then
 
                     Dim porcdesc As Double = grdetalle.GetValue("tbporc")
                     Dim montodesc As Double = (grdetalle.GetValue("tbptot") * (porcdesc / 100))
@@ -2575,6 +2659,8 @@ salirIf:
                     grdetalle.SetValue("tbdesc", 0)
                     grdetalle.SetValue("tbtotdesc", grdetalle.GetValue("tbptot"))
                     _prCalcularPrecioTotal()
+
+                    ToastNotification.Show(Me, "El Porcentaje de Descuento es Mayor al Asignado al Usuario = " + Str(gs_DescuentoProducto), My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.BottomLeft)
                     'grdetalle.SetValue("tbcmin", 1)
                     'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
 
@@ -2598,10 +2684,12 @@ salirIf:
                 'grdetalle.SetValue("tbcmin", 1)
                 'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
             Else
-                If (grdetalle.GetValue("tbdesc") > 0 And grdetalle.GetValue("tbdesc") <= grdetalle.GetValue("tbptot")) Then
+                Dim montodesc As Double = grdetalle.GetValue("tbdesc")
+                Dim pordesc As Double = ((montodesc * 100) / grdetalle.GetValue("tbptot"))
 
-                    Dim montodesc As Double = grdetalle.GetValue("tbdesc")
-                    Dim pordesc As Double = ((montodesc * 100) / grdetalle.GetValue("tbptot"))
+                If (grdetalle.GetValue("tbdesc") > 0 And pordesc <= gs_DescuentoProducto) Then
+
+
 
                     Dim lin As Integer = grdetalle.GetValue("tbnumi")
                     Dim pos As Integer = -1
@@ -2624,6 +2712,8 @@ salirIf:
                     grdetalle.SetValue("tbdesc", 0)
                     grdetalle.SetValue("tbtotdesc", grdetalle.GetValue("tbptot"))
                     _prCalcularPrecioTotal()
+                    Dim Monto As Double = CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbtotdesc") * (gs_DescuentoProducto / 100)
+                    ToastNotification.Show(Me, "El Monto de Descuento Es Mayor al Autorizado = " + Str(Monto), My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.BottomLeft)
                     'grdetalle.SetValue("tbcmin", 1)
                     'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
 
@@ -3146,6 +3236,10 @@ salirIf:
                 Dim lote As String = grProductos.GetValue("iclot")
                 Dim FechaVenc As Date = grProductos.GetValue("icfven")
                 If (Not _fnExisteProductoConLote(numiProd, lote, FechaVenc)) Then
+                    If (grProductos.GetValue("Stock") <= 0) Then
+                        Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                        ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                    End If
                     'b.yfcdprod1, a.iclot, a.icfven, a.iccven
                     CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbty5prod") = FilaSelectLote.Item("Item")
                     CType(grdetalle.DataSource, DataTable).Rows(pos).Item("codigo") = FilaSelectLote.Item("yfcprod")
