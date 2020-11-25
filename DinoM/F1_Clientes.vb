@@ -762,6 +762,7 @@ Public Class F1_Clientes
 
     Private Sub F1_Clientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _prIniciarTodo()
+        btnNuevo.PerformClick()
 
     End Sub
 

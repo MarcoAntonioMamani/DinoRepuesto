@@ -369,6 +369,8 @@ Public Class F0_Usuarios
 
     Private Sub F0_Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _PIniciarTodo()
+        btnNuevo.PerformClick()
+
     End Sub
 
 

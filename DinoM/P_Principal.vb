@@ -326,11 +326,11 @@ Public Class P_Principal
 
     End Sub
 
-    Private Sub btConfTipoEquipo_Click(sender As Object, e As EventArgs) Handles btConfProducto.Click
+    Private Sub btConfTipoEquipo_Click(sender As Object, e As EventArgs) Handles btConfProducto01.Click
         'SideNav1.IsMenuExpanded = False
         'Ventana.Select()
         Dim frm As New F1_Productos
-        frm._nameButton = btConfProducto.Name
+        frm._nameButton = btConfProducto01.Name
         frm._modulo = FP_Configuracion
         'Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
         'frm._tab = tab3
@@ -1057,6 +1057,20 @@ Public Class P_Principal
         frm._nameButton = btEstadoCuentasClientes.Name
         'frm._modulo = FP_COMPRAS
         frm.Show()
+    End Sub
+
+    Private Sub MetroTileItem13_Click_1(sender As Object, e As EventArgs) Handles btConfProducto.Click
+        Dim frm As New F1_Productos
+        frm._nameButton = btConfProducto.Name
+        frm._modulo = FP_Configuracion
+        'Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
+        'frm._tab = tab3
+        'Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
+        'superTabControl3.SelectedTabIndex = superTabControl3.Tabs.Count - 1
+        'tab3.AttachedControl.Controls.Add(panel)
+        frm.Show()
+        'tab3.Text = frm.Text
+        'tab3.Icon = frm.Icon
     End Sub
 
     'Private Sub btnCredPagoCliente_Click(sender As Object, e As EventArgs) Handles btnCredPagoCliente.Click

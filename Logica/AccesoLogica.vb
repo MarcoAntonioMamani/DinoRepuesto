@@ -1386,7 +1386,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@CategoriaPrecio", _CatPrecio))
         _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
         _listParam.Add(New Datos.DParametro("@IdCategoria", idCategoria))
-        _listParam.Add(New Datos.DParametro("@TV0011", "", _detalle))
+        '_listParam.Add(New Datos.DParametro("@TV0011", "", _detalle))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TV001", _listParam)
 
         Return _Tabla
