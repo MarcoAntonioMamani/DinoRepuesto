@@ -1376,7 +1376,7 @@ Public Class AccesoLogica
 
     End Function
 
-    Public Shared Function L_fnListarProductosSinLote(_almacen As String, _CatPrecio As String, _detalle As DataTable, idCategoria As Integer) As DataTable
+    Public Shared Function L_fnListarProductosSinLote(_almacen As String, _CatPrecio As String, idCategoria As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)

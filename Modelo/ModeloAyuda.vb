@@ -23,8 +23,8 @@ Public Class ModeloAyuda
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.StartPosition = FormStartPosition.Manual
-        Me.Location = New Point(posX, posY)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        'Me.Location = New Point(posX, posY)
         GPPanelP.Text = titulo
 
         listEstrucGrilla = listEst
