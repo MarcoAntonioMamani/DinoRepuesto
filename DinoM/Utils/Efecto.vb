@@ -14,8 +14,9 @@ Public Class Efecto
     Public ancho As Integer
     Public Row As Janus.Windows.GridEX.GridEXRow
     Public SeleclCol As Integer = -1
-
-
+    Public Stock As Double = 0
+    Public Cantidad As Double = 0
+    Public NameProducto As String = ""
 
 
 
@@ -24,14 +25,38 @@ Public Class Efecto
 
         Select Case tipo
             Case 1
-                 _prMostrarMensaje()
+                _prMostrarMensaje()
             Case 2
                 _prMostrarMensajeDelete()
             Case 3
                 _prMostrarFormAyuda()
             Case 4
                 _prLogin()
+            Case 7
+                _prMostrarAyudaVentaCantidad()
         End Select
+    End Sub
+
+    Sub _prMostrarAyudaVentaCantidad()
+
+        Dim frmAyuda As F1_Cantidad
+        frmAyuda = New F1_Cantidad
+
+        frmAyuda.Stock = Stock
+        frmAyuda.Cantidad = Cantidad
+        frmAyuda.Producto = NameProducto
+        frmAyuda.ShowDialog()
+        If frmAyuda.Bandera = True Then
+
+            Cantidad = frmAyuda.Cantidad
+
+            band = True
+            Me.Close()
+        Else
+            band = False
+            Me.Close()
+        End If
+
     End Sub
     Public Sub _prLogin()
         Dim Frm As New Login

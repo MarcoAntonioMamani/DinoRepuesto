@@ -37,6 +37,23 @@ Public Class P_Principal
         Me.Icon = Icon.ExtractAssociatedIcon(gs_CarpetaRaiz + "\LogoIco.ico")
 
     End Sub
+
+    Public Sub ProgramaVenta()
+
+        Ventana.Select()
+        Dim frm As New F0_Ventas
+        frm._nameButton = btVentVenta.Name
+        Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
+        frm._tab = tab3
+        frm._modulo = FP_VENTAS
+        Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
+        superTabControl3.SelectedTabIndex = superTabControl3.Tabs.Count - 1
+        tab3.AttachedControl.Controls.Add(panel)
+        frm.Show()
+        tab3.Text = frm.Text
+        tab3.Icon = frm.Icon
+
+    End Sub
     Private Sub _prCambiarStyle()
         'tratar de cambiar estilo
         'RibbonPredefinedColorSchemes.ChangeOffice2007ColorTable(Me, DevComponents.DotNetBar.Rendering.eOffice2007ColorScheme.Silver, Color.FromArgb(0, 85, 139))
