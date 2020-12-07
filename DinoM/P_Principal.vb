@@ -11,6 +11,8 @@ Public Class P_Principal
 
 #End Region
 
+    Dim FVentas As F0_Ventas
+
 #Region "Metodos Privados"
 
     Public Sub New()
@@ -20,7 +22,7 @@ Public Class P_Principal
         FP_Configuracion.Select ()
 
         ' Add any initialization after the InitializeComponent() call.
-
+        cargarProgramaVentas()
     End Sub
     Private Sub _prIniciarTodo()
         'Leer Archivo de Configuración
@@ -38,22 +40,7 @@ Public Class P_Principal
 
     End Sub
 
-    Public Sub ProgramaVenta()
 
-        Ventana.Select()
-        Dim frm As New F0_Ventas
-        frm._nameButton = btVentVenta.Name
-        Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
-        frm._tab = tab3
-        frm._modulo = FP_VENTAS
-        Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
-        superTabControl3.SelectedTabIndex = superTabControl3.Tabs.Count - 1
-        tab3.AttachedControl.Controls.Add(panel)
-        frm.Show()
-        tab3.Text = frm.Text
-        tab3.Icon = frm.Icon
-
-    End Sub
     Private Sub _prCambiarStyle()
         'tratar de cambiar estilo
         'RibbonPredefinedColorSchemes.ChangeOffice2007ColorTable(Me, DevComponents.DotNetBar.Rendering.eOffice2007ColorScheme.Silver, Color.FromArgb(0, 85, 139))
@@ -235,7 +222,37 @@ Public Class P_Principal
 
     Private Sub P_Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _prIniciarTodo()
+        'cargarProgramaVentas()
     End Sub
+
+
+    Public Sub cargarProgramaVentas()
+
+        'VentanaVenta.Select()
+
+        FVentas = New F0_Ventas With {.TopLevel = False, .AutoSize = True}
+        FVentas._nameButton = btConfCliente.Name
+        FVentas._modulo = FP_INVENTARIO
+        FVentas._tab = Nothing
+        FVentas.Parent = PanelVentaAtajo
+        FVentas.Visible = False
+
+        'f.Show()
+
+        'Dim frm As New F0_Ventas
+        'frm._nameButton = btConfCliente.Name
+        'frm._modulo = FP_INVENTARIO
+        'frm._tab = Nothing
+
+        'Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
+
+
+        'PanelVentaAtajo.Controls.Add(panel)
+        'frm.Show()
+
+
+    End Sub
+
     Private Sub P_Principal_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
         _prLogin()
     End Sub
@@ -510,18 +527,19 @@ Public Class P_Principal
 
     Private Sub btVentVenta_Click(sender As Object, e As EventArgs) Handles btVentVenta.Click
         SideNav1.IsMenuExpanded = False
-        Ventana.Select()
-        Dim frm As New F0_Ventas
-        frm._nameButton = btVentVenta.Name
-        Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
-        frm._tab = tab3
-        frm._modulo = FP_VENTAS
-        Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
-        superTabControl3.SelectedTabIndex = superTabControl3.Tabs.Count - 1
-        tab3.AttachedControl.Controls.Add(panel)
-        frm.Show()
-        tab3.Text = frm.Text
-        tab3.Icon = frm.Icon
+        VentanaVenta.Select()
+        FVentas.Visible = True
+        'Dim frm As New F0_Ventas
+        'frm._nameButton = btVentVenta.Name
+        'Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
+        'frm._tab = tab3
+        'frm._modulo = FP_VENTAS
+        'Dim panel As Panel = P_Global._fnCrearPanelVentanas(frm)
+        'superTabControl3.SelectedTabIndex = superTabControl3.Tabs.Count - 1
+        'tab3.AttachedControl.Controls.Add(panel)
+        'frm.Show()
+        'tab3.Text = frm.Text
+        'tab3.Icon = frm.Icon
     End Sub
 
     Private Sub btVentAnularFactura_Click(sender As Object, e As EventArgs) Handles btVentAnularFactura.Click
@@ -1088,6 +1106,10 @@ Public Class P_Principal
         frm.Show()
         'tab3.Text = frm.Text
         'tab3.Icon = frm.Icon
+    End Sub
+
+    Private Sub SideNavItem4_Click(sender As Object, e As EventArgs) Handles VentanaVenta.Click
+
     End Sub
 
     'Private Sub btnCredPagoCliente_Click(sender As Object, e As EventArgs) Handles btnCredPagoCliente.Click

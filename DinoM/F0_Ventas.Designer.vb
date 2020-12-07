@@ -100,6 +100,7 @@ Partial Class F0_Ventas
         Me.lbMDescuento = New DevComponents.DotNetBar.LabelX()
         Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
+        Me.btnActualizar = New DevComponents.DotNetBar.ButtonX()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -152,6 +153,7 @@ Partial Class F0_Ventas
         '
         'PanelSuperior
         '
+        Me.PanelSuperior.Controls.Add(Me.btnActualizar)
         Me.PanelSuperior.Controls.Add(Me.ButtonX1)
         Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelSuperior.Size = New System.Drawing.Size(1355, 89)
@@ -172,6 +174,7 @@ Partial Class F0_Ventas
         Me.PanelSuperior.Controls.SetChildIndex(Me.PanelToolBar2, 0)
         Me.PanelSuperior.Controls.SetChildIndex(Me.MRlAccion, 0)
         Me.PanelSuperior.Controls.SetChildIndex(Me.ButtonX1, 0)
+        Me.PanelSuperior.Controls.SetChildIndex(Me.btnActualizar, 0)
         Me.PanelSuperior.Controls.SetChildIndex(Me.PictureBox1, 0)
         '
         'PanelInferior
@@ -324,7 +327,7 @@ Partial Class F0_Ventas
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(884, 0)
+        Me.PictureBox1.Location = New System.Drawing.Point(777, 0)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(5)
         '
         'SuperTabItem1
@@ -1335,6 +1338,7 @@ Partial Class F0_Ventas
         'grdetalle
         '
         Me.grdetalle.BackColor = System.Drawing.Color.GhostWhite
+        Me.grdetalle.ColumnAutoResize = True
         Me.grdetalle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdetalle.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1839,11 +1843,30 @@ Partial Class F0_Ventas
         '
         Me.PrintDialog1.UseEXDialog = True
         '
+        'btnActualizar
+        '
+        Me.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnActualizar.ColorTable = DevComponents.DotNetBar.eButtonColor.Orange
+        Me.btnActualizar.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnActualizar.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActualizar.Image = Global.DinoM.My.Resources.Resources.reload_5
+        Me.btnActualizar.ImageFixedSize = New System.Drawing.Size(48, 48)
+        Me.btnActualizar.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
+        Me.btnActualizar.Location = New System.Drawing.Point(1034, 0)
+        Me.btnActualizar.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnActualizar.Name = "btnActualizar"
+        Me.btnActualizar.Size = New System.Drawing.Size(107, 89)
+        Me.btnActualizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.btnActualizar.TabIndex = 13
+        Me.btnActualizar.Text = "Actualizar"
+        Me.btnActualizar.TextColor = System.Drawing.Color.White
+        '
         'F0_Ventas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1355, 865)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "F0_Ventas"
@@ -1981,4 +2004,5 @@ Partial Class F0_Ventas
     Friend WithEvents tbProducto As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
     Friend WithEvents btnAgregar As DevComponents.DotNetBar.ButtonX
+    Protected WithEvents btnActualizar As DevComponents.DotNetBar.ButtonX
 End Class

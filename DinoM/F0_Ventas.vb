@@ -212,7 +212,7 @@ Public Class F0_Ventas
         btnGrabar.Enabled = False
         btnNuevo.Enabled = True
         btnEliminar.Enabled = True
-
+        btnActualizar.Visible = True
         tbSubTotal.IsInputReadOnly = True
         tbIce.IsInputReadOnly = True
         tbtotal.IsInputReadOnly = True
@@ -276,7 +276,7 @@ Public Class F0_Ventas
             tbMdesc.Visible = False
             tbPdesc.Visible = False
         End If
-
+        btnActualizar.Visible = False
         _prCargarComboPrecioLimpiar(cbPrecio)
     End Sub
     Public Sub _prFiltrar()
@@ -523,7 +523,7 @@ Public Class F0_Ventas
         End With
         With grdetalle.RootTable.Columns("producto")
             .Caption = "Productos"
-            .Width = 220
+            .Width = 310
             .MaxLines = 200
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
@@ -1358,7 +1358,10 @@ Public Class F0_Ventas
             End If
         Else
             _modulo.Select()
-            _tab.Close()
+            If (Not IsNothing(_tab)) Then
+                _tab.Close()
+            End If
+
         End If
     End Sub
     Public Sub _prCargarIconELiminar()
@@ -1969,10 +1972,15 @@ Public Class F0_Ventas
 
 #End Region
 
+
 #Region "Eventos Formulario"
     Private Sub F0_Ventas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Me.SuspendLayout()
+
         _IniciarTodo()
         btnNuevo.PerformClick()
+        'Me.ResumeLayout()
+
 
     End Sub
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
@@ -3294,6 +3302,10 @@ salirIf:
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         SeleccionarCategoria (True)
+    End Sub
+
+    Private Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
+        _IniciarTodo()
     End Sub
 
 #End Region
