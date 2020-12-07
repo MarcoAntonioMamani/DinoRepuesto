@@ -82,7 +82,7 @@ Public Class F0_DetalleVenta
         With grProductoSeleccionado.RootTable.Columns("Marca")
             .Width = 90
             .Caption = "Cod.Marca"
-            .MaxLines = 100
+            .MaxLines = 150
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
@@ -96,7 +96,7 @@ Public Class F0_DetalleVenta
             .Visible = True
         End With
         With grProductoSeleccionado.RootTable.Columns("yfcdprod1")
-            .Width = 300
+            .Width = 550
             .Visible = True
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -223,6 +223,7 @@ Public Class F0_DetalleVenta
             .GroupByBoxVisible = False
             'diseño de la grilla
             .VisualStyle = VisualStyle.Office2007
+
         End With
 
 
@@ -277,7 +278,7 @@ Public Class F0_DetalleVenta
         With grProductos.RootTable.Columns("Marca")
             .Width = 90
             .Caption = "Cod.Marca"
-            .MaxLines = 100
+            .MaxLines = 150
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
@@ -291,7 +292,7 @@ Public Class F0_DetalleVenta
             .Visible = True
         End With
         With grProductos.RootTable.Columns("yfcdprod1")
-            .Width = 300
+            .Width = 550
             .Visible = True
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -419,6 +420,8 @@ Public Class F0_DetalleVenta
             'diseño de la grilla
             .VisualStyle = VisualStyle.Office2007
         End With
+
+
         _prAplicarCondiccionJanusSinLote()
     End Sub
     Public Sub _prAplicarCondiccionJanusSinLote()
@@ -462,7 +465,12 @@ Public Class F0_DetalleVenta
             If (f >= 0) Then
 
                 If (Not ExisteProducto(grProductos.GetValue("Item"))) Then
+                    If (grProductos.GetValue("Stock") <= 0) Then
 
+                        ToastNotification.Show(Me, "El Producto no Cuenta con Stock Disponible", My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                        Return
+
+                    End If
                     Dim cantidad As Double
                     'cantidad = InputBox("Seleccione Cantidad del Producto " + grProductos.GetValue("yfcdprod1") + "  " + "   Stock = " + Str(grProductos.GetValue("Stock")))
 
@@ -691,6 +699,12 @@ Public Class F0_DetalleVenta
 
             If (Not ExisteProducto(grProductos.GetValue("Item"))) Then
 
+                If (grProductos.GetValue("Stock") <= 0) Then
+
+                    ToastNotification.Show(Me, "El Producto no Cuenta con Stock Disponible", My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                    Return
+
+                End If
                 Dim cantidad As Double
                 'cantidad = InputBox("Seleccione Cantidad del Producto " + grProductos.GetValue("yfcdprod1") + "  " + "   Stock = " + Str(grProductos.GetValue("Stock")))
 

@@ -27,6 +27,8 @@ Partial Class F1_Cantidad
         Me.tbCantidad = New DevComponents.Editors.DoubleInput()
         Me.lbStock = New System.Windows.Forms.Label()
         Me.lbProducto = New System.Windows.Forms.Label()
+        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
+        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.Panel1.SuspendLayout()
         CType(Me.tbCantidad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -94,11 +96,41 @@ Partial Class F1_Cantidad
         Me.lbProducto.Text = "Producto A"
         Me.lbProducto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnAgregar
+        '
+        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.checked
+        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnAgregar.Location = New System.Drawing.Point(382, 358)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(128, 52)
+        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnAgregar.TabIndex = 373
+        Me.btnAgregar.Text = "Confirmar"
+        '
+        'ButtonX1
+        '
+        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.cancel
+        Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX1.Location = New System.Drawing.Point(207, 358)
+        Me.ButtonX1.Name = "ButtonX1"
+        Me.ButtonX1.Size = New System.Drawing.Size(128, 52)
+        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX1.TabIndex = 374
+        Me.ButtonX1.Text = "Salir"
+        '
         'F1_Cantidad
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(700, 416)
+        Me.ClientSize = New System.Drawing.Size(700, 440)
+        Me.Controls.Add(Me.ButtonX1)
+        Me.Controls.Add(Me.btnAgregar)
         Me.Controls.Add(Me.tbCantidad)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.lbStock)
@@ -118,4 +150,6 @@ Partial Class F1_Cantidad
     Friend WithEvents tbCantidad As DevComponents.Editors.DoubleInput
     Friend WithEvents lbStock As Label
     Friend WithEvents lbProducto As Label
+    Friend WithEvents btnAgregar As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
 End Class

@@ -129,4 +129,8 @@ Public Class ModeloAyuda
     Private Sub ModeloAyuda_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick
         Me.Close()
     End Sub
+
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
+        Me.Close()
+    End Sub
 End Class

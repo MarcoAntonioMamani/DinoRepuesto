@@ -35,6 +35,7 @@ Partial Class F0_Ventas
         Me.PanelContentSup = New System.Windows.Forms.Panel()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.btnSearchCliente = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
         Me.cbPrecio = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
@@ -99,7 +100,6 @@ Partial Class F0_Ventas
         Me.lbMDescuento = New DevComponents.DotNetBar.LabelX()
         Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -543,6 +543,20 @@ Partial Class F0_Ventas
         Me.Panel2.Size = New System.Drawing.Size(1312, 253)
         Me.Panel2.TabIndex = 234
         '
+        'btnAgregar
+        '
+        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.add
+        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnAgregar.Location = New System.Drawing.Point(847, 153)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(147, 48)
+        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnAgregar.TabIndex = 371
+        Me.btnAgregar.Text = "Agregar"
+        '
         'btnSearchCliente
         '
         Me.btnSearchCliente.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
@@ -577,6 +591,7 @@ Partial Class F0_Ventas
         '
         'cbPrecio
         '
+        Me.cbPrecio.ComboStyle = Janus.Windows.GridEX.ComboStyle.DropDownList
         cbPrecio_DesignTimeLayout.LayoutString = resources.GetString("cbPrecio_DesignTimeLayout.LayoutString")
         Me.cbPrecio.DesignTimeLayout = cbPrecio_DesignTimeLayout
         Me.cbPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -587,7 +602,7 @@ Partial Class F0_Ventas
         Me.cbPrecio.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.cbPrecio.SelectedIndex = -1
         Me.cbPrecio.SelectedItem = Nothing
-        Me.cbPrecio.Size = New System.Drawing.Size(219, 26)
+        Me.cbPrecio.Size = New System.Drawing.Size(300, 26)
         Me.cbPrecio.TabIndex = 242
         Me.cbPrecio.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -679,7 +694,7 @@ Partial Class F0_Ventas
         Me.cbSucursal.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.cbSucursal.SelectedIndex = -1
         Me.cbSucursal.SelectedItem = Nothing
-        Me.cbSucursal.Size = New System.Drawing.Size(219, 26)
+        Me.cbSucursal.Size = New System.Drawing.Size(300, 26)
         Me.cbSucursal.TabIndex = 6
         Me.cbSucursal.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -699,7 +714,7 @@ Partial Class F0_Ventas
         Me.GroupPanelFactura2.Controls.Add(Me.tbFechaVenc)
         Me.GroupPanelFactura2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanelFactura2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.GroupPanelFactura2.Location = New System.Drawing.Point(1068, 0)
+        Me.GroupPanelFactura2.Location = New System.Drawing.Point(1149, 0)
         Me.GroupPanelFactura2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupPanelFactura2.Name = "GroupPanelFactura2"
         Me.GroupPanelFactura2.Size = New System.Drawing.Size(467, 232)
@@ -1823,20 +1838,6 @@ Partial Class F0_Ventas
         'PrintDialog1
         '
         Me.PrintDialog1.UseEXDialog = True
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
-        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.add
-        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnAgregar.Location = New System.Drawing.Point(847, 153)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(147, 48)
-        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
-        Me.btnAgregar.TabIndex = 371
-        Me.btnAgregar.Text = "Agregar"
         '
         'F0_Ventas
         '

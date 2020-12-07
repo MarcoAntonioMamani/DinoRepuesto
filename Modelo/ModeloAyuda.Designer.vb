@@ -24,8 +24,11 @@ Partial Class ModeloAyuda
     Private Sub InitializeComponent()
         Me.grJBuscador = New Janus.Windows.GridEX.GridEX()
         Me.GPPanelP = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         CType(Me.grJBuscador, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GPPanelP.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'grJBuscador
@@ -40,7 +43,7 @@ Partial Class ModeloAyuda
         Me.grJBuscador.Name = "grJBuscador"
         Me.grJBuscador.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grJBuscador.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grJBuscador.Size = New System.Drawing.Size(1020, 477)
+        Me.grJBuscador.Size = New System.Drawing.Size(1020, 397)
         Me.grJBuscador.TabIndex = 0
         Me.grJBuscador.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -52,10 +55,10 @@ Partial Class ModeloAyuda
         Me.GPPanelP.DisabledBackColor = System.Drawing.Color.Empty
         Me.GPPanelP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GPPanelP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GPPanelP.Location = New System.Drawing.Point(0, 0)
+        Me.GPPanelP.Location = New System.Drawing.Point(0, 80)
         Me.GPPanelP.Margin = New System.Windows.Forms.Padding(4)
         Me.GPPanelP.Name = "GPPanelP"
-        Me.GPPanelP.Size = New System.Drawing.Size(1026, 510)
+        Me.GPPanelP.Size = New System.Drawing.Size(1026, 430)
         '
         '
         '
@@ -88,6 +91,30 @@ Partial Class ModeloAyuda
         Me.GPPanelP.TabIndex = 1
         Me.GPPanelP.Text = "GroupPanel1"
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Panel1.Controls.Add(Me.ButtonX1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1026, 80)
+        Me.Panel1.TabIndex = 2
+        '
+        'ButtonX1
+        '
+        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX1.Image = Global.Modelo.My.Resources.Resources._error
+        Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(35, 35)
+        Me.ButtonX1.Location = New System.Drawing.Point(12, 21)
+        Me.ButtonX1.Name = "ButtonX1"
+        Me.ButtonX1.Size = New System.Drawing.Size(311, 52)
+        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX1.TabIndex = 375
+        Me.ButtonX1.Text = "Salir"
+        '
         'ModeloAyuda
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -95,6 +122,7 @@ Partial Class ModeloAyuda
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1026, 510)
         Me.Controls.Add(Me.GPPanelP)
+        Me.Controls.Add(Me.Panel1)
         Me.DoubleBuffered = True
         Me.ForeColor = System.Drawing.Color.Black
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -105,9 +133,12 @@ Partial Class ModeloAyuda
         Me.Text = "ModeloAyuda"
         CType(Me.grJBuscador, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GPPanelP.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents GPPanelP As DevComponents.DotNetBar.Controls.GroupPanel
     Public WithEvents grJBuscador As Janus.Windows.GridEX.GridEX
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
 End Class

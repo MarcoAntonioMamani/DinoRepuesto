@@ -49,4 +49,31 @@ Public Class F1_Cantidad
         End If
 
     End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        If (tbCantidad.Value > Stock) Then
+            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+            ToastNotification.Show(Me, "La cantidad Ingresada " + Str(tbCantidad.Value) + " Es superior a la cantidad Disponible del Producto : " + Str(Stock), img, 5000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            Return
+
+        Else
+            If (tbCantidad.Value <= 0) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "La cantidad debe ser mayor a 0", img, 5000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                Return
+
+            Else
+                Cantidad = tbCantidad.Value
+                bandera = True
+                Me.Close()
+            End If
+
+
+        End If
+    End Sub
+
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
+        bandera = False
+        Me.Close()
+    End Sub
 End Class

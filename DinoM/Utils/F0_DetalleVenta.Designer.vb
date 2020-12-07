@@ -100,9 +100,10 @@ Partial Class F0_DetalleVenta
         '
         Me.grProductos.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.grProductos.BackColor = System.Drawing.Color.GhostWhite
+        Me.grProductos.ColumnAutoResize = True
         Me.grProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grProductos.FocusStyle = Janus.Windows.GridEX.FocusStyle.Solid
-        Me.grProductos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductos.Font = New System.Drawing.Font("Calibri", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.grProductos.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
@@ -111,6 +112,7 @@ Partial Class F0_DetalleVenta
         Me.grProductos.Name = "grProductos"
         Me.grProductos.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grProductos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.grProductos.RecordNavigator = True
         Me.grProductos.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grProductos.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.SelectedFormatStyle.ForeColor = System.Drawing.Color.White

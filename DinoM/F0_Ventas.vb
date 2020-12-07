@@ -109,7 +109,7 @@ Public Class F0_Ventas
     Private Sub _prCargarComboPrecio(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo)
         Dim dt As New DataTable
         dt = L_fnListarPrecios()
-        dt.Rows.Add(50, "Mayorista")
+        dt.Rows.Add(50, "PRECIO VENTA MAYORISTA")
 
 
 
@@ -133,7 +133,7 @@ Public Class F0_Ventas
     Private Sub _prCargarComboPrecioLimpiar(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo)
         Dim dt As New DataTable
         dt = L_fnListarPrecios()
-        dt.Rows.Add(50, "Mayorista")
+        dt.Rows.Add(50, "PRECIO VENTA MAYORISTA")
 
         Dim dt2 As DataTable = dt.Copy
         dt2.Rows.Clear()
