@@ -216,8 +216,8 @@ Partial Class P_Principal
         'SideNav1
         '
         Me.SideNav1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
-        Me.SideNav1.Controls.Add(Me.SideNavPanel9)
         Me.SideNav1.Controls.Add(Me.SideNavPanel8)
+        Me.SideNav1.Controls.Add(Me.SideNavPanel9)
         Me.SideNav1.Controls.Add(Me.SideNav_Ventas)
         Me.SideNav1.Controls.Add(Me.SideNavPanel3)
         Me.SideNav1.Controls.Add(Me.SideNavPanel4)
@@ -564,7 +564,6 @@ Partial Class P_Principal
         Me.SideNavPanel8.Name = "SideNavPanel8"
         Me.SideNavPanel8.Size = New System.Drawing.Size(875, 649)
         Me.SideNavPanel8.TabIndex = 184
-        Me.SideNavPanel8.Visible = False
         '
         'PanelVentaAtajo
         '
@@ -2265,6 +2264,7 @@ Partial Class P_Principal
         '
         'VentanaVenta
         '
+        Me.VentanaVenta.Checked = True
         Me.VentanaVenta.Name = "VentanaVenta"
         Me.VentanaVenta.Panel = Me.SideNavPanel8
         Me.VentanaVenta.Symbol = ""
@@ -2457,7 +2457,6 @@ Partial Class P_Principal
         '
         'VentanaBuscadorPRoducto
         '
-        Me.VentanaBuscadorPRoducto.Checked = True
         Me.VentanaBuscadorPRoducto.Name = "VentanaBuscadorPRoducto"
         Me.VentanaBuscadorPRoducto.Panel = Me.SideNavPanel9
         Me.VentanaBuscadorPRoducto.Symbol = "59552"
@@ -2472,6 +2471,7 @@ Partial Class P_Principal
         Me.SideNavPanel9.Name = "SideNavPanel9"
         Me.SideNavPanel9.Size = New System.Drawing.Size(875, 649)
         Me.SideNavPanel9.TabIndex = 215
+        Me.SideNavPanel9.Visible = False
         '
         'PanelBuscador
         '
