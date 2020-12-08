@@ -129,6 +129,8 @@ Partial Class F1_Productos
         Me.btExcel = New DevComponents.DotNetBar.ButtonX()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.lbPorcentajeVentaPublico = New DevComponents.DotNetBar.LabelX()
+        Me.lbPorcentajeVentaMecanico = New DevComponents.DotNetBar.LabelX()
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabPrincipal.SuspendLayout()
         Me.SuperTabControlPanelRegistro.SuspendLayout()
@@ -1331,9 +1333,9 @@ Partial Class F1_Productos
         Me.LabelX17.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX17.Name = "LabelX17"
         Me.LabelX17.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX17.Size = New System.Drawing.Size(136, 20)
+        Me.LabelX17.Size = New System.Drawing.Size(172, 20)
         Me.LabelX17.TabIndex = 226
-        Me.LabelX17.Text = "Precio Mecanico:"
+        Me.LabelX17.Text = "Precio Mecanico (Bs):"
         '
         'tbPrecioMecanico
         '
@@ -1345,7 +1347,7 @@ Partial Class F1_Productos
         Me.tbPrecioMecanico.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioMecanico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioMecanico.Increment = 1.0R
-        Me.tbPrecioMecanico.Location = New System.Drawing.Point(257, 154)
+        Me.tbPrecioMecanico.Location = New System.Drawing.Point(275, 148)
         Me.tbPrecioMecanico.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioMecanico.MinValue = 0R
         Me.tbPrecioMecanico.Name = "tbPrecioMecanico"
@@ -1367,9 +1369,9 @@ Partial Class F1_Productos
         Me.LabelX18.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX18.Name = "LabelX18"
         Me.LabelX18.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX18.Size = New System.Drawing.Size(105, 20)
+        Me.LabelX18.Size = New System.Drawing.Size(152, 20)
         Me.LabelX18.TabIndex = 224
-        Me.LabelX18.Text = "Precio Costo:"
+        Me.LabelX18.Text = "Precio Costo ($u$):"
         '
         'tbPrecioCosto
         '
@@ -1381,7 +1383,7 @@ Partial Class F1_Productos
         Me.tbPrecioCosto.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioCosto.Increment = 1.0R
-        Me.tbPrecioCosto.Location = New System.Drawing.Point(257, 48)
+        Me.tbPrecioCosto.Location = New System.Drawing.Point(275, 42)
         Me.tbPrecioCosto.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioCosto.MinValue = 0R
         Me.tbPrecioCosto.Name = "tbPrecioCosto"
@@ -1403,9 +1405,9 @@ Partial Class F1_Productos
         Me.LabelX14.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX14.Name = "LabelX14"
         Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX14.Size = New System.Drawing.Size(169, 20)
+        Me.LabelX14.Size = New System.Drawing.Size(205, 20)
         Me.LabelX14.TabIndex = 220
-        Me.LabelX14.Text = "Precio Venta Publico:"
+        Me.LabelX14.Text = "Precio Venta Publico (Bs):"
         '
         'tbPrecioVentaNormal
         '
@@ -1417,7 +1419,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaNormal.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioVentaNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioVentaNormal.Increment = 1.0R
-        Me.tbPrecioVentaNormal.Location = New System.Drawing.Point(257, 120)
+        Me.tbPrecioVentaNormal.Location = New System.Drawing.Point(275, 114)
         Me.tbPrecioVentaNormal.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioVentaNormal.MinValue = 0R
         Me.tbPrecioVentaNormal.Name = "tbPrecioVentaNormal"
@@ -1482,10 +1484,10 @@ Partial Class F1_Productos
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox, Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.CloseBox})
-        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel1)
-        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel1)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel2)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl_Imagenes_DetalleProducto.Location = New System.Drawing.Point(0, 0)
         Me.SuperTabControl_Imagenes_DetalleProducto.Margin = New System.Windows.Forms.Padding(4)
@@ -1624,6 +1626,8 @@ Partial Class F1_Productos
         '
         'Panel7
         '
+        Me.Panel7.Controls.Add(Me.lbPorcentajeVentaMecanico)
+        Me.Panel7.Controls.Add(Me.lbPorcentajeVentaPublico)
         Me.Panel7.Controls.Add(Me.LabelX11)
         Me.Panel7.Controls.Add(Me.tbPrecioFacturado)
         Me.Panel7.Controls.Add(Me.LabelX17)
@@ -1652,9 +1656,9 @@ Partial Class F1_Productos
         Me.LabelX11.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX11.Size = New System.Drawing.Size(190, 20)
+        Me.LabelX11.Size = New System.Drawing.Size(226, 20)
         Me.LabelX11.TabIndex = 228
-        Me.LabelX11.Text = "Precio Venta Facturado:"
+        Me.LabelX11.Text = "Precio Venta Facturado (Bs):"
         '
         'tbPrecioFacturado
         '
@@ -1666,7 +1670,7 @@ Partial Class F1_Productos
         Me.tbPrecioFacturado.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioFacturado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioFacturado.Increment = 1.0R
-        Me.tbPrecioFacturado.Location = New System.Drawing.Point(257, 82)
+        Me.tbPrecioFacturado.Location = New System.Drawing.Point(275, 76)
         Me.tbPrecioFacturado.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioFacturado.MinValue = 0R
         Me.tbPrecioFacturado.Name = "tbPrecioFacturado"
@@ -1746,6 +1750,7 @@ Partial Class F1_Productos
         'JGr_Descuentos
         '
         Me.JGr_Descuentos.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
+        Me.JGr_Descuentos.ColumnAutoResize = True
         Me.JGr_Descuentos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_Descuentos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JGr_Descuentos.Location = New System.Drawing.Point(0, 0)
@@ -2106,6 +2111,42 @@ Partial Class F1_Productos
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
         '
+        'lbPorcentajeVentaPublico
+        '
+        Me.lbPorcentajeVentaPublico.AutoSize = True
+        Me.lbPorcentajeVentaPublico.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbPorcentajeVentaPublico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbPorcentajeVentaPublico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPorcentajeVentaPublico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbPorcentajeVentaPublico.Location = New System.Drawing.Point(483, 112)
+        Me.lbPorcentajeVentaPublico.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbPorcentajeVentaPublico.Name = "lbPorcentajeVentaPublico"
+        Me.lbPorcentajeVentaPublico.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbPorcentajeVentaPublico.Size = New System.Drawing.Size(26, 25)
+        Me.lbPorcentajeVentaPublico.TabIndex = 229
+        Me.lbPorcentajeVentaPublico.Text = "0%"
+        '
+        'lbPorcentajeVentaMecanico
+        '
+        Me.lbPorcentajeVentaMecanico.AutoSize = True
+        Me.lbPorcentajeVentaMecanico.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbPorcentajeVentaMecanico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbPorcentajeVentaMecanico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPorcentajeVentaMecanico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbPorcentajeVentaMecanico.Location = New System.Drawing.Point(483, 148)
+        Me.lbPorcentajeVentaMecanico.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbPorcentajeVentaMecanico.Name = "lbPorcentajeVentaMecanico"
+        Me.lbPorcentajeVentaMecanico.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbPorcentajeVentaMecanico.Size = New System.Drawing.Size(26, 25)
+        Me.lbPorcentajeVentaMecanico.TabIndex = 230
+        Me.lbPorcentajeVentaMecanico.Text = "0%"
+        '
         'F1_Productos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2284,4 +2325,6 @@ Partial Class F1_Productos
     Friend WithEvents Panel7 As Panel
     Friend WithEvents LabelX11 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbPrecioFacturado As DevComponents.Editors.DoubleInput
+    Friend WithEvents lbPorcentajeVentaMecanico As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lbPorcentajeVentaPublico As DevComponents.DotNetBar.LabelX
 End Class

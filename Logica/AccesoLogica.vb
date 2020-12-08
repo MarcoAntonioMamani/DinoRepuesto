@@ -1391,6 +1391,21 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+
+    Public Shared Function L_fnListarProductosall() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 20))
+
+        _listParam.Add(New Datos.DParametro("@tauact", L_Usuario))
+
+        '_listParam.Add(New Datos.DParametro("@TV0011", "", _detalle))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TV001", _listParam)
+
+        Return _Tabla
+    End Function
     Public Shared Function L_fnListarCategoriaVentas() As DataTable
         Dim _Tabla As DataTable
 

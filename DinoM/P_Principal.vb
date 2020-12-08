@@ -12,6 +12,7 @@ Public Class P_Principal
 #End Region
 
     Dim FVentas As F0_Ventas
+    Dim FSearchProductos As F0_BuscarProductos
 
 #Region "Metodos Privados"
 
@@ -236,6 +237,12 @@ Public Class P_Principal
         FVentas._tab = Nothing
         FVentas.Parent = PanelVentaAtajo
         FVentas.Visible = False
+
+
+        FSearchProductos = New F0_BuscarProductos With {.TopLevel = False, .AutoSize = True}
+
+        FSearchProductos.Parent = PanelBuscador
+        FSearchProductos.Visible = False
 
         'f.Show()
 
@@ -1110,6 +1117,10 @@ Public Class P_Principal
 
     Private Sub SideNavItem4_Click(sender As Object, e As EventArgs) Handles VentanaVenta.Click
 
+    End Sub
+
+    Private Sub VentanaBuscadorPRoducto_Click(sender As Object, e As EventArgs) Handles VentanaBuscadorPRoducto.Click
+        FSearchProductos.Visible = True
     End Sub
 
     'Private Sub btnCredPagoCliente_Click(sender As Object, e As EventArgs) Handles btnCredPagoCliente.Click

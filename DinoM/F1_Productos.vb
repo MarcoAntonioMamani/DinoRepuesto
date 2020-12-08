@@ -460,6 +460,9 @@ Public Class F1_Productos
         dgjDetalleProducto.AllowEdit = InheritableBoolean.True
         dgjDetalleProducto.RootTable.Columns("delete").Visible = True
         adicionarFilaDetalleProducto()
+
+        tbDesde.MinDate = Now.Date
+
     End Sub
 
     Public Overrides Sub _PMOInhabilitar()
@@ -547,6 +550,10 @@ Public Class F1_Productos
         tbPrecioDescuento.Value = 0
 
         _PCargarGridCategoriasPrecios(-1)
+
+
+        lbPorcentajeVentaMecanico.Text = "0 %"
+        lbPorcentajeVentaPublico.Text = "0 %"
 
     End Sub
 
@@ -843,8 +850,9 @@ Public Class F1_Productos
             cbgrupo4.Value = .GetValue("yfgr4")
             cbgrupo5.Value = .GetValue("yfgr5")
             cbUMed.Value = .GetValue("yfMed")
-            tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
             tbPrecioFacturado.Value = .GetValue("VentaFacturado")
+            tbPrecioVentaNormal.Value = .GetValue("VentaNormal")
+
             tbPrecioCosto.Value = .GetValue("PrecioCosto")
             tbPrecioMecanico.Value = .GetValue("VentaMecanico")
             tbCodigoMarca.Text = .GetValue("yfCodigoMarca").ToString
@@ -860,6 +868,18 @@ Public Class F1_Productos
             _PCargarGridCategoriasPrecios(.GetValue("yfnumi"))
         End With
 
+        Dim Mecanico As Double = 0
+        Dim Publico As Double = 0
+
+        If (tbPrecioFacturado.Value > 0) Then
+            Mecanico = 100 - ((tbPrecioMecanico.Value * 100) / tbPrecioFacturado.Value)
+            Publico = 100 - ((tbPrecioVentaNormal.Value * 100) / tbPrecioFacturado.Value)
+        End If
+
+
+
+        lbPorcentajeVentaMecanico.Text = Mecanico.ToString("0.00") + " %"
+        lbPorcentajeVentaPublico.Text = Publico.ToString("0.00") + " %"
 
         Dim name As String = JGrM_Buscador.GetValue("yfimg")
         TablaImagenes = L_prCargarImagenesProducto(tbCodigo.Text)
@@ -1282,10 +1302,10 @@ Public Class F1_Productos
             .Width = 180
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.BackColor = Color.AliceBlue
-            .Visible = True
+            .Visible = False
         End With
         With JGr_Descuentos.RootTable.Columns("estado")
-            .Visible = True
+            .Visible = False
         End With
         'Habilitar Filtradores
         With JGr_Descuentos
@@ -1455,5 +1475,34 @@ Public Class F1_Productos
 
 
 
+    End Sub
+
+    Private Sub LabelX17_Click(sender As Object, e As EventArgs) Handles LabelX17.Click
+
+    End Sub
+
+    Private Sub tbPrecioVentaNormal_ValueChanged(sender As Object, e As EventArgs) Handles tbPrecioVentaNormal.ValueChanged
+        Dim publico As Double = 0
+        If (tbPrecioFacturado.Value > 0) Then
+
+            publico = 100 - ((tbPrecioVentaNormal.Value * 100) / tbPrecioFacturado.Value)
+
+
+        End If
+
+        lbPorcentajeVentaPublico.Text = publico.ToString("0.00") + " %"
+
+    End Sub
+
+    Private Sub tbPrecioMecanico_ValueChanged(sender As Object, e As EventArgs) Handles tbPrecioMecanico.ValueChanged
+        Dim mecanico As Double = 0
+        If (tbPrecioFacturado.Value > 0) Then
+
+            mecanico = 100 - ((tbPrecioMecanico.Value * 100) / tbPrecioFacturado.Value)
+
+
+        End If
+
+        lbPorcentajeVentaMecanico.Text = mecanico.ToString("0.00") + " %"
     End Sub
 End Class
