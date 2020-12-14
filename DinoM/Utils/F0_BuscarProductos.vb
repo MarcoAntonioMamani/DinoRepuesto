@@ -391,6 +391,8 @@ Public Class F0_BuscarProductos
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         IniciarTodod()
+        tbProducto.Clear()
+
         tbProducto.Focus()
     End Sub
 End Class

@@ -448,7 +448,7 @@ Public Class F1_Productos
         tbCodigoMarca.ReadOnly = False
         tbPrecioMecanico.IsInputReadOnly = False
         tbPrecioCosto.IsInputReadOnly = False
-        btNuevoP.Visible = True
+
         btGrabarP.Visible = True
         _prCrearCarpetaImagenes()
         _prCrearCarpetaTemporal()
@@ -463,6 +463,24 @@ Public Class F1_Productos
 
         tbDesde.MinDate = Now.Date
 
+
+        ''' Descuentos
+        ''' 
+        tbDesde.IsInputReadOnly = False
+        tbHasta.IsInputReadOnly = False
+        tbMontoDesde.IsInputReadOnly = False
+        tbMontoHasta.IsInputReadOnly = False
+        tbPrecioDescuento.IsInputReadOnly = False
+
+
+        btGrabarP.Enabled = True
+        tbDesde.Value = Now.Date
+        tbHasta.Value = "01/01/2050"
+        tbMontoDesde.Value = 0
+        tbMontoHasta.Value = 0
+        tbPrecioDescuento.Value = 0
+
+        JGr_Descuentos.ContextMenuStrip = MenuStripDescuento
     End Sub
 
     Public Overrides Sub _PMOInhabilitar()
@@ -497,7 +515,7 @@ Public Class F1_Productos
         tbMontoDesde.IsInputReadOnly = True
         tbMontoHasta.IsInputReadOnly = True
         tbPrecioDescuento.IsInputReadOnly = True
-        btNuevoP.Visible = False
+
         btGrabarP.Visible = False
         _prStyleJanus()
         JGrM_Buscador.Focus()
@@ -506,6 +524,9 @@ Public Class F1_Productos
         btnImprimir.Visible = True
         dgjDetalleProducto.AllowEdit = InheritableBoolean.False
         dgjDetalleProducto.RootTable.Columns("delete").Visible = False
+
+        JGr_Descuentos.ContextMenuStrip = Nothing
+
     End Sub
 
     Public Overrides Sub _PMOLimpiar()
@@ -544,7 +565,7 @@ Public Class F1_Productos
         armarGrillaDetalleProducto(0)
         tbPrecioVentaNormal.Value = 0
         tbDesde.Value = Now.Date
-        tbHasta.Value = Now.Date
+        tbHasta.Value = "01/01/2050"
         tbMontoDesde.Value = 0
         tbMontoHasta.Value = 0
         tbPrecioDescuento.Value = 0
@@ -1277,6 +1298,12 @@ Public Class F1_Productos
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.BackColor = Color.AliceBlue
         End With
+        With JGr_Descuentos.RootTable.Columns("estadoDescuento")
+            .Caption = "Estado"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+
+        End With
         With JGr_Descuentos.RootTable.Columns("dacant2")
             .Caption = "Hasta"
             .Width = 100
@@ -1295,7 +1322,7 @@ Public Class F1_Productos
             .Width = 180
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.BackColor = Color.AliceBlue
-            .Visible = True
+            .Visible = False
         End With
         With JGr_Descuentos.RootTable.Columns("daffin")
             .Caption = "Fecha Fin"
@@ -1318,7 +1345,20 @@ Public Class F1_Productos
             '.AllowEdit = InheritableBoolean.False
         End With
 
+        _prAplicarCondiccionDescuento()
+    End Sub
 
+    Public Sub _prAplicarCondiccionDescuento()
+        Dim fc As GridEXFormatCondition
+        fc = New GridEXFormatCondition(JGr_Descuentos.RootTable.Columns("estadoDescuento"), ConditionOperator.Equal, 0)
+        'fc.FormatStyle.FontBold = TriState.True
+        fc.FormatStyle.ForeColor = Color.Red    'Color.Tan
+        JGr_Descuentos.RootTable.FormatConditions.Add(fc)
+        Dim fr As GridEXFormatCondition
+        fr = New GridEXFormatCondition(JGr_Descuentos.RootTable.Columns("estadoDescuento"), ConditionOperator.Equal, 1)
+        fr.FormatStyle.ForeColor = Color.Black
+        fr.FormatStyle.BackColor = Color.DodgerBlue
+        JGr_Descuentos.RootTable.FormatConditions.Add(fr)
     End Sub
 
     Private Sub dgjDetalleProducto_EditingCell(sender As Object, e As EditingCellEventArgs) Handles dgjDetalleProducto.EditingCell
@@ -1398,49 +1438,82 @@ Public Class F1_Productos
         End If
     End Sub
 
-    Private Sub btNuevoP_Click(sender As Object, e As EventArgs) Handles btNuevoP.Click
-        tbDesde.IsInputReadOnly = False
-        tbHasta.IsInputReadOnly = False
-        tbMontoDesde.IsInputReadOnly = False
-        tbMontoHasta.IsInputReadOnly = False
-        tbPrecioDescuento.IsInputReadOnly = False
+    Private Sub btNuevoP_Click(sender As Object, e As EventArgs)
 
-        btNuevoP.Enabled = False
-        btGrabarP.Enabled = True
-        tbDesde.Value = Now.Date
-        tbHasta.Value = Now.Date
-        tbMontoDesde.Value = 0
-        tbMontoHasta.Value = 0
-        tbPrecioDescuento.Value = 0
 
     End Sub
+
+
+    Function validarDescuento(ByRef posicion As Integer) As Boolean
+
+        Dim dt As DataTable = CType(JGr_Descuentos.DataSource, DataTable)
+
+        For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+            Dim estado As Integer = dt.Rows(i).Item("estadoDescuento")
+            Dim estadoRegistro As Integer = dt.Rows(i).Item("estado")
+            If (estado = 1 And estadoRegistro >= 0) Then
+                If (tbMontoDesde.Value >= dt.Rows(i).Item("dacant1") And tbMontoDesde.Value <= dt.Rows(i).Item("dacant2")) Then
+                    posicion = i
+                    Return True
+                End If
+                If (tbMontoHasta.Value >= dt.Rows(i).Item("dacant1") And tbMontoHasta.Value <= dt.Rows(i).Item("dacant2")) Then
+                    posicion = i
+                    Return True
+                End If
+            End If
+
+        Next
+        Return False
+
+
+
+    End Function
+
 
     Private Sub btGrabarP_Click(sender As Object, e As EventArgs) Handles btGrabarP.Click
 
         If (tbMontoDesde.Value > 0 And tbMontoHasta.Value > 0 And tbPrecioDescuento.Value > 0) Then
-            _prAddDetalleDescuento()
 
+
+            If (tbMontoDesde.Value > tbMontoHasta.Value) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, "La cantidad Hasta es mayor al Desde".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+
+                Return
+
+            End If
+            Dim posicion As Integer = -1
+            If (Not validarDescuento(posicion)) Then
+                _prAddDetalleDescuento()
+                tbDesde.Value = Now.Date
+                tbHasta.Value = "01/01/2050"
+                tbMontoDesde.Value = 0
+                tbMontoHasta.Value = 0
+                tbPrecioDescuento.Value = 0
+
+
+            Else
+                Dim dt As DataTable = CType(JGr_Descuentos.DataSource, DataTable)
+
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, "Ya existe un Descuento Programado con los datos a Insertar, Desde = " + Str(dt.Rows(posicion).Item("dacant1")) + "  Hasta " + Str(dt.Rows(posicion).Item("dacant2")), img, 4500, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            End If
+
+
+
+
+        Else
+            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+            ToastNotification.Show(Me, "Debe Rellenar todos los campos para agregar el descuento".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.BottomCenter)
         End If
-        tbDesde.Value = Now.Date
-        tbHasta.Value = Now.Date
-        tbMontoDesde.Value = 0
-        tbMontoHasta.Value = 0
-        tbPrecioDescuento.Value = 0
-        tbDesde.IsInputReadOnly = True
-        tbHasta.IsInputReadOnly = True
-        tbMontoDesde.IsInputReadOnly = True
-        tbMontoHasta.IsInputReadOnly = True
-        tbPrecioDescuento.IsInputReadOnly = True
 
-        btGrabarP.Enabled = False
-        btNuevoP.Enabled = True
     End Sub
     Private Sub _prAddDetalleDescuento()
         'd.danumi , d.dacanumi, d.dacant1, d.dacant2, d.dapreciou, d.dafinicio, d.daffin, 1 as estado
         Dim Bin As New MemoryStream
         Dim img As New Bitmap(My.Resources.delete, 28, 28)
         img.Save(Bin, Imaging.ImageFormat.Png)
-        CType(JGr_Descuentos.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, tbMontoDesde.Value, tbMontoHasta.Value, tbPrecioDescuento.Value, tbDesde.Value.ToString("dd/MM/yyyy"), tbHasta.Value.ToString("dd/MM/yyyy"), 0)
+        CType(JGr_Descuentos.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, tbMontoDesde.Value, tbMontoHasta.Value, tbPrecioDescuento.Value, tbDesde.Value.ToString("dd/MM/yyyy"), tbHasta.Value.ToString("dd/MM/yyyy"), 1, 0)
     End Sub
 
     Public Function _fnSiguienteNumi()
@@ -1504,5 +1577,33 @@ Public Class F1_Productos
         End If
 
         lbPorcentajeVentaMecanico.Text = mecanico.ToString("0.00") + " %"
+    End Sub
+
+    Private Sub tbHasta_Click(sender As Object, e As EventArgs) Handles tbHasta.Click
+
+    End Sub
+
+
+    Public Function ObtenerPosicion(ByRef id As Integer) As Integer
+
+        For i As Integer = 0 To CType(JGr_Descuentos.DataSource, DataTable).Rows.Count - 1 Step 1
+            If (CType(JGr_Descuentos.DataSource, DataTable).Rows(i).Item("danumi") = id) Then
+                Return i
+            End If
+
+        Next
+        Return -1
+    End Function
+    Private Sub InhabilitarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InhabilitarToolStripMenuItem.Click
+        If (JGr_Descuentos.Row >= 0) Then
+
+            Dim posicion As Integer = -1
+            ObtenerPosicion(JGr_Descuentos.GetValue("danumi"))
+            If (posicion >= 0) Then
+                CType(JGr_Descuentos.DataSource, DataTable).Rows(posicion).Item("estadoDescuento") = 0
+            End If
+
+
+        End If
     End Sub
 End Class

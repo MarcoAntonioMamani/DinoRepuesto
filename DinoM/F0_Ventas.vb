@@ -3055,7 +3055,7 @@ salirIf:
             Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
 
             _CodCliente = Row.Cells("ydnumi").Value
-            tbCliente.Text = Row.Cells("ydrazonsocial").Value
+            tbCliente.Text = Row.Cells("yddesc").Value
             _dias = Row.Cells("yddias").Value
 
             Dim numiVendedor As Integer = IIf(IsDBNull(Row.Cells("ydnumivend").Value), 0, Row.Cells("ydnumivend").Value)
@@ -3066,8 +3066,8 @@ salirIf:
                 grdetalle.Select()
                 Table_Producto = Nothing
             Else
-                tbVendedor.Clear()
-                _CodEmpleado = 0
+                'tbVendedor.Clear()
+                '_CodEmpleado = 0
                 tbVendedor.Focus()
                 Table_Producto = Nothing
 
