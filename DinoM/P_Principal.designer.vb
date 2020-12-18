@@ -26,6 +26,10 @@ Partial Class P_Principal
         Dim MetroTileFrame2 As DevComponents.DotNetBar.Metro.MetroTileFrame
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(P_Principal))
         Me.SideNav1 = New DevComponents.DotNetBar.Controls.SideNav()
+        Me.SideNavPanel8 = New DevComponents.DotNetBar.Controls.SideNavPanel()
+        Me.PanelVentaAtajo = New System.Windows.Forms.Panel()
+        Me.SideNavPanel9 = New DevComponents.DotNetBar.Controls.SideNavPanel()
+        Me.PanelBuscador = New System.Windows.Forms.Panel()
         Me.SideNav_Ventas = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.PanelVentas = New System.Windows.Forms.Panel()
         Me.MetroTilePanelVentas = New DevComponents.DotNetBar.Metro.MetroTilePanel()
@@ -42,8 +46,6 @@ Partial Class P_Principal
         Me.btVentRotProd = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btComVendedor = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btVentEstad = New DevComponents.DotNetBar.Metro.MetroTileItem()
-        Me.SideNavPanel8 = New DevComponents.DotNetBar.Controls.SideNavPanel()
-        Me.PanelVentaAtajo = New System.Windows.Forms.Panel()
         Me.SideNavPanel3 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.superTabControl3 = New DevComponents.DotNetBar.SuperTabControl()
         Me.PanelPrincipal = New System.Windows.Forms.Panel()
@@ -148,6 +150,7 @@ Partial Class P_Principal
         Me.Ventana = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.SideNavItem3 = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.VentanaVenta = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.VentanaBuscadorPRoducto = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.MetroTileItem8 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.MetroTileItem6 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.MetroTileItem7 = New DevComponents.DotNetBar.Metro.MetroTileItem()
@@ -161,15 +164,13 @@ Partial Class P_Principal
         Me.lbUsuario = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.MetroTileItem11 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.MetroTileItem12 = New DevComponents.DotNetBar.Metro.MetroTileItem()
-        Me.VentanaBuscadorPRoducto = New DevComponents.DotNetBar.Controls.SideNavItem()
-        Me.SideNavPanel9 = New DevComponents.DotNetBar.Controls.SideNavPanel()
-        Me.PanelBuscador = New System.Windows.Forms.Panel()
         MetroTileFrame1 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         MetroTileFrame2 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         Me.SideNav1.SuspendLayout()
+        Me.SideNavPanel8.SuspendLayout()
+        Me.SideNavPanel9.SuspendLayout()
         Me.SideNav_Ventas.SuspendLayout()
         Me.PanelVentas.SuspendLayout()
-        Me.SideNavPanel8.SuspendLayout()
         Me.SideNavPanel3.SuspendLayout()
         CType(Me.superTabControl3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.superTabControl3.SuspendLayout()
@@ -187,7 +188,6 @@ Partial Class P_Principal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SideNavPanel2.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SideNavPanel9.SuspendLayout()
         Me.SuspendLayout()
         '
         'MetroTileFrame1
@@ -237,6 +237,45 @@ Partial Class P_Principal
         Me.SideNav1.Size = New System.Drawing.Size(1045, 690)
         Me.SideNav1.TabIndex = 1
         Me.SideNav1.Text = "SideNav1"
+        '
+        'SideNavPanel8
+        '
+        Me.SideNavPanel8.Controls.Add(Me.PanelVentaAtajo)
+        Me.SideNavPanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel8.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanel8.Name = "SideNavPanel8"
+        Me.SideNavPanel8.Size = New System.Drawing.Size(875, 649)
+        Me.SideNavPanel8.TabIndex = 184
+        '
+        'PanelVentaAtajo
+        '
+        Me.PanelVentaAtajo.BackColor = System.Drawing.SystemColors.Control
+        Me.PanelVentaAtajo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelVentaAtajo.Location = New System.Drawing.Point(0, 0)
+        Me.PanelVentaAtajo.Margin = New System.Windows.Forms.Padding(4)
+        Me.PanelVentaAtajo.Name = "PanelVentaAtajo"
+        Me.PanelVentaAtajo.Size = New System.Drawing.Size(875, 649)
+        Me.PanelVentaAtajo.TabIndex = 2
+        '
+        'SideNavPanel9
+        '
+        Me.SideNavPanel9.Controls.Add(Me.PanelBuscador)
+        Me.SideNavPanel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel9.Location = New System.Drawing.Point(165, 40)
+        Me.SideNavPanel9.Name = "SideNavPanel9"
+        Me.SideNavPanel9.Size = New System.Drawing.Size(875, 649)
+        Me.SideNavPanel9.TabIndex = 215
+        Me.SideNavPanel9.Visible = False
+        '
+        'PanelBuscador
+        '
+        Me.PanelBuscador.BackColor = System.Drawing.SystemColors.Control
+        Me.PanelBuscador.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelBuscador.Location = New System.Drawing.Point(0, 0)
+        Me.PanelBuscador.Margin = New System.Windows.Forms.Padding(4)
+        Me.PanelBuscador.Name = "PanelBuscador"
+        Me.PanelBuscador.Size = New System.Drawing.Size(875, 649)
+        Me.PanelBuscador.TabIndex = 3
         '
         'SideNav_Ventas
         '
@@ -555,25 +594,6 @@ Partial Class P_Principal
         Me.btVentEstad.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
         Me.btVentEstad.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btVentEstad.TitleTextColor = System.Drawing.Color.Red
-        '
-        'SideNavPanel8
-        '
-        Me.SideNavPanel8.Controls.Add(Me.PanelVentaAtajo)
-        Me.SideNavPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel8.Location = New System.Drawing.Point(165, 40)
-        Me.SideNavPanel8.Name = "SideNavPanel8"
-        Me.SideNavPanel8.Size = New System.Drawing.Size(875, 649)
-        Me.SideNavPanel8.TabIndex = 184
-        '
-        'PanelVentaAtajo
-        '
-        Me.PanelVentaAtajo.BackColor = System.Drawing.SystemColors.Control
-        Me.PanelVentaAtajo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelVentaAtajo.Location = New System.Drawing.Point(0, 0)
-        Me.PanelVentaAtajo.Margin = New System.Windows.Forms.Padding(4)
-        Me.PanelVentaAtajo.Name = "PanelVentaAtajo"
-        Me.PanelVentaAtajo.Size = New System.Drawing.Size(875, 649)
-        Me.PanelVentaAtajo.TabIndex = 2
         '
         'SideNavPanel3
         '
@@ -2164,7 +2184,7 @@ Partial Class P_Principal
         Me.SideNavItem1.IsSystemMenu = True
         Me.SideNavItem1.Name = "SideNavItem1"
         Me.SideNavItem1.Symbol = ""
-        Me.SideNavItem1.Text = "Menu"
+        Me.SideNavItem1.Text = "Menu V2.0"
         '
         'Separator1
         '
@@ -2269,6 +2289,14 @@ Partial Class P_Principal
         Me.VentanaVenta.Panel = Me.SideNavPanel8
         Me.VentanaVenta.Symbol = ""
         Me.VentanaVenta.Text = "Programa Ventas"
+        '
+        'VentanaBuscadorPRoducto
+        '
+        Me.VentanaBuscadorPRoducto.Name = "VentanaBuscadorPRoducto"
+        Me.VentanaBuscadorPRoducto.Panel = Me.SideNavPanel9
+        Me.VentanaBuscadorPRoducto.Symbol = "59552"
+        Me.VentanaBuscadorPRoducto.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
+        Me.VentanaBuscadorPRoducto.Text = "Buscador Producto"
         '
         'MetroTileItem8
         '
@@ -2455,34 +2483,6 @@ Partial Class P_Principal
         Me.MetroTileItem12.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.MetroTileItem12.TitleTextColor = System.Drawing.Color.Red
         '
-        'VentanaBuscadorPRoducto
-        '
-        Me.VentanaBuscadorPRoducto.Name = "VentanaBuscadorPRoducto"
-        Me.VentanaBuscadorPRoducto.Panel = Me.SideNavPanel9
-        Me.VentanaBuscadorPRoducto.Symbol = "59552"
-        Me.VentanaBuscadorPRoducto.SymbolSet = DevComponents.DotNetBar.eSymbolSet.Material
-        Me.VentanaBuscadorPRoducto.Text = "Buscador Producto"
-        '
-        'SideNavPanel9
-        '
-        Me.SideNavPanel9.Controls.Add(Me.PanelBuscador)
-        Me.SideNavPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel9.Location = New System.Drawing.Point(165, 40)
-        Me.SideNavPanel9.Name = "SideNavPanel9"
-        Me.SideNavPanel9.Size = New System.Drawing.Size(875, 649)
-        Me.SideNavPanel9.TabIndex = 215
-        Me.SideNavPanel9.Visible = False
-        '
-        'PanelBuscador
-        '
-        Me.PanelBuscador.BackColor = System.Drawing.SystemColors.Control
-        Me.PanelBuscador.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelBuscador.Location = New System.Drawing.Point(0, 0)
-        Me.PanelBuscador.Margin = New System.Windows.Forms.Padding(4)
-        Me.PanelBuscador.Name = "PanelBuscador"
-        Me.PanelBuscador.Size = New System.Drawing.Size(875, 649)
-        Me.PanelBuscador.TabIndex = 3
-        '
         'P_Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2497,9 +2497,10 @@ Partial Class P_Principal
         Me.Text = "Dino "
         Me.SideNav1.ResumeLayout(False)
         Me.SideNav1.PerformLayout()
+        Me.SideNavPanel8.ResumeLayout(False)
+        Me.SideNavPanel9.ResumeLayout(False)
         Me.SideNav_Ventas.ResumeLayout(False)
         Me.PanelVentas.ResumeLayout(False)
-        Me.SideNavPanel8.ResumeLayout(False)
         Me.SideNavPanel3.ResumeLayout(False)
         CType(Me.superTabControl3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.superTabControl3.ResumeLayout(False)
@@ -2517,7 +2518,6 @@ Partial Class P_Principal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SideNavPanel2.ResumeLayout(False)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SideNavPanel9.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
