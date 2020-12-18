@@ -888,6 +888,7 @@ Public Class F0_Ventas
 
                     If (dt.Rows(j).Item("Item") = codigoProducto) Then
                         dt.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("tbcmin")
+                        dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
                         dtVenta.ImportRow(dt.Rows(j))
                     End If
 
@@ -2480,6 +2481,20 @@ salirIf:
                     grdetalle.SetValue("tbdesc", montodesc)
                     P_PonerTotal(rowIndex)
 
+
+                    Dim PrecioReferencia As Double = grdetalle.GetValue("tbPrecioReferencia")
+                    Dim monto As Double = grdetalle.GetValue("tbpbas")
+                    Dim Porcentaje As Double
+                    If (PrecioReferencia = 0) Then
+                        Porcentaje = 0
+                    Else
+                        Porcentaje = 100 - ((monto * 100) / PrecioReferencia)
+                    End If
+
+                    ''tbPorcentajeReferencia
+
+                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbPorcentajeReferencia") = Porcentaje
+                    grdetalle.SetValue("tbPorcentajeReferencia", Porcentaje)
                 Else
                     Dim lin As Integer = grdetalle.GetValue("tbnumi")
                     Dim pos As Integer = -1
@@ -2720,12 +2735,13 @@ salirIf:
         If (Not _fnAccesible()) Then
             Return
         End If
-        If (grdetalle.RowCount >= 2) Then
-            If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
-                _prEliminarFila()
-            End If
-        End If
+
         Try
+            If (grdetalle.RowCount >= 2) Then
+                If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
+                    _prEliminarFila()
+                End If
+            End If
             If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("imgAdd").Index) Then
                 SeleccionarCategoria(True)
             End If

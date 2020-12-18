@@ -1449,9 +1449,9 @@ Public Class F1_Productos
         Dim dt As DataTable = CType(JGr_Descuentos.DataSource, DataTable)
 
         For i As Integer = 0 To dt.Rows.Count - 1 Step 1
-            Dim estado As Integer = dt.Rows(i).Item("estadoDescuento")
+            Dim estado As Boolean = dt.Rows(i).Item("estadoDescuento")
             Dim estadoRegistro As Integer = dt.Rows(i).Item("estado")
-            If (estado = 1 And estadoRegistro >= 0) Then
+            If (estado = True And estadoRegistro >= 0) Then
                 If (tbMontoDesde.Value >= dt.Rows(i).Item("dacant1") And tbMontoDesde.Value <= dt.Rows(i).Item("dacant2")) Then
                     posicion = i
                     Return True
