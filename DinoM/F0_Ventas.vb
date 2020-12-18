@@ -870,6 +870,7 @@ Public Class F0_Ventas
             'Table_Producto = dt.Copy
             dtProductoGoblal = dt
         Else
+
             dt = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
             'Table_Producto = dt.Copy
             dtProductoGoblal = dt
@@ -898,7 +899,7 @@ Public Class F0_Ventas
 
         Next
         Dim frm As F0_DetalleVenta
-        frm = New F0_DetalleVenta(dt, dtVenta, dtname)
+        frm = New F0_DetalleVenta(dt, dtVenta, dtname, cbPrecio.Value)
 
         frm.ShowDialog()
         Dim dtProd As DataTable = frm.dtDetalle

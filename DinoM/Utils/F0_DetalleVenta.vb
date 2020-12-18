@@ -8,6 +8,8 @@ Public Class F0_DetalleVenta
     Public dtDetalle As DataTable
     Public dtname As DataTable
 
+    Public CategoriaPrecio As Integer
+
     Public Sub IniciarTodod()
         CargarProductos()
         CargarProductosVentas()
@@ -15,11 +17,12 @@ Public Class F0_DetalleVenta
         tbProducto.Focus()
     End Sub
 
-    Public Sub New(dtp As DataTable, dtv As DataTable, dtn As DataTable)
+    Public Sub New(dtp As DataTable, dtv As DataTable, dtn As DataTable, _CategoriaPrecio As Integer)
         InitializeComponent()
         dtProductoAll = dtp
         dtDetalle = dtv
         dtname = dtn
+        CategoriaPrecio = _CategoriaPrecio
 
     End Sub
 
@@ -492,6 +495,8 @@ Public Class F0_DetalleVenta
                     ef.tipo = 7
                     ef.Stock = grProductos.GetValue("Stock")
                     ef.Cantidad = 0
+                    ef.CategoriaPrecio = CategoriaPrecio
+                    ef.IdProducto = grProductos.GetValue("Item")
                     ef.NameProducto = grProductos.GetValue("yfcdprod1")
 
                     ef.ShowDialog()
@@ -504,6 +509,10 @@ Public Class F0_DetalleVenta
                             Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
 
                             row.Item("Cantidad") = cantidad
+                            If (CategoriaPrecio = 50) Then
+                                row.Item("yhprecio") = ef.Precio
+                            End If
+
                             CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
                             tbProducto.Focus()
 

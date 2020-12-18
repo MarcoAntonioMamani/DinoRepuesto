@@ -1291,6 +1291,7 @@ Public Class AccesoLogica
     End Function
 #End Region
 
+
 #Region "TV001 Ventas"
     Public Shared Function L_fnGeneralVenta() As DataTable
         Dim _Tabla As DataTable

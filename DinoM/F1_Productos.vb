@@ -1598,9 +1598,11 @@ Public Class F1_Productos
         If (JGr_Descuentos.Row >= 0) Then
 
             Dim posicion As Integer = -1
-            ObtenerPosicion(JGr_Descuentos.GetValue("danumi"))
+            posicion = ObtenerPosicion(JGr_Descuentos.GetValue("danumi"))
             If (posicion >= 0) Then
                 CType(JGr_Descuentos.DataSource, DataTable).Rows(posicion).Item("estadoDescuento") = 0
+                _prAplicarCondiccionDescuento()
+                CType(JGr_Descuentos.DataSource, DataTable).Rows(posicion).Item("estado") = 2
             End If
 
 
