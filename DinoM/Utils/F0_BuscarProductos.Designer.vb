@@ -108,7 +108,7 @@ Partial Class F0_BuscarProductos
         Me.grProductos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.grProductos.RecordNavigator = True
         Me.grProductos.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
-        Me.grProductos.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductos.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
         Me.grProductos.Size = New System.Drawing.Size(871, 598)
         Me.grProductos.TabIndex = 0

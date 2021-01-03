@@ -569,7 +569,8 @@ Public Class F0_DetalleVenta
                     " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Marca").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("grupo2").ToString.ToUpper
+                    " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper
                 Select Case cant
                     Case 1
 

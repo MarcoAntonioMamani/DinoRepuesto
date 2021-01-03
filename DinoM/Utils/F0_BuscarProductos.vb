@@ -182,17 +182,20 @@ Public Class F0_BuscarProductos
         End With
         'Item  CodigoFabrica	Marca	Medida	Categoria	yfcdprod1	yfgr1	grupo1	yfgr2	grupo2	yfgr3	grupo3	yfgr4	grupo4	yfumin	UnidMin	stock	PrecioFacturado	PrecioPublico	PrecioMecanico	Almacen
         With grProductos.RootTable.Columns("stock")
-            .Width = 120
+            .Width = 160
             .FormatString = "0.00"
             .Visible = True
             .Caption = "Stock"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
         End With
-        With grProductos.RootTable.Columns("Almacen")
-            .Width = 90
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "Almacen"
-        End With
+        'With grProductos.RootTable.Columns("Almacen")
+        '    .Width = 90
+        '    .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+        '    .Visible = True
+        '    .Caption = "Almacen"
+        'End With
         With grProductos.RootTable.Columns("PrecioFacturado")
             .Width = 100
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -274,7 +277,7 @@ Public Class F0_BuscarProductos
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Categoria").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("Almacen").ToString.ToUpper
+                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper
                 Select Case cant
                     Case 1
 
