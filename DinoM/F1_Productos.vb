@@ -818,7 +818,7 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yfcprod", True, "Cod.Fabrica", 100))
         listEstCeldas.Add(New Modelo.Celda("yfcdprod2", True, "Medida".ToUpper, 140))
         listEstCeldas.Add(New Modelo.Celda("yfcbarra", False, "Cod.Barra".ToUpper, 140))
-        listEstCeldas.Add(New Modelo.Celda("yfcdprod1", True, "Descripcion Producto".ToUpper, 250))
+        listEstCeldas.Add(New Modelo.Celda("yfdetprod", True, "Descripcion Producto".ToUpper, 250))
         listEstCeldas.Add(New Modelo.Celda("yfgr1", False))
         listEstCeldas.Add(New Modelo.Celda("yfgr2", False))
         listEstCeldas.Add(New Modelo.Celda("yfgr3", False))
@@ -849,7 +849,7 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("Umedida", False, "UMedida".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("UnidMin", False, "UniVenta".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("Umax", False, "UniCaja".ToUpper, 150))
-        listEstCeldas.Add(New Modelo.Celda("yfdetprod", False, "Descripcion".ToUpper, 150))
+        listEstCeldas.Add(New Modelo.Celda("yfcdprod1", False, "Descripcion".ToUpper, 150))
 
         Return listEstCeldas
     End Function
@@ -1807,7 +1807,15 @@ Public Class F1_Productos
 
         If (CategoriaId >= 0) Then
             Dim dt As DataTable = dtProductoAll.Copy
-            JGrM_Buscador.DataSource = dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable
+            If (Not IsNothing(dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable)) Then
+                JGrM_Buscador.DataSource = dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable
+            Else
+                dt.Rows.Clear()
+
+                JGrM_Buscador.DataSource = dt
+
+            End If
+
 
         Else
             JGrM_Buscador.DataSource = dtProductoAll.Copy
