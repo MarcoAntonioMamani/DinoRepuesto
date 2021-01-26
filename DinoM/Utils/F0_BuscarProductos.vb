@@ -246,6 +246,28 @@ Public Class F0_BuscarProductos
         tbProducto.Focus()
     End Sub
     Private Sub tbProducto_TextChanged(sender As Object, e As EventArgs) Handles tbProducto.TextChanged
+
+
+
+        Dim charSequence As String
+        charSequence = tbProducto.Text.ToUpper
+        If (charSequence.Trim = String.Empty) Then
+
+
+            grProductos.DataSource = dtProductoAll.Copy
+        End If
+
+
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        IniciarTodod()
+        tbProducto.Clear()
+
+        tbProducto.Focus()
+    End Sub
+
+    Private Sub ButtonX2_Click(sender As Object, e As EventArgs) Handles ButtonX2.Click
         Dim dtProductoCopy As DataTable
         dtProductoCopy = dtProductoAll.Copy
         dtProductoCopy.Rows.Clear()
@@ -388,14 +410,5 @@ Public Class F0_BuscarProductos
             grProductos.DataSource = dtProductoAll.Copy
         End If
 
-
-
-    End Sub
-
-    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        IniciarTodod()
-        tbProducto.Clear()
-
-        tbProducto.Focus()
     End Sub
 End Class

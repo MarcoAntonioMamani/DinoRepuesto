@@ -5,6 +5,8 @@ Imports Janus.Windows.GridEX
 Imports System.IO
 Imports DevComponents.DotNetBar.SuperGrid
 Imports DevComponents.DotNetBar.Controls
+Imports System.ComponentModel
+
 
 Public Class F1_Productos
     Dim _Inter As Integer = 0
@@ -18,12 +20,26 @@ Public Class F1_Productos
     Public _modulo As SideNavItem
     Public Limpiar As Boolean = False  'Bandera para indicar si limpiar todos los datos o mantener datos ya registrados
     Dim dtProductoAll As DataTable
+    Dim dtImagenesAll As DataTable
     Dim CategoriaSeleccionada As Integer '' Esta variable es para capturar la categoria seleccionada por el usuario
     Dim TablaImagenes As DataTable
     Dim TablaInventario As DataTable
 
     Dim gs_DirPrograma As String = ""
     Dim gs_RutaImg As String = ""
+    Dim dtLibreria As DataTable = Nothing
+
+    Dim dtPrecioAll As DataTable
+
+    Private bgWorker As New BackgroundWorker
+
+    Dim CategoriaGeneral As Integer = -1 ''Id de la categoria si es que no termina el hilo
+
+    Dim BanderaCarga As Boolean = False
+
+    Dim BanderaClonar As Boolean = False
+
+
 #End Region
 #Region "Metodos Privados"
 
@@ -31,6 +47,9 @@ Public Class F1_Productos
     Private Sub _prIniciarTodo()
         Me.Text = "PRODUCTOS"
         'L_prAbrirConexion(gs_Ip, gs_UsuarioSql, gs_ClaveSql, gs_NombreBD)
+
+        btnBuscar.PerformClick()
+
         _prMaxLength()
         _prCargarNameLabel()
         _prCargarComboLibreria(cbgrupo1, 1, 1)
@@ -41,6 +60,8 @@ Public Class F1_Productos
         _prCargarComboLibreria(cbUMed, 1, 5)
         _prCargarComboLibreria(cbUniVenta, 1, 6)
         _prCargarComboLibreria(cbUnidMaxima, 1, 6)
+        dtPrecioAll = L_fnGeneralProductosDescuentosAll()
+        dtImagenesAll = L_prCargarImagenesProductoAll()
         _prAsignarPermisos()
         armarGrillaDetalleProducto(0)
         _PMIniciarTodo()
@@ -53,10 +74,23 @@ Public Class F1_Productos
         Me.Icon = ico
 
         _prEliminarContenidoImage()
-        btnBuscar.PerformClick()
 
         SeleccionarCategoria()
     End Sub
+
+    Private Sub MyWorker_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
+        'Add your codes here for the worker to execute
+
+    End Sub
+
+    Private Sub MyWorker_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
+        'Add your codes for the worker to execute after finishing the work.
+        BanderaCarga = True
+
+    End Sub
+
+
+
 
     Private Sub _prCrearCarpetaImagenes(carpetaFinal As String)
         Dim rutaDestino As String = RutaGlobal + "\Imagenes\Imagenes Productos\" + carpetaFinal + "\"
@@ -318,14 +352,19 @@ Public Class F1_Productos
         JGrM_Buscador.RootTable.HeaderFormatStyle.FontBold = TriState.True
     End Sub
     Public Sub _prCargarNameLabel()
-        Dim dt As DataTable = L_fnNameLabel()
-        If (dt.Rows.Count > 0) Then
-            lbgrupo1.Text = dt.Rows(0).Item("Grupo 1").ToString + ":"
-            lbgrupo2.Text = dt.Rows(0).Item("Grupo 2").ToString + ":"
-            lbgrupo3.Text = dt.Rows(0).Item("Grupo 3").ToString + ":"
-            lbgrupo4.Text = dt.Rows(0).Item("Grupo 4").ToString + ":"
+        'Dim dt As DataTable = L_fnNameLabel()
+        'If (dt.Rows.Count > 0) Then
+        '    lbgrupo1.Text = dt.Rows(0).Item("Grupo 1").ToString + ":"
+        '    lbgrupo2.Text = dt.Rows(0).Item("Grupo 2").ToString + ":"
+        '    lbgrupo3.Text = dt.Rows(0).Item("Grupo 3").ToString + ":"
+        '    lbgrupo4.Text = dt.Rows(0).Item("Grupo 4").ToString + ":"
 
-        End If
+        'End If
+
+        lbgrupo1.Text = "MARCA :"
+        lbgrupo2.Text = "PROCEDENCIA :"
+        lbgrupo3.Text = "SUBCATEGORIA :"
+        lbgrupo4.Text = "PRESENTACION :"
     End Sub
     Public Sub _prMaxLength()
         'tbCodProd.MaxLength = 25
@@ -343,7 +382,16 @@ Public Class F1_Productos
 
     Private Sub _prCargarComboLibreria(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
         Dim dt As New DataTable
-        dt = L_prLibreriaClienteLGeneral(cod1, cod2)
+        If (IsNothing(dtLibreria)) Then
+
+            dtLibreria = L_prObtenerTodaLaLibreria()
+        End If
+
+
+        dt = dtLibreria.Select("yccod1=" + cod1 + " and yccod2=" + cod2, "ycdes3 asc").CopyToDataTable().DefaultView.ToTable(False, "yccod3", "ycdes3")
+
+
+        'dt = L_prLibreriaClienteLGeneral(cod1, cod2)
         With mCombo
             .DropDownList.Columns.Clear()
             .DropDownList.Columns.Add("yccod3").Width = 70
@@ -442,7 +490,7 @@ Public Class F1_Productos
         cbgrupo2.ReadOnly = False
         cbgrupo3.ReadOnly = False
         cbgrupo4.ReadOnly = False
-        cbgrupo5.ReadOnly = False
+        '' cbgrupo5.ReadOnly = False  a solicitud de rosely se bloquea el campo
         cbUMed.ReadOnly = False
         swEstado.IsReadOnly = False
         cbUniVenta.ReadOnly = False
@@ -535,51 +583,78 @@ Public Class F1_Productos
     End Sub
 
     Public Overrides Sub _PMOLimpiar()
-        tbCodigo.Clear()
-        tbCodBarra.Clear()
-        tbCodProd.Clear()
-        tbDescPro.Clear()
-        tbDescDet.Clear()
-        tbMedida.Clear()
+        If (BanderaClonar = False) Then
+            tbCodigo.Clear()
+            tbCodBarra.Clear()
+            tbCodProd.Clear()
+            tbDescPro.Clear()
+            tbDescDet.Clear()
+            tbMedida.Clear()
 
-        tbPrecioCosto.Value = 0
-        tbPrecioMecanico.Value = 0
-        tbPrecioVentaNormal.Value = 0
-        tbCodigoMarca.Clear()
-        tbPrecioFacturado.Value = 0
+            tbPrecioCosto.Value = 0
+            tbPrecioMecanico.Value = 0
+            tbPrecioVentaNormal.Value = 0
+            tbCodigoMarca.Clear()
+            tbPrecioFacturado.Value = 0
 
-        If (Limpiar = False) Then
-            _prSeleccionarCombo(cbgrupo1)
-            _prSeleccionarCombo(cbgrupo2)
-            _prSeleccionarCombo(cbgrupo3)
-            _prSeleccionarCombo(cbgrupo4)
-            _prSeleccionarCombo(cbgrupo5)
-            _prSeleccionarCombo(cbUMed)
-            _prSeleccionarCombo(cbUnidMaxima)
-            _prSeleccionarCombo(cbUniVenta)
-            swEstado.Value = True
-            tbConversion.Value = 1
+            If (Limpiar = False) Then
+                _prSeleccionarCombo(cbgrupo1)
+                _prSeleccionarCombo(cbgrupo2)
+                _prSeleccionarCombo(cbgrupo3)
+                _prSeleccionarCombo(cbgrupo4)
+                '_prSeleccionarCombo(cbgrupo5)
+                _prSeleccionarCombo(cbUMed)
+                _prSeleccionarCombo(cbUnidMaxima)
+                _prSeleccionarCombo(cbUniVenta)
+                swEstado.Value = True
+                tbConversion.Value = 1
 
-            tbStockMinimo.Value = 0
+                tbStockMinimo.Value = 0
+            End If
+            tbCodProd.Focus()
+            TablaImagenes = L_prCargarImagenesProducto(-1)
+            _prCargarImagen()
+            _prEliminarContenidoImage()
+
+            armarGrillaDetalleProducto(0)
+            tbPrecioVentaNormal.Value = 0
+            tbDesde.Value = Now.Date
+            tbHasta.Value = "01/01/2050"
+            tbMontoDesde.Value = 0
+            tbMontoHasta.Value = 0
+            tbPrecioDescuento.Value = 0
+
+            _PCargarGridCategoriasPrecios(-1)
+
+
+            lbPorcentajeVentaMecanico.Text = "0 %"
+            lbPorcentajeVentaPublico.Text = "0 %"
+        Else
+
+
+            tbPrecioCosto.Value = 0
+            tbPrecioMecanico.Value = 0
+            tbPrecioVentaNormal.Value = 0
+            tbCodigoMarca.Clear()
+            tbPrecioFacturado.Value = 0
+
+
+            TablaImagenes = L_prCargarImagenesProducto(-1)
+            _prCargarImagen()
+            _prEliminarContenidoImage()
+
+            armarGrillaDetalleProducto(0)
+
+            tbDesde.Value = Now.Date
+            tbHasta.Value = "01/01/2050"
+            tbMontoDesde.Value = 0
+            tbMontoHasta.Value = 0
+            tbPrecioDescuento.Value = 0
+
+            _PCargarGridCategoriasPrecios(-1)
+            BanderaClonar = False
         End If
-        tbCodProd.Focus()
-        TablaImagenes = L_prCargarImagenesProducto(-1)
-        _prCargarImagen()
-        _prEliminarContenidoImage()
 
-        armarGrillaDetalleProducto(0)
-        tbPrecioVentaNormal.Value = 0
-        tbDesde.Value = Now.Date
-        tbHasta.Value = "01/01/2050"
-        tbMontoDesde.Value = 0
-        tbMontoHasta.Value = 0
-        tbPrecioDescuento.Value = 0
-
-        _PCargarGridCategoriasPrecios(-1)
-
-
-        lbPorcentajeVentaMecanico.Text = "0 %"
-        lbPorcentajeVentaPublico.Text = "0 %"
 
     End Sub
 
@@ -633,6 +708,8 @@ Public Class F1_Productos
 
         If res Then
             Modificado = False
+
+
             _prCrearCarpetaImagenes("ProductosTodos")
             _prGuardarImagenes(RutaGlobal + "\Imagenes\Imagenes Productos\" + "ProductosTodos" + "\")
 
@@ -644,6 +721,8 @@ Public Class F1_Productos
                                       )
             tbCodigo.Focus()
             Limpiar = True
+            dtPrecioAll = L_fnGeneralProductosDescuentosAll()
+            dtImagenesAll = L_prCargarImagenesProductoAll()
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
             ToastNotification.Show(Me, "El producto no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
@@ -674,6 +753,8 @@ Public Class F1_Productos
                                       img, 2000,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter)
+            dtPrecioAll = L_fnGeneralProductosDescuentosAll()
+            dtImagenesAll = L_prCargarImagenesProductoAll()
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
@@ -805,7 +886,15 @@ Public Class F1_Productos
     End Function
 
     Public Overrides Function _PMOGetTablaBuscador() As DataTable
-        Dim dtBuscador As DataTable = L_fnGeneralProductos()
+        Dim dtBuscador As DataTable
+        If (CategoriaSeleccionada > 0) Then
+            dtBuscador = L_fnGeneralProductos(CategoriaSeleccionada)
+
+        Else
+            dtBuscador = L_fnGeneralProductos(-1)
+        End If
+
+
         dtProductoAll = dtBuscador.Copy
         Return dtBuscador
     End Function
@@ -852,6 +941,22 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yfcdprod1", False, "Descripcion".ToUpper, 150))
 
         Return listEstCeldas
+    End Function
+
+    Public Function filtrarImagenes(Id As Integer) As DataTable
+        Dim dt As DataTable = dtImagenesAll.Copy
+        dt.Rows.Clear()
+
+        For i As Integer = 0 To dtImagenesAll.Rows.Count - 1
+
+            If (dtImagenesAll.Rows(i).Item("idty005") = Id) Then
+                dt.ImportRow(dtImagenesAll.Rows(i))
+            End If
+
+
+        Next
+        Return dt
+
     End Function
 
     Public Overrides Sub _PMOMostrarRegistro(_N As Integer)
@@ -909,7 +1014,8 @@ Public Class F1_Productos
         lbPorcentajeVentaPublico.Text = Publico.ToString("0.00") + " %"
 
         Dim name As String = JGrM_Buscador.GetValue("yfimg")
-        TablaImagenes = L_prCargarImagenesProducto(tbCodigo.Text)
+        'TablaImagenes = L_prCargarImagenesProducto(tbCodigo.Text)
+        TablaImagenes = filtrarImagenes(tbCodigo.Text)
         _prCargarImagen()
         If (gb_DetalleProducto) Then
             armarGrillaDetalleProducto(CInt(tbCodigo.Text))
@@ -1265,11 +1371,25 @@ Public Class F1_Productos
 
     End Sub
 
+    Public Function ObtenerTablaPrecio(codigoProducto As Integer)
+
+        Dim dt As DataTable = dtPrecioAll.Copy
+        dt.Rows.Clear()
+
+        For i As Integer = 0 To dtPrecioAll.Rows.Count - 1 Step 1
+
+            If (codigoProducto = dtPrecioAll.Rows(i).Item("dacanumi")) Then
+                dt.ImportRow(dtPrecioAll.Rows(i))
+            End If
+
+        Next
+        Return dt
+    End Function
 
     Private Sub _PCargarGridCategoriasPrecios(codigoProducto As Integer)
         Dim dtPreciosDesc As DataTable
-        dtPreciosDesc = L_fnGeneralProductosDescuentos(codigoProducto)
-
+        ''dtPreciosDesc = L_fnGeneralProductosDescuentos(codigoProducto)
+        dtPreciosDesc = ObtenerTablaPrecio(codigoProducto)
         JGr_Descuentos.DataSource = dtPreciosDesc
         JGr_Descuentos.RetrieveStructure()
 
@@ -1605,6 +1725,112 @@ Public Class F1_Productos
     End Sub
 
     Private Sub tbProducto_TextChanged(sender As Object, e As EventArgs) Handles tbProducto.TextChanged
+
+
+        Dim charSequence As String
+        charSequence = tbProducto.Text.ToUpper
+        If (charSequence.Trim = String.Empty) Then
+
+
+            JGrM_Buscador.DataSource = dtProductoAll.Copy
+        End If
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+        MPanelSup.Visible = False
+        PanelSuperior.Visible = False
+        PanelInferior.Visible = False
+        GroupPanelBuscador.Visible = True
+        tbProducto.Focus()
+
+    End Sub
+
+    Sub HabilitarDatos()
+        MPanelSup.Dock = DockStyle.Fill
+        MPanelSup.Visible = True
+        PanelSuperior.Visible = True
+        PanelInferior.Visible = True
+        GroupPanelBuscador.Visible = False
+    End Sub
+
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles btnCategoria.Click
+        SeleccionarCategoria()
+    End Sub
+
+    Public Sub SeleccionarCategoria()
+        Dim dt As DataTable
+        Dim idCategoria As Integer = 0
+        Dim nombreCategoria As String
+        dt = L_fnListarCategoriaVentas()
+        dt.Rows.Add(-1, "Todos")
+
+
+        Dim listEstCeldas As New List(Of Modelo.Celda)
+        listEstCeldas.Add(New Modelo.Celda("yccod3,", True, "Codigo", 100))
+        listEstCeldas.Add(New Modelo.Celda("ycdes3", True, "Nombre Categoria", 500))
+
+        Dim ef = New Efecto
+        ef.tipo = 3
+        ef.dt = dt
+        ef.SeleclCol = 2
+        ef.listEstCeldas = listEstCeldas
+        ef.alto = 50
+        ef.ancho = 800
+        ef.Context = "Seleccione Categoria".ToUpper
+        ef.ShowDialog()
+        Dim bandera As Boolean = False
+        bandera = ef.band
+        If (bandera = True) Then
+            Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
+            ''yccod3,ycdes3 
+            'idCategoria = Row.Cells("yccod3").Value
+            'nombreCategoria = Row.Cells("ycdes3").Value
+
+
+
+            CategoriaSeleccionada = Row.Cells("yccod3").Value
+            CargarDatasourceProducto(CategoriaSeleccionada)
+
+        End If
+
+    End Sub
+    Public Sub CargarDatasourceProducto(CategoriaId As Integer)
+
+        If (CategoriaId >= 0) Then
+            Dim dt As DataTable = L_fnGeneralProductos(CategoriaId)
+            JGrM_Buscador.DataSource = dt
+            dtProductoAll = dt
+            'If (Not IsNothing(dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable)) Then
+            '    JGrM_Buscador.DataSource = dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable
+            'Else
+            '    dt.Rows.Clear()
+
+            '    JGrM_Buscador.DataSource = dt
+
+            'End If
+
+
+
+        End If
+
+    End Sub
+
+    Private Sub ButtonX1_Click_1(sender As Object, e As EventArgs) Handles ButtonX1.Click
+        HabilitarDatos()
+        btnNuevo.PerformClick()
+
+    End Sub
+
+    Private Sub VerDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerDatosToolStripMenuItem.Click
+        If (JGrM_Buscador.Row >= 0) Then
+            HabilitarDatos()
+
+        End If
+
+
+    End Sub
+
+    Private Sub ButtonX2_Click_1(sender As Object, e As EventArgs) Handles ButtonX2.Click
         Dim dtProductoCopy As DataTable
         dtProductoCopy = dtProductoAll.Copy
         dtProductoCopy.Rows.Clear()
@@ -1747,93 +1973,10 @@ Public Class F1_Productos
         End If
     End Sub
 
-    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        MPanelSup.Visible = False
-        PanelSuperior.Visible = False
-        PanelInferior.Visible = False
-        GroupPanelBuscador.Visible = True
-        tbProducto.Focus()
-
-    End Sub
-
-    Sub HabilitarDatos()
-        MPanelSup.Dock = DockStyle.Fill
-        MPanelSup.Visible = True
-        PanelSuperior.Visible = True
-        PanelInferior.Visible = True
-        GroupPanelBuscador.Visible = False
-    End Sub
-
-    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles btnCategoria.Click
-        SeleccionarCategoria()
-    End Sub
-
-    Public Sub SeleccionarCategoria()
-        Dim dt As DataTable
-        Dim idCategoria As Integer = 0
-        Dim nombreCategoria As String
-        dt = L_fnListarCategoriaVentas()
-        dt.Rows.Add(-1, "Todos")
-
-
-        Dim listEstCeldas As New List(Of Modelo.Celda)
-        listEstCeldas.Add(New Modelo.Celda("yccod3,", True, "Codigo", 100))
-        listEstCeldas.Add(New Modelo.Celda("ycdes3", True, "Nombre Categoria", 500))
-
-        Dim ef = New Efecto
-        ef.tipo = 3
-        ef.dt = dt
-        ef.SeleclCol = 2
-        ef.listEstCeldas = listEstCeldas
-        ef.alto = 50
-        ef.ancho = 800
-        ef.Context = "Seleccione Categoria".ToUpper
-        ef.ShowDialog()
-        Dim bandera As Boolean = False
-        bandera = ef.band
-        If (bandera = True) Then
-            Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
-            ''yccod3,ycdes3 
-            'idCategoria = Row.Cells("yccod3").Value
-            'nombreCategoria = Row.Cells("ycdes3").Value
-
-            CategoriaSeleccionada = Row.Cells("yccod3").Value
-            CargarDatasourceProducto(CategoriaSeleccionada)
-
-        End If
-
-    End Sub
-    Public Sub CargarDatasourceProducto(CategoriaId As Integer)
-
-        If (CategoriaId >= 0) Then
-            Dim dt As DataTable = dtProductoAll.Copy
-            If (Not IsNothing(dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable)) Then
-                JGrM_Buscador.DataSource = dt.Select("yfgr5=" + Str(CategoriaId)).CopyToDataTable
-            Else
-                dt.Rows.Clear()
-
-                JGrM_Buscador.DataSource = dt
-
-            End If
-
-
-        Else
-            JGrM_Buscador.DataSource = dtProductoAll.Copy
-        End If
-
-    End Sub
-
-    Private Sub ButtonX1_Click_1(sender As Object, e As EventArgs) Handles ButtonX1.Click
+    Private Sub ClonarNuevoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClonarNuevoToolStripMenuItem.Click
+        BanderaClonar = True
         HabilitarDatos()
         btnNuevo.PerformClick()
-
-    End Sub
-
-    Private Sub VerDatosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VerDatosToolStripMenuItem.Click
-        If (JGrM_Buscador.Row >= 0) Then
-            HabilitarDatos()
-
-        End If
 
 
     End Sub

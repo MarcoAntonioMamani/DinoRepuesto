@@ -532,12 +532,13 @@ Public Class AccesoLogica
         Return _resultado
     End Function
 
-    Public Shared Function L_fnGeneralProductos() As DataTable
+    Public Shared Function L_fnGeneralProductos(CategoriaId As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
 
-        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@tipo", 19))
+        _listParam.Add(New Datos.DParametro("@yfgr5", CategoriaId))
         _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
 
@@ -556,6 +557,17 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_fnGeneralProductosDescuentosAll() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 20))
+        _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
+
+        Return _Tabla
+    End Function
 
     Public Shared Function L_prCargarImagenesProducto(ProductoId As Integer) As DataTable
         Dim _Tabla As DataTable
@@ -564,6 +576,19 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 17))
         _listParam.Add(New Datos.DParametro("@yfnumi", ProductoId))
+        _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prCargarImagenesProductoAll() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 17))
         _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
 
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
@@ -606,7 +631,17 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_prObtenerTodaLaLibreria() As DataTable
+        Dim _Tabla As DataTable
 
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 18))
+        _listParam.Add(New Datos.DParametro("@yfuact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_TY005", _listParam)
+
+        Return _Tabla
+    End Function
 
     Public Shared Function L_prListarBanco(cod1 As Integer, cod2 As Integer) As DataTable
         Dim _Tabla As DataTable

@@ -2184,7 +2184,7 @@ Partial Class P_Principal
         Me.SideNavItem1.IsSystemMenu = True
         Me.SideNavItem1.Name = "SideNavItem1"
         Me.SideNavItem1.Symbol = ""
-        Me.SideNavItem1.Text = "Menu V2.0"
+        Me.SideNavItem1.Text = "Menu V2.1"
         '
         'Separator1
         '
