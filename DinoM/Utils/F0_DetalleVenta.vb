@@ -236,7 +236,7 @@ Public Class F0_DetalleVenta
         End If
     End Sub
     Public Sub CargarProductos()
-        grProductos.DataSource = dtProductoAll
+        grProductos.DataSource = dtProductoAll.Copy
         grProductos.RetrieveStructure()
         grProductos.AlternatingColors = True
 
@@ -716,21 +716,7 @@ Public Class F0_DetalleVenta
 
                 End If
                 Dim cantidad As Double
-                'cantidad = InputBox("Seleccione Cantidad del Producto " + grProductos.GetValue("yfcdprod1") + "  " + "   Stock = " + Str(grProductos.GetValue("Stock")))
 
-                'If (cantidad <= grProductos.GetValue("Stock")) Then
-
-                '    Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
-
-                '    row.Item("Cantidad") = cantidad
-                '    CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
-                '    tbProducto.Focus()
-                'Else
-                '    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-                '    ToastNotification.Show(Me, "La cantidad es mayor al Stock".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-                '    tbProducto.Focus()
-
-                'End If
 
                 Dim ef = New Efecto
                 ef.tipo = 7
@@ -747,7 +733,9 @@ Public Class F0_DetalleVenta
                 If (bandera = True) Then
                     cantidad = ef.Cantidad
                     If (cantidad > 0) Then
-                        Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
+
+                        Dim dt As DataTable = CType(grProductos.DataSource, DataTable).Copy
+                        Dim row As DataRow = dt.Rows(f)
 
                         row.Item("Cantidad") = cantidad
                         If (CategoriaPrecio = 50) Then

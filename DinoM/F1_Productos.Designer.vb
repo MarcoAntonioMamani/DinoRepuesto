@@ -2294,7 +2294,7 @@ Partial Class F1_Productos
         '
         Me.VerDatosToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources.verRegistros2
         Me.VerDatosToolStripMenuItem.Name = "VerDatosToolStripMenuItem"
-        Me.VerDatosToolStripMenuItem.Size = New System.Drawing.Size(146, 26)
+        Me.VerDatosToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
         Me.VerDatosToolStripMenuItem.Text = "Ver Datos"
         '
         'ClonarNuevoToolStripMenuItem

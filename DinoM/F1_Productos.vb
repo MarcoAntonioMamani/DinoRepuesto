@@ -1308,16 +1308,11 @@ Public Class F1_Productos
     End Function
 
     Private Sub JGrM_Buscador_DoubleClick(sender As Object, e As EventArgs) Handles JGrM_Buscador.DoubleClick
-        If (MPanelSup.Visible = True) Then
-            JGrM_Buscador.GroupByBoxVisible = True
-            MPanelSup.Visible = False
-            JGrM_Buscador.UseGroupRowSelector = True
+        If (JGrM_Buscador.Row >= 0) Then
+            HabilitarDatos()
 
-        Else
-            JGrM_Buscador.GroupByBoxVisible = False
-            JGrM_Buscador.UseGroupRowSelector = True
-            MPanelSup.Visible = True
         End If
+
     End Sub
 
 
@@ -1338,13 +1333,28 @@ Public Class F1_Productos
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         If btnGrabar.Enabled = True Then
-            _PMInhabilitar()
-            _PMPrimerRegistro()
+
+            Dim ef = New Efecto
+
+
+            ef.tipo = 2
+            ef.Header = "¿Los Datos No Se Guardaron Debe Hacer Clic en el Boton Grabar. En Caso de Que no Quiera Guardarlo Confirme Este Mensaje?".ToUpper
+            ef.Context = "mensaje principal".ToUpper
+            ef.ShowDialog()
+            Dim bandera As Boolean = False
+            bandera = ef.band
+            If (bandera = True) Then
+                _PMInhabilitar()
+                _PMPrimerRegistro()
+            End If
+
 
         Else
-            '  Public _modulo As SideNavItem
-            _modulo.Select()
-            Me.Close()
+            MPanelSup.Visible = False
+            PanelSuperior.Visible = False
+            PanelInferior.Visible = False
+            GroupPanelBuscador.Visible = True
+            tbProducto.Focus()
         End If
     End Sub
 

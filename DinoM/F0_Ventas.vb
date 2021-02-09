@@ -888,7 +888,7 @@ Public Class F0_Ventas
 
                     If (dt.Rows(j).Item("Item") = codigoProducto) Then
                         dt.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("tbcmin")
-                        dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
+                        'dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
                         dtVenta.ImportRow(dt.Rows(j))
                     End If
 

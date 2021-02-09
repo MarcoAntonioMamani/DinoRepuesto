@@ -255,6 +255,14 @@ Public Class F0_BuscarProductos
 
 
             grProductos.DataSource = dtProductoAll.Copy
+        Else
+            Dim Len As Integer = tbProducto.Text.Length
+            Dim Ch As String = tbProducto.Text(Len - 1)
+            If (Ch.Trim = String.Empty) Then
+                FiltrarProducto()
+            End If
+
+
         End If
 
 
@@ -266,8 +274,7 @@ Public Class F0_BuscarProductos
 
         tbProducto.Focus()
     End Sub
-
-    Private Sub ButtonX2_Click(sender As Object, e As EventArgs) Handles ButtonX2.Click
+    Public Sub FiltrarProducto()
         Dim dtProductoCopy As DataTable
         dtProductoCopy = dtProductoAll.Copy
         dtProductoCopy.Rows.Clear()
@@ -409,6 +416,11 @@ Public Class F0_BuscarProductos
         Else
             grProductos.DataSource = dtProductoAll.Copy
         End If
+    End Sub
+
+    Private Sub ButtonX2_Click(sender As Object, e As EventArgs) Handles ButtonX2.Click
+        FiltrarProducto()
+
 
     End Sub
 End Class
