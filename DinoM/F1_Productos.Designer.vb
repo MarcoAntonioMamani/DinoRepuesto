@@ -2288,20 +2288,20 @@ Partial Class F1_Productos
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerDatosToolStripMenuItem, Me.ClonarNuevoToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(180, 84)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 56)
         '
         'VerDatosToolStripMenuItem
         '
         Me.VerDatosToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources.verRegistros2
         Me.VerDatosToolStripMenuItem.Name = "VerDatosToolStripMenuItem"
-        Me.VerDatosToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.VerDatosToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
         Me.VerDatosToolStripMenuItem.Text = "Ver Datos"
         '
         'ClonarNuevoToolStripMenuItem
         '
         Me.ClonarNuevoToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources.add
         Me.ClonarNuevoToolStripMenuItem.Name = "ClonarNuevoToolStripMenuItem"
-        Me.ClonarNuevoToolStripMenuItem.Size = New System.Drawing.Size(179, 26)
+        Me.ClonarNuevoToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
         Me.ClonarNuevoToolStripMenuItem.Text = "Clonar Nuevo"
         '
         'F1_Productos
