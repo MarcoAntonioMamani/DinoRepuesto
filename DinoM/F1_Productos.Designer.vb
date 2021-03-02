@@ -102,6 +102,8 @@ Partial Class F1_Productos
         Me.SuperTabItem_Imagenes = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel4 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.lbPorcentajeVentaMecanico = New DevComponents.DotNetBar.LabelX()
+        Me.lbPorcentajeVentaPublico = New DevComponents.DotNetBar.LabelX()
         Me.LabelX11 = New DevComponents.DotNetBar.LabelX()
         Me.tbPrecioFacturado = New DevComponents.Editors.DoubleInput()
         Me.SuperTabItem2 = New DevComponents.DotNetBar.SuperTabItem()
@@ -110,7 +112,6 @@ Partial Class F1_Productos
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_Descuentos = New Janus.Windows.GridEX.GridEX()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.btNuevoP = New DevComponents.DotNetBar.ButtonX()
         Me.btGrabarP = New DevComponents.DotNetBar.ButtonX()
         Me.tbPrecioDescuento = New DevComponents.Editors.DoubleInput()
         Me.LabelX23 = New DevComponents.DotNetBar.LabelX()
@@ -129,6 +130,18 @@ Partial Class F1_Productos
         Me.btExcel = New DevComponents.DotNetBar.ButtonX()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.MenuStripDescuento = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.InhabilitarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.ButtonX2 = New DevComponents.DotNetBar.ButtonX()
+        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
+        Me.btnCategoria = New DevComponents.DotNetBar.ButtonX()
+        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
+        Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.btnBuscar = New DevComponents.DotNetBar.ButtonX()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.VerDatosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClonarNuevoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabPrincipal.SuspendLayout()
         Me.SuperTabControlPanelRegistro.SuspendLayout()
@@ -188,6 +201,9 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel2.SuspendLayout()
         CType(Me.dgjDetalleProducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.MenuStripDescuento.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SuperTabPrincipal
@@ -239,6 +255,7 @@ Partial Class F1_Productos
         '
         'PanelInferior
         '
+        Me.PanelInferior.Controls.Add(Me.btnBuscar)
         Me.PanelInferior.Location = New System.Drawing.Point(0, 831)
         Me.PanelInferior.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelInferior.Size = New System.Drawing.Size(1770, 44)
@@ -250,6 +267,9 @@ Partial Class F1_Productos
         Me.PanelInferior.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelInferior.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelInferior.Style.GradientAngle = 90
+        Me.PanelInferior.Controls.SetChildIndex(Me.PanelNavegacion, 0)
+        Me.PanelInferior.Controls.SetChildIndex(Me.MPanelUserAct, 0)
+        Me.PanelInferior.Controls.SetChildIndex(Me.btnBuscar, 0)
         '
         'BubbleBarUsuario
         '
@@ -308,6 +328,7 @@ Partial Class F1_Productos
         '
         'GroupPanelBuscador
         '
+        Me.GroupPanelBuscador.Controls.Add(Me.Panel8)
         Me.GroupPanelBuscador.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanelBuscador.Location = New System.Drawing.Point(0, 440)
         Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(5)
@@ -341,11 +362,15 @@ Partial Class F1_Productos
         '
         '
         Me.GroupPanelBuscador.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanelBuscador.Controls.SetChildIndex(Me.Panel8, 0)
+        Me.GroupPanelBuscador.Controls.SetChildIndex(Me.JGrM_Buscador, 0)
         '
         'JGrM_Buscador
         '
         Me.JGrM_Buscador.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.JGrM_Buscador.BorderStyle = Janus.Windows.GridEX.BorderStyle.None
+        Me.JGrM_Buscador.ColumnAutoResize = True
+        Me.JGrM_Buscador.ContextMenuStrip = Me.ContextMenuStrip1
         Me.JGrM_Buscador.EnterKeyBehavior = Janus.Windows.GridEX.EnterKeyBehavior.None
         Me.JGrM_Buscador.FilterRowButtonStyle = Janus.Windows.GridEX.FilterRowButtonStyle.None
         Me.JGrM_Buscador.FlatBorderColor = System.Drawing.SystemColors.AppWorkspace
@@ -359,14 +384,16 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.HeaderFormatStyle.FontUnderline = Janus.Windows.GridEX.TriState.[False]
         Me.JGrM_Buscador.HeaderFormatStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center
         Me.JGrM_Buscador.Hierarchical = True
+        Me.JGrM_Buscador.Location = New System.Drawing.Point(0, 59)
         Me.JGrM_Buscador.Margin = New System.Windows.Forms.Padding(5)
         Me.JGrM_Buscador.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.JGrM_Buscador.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.JGrM_Buscador.RecordNavigator = True
         Me.JGrM_Buscador.RowCheckStateBehavior = Janus.Windows.GridEX.RowCheckStateBehavior.CheckStateDependsOnChild
         Me.JGrM_Buscador.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.JGrM_Buscador.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JGrM_Buscador.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.JGrM_Buscador.Size = New System.Drawing.Size(1764, 275)
+        Me.JGrM_Buscador.Size = New System.Drawing.Size(1764, 216)
         Me.JGrM_Buscador.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'PanelUsuario
@@ -1331,9 +1358,9 @@ Partial Class F1_Productos
         Me.LabelX17.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX17.Name = "LabelX17"
         Me.LabelX17.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX17.Size = New System.Drawing.Size(136, 20)
+        Me.LabelX17.Size = New System.Drawing.Size(172, 20)
         Me.LabelX17.TabIndex = 226
-        Me.LabelX17.Text = "Precio Mecanico:"
+        Me.LabelX17.Text = "Precio Mecanico (Bs):"
         '
         'tbPrecioMecanico
         '
@@ -1345,7 +1372,7 @@ Partial Class F1_Productos
         Me.tbPrecioMecanico.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioMecanico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioMecanico.Increment = 1.0R
-        Me.tbPrecioMecanico.Location = New System.Drawing.Point(257, 154)
+        Me.tbPrecioMecanico.Location = New System.Drawing.Point(275, 148)
         Me.tbPrecioMecanico.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioMecanico.MinValue = 0R
         Me.tbPrecioMecanico.Name = "tbPrecioMecanico"
@@ -1367,9 +1394,9 @@ Partial Class F1_Productos
         Me.LabelX18.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX18.Name = "LabelX18"
         Me.LabelX18.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX18.Size = New System.Drawing.Size(105, 20)
+        Me.LabelX18.Size = New System.Drawing.Size(152, 20)
         Me.LabelX18.TabIndex = 224
-        Me.LabelX18.Text = "Precio Costo:"
+        Me.LabelX18.Text = "Precio Costo ($u$):"
         '
         'tbPrecioCosto
         '
@@ -1381,7 +1408,7 @@ Partial Class F1_Productos
         Me.tbPrecioCosto.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioCosto.Increment = 1.0R
-        Me.tbPrecioCosto.Location = New System.Drawing.Point(257, 48)
+        Me.tbPrecioCosto.Location = New System.Drawing.Point(275, 42)
         Me.tbPrecioCosto.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioCosto.MinValue = 0R
         Me.tbPrecioCosto.Name = "tbPrecioCosto"
@@ -1403,9 +1430,9 @@ Partial Class F1_Productos
         Me.LabelX14.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX14.Name = "LabelX14"
         Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX14.Size = New System.Drawing.Size(169, 20)
+        Me.LabelX14.Size = New System.Drawing.Size(205, 20)
         Me.LabelX14.TabIndex = 220
-        Me.LabelX14.Text = "Precio Venta Publico:"
+        Me.LabelX14.Text = "Precio Venta Publico (Bs):"
         '
         'tbPrecioVentaNormal
         '
@@ -1417,7 +1444,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaNormal.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioVentaNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioVentaNormal.Increment = 1.0R
-        Me.tbPrecioVentaNormal.Location = New System.Drawing.Point(257, 120)
+        Me.tbPrecioVentaNormal.Location = New System.Drawing.Point(275, 114)
         Me.tbPrecioVentaNormal.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioVentaNormal.MinValue = 0R
         Me.tbPrecioVentaNormal.Name = "tbPrecioVentaNormal"
@@ -1624,6 +1651,8 @@ Partial Class F1_Productos
         '
         'Panel7
         '
+        Me.Panel7.Controls.Add(Me.lbPorcentajeVentaMecanico)
+        Me.Panel7.Controls.Add(Me.lbPorcentajeVentaPublico)
         Me.Panel7.Controls.Add(Me.LabelX11)
         Me.Panel7.Controls.Add(Me.tbPrecioFacturado)
         Me.Panel7.Controls.Add(Me.LabelX17)
@@ -1637,6 +1666,42 @@ Partial Class F1_Productos
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(577, 395)
         Me.Panel7.TabIndex = 0
+        '
+        'lbPorcentajeVentaMecanico
+        '
+        Me.lbPorcentajeVentaMecanico.AutoSize = True
+        Me.lbPorcentajeVentaMecanico.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbPorcentajeVentaMecanico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbPorcentajeVentaMecanico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPorcentajeVentaMecanico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbPorcentajeVentaMecanico.Location = New System.Drawing.Point(483, 148)
+        Me.lbPorcentajeVentaMecanico.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbPorcentajeVentaMecanico.Name = "lbPorcentajeVentaMecanico"
+        Me.lbPorcentajeVentaMecanico.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbPorcentajeVentaMecanico.Size = New System.Drawing.Size(26, 25)
+        Me.lbPorcentajeVentaMecanico.TabIndex = 230
+        Me.lbPorcentajeVentaMecanico.Text = "0%"
+        '
+        'lbPorcentajeVentaPublico
+        '
+        Me.lbPorcentajeVentaPublico.AutoSize = True
+        Me.lbPorcentajeVentaPublico.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbPorcentajeVentaPublico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbPorcentajeVentaPublico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbPorcentajeVentaPublico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbPorcentajeVentaPublico.Location = New System.Drawing.Point(483, 112)
+        Me.lbPorcentajeVentaPublico.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbPorcentajeVentaPublico.Name = "lbPorcentajeVentaPublico"
+        Me.lbPorcentajeVentaPublico.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbPorcentajeVentaPublico.Size = New System.Drawing.Size(26, 25)
+        Me.lbPorcentajeVentaPublico.TabIndex = 229
+        Me.lbPorcentajeVentaPublico.Text = "0%"
         '
         'LabelX11
         '
@@ -1652,9 +1717,9 @@ Partial Class F1_Productos
         Me.LabelX11.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX11.Size = New System.Drawing.Size(190, 20)
+        Me.LabelX11.Size = New System.Drawing.Size(226, 20)
         Me.LabelX11.TabIndex = 228
-        Me.LabelX11.Text = "Precio Venta Facturado:"
+        Me.LabelX11.Text = "Precio Venta Facturado (Bs):"
         '
         'tbPrecioFacturado
         '
@@ -1666,7 +1731,7 @@ Partial Class F1_Productos
         Me.tbPrecioFacturado.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioFacturado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioFacturado.Increment = 1.0R
-        Me.tbPrecioFacturado.Location = New System.Drawing.Point(257, 82)
+        Me.tbPrecioFacturado.Location = New System.Drawing.Point(275, 76)
         Me.tbPrecioFacturado.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioFacturado.MinValue = 0R
         Me.tbPrecioFacturado.Name = "tbPrecioFacturado"
@@ -1696,9 +1761,9 @@ Partial Class F1_Productos
         '
         Me.Panel6.Controls.Add(Me.GroupPanel4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(0, 230)
+        Me.Panel6.Location = New System.Drawing.Point(0, 120)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(577, 165)
+        Me.Panel6.Size = New System.Drawing.Size(577, 275)
         Me.Panel6.TabIndex = 1
         '
         'GroupPanel4
@@ -1711,7 +1776,7 @@ Partial Class F1_Productos
         Me.GroupPanel4.Font = New System.Drawing.Font("Georgia", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel4.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(577, 165)
+        Me.GroupPanel4.Size = New System.Drawing.Size(577, 275)
         '
         '
         '
@@ -1746,17 +1811,18 @@ Partial Class F1_Productos
         'JGr_Descuentos
         '
         Me.JGr_Descuentos.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
+        Me.JGr_Descuentos.ColumnAutoResize = True
         Me.JGr_Descuentos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_Descuentos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JGr_Descuentos.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
         Me.JGr_Descuentos.Location = New System.Drawing.Point(0, 0)
         Me.JGr_Descuentos.Name = "JGr_Descuentos"
         Me.JGr_Descuentos.RowFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.JGr_Descuentos.Size = New System.Drawing.Size(571, 142)
+        Me.JGr_Descuentos.Size = New System.Drawing.Size(571, 252)
         Me.JGr_Descuentos.TabIndex = 0
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.btNuevoP)
         Me.Panel5.Controls.Add(Me.btGrabarP)
         Me.Panel5.Controls.Add(Me.tbPrecioDescuento)
         Me.Panel5.Controls.Add(Me.LabelX23)
@@ -1771,21 +1837,8 @@ Partial Class F1_Productos
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(577, 230)
+        Me.Panel5.Size = New System.Drawing.Size(577, 120)
         Me.Panel5.TabIndex = 0
-        '
-        'btNuevoP
-        '
-        Me.btNuevoP.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btNuevoP.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
-        Me.btNuevoP.ImageFixedSize = New System.Drawing.Size(25, 25)
-        Me.btNuevoP.Location = New System.Drawing.Point(78, 158)
-        Me.btNuevoP.Margin = New System.Windows.Forms.Padding(4)
-        Me.btNuevoP.Name = "btNuevoP"
-        Me.btNuevoP.Size = New System.Drawing.Size(163, 49)
-        Me.btNuevoP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btNuevoP.TabIndex = 237
-        Me.btNuevoP.Text = "Nuevo"
         '
         'btGrabarP
         '
@@ -1793,10 +1846,10 @@ Partial Class F1_Productos
         Me.btGrabarP.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
         Me.btGrabarP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btGrabarP.ImageFixedSize = New System.Drawing.Size(25, 25)
-        Me.btGrabarP.Location = New System.Drawing.Point(259, 158)
+        Me.btGrabarP.Location = New System.Drawing.Point(79, 72)
         Me.btGrabarP.Margin = New System.Windows.Forms.Padding(4)
         Me.btGrabarP.Name = "btGrabarP"
-        Me.btGrabarP.Size = New System.Drawing.Size(163, 49)
+        Me.btGrabarP.Size = New System.Drawing.Size(130, 37)
         Me.btGrabarP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btGrabarP.TabIndex = 238
         Me.btGrabarP.Text = "Guardar"
@@ -1812,7 +1865,7 @@ Partial Class F1_Productos
         Me.tbPrecioDescuento.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbPrecioDescuento.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioDescuento.Increment = 1.0R
-        Me.tbPrecioDescuento.Location = New System.Drawing.Point(81, 97)
+        Me.tbPrecioDescuento.Location = New System.Drawing.Point(79, 38)
         Me.tbPrecioDescuento.Name = "tbPrecioDescuento"
         Me.tbPrecioDescuento.Size = New System.Drawing.Size(130, 27)
         Me.tbPrecioDescuento.TabIndex = 236
@@ -1827,7 +1880,7 @@ Partial Class F1_Productos
         Me.LabelX23.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX23.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX23.Location = New System.Drawing.Point(18, 103)
+        Me.LabelX23.Location = New System.Drawing.Point(16, 44)
         Me.LabelX23.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX23.Name = "LabelX23"
         Me.LabelX23.SingleLineColor = System.Drawing.SystemColors.Control
@@ -1844,7 +1897,7 @@ Partial Class F1_Productos
         Me.tbMontoHasta.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbMontoHasta.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbMontoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbMontoHasta.Location = New System.Drawing.Point(321, 64)
+        Me.tbMontoHasta.Location = New System.Drawing.Point(319, 5)
         Me.tbMontoHasta.Name = "tbMontoHasta"
         Me.tbMontoHasta.Size = New System.Drawing.Size(120, 27)
         Me.tbMontoHasta.TabIndex = 234
@@ -1859,7 +1912,7 @@ Partial Class F1_Productos
         Me.LabelX22.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX22.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX22.Location = New System.Drawing.Point(259, 65)
+        Me.LabelX22.Location = New System.Drawing.Point(257, 6)
         Me.LabelX22.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX22.Name = "LabelX22"
         Me.LabelX22.SingleLineColor = System.Drawing.SystemColors.Control
@@ -1876,7 +1929,7 @@ Partial Class F1_Productos
         Me.tbMontoDesde.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbMontoDesde.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbMontoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbMontoDesde.Location = New System.Drawing.Point(81, 65)
+        Me.tbMontoDesde.Location = New System.Drawing.Point(79, 6)
         Me.tbMontoDesde.Name = "tbMontoDesde"
         Me.tbMontoDesde.Size = New System.Drawing.Size(120, 27)
         Me.tbMontoDesde.TabIndex = 232
@@ -1891,7 +1944,7 @@ Partial Class F1_Productos
         Me.LabelX21.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX21.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX21.Location = New System.Drawing.Point(18, 70)
+        Me.LabelX21.Location = New System.Drawing.Point(16, 11)
         Me.LabelX21.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX21.Name = "LabelX21"
         Me.LabelX21.SingleLineColor = System.Drawing.SystemColors.Control
@@ -1910,7 +1963,7 @@ Partial Class F1_Productos
         Me.tbHasta.ButtonDropDown.Visible = True
         Me.tbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbHasta.IsPopupCalendarOpen = False
-        Me.tbHasta.Location = New System.Drawing.Point(320, 21)
+        Me.tbHasta.Location = New System.Drawing.Point(469, 49)
         Me.tbHasta.Margin = New System.Windows.Forms.Padding(4)
         '
         '
@@ -1945,6 +1998,7 @@ Partial Class F1_Productos
         Me.tbHasta.Size = New System.Drawing.Size(160, 26)
         Me.tbHasta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.tbHasta.TabIndex = 230
+        Me.tbHasta.Visible = False
         '
         'tbDesde
         '
@@ -1957,7 +2011,7 @@ Partial Class F1_Productos
         Me.tbDesde.ButtonDropDown.Visible = True
         Me.tbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbDesde.IsPopupCalendarOpen = False
-        Me.tbDesde.Location = New System.Drawing.Point(81, 21)
+        Me.tbDesde.Location = New System.Drawing.Point(279, 49)
         Me.tbDesde.Margin = New System.Windows.Forms.Padding(4)
         '
         '
@@ -1992,6 +2046,7 @@ Partial Class F1_Productos
         Me.tbDesde.Size = New System.Drawing.Size(160, 26)
         Me.tbDesde.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.tbDesde.TabIndex = 229
+        Me.tbDesde.Visible = False
         '
         'LabelX20
         '
@@ -2003,13 +2058,14 @@ Partial Class F1_Productos
         Me.LabelX20.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX20.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX20.Location = New System.Drawing.Point(259, 24)
+        Me.LabelX20.Location = New System.Drawing.Point(447, 57)
         Me.LabelX20.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX20.Name = "LabelX20"
         Me.LabelX20.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX20.Size = New System.Drawing.Size(25, 20)
         Me.LabelX20.TabIndex = 228
         Me.LabelX20.Text = "Al:"
+        Me.LabelX20.Visible = False
         '
         'LabelX19
         '
@@ -2021,13 +2077,14 @@ Partial Class F1_Productos
         Me.LabelX19.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX19.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX19.Location = New System.Drawing.Point(18, 22)
+        Me.LabelX19.Location = New System.Drawing.Point(243, 55)
         Me.LabelX19.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX19.Name = "LabelX19"
         Me.LabelX19.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX19.Size = New System.Drawing.Size(34, 20)
         Me.LabelX19.TabIndex = 227
         Me.LabelX19.Text = "Del:"
+        Me.LabelX19.Visible = False
         '
         'SuperTabItem1
         '
@@ -2105,6 +2162,147 @@ Partial Class F1_Productos
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
+        '
+        'MenuStripDescuento
+        '
+        Me.MenuStripDescuento.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MenuStripDescuento.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InhabilitarToolStripMenuItem})
+        Me.MenuStripDescuento.Name = "MenuStripDescuento"
+        Me.MenuStripDescuento.Size = New System.Drawing.Size(141, 30)
+        '
+        'InhabilitarToolStripMenuItem
+        '
+        Me.InhabilitarToolStripMenuItem.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InhabilitarToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources._051_prohibition
+        Me.InhabilitarToolStripMenuItem.Name = "InhabilitarToolStripMenuItem"
+        Me.InhabilitarToolStripMenuItem.Size = New System.Drawing.Size(140, 26)
+        Me.InhabilitarToolStripMenuItem.Text = "Dar Baja"
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.White
+        Me.Panel8.Controls.Add(Me.ButtonX2)
+        Me.Panel8.Controls.Add(Me.ButtonX1)
+        Me.Panel8.Controls.Add(Me.btnCategoria)
+        Me.Panel8.Controls.Add(Me.LabelX15)
+        Me.Panel8.Controls.Add(Me.tbProducto)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel8.Location = New System.Drawing.Point(0, 0)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(1764, 59)
+        Me.Panel8.TabIndex = 1
+        '
+        'ButtonX2
+        '
+        Me.ButtonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta
+        Me.ButtonX2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX2.Image = Global.DinoM.My.Resources.Resources.search
+        Me.ButtonX2.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX2.Location = New System.Drawing.Point(538, 13)
+        Me.ButtonX2.Name = "ButtonX2"
+        Me.ButtonX2.Size = New System.Drawing.Size(146, 38)
+        Me.ButtonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX2.TabIndex = 376
+        Me.ButtonX2.Text = "Buscar"
+        '
+        'ButtonX1
+        '
+        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta
+        Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.add
+        Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX1.Location = New System.Drawing.Point(921, 11)
+        Me.ButtonX1.Name = "ButtonX1"
+        Me.ButtonX1.Size = New System.Drawing.Size(203, 38)
+        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX1.TabIndex = 375
+        Me.ButtonX1.Text = "Nuevo Producto"
+        '
+        'btnCategoria
+        '
+        Me.btnCategoria.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnCategoria.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta
+        Me.btnCategoria.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCategoria.Image = Global.DinoM.My.Resources.Resources.search
+        Me.btnCategoria.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnCategoria.Location = New System.Drawing.Point(721, 11)
+        Me.btnCategoria.Name = "btnCategoria"
+        Me.btnCategoria.Size = New System.Drawing.Size(203, 38)
+        Me.btnCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnCategoria.TabIndex = 374
+        Me.btnCategoria.Text = "Seleccionar Categoria"
+        '
+        'LabelX15
+        '
+        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX15.Location = New System.Drawing.Point(32, 11)
+        Me.LabelX15.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX15.Name = "LabelX15"
+        Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX15.Size = New System.Drawing.Size(151, 28)
+        Me.LabelX15.TabIndex = 228
+        Me.LabelX15.Text = "Buscar Producto:"
+        '
+        'tbProducto
+        '
+        Me.tbProducto.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.tbProducto.Border.Class = "TextBoxBorder"
+        Me.tbProducto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbProducto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
+        Me.tbProducto.Location = New System.Drawing.Point(199, 13)
+        Me.tbProducto.Margin = New System.Windows.Forms.Padding(4)
+        Me.tbProducto.Name = "tbProducto"
+        Me.tbProducto.PreventEnterBeep = True
+        Me.tbProducto.Size = New System.Drawing.Size(332, 26)
+        Me.tbProducto.TabIndex = 227
+        '
+        'btnBuscar
+        '
+        Me.btnBuscar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnBuscar.ColorTable = DevComponents.DotNetBar.eButtonColor.BlueOrb
+        Me.btnBuscar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnBuscar.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBuscar.Image = Global.DinoM.My.Resources.Resources.search
+        Me.btnBuscar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnBuscar.Location = New System.Drawing.Point(384, 0)
+        Me.btnBuscar.Name = "btnBuscar"
+        Me.btnBuscar.Size = New System.Drawing.Size(198, 44)
+        Me.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnBuscar.TabIndex = 373
+        Me.btnBuscar.Text = "Buscar Productos"
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerDatosToolStripMenuItem, Me.ClonarNuevoToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(173, 56)
+        '
+        'VerDatosToolStripMenuItem
+        '
+        Me.VerDatosToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources.verRegistros2
+        Me.VerDatosToolStripMenuItem.Name = "VerDatosToolStripMenuItem"
+        Me.VerDatosToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
+        Me.VerDatosToolStripMenuItem.Text = "Ver Datos"
+        '
+        'ClonarNuevoToolStripMenuItem
+        '
+        Me.ClonarNuevoToolStripMenuItem.Image = Global.DinoM.My.Resources.Resources.add
+        Me.ClonarNuevoToolStripMenuItem.Name = "ClonarNuevoToolStripMenuItem"
+        Me.ClonarNuevoToolStripMenuItem.Size = New System.Drawing.Size(172, 26)
+        Me.ClonarNuevoToolStripMenuItem.Text = "Clonar Nuevo"
         '
         'F1_Productos
         '
@@ -2185,6 +2383,9 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel2.ResumeLayout(False)
         CType(Me.dgjDetalleProducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.MenuStripDescuento.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2269,7 +2470,6 @@ Partial Class F1_Productos
     Friend WithEvents LabelX23 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbMontoHasta As DevComponents.Editors.IntegerInput
     Friend WithEvents LabelX22 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents btNuevoP As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btGrabarP As DevComponents.DotNetBar.ButtonX
     Friend WithEvents PanelImagenes As Panel
     Friend WithEvents PanelVerImagen As Panel
@@ -2284,4 +2484,18 @@ Partial Class F1_Productos
     Friend WithEvents Panel7 As Panel
     Friend WithEvents LabelX11 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbPrecioFacturado As DevComponents.Editors.DoubleInput
+    Friend WithEvents lbPorcentajeVentaMecanico As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lbPorcentajeVentaPublico As DevComponents.DotNetBar.LabelX
+    Friend WithEvents MenuStripDescuento As ContextMenuStrip
+    Friend WithEvents InhabilitarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents LabelX15 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbProducto As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents btnBuscar As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnCategoria As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents VerDatosToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ButtonX2 As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents ClonarNuevoToolStripMenuItem As ToolStripMenuItem
 End Class

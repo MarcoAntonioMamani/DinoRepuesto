@@ -1,6 +1,18 @@
 ﻿Imports Modelo.MGlobal
 Public Class ModeloF0
+    Public Sub New()
+        MyBase.New()
 
+        Controls.Clear()
+
+        InitializeComponent()
+
+        Me.SuspendLayout()
+
+
+
+        Me.ResumeLayout()
+    End Sub
 
     Private Sub ModeloHor_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
 

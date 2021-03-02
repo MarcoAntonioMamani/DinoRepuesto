@@ -23,8 +23,8 @@ Public Class ModeloAyuda
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.StartPosition = FormStartPosition.Manual
-        Me.Location = New Point(posX, posY)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        'Me.Location = New Point(posX, posY)
         GPPanelP.Text = titulo
 
         listEstrucGrilla = listEst
@@ -127,6 +127,10 @@ Public Class ModeloAyuda
     End Sub
 
     Private Sub ModeloAyuda_DoubleClick(sender As Object, e As EventArgs) Handles MyBase.DoubleClick
+        Me.Close()
+    End Sub
+
+    Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
         Me.Close()
     End Sub
 End Class

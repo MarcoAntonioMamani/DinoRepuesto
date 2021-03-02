@@ -14,24 +14,52 @@ Public Class Efecto
     Public ancho As Integer
     Public Row As Janus.Windows.GridEX.GridEXRow
     Public SeleclCol As Integer = -1
-
-
-
-
+    Public Stock As Double = 0
+    Public Cantidad As Double = 0
+    Public NameProducto As String = ""
+    Public CategoriaPrecio As Integer = 0
+    Public IdProducto As Integer
+    Public Precio As Double
 
     Private Sub Efecto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
 
         Select Case tipo
             Case 1
-                 _prMostrarMensaje()
+                _prMostrarMensaje()
             Case 2
                 _prMostrarMensajeDelete()
             Case 3
                 _prMostrarFormAyuda()
             Case 4
                 _prLogin()
+            Case 7
+                _prMostrarAyudaVentaCantidad()
         End Select
+    End Sub
+
+    Sub _prMostrarAyudaVentaCantidad()
+
+        Dim frmAyuda As F1_Cantidad
+        frmAyuda = New F1_Cantidad
+
+        frmAyuda.Stock = Stock
+        frmAyuda.Cantidad = Cantidad
+        frmAyuda.Producto = NameProducto
+        frmAyuda.CategoriaPrecio = CategoriaPrecio
+        frmAyuda.idProducto = IdProducto
+        frmAyuda.ShowDialog()
+        If frmAyuda.Bandera = True Then
+
+            Cantidad = frmAyuda.Cantidad
+            Precio = frmAyuda.Precio
+            band = True
+            Me.Close()
+        Else
+            band = False
+            Me.Close()
+        End If
+
     End Sub
     Public Sub _prLogin()
         Dim Frm As New Login

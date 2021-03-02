@@ -681,7 +681,7 @@ Public Class F1_Proveedor
 
     Private Sub F1_Clientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _prIniciarTodo()
-
+        btnNuevo.PerformClick()
     End Sub
 
     Private Sub Gmc_Cliente_DoubleClick(sender As Object, e As EventArgs) Handles Gmc_Cliente.DoubleClick
