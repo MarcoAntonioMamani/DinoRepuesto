@@ -29,8 +29,6 @@ Partial Class F0_Movimiento
         Dim cbConcepto_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.grdetalle = New Janus.Windows.GridEX.GridEX()
-        Me.GPanelProductos = New DevComponents.DotNetBar.Controls.GroupPanel()
-        Me.grproducto = New Janus.Windows.GridEX.GridEX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cbDepositoDestino = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
@@ -50,6 +48,12 @@ Partial Class F0_Movimiento
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.grmovimiento = New Janus.Windows.GridEX.GridEX()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.GPanelProductos = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.grProductos = New Janus.Windows.GridEX.GridEX()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
+        Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,8 +72,6 @@ Partial Class F0_Movimiento
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel3.SuspendLayout()
         CType(Me.grdetalle, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GPanelProductos.SuspendLayout()
-        CType(Me.grproducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.cbDepositoDestino, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,10 +81,15 @@ Partial Class F0_Movimiento
         Me.SuperTabControlPanel2.SuspendLayout()
         Me.GroupPanel4.SuspendLayout()
         CType(Me.grmovimiento, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GPanelProductos.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        CType(Me.grProductos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'PanelSuperior
         '
+        Me.PanelSuperior.Size = New System.Drawing.Size(1362, 72)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
@@ -99,6 +106,8 @@ Partial Class F0_Movimiento
         '
         'PanelInferior
         '
+        Me.PanelInferior.Location = New System.Drawing.Point(0, 702)
+        Me.PanelInferior.Size = New System.Drawing.Size(1362, 39)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelInferior.Style.BackColor1.Color = System.Drawing.Color.Transparent
         Me.PanelInferior.Style.BackColor2.Color = System.Drawing.Color.Transparent
@@ -152,6 +161,14 @@ Partial Class F0_Movimiento
         '
         'btnNuevo
         '
+        '
+        'PanelToolBar2
+        '
+        Me.PanelToolBar2.Location = New System.Drawing.Point(1282, 0)
+        '
+        'PanelPrincipal
+        '
+        Me.PanelPrincipal.Size = New System.Drawing.Size(1362, 741)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelInferior, 0)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelSuperior, 0)
@@ -170,23 +187,33 @@ Partial Class F0_Movimiento
         'btnPrimero
         '
         '
+        'MPanelUserAct
+        '
+        Me.MPanelUserAct.Location = New System.Drawing.Point(1162, 0)
+        '
         'MRlAccion
         '
         '
         '
         '
         Me.MRlAccion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.MRlAccion.Size = New System.Drawing.Size(906, 72)
         '
         'PanelContent
         '
         Me.PanelContent.Controls.Add(Me.GroupPanel3)
-        Me.PanelContent.Controls.Add(Me.GPanelProductos)
         Me.PanelContent.Controls.Add(Me.GroupPanel1)
         Me.PanelContent.Margin = New System.Windows.Forms.Padding(2)
+        Me.PanelContent.Size = New System.Drawing.Size(1329, 630)
+        '
+        'Panel1
+        '
+        Me.Panel1.Size = New System.Drawing.Size(1362, 630)
         '
         'MSuperTabControlPanel1
         '
         Me.MSuperTabControlPanel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.MSuperTabControlPanel1.Size = New System.Drawing.Size(1329, 630)
         '
         'MSuperTabControl
         '
@@ -205,21 +232,27 @@ Partial Class F0_Movimiento
         Me.MSuperTabControl.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.MSuperTabControl.ControlBox.MenuBox, Me.MSuperTabControl.ControlBox.CloseBox})
         Me.MSuperTabControl.Controls.Add(Me.SuperTabControlPanel2)
         Me.MSuperTabControl.SelectedTabIndex = 1
+        Me.MSuperTabControl.Size = New System.Drawing.Size(1362, 630)
         Me.MSuperTabControl.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem2})
         Me.MSuperTabControl.Controls.SetChildIndex(Me.SuperTabControlPanel2, 0)
         Me.MSuperTabControl.Controls.SetChildIndex(Me.MSuperTabControlPanel1, 0)
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(1089, 0)
         '
         'GroupPanel3
         '
         Me.GroupPanel3.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel3.Controls.Add(Me.GPanelProductos)
         Me.GroupPanel3.Controls.Add(Me.grdetalle)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel3.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel3.Location = New System.Drawing.Point(0, 197)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(1329, 215)
+        Me.GroupPanel3.Size = New System.Drawing.Size(1329, 433)
         '
         '
         '
@@ -262,68 +295,9 @@ Partial Class F0_Movimiento
         Me.grdetalle.Name = "grdetalle"
         Me.grdetalle.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grdetalle.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grdetalle.Size = New System.Drawing.Size(1323, 192)
+        Me.grdetalle.Size = New System.Drawing.Size(1323, 410)
         Me.grdetalle.TabIndex = 0
         Me.grdetalle.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
-        '
-        'GPanelProductos
-        '
-        Me.GPanelProductos.CanvasColor = System.Drawing.SystemColors.Control
-        Me.GPanelProductos.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GPanelProductos.Controls.Add(Me.grproducto)
-        Me.GPanelProductos.DisabledBackColor = System.Drawing.Color.Empty
-        Me.GPanelProductos.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GPanelProductos.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GPanelProductos.Location = New System.Drawing.Point(0, 412)
-        Me.GPanelProductos.Name = "GPanelProductos"
-        Me.GPanelProductos.Size = New System.Drawing.Size(1329, 218)
-        '
-        '
-        '
-        Me.GPanelProductos.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
-        Me.GPanelProductos.Style.BackColorGradientAngle = 90
-        Me.GPanelProductos.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
-        Me.GPanelProductos.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GPanelProductos.Style.BorderBottomWidth = 1
-        Me.GPanelProductos.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
-        Me.GPanelProductos.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GPanelProductos.Style.BorderLeftWidth = 1
-        Me.GPanelProductos.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GPanelProductos.Style.BorderRightWidth = 1
-        Me.GPanelProductos.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
-        Me.GPanelProductos.Style.BorderTopWidth = 1
-        Me.GPanelProductos.Style.CornerDiameter = 4
-        Me.GPanelProductos.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
-        Me.GPanelProductos.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
-        Me.GPanelProductos.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
-        Me.GPanelProductos.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
-        '
-        '
-        '
-        Me.GPanelProductos.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        '
-        '
-        '
-        Me.GPanelProductos.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.GPanelProductos.TabIndex = 33
-        Me.GPanelProductos.Text = "PRODUCTOS"
-        Me.GPanelProductos.Visible = False
-        '
-        'grproducto
-        '
-        Me.grproducto.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
-        Me.grproducto.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.grproducto.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grproducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grproducto.HeaderFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grproducto.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
-        Me.grproducto.Location = New System.Drawing.Point(0, 0)
-        Me.grproducto.Name = "grproducto"
-        Me.grproducto.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
-        Me.grproducto.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grproducto.Size = New System.Drawing.Size(1323, 196)
-        Me.grproducto.TabIndex = 0
-        Me.grproducto.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'GroupPanel1
         '
@@ -708,6 +682,119 @@ Partial Class F0_Movimiento
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
         '
+        'GPanelProductos
+        '
+        Me.GPanelProductos.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GPanelProductos.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GPanelProductos.Controls.Add(Me.Panel7)
+        Me.GPanelProductos.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GPanelProductos.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GPanelProductos.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GPanelProductos.Location = New System.Drawing.Point(0, 199)
+        Me.GPanelProductos.Name = "GPanelProductos"
+        Me.GPanelProductos.Size = New System.Drawing.Size(1323, 211)
+        '
+        '
+        '
+        Me.GPanelProductos.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GPanelProductos.Style.BackColorGradientAngle = 90
+        Me.GPanelProductos.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GPanelProductos.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GPanelProductos.Style.BorderBottomWidth = 1
+        Me.GPanelProductos.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GPanelProductos.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GPanelProductos.Style.BorderLeftWidth = 1
+        Me.GPanelProductos.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GPanelProductos.Style.BorderRightWidth = 1
+        Me.GPanelProductos.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GPanelProductos.Style.BorderTopWidth = 1
+        Me.GPanelProductos.Style.CornerDiameter = 4
+        Me.GPanelProductos.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GPanelProductos.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GPanelProductos.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GPanelProductos.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GPanelProductos.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GPanelProductos.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GPanelProductos.TabIndex = 4
+        Me.GPanelProductos.Text = "PRODUCTOS"
+        Me.GPanelProductos.Visible = False
+        '
+        'Panel7
+        '
+        Me.Panel7.BackColor = System.Drawing.Color.White
+        Me.Panel7.Controls.Add(Me.grProductos)
+        Me.Panel7.Controls.Add(Me.Panel3)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(0, 0)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(1317, 188)
+        Me.Panel7.TabIndex = 0
+        '
+        'grProductos
+        '
+        Me.grProductos.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
+        Me.grProductos.BackColor = System.Drawing.Color.GhostWhite
+        Me.grProductos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grProductos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductos.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductos.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
+        Me.grProductos.Location = New System.Drawing.Point(0, 41)
+        Me.grProductos.Name = "grProductos"
+        Me.grProductos.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.grProductos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.grProductos.Size = New System.Drawing.Size(1317, 147)
+        Me.grProductos.TabIndex = 0
+        Me.grProductos.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.LabelX9)
+        Me.Panel3.Controls.Add(Me.tbProducto)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1317, 41)
+        Me.Panel3.TabIndex = 1
+        '
+        'LabelX9
+        '
+        Me.LabelX9.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX9.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX9.Location = New System.Drawing.Point(9, 11)
+        Me.LabelX9.Name = "LabelX9"
+        Me.LabelX9.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX9.Size = New System.Drawing.Size(113, 23)
+        Me.LabelX9.TabIndex = 226
+        Me.LabelX9.Text = "Buscar Producto:"
+        '
+        'tbProducto
+        '
+        Me.tbProducto.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.tbProducto.Border.Class = "TextBoxBorder"
+        Me.tbProducto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbProducto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
+        Me.tbProducto.Location = New System.Drawing.Point(134, 13)
+        Me.tbProducto.Name = "tbProducto"
+        Me.tbProducto.PreventEnterBeep = True
+        Me.tbProducto.Size = New System.Drawing.Size(249, 22)
+        Me.tbProducto.TabIndex = 3
+        '
         'F0_Movimiento
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -716,7 +803,6 @@ Partial Class F0_Movimiento
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "F0_Movimiento"
-        Me.Opacity = 0.05R
         Me.Text = "F0_Movimiento"
         Me.Controls.SetChildIndex(Me.PanelPrincipal, 0)
         Me.PanelSuperior.ResumeLayout(False)
@@ -739,8 +825,6 @@ Partial Class F0_Movimiento
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel3.ResumeLayout(False)
         CType(Me.grdetalle, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GPanelProductos.ResumeLayout(False)
-        CType(Me.grproducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -751,13 +835,15 @@ Partial Class F0_Movimiento
         Me.SuperTabControlPanel2.ResumeLayout(False)
         Me.GroupPanel4.ResumeLayout(False)
         CType(Me.grmovimiento, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GPanelProductos.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        CType(Me.grProductos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents grdetalle As Janus.Windows.GridEX.GridEX
-    Friend WithEvents GPanelProductos As DevComponents.DotNetBar.Controls.GroupPanel
-    Friend WithEvents grproducto As Janus.Windows.GridEX.GridEX
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents tbFecha As DevComponents.Editors.DateTimeAdv.DateTimeInput
@@ -777,4 +863,10 @@ Partial Class F0_Movimiento
     Friend WithEvents cbDepositoDestino As Janus.Windows.GridEX.EditControls.MultiColumnCombo
     Friend WithEvents lbDepositoDestino As DevComponents.DotNetBar.LabelX
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents GPanelProductos As DevComponents.DotNetBar.Controls.GroupPanel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents grProductos As Janus.Windows.GridEX.GridEX
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbProducto As DevComponents.DotNetBar.Controls.TextBoxX
 End Class
