@@ -170,7 +170,7 @@ Public Class F0_Movimiento
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("imgAdd")
-            .Width = 40
+            .Width = 80
             .Caption = "Nuevo"
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = True
@@ -475,174 +475,53 @@ Public Class F0_Movimiento
         Next
 
     End Sub
-    Private Sub _prCargarProductos(idCategoria As Integer)
+    Private Sub _prCargarProductos()
         Dim dt As New DataTable
         Dim dtname As DataTable = L_fnNameLabel()
         If (Lote = True And cbConcepto.Value <> 1) Then
             dt = L_prMovimientoListarProductosConLote(cbAlmacenOrigen.Value)  ''1=Almacen
             actualizarSaldoSinLote(dt)
-            dtProductoGoblal = dt
+            'dtProductoGoblal = dt
         Else
-            dt = L_prMovimientoListarProductos(CType(grdetalle.DataSource, DataTable), cbAlmacenOrigen.Value, idCategoria)  ''1=Almacen
-            dtProductoGoblal = dt
+            dt = L_prMovimientoListarProductos(CType(grdetalle.DataSource, DataTable), cbAlmacenOrigen.Value)  ''1=Almacen
+            'dtProductoGoblal = dt
         End If
 
-        'a.Item  ,a.yfcdprod1  ,a.yfcdprod2 
-        If (grProductos.RowCount > 0 And cbConcepto.Value = 1) Then
-            grProductos.DataSource = dt
-            Return
-        End If
-        grProductos.DataSource = dt
-        grProductos.RetrieveStructure()
-        grProductos.AlternatingColors = True
-        With grProductos.RootTable.Columns("Item")
-            .Width = 100
-            .Caption = "CODIGO"
-            .Visible = False
+        Dim dtMovimiento As DataTable = dt.Copy
+        dtMovimiento.Rows.Clear()
+        Dim detalle As DataTable = CType(grdetalle.DataSource, DataTable)
+        For i As Integer = 0 To detalle.Rows.Count - 1
 
-        End With
-        With grProductos.RootTable.Columns("CodigoFabrica")
-            .Width = 100
-            .Caption = "CodigoFabrica"
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = True
-        End With
-        With grProductos.RootTable.Columns("Medida")
-            .Width = 90
-            .Caption = "Medida"
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = gb_CodigoBarra
-        End With
-        With grProductos.RootTable.Columns("Marca")
-            .Width = 90
-            .Caption = "Cod.Marca"
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = True
-        End With
-        With grProductos.RootTable.Columns("Categoria")
-            .Width = 100
-            .Caption = "Categoria"
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = True
-        End With
-        With grProductos.RootTable.Columns("yfcdprod1")
-            .Width = 350
-            .Caption = "PRODUCTOS"
-            .Visible = True
+            If (detalle.Rows(i).Item("estado") >= 0) Then
+                Dim codigoProducto As Integer = detalle.Rows(i).Item("iccprod")
 
-        End With
-        With grProductos.RootTable.Columns("yfgr1")
-            .Width = 160
-            .Visible = False
-        End With
+                For j As Integer = 0 To dt.Rows.Count - 1 Step 1
 
-        If (dtname.Rows.Count > 0) Then
+                    If (dt.Rows(j).Item("Item") = codigoProducto) Then
+                        dt.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("iccant")
+                        'dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
+                        dtMovimiento.ImportRow(dt.Rows(j))
+                    End If
 
-            With grProductos.RootTable.Columns("grupo1")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 1").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 2").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-
-            With grProductos.RootTable.Columns("Laboratorio")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 3").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = False
-            End With
-            With grProductos.RootTable.Columns("Presentacion")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 4").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = False
-            End With
-        Else
-            With grProductos.RootTable.Columns("grupo1")
-                .Width = 120
-                .Caption = "Grupo 1"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
-                .Caption = "Grupo 2"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = False
-            End With
-            With grProductos.RootTable.Columns("Laboratorio")
-                .Width = 120
-                .Caption = "Grupo 3"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = False
-            End With
-            With grProductos.RootTable.Columns("Presentacion")
-                .Width = 120
-                .Caption = "Grupo 4"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = False
-            End With
-        End If
+                Next
 
 
-        With grProductos.RootTable.Columns("yfgr2")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
+            End If
 
-        With grProductos.RootTable.Columns("yfgr3")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
 
-        With grProductos.RootTable.Columns("yfgr4")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
-        With grProductos.RootTable.Columns("yfumin")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
-        With grProductos.RootTable.Columns("UnidMin")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-            .Caption = "Unidad Min."
-        End With
-        With grProductos.RootTable.Columns("stock")
-            .Width = 150
-            .Visible = True
-            .FormatString = "0.00"
-            .Caption = "STOCK"
-        End With
+        Next
+        Dim frm As F0_DetalleMovimiento
+        frm = New F0_DetalleMovimiento(dt, dtMovimiento, dtname)
 
-        With grProductos
-            .DefaultFilterRowComparison = FilterConditionOperator.Contains
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
-            .GroupByBoxVisible = False
-            'diseño de la grilla
-            .VisualStyle = VisualStyle.Office2007
-        End With
-        _prAplicarCondiccionJanusSinLote()
+        frm.ShowDialog()
+        Dim dtProd As DataTable = frm.dtDetalle
+
+        For i As Integer = 0 To dtProd.Rows.Count - 1 Step 1
+
+            InsertarProductosSinLote(dtProd, i)
+        Next
+        dt.Rows.Clear()
+        dtMovimiento.Rows.Clear()
     End Sub
     Public Sub actualizarSaldo(ByRef dt As DataTable, CodProducto As Integer)
         'b.yfcdprod1 ,a.iclot ,a.icfven  ,a.iccven 
@@ -774,7 +653,7 @@ Public Class F0_Movimiento
     Public Function _fnAccesible()
         Return tbFecha.IsInputReadOnly = False
     End Function
-    Private Sub _HabilitarProductos(idCategoria As Integer)
+    Private Sub _HabilitarProductos()
         'GPanelProductos.Visible = True
 
         'PanelInferior.Visible = False
@@ -783,17 +662,17 @@ Public Class F0_Movimiento
         'grProductos.MoveTo(grProductos.FilterRow)
         'grProductos.Col = 1
 
-        GPanelProductos.Visible = True
-        PanelInferior.Visible = False
-        PanelInferior.Visible = False
-        _prCargarProductos(idCategoria)
+        'GPanelProductos.Visible = True
+        'PanelInferior.Visible = False
+        'PanelInferior.Visible = False
+        _prCargarProductos()
         'grProductos.Focus()
         'grProductos.MoveTo(grProductos.FilterRow)
         'grProductos.Col = 2
-        tbProducto.Clear()
-        tbProducto.Focus()
+        'tbProducto.Clear()
+        'tbProducto.Focus()
 
-        GPanelProductos.Height = 350
+        'GPanelProductos.Height = 350
     End Sub
     Private Sub _DesHabilitarProductos()
         If (GPanelProductos.Visible = True) Then
@@ -1004,38 +883,66 @@ Public Class F0_Movimiento
         End If
     End Sub
 
-    Public Sub InsertarProductosSinLote()
+    Public Sub InsertarProductosSinLote(dt As DataTable, fila As Integer)
         '      a.icid ,a.icibid ,a.iccprod ,b.yfcdprod1  as producto,a.iccant ,
         'a.iclot ,a.icfvenc ,Cast(null as image ) as img,1 as estado,
         '(Sum(inv.iccven )+a.iccant  ) as stock
+        If (dt.Rows(fila).Item("Stock") <= 0) Then
+            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+            ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            Return
+        End If
+
         Dim pos As Integer = -1
         grdetalle.Row = grdetalle.RowCount - 1
+        If (grdetalle.GetValue("iccprod") <> 0) Then
+            _prAddDetalleVenta()
+            grdetalle.Row = grdetalle.RowCount - 1
+        End If
         _fnObtenerFilaDetalle(pos, grdetalle.GetValue("icid"))
 
-        Dim existe As Boolean = _fnExisteProducto(grProductos.GetValue("Item"))
+        Dim existe As Boolean = _fnExisteProducto(dt.Rows(fila).Item("Item"))
         If ((pos >= 0) And (Not existe)) Then
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccprod") = grProductos.GetValue("Item")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = grProductos.GetValue("CodigoFabrica")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = grProductos.GetValue("Marca")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = grProductos.GetValue("Medida")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = grProductos.GetValue("Categoria")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = grProductos.GetValue("yfcdprod1")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccprod") = grProductos.GetValue("Item")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = grProductos.GetValue("CodigoFabrica")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = grProductos.GetValue("Marca")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = grProductos.GetValue("Medida")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = grProductos.GetValue("Categoria")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = grProductos.GetValue("yfcdprod1")
 
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = grProductos.GetValue("stock")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = grProductos.GetValue("Laboratorio")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = grProductos.GetValue("Presentacion")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = grProductos.GetValue("stock")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = grProductos.GetValue("Laboratorio")
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = grProductos.GetValue("Presentacion")
 
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccant") = 1
+            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccant") = 1
+
+
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccprod") = dt.Rows(fila).Item("Item")
+
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = dt.Rows(fila).Item("CodigoFabrica")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = dt.Rows(fila).Item("Marca")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = dt.Rows(fila).Item("Medida")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = dt.Rows(fila).Item("Categoria")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = dt.Rows(fila).Item("yfcdprod1")
+
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = dt.Rows(fila).Item("Laboratorio")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = dt.Rows(fila).Item("Presentacion")
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccant") = dt.Rows(fila).Item("Cantidad")
+
+            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = dt.Rows(fila).Item("stock")
 
             ''    _DesHabilitarProductos()
 
-            _prAddDetalleVenta()
+            '_prAddDetalleVenta()
 
-            _prCargarProductos(0)
-            'grproducto.RemoveFilters()
-            grProductos.Focus()
-            grProductos.MoveTo(grProductos.FilterRow)
-            grProductos.Col = 1
+            '_prCargarProductos(0)
+            ''grproducto.RemoveFilters()
+            'grProductos.Focus()
+            'grProductos.MoveTo(grProductos.FilterRow)
+            'grProductos.Col = 1
+
+
+            tbProducto.Focus()
         Else
             If (existe) Then
                 Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
@@ -1186,7 +1093,7 @@ Public Class F0_Movimiento
                 'If (newItem = True) Then
                 '    _prAddDetalleVenta()
                 'End If
-                _HabilitarProductos(idCategoria)
+                _HabilitarProductos()
             End If
         End If
         Return idCategoria
@@ -1204,8 +1111,8 @@ Public Class F0_Movimiento
             If (grdetalle.Col = grdetalle.RootTable.Columns("iccant").Index) Then
                 If (grdetalle.GetValue("producto") <> String.Empty) Then
                     '_prAddDetalleVenta()
-                    '_HabilitarProductos()
-                    SeleccionarCategoria(True)
+                    _HabilitarProductos()
+                    ' SeleccionarCategoria(True)
                 Else
                     ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
                 End If
@@ -1214,8 +1121,8 @@ Public Class F0_Movimiento
             If (grdetalle.Col = grdetalle.RootTable.Columns("producto").Index) Then
                 If (grdetalle.GetValue("producto") <> String.Empty) Then
                     '_prAddDetalleVenta()
-                    '_HabilitarProductos()
-                    SeleccionarCategoria(True)
+                    _HabilitarProductos()
+                    'SeleccionarCategoria(True)
                 Else
                     ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
                 End If
@@ -1228,8 +1135,8 @@ salirIf:
             grdetalle.Col = grdetalle.RootTable.Columns("producto").Index) Then
             Dim indexfil As Integer = grdetalle.Row
             Dim indexcol As Integer = grdetalle.Col
-            ' _HabilitarProductos()
-            SeleccionarCategoria(True)
+            _HabilitarProductos()
+            'SeleccionarCategoria(True)
         End If
         If (e.KeyData = Keys.Escape And grdetalle.Row >= 0) Then
 
@@ -1258,7 +1165,7 @@ salirIf:
                     If (Lote = True) Then
                         If (cbConcepto.Value = 1) Then ''' Aqui pregunto si es con lote y tambien si es una 
                             ''entrada debe solo insertar solo el producto y no seguir con los lotes 
-                            InsertarProductosSinLote()
+                            'InsertarProductosSinLote()
 
                         Else
                             InsertarProductosConLote()
@@ -1266,7 +1173,7 @@ salirIf:
 
                     Else
 
-                        InsertarProductosSinLote()
+                        'InsertarProductosSinLote()
                     End If
                     '''''''''''''''
                 Else
@@ -1407,7 +1314,8 @@ salirIf:
         End If
         Try
             If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("imgAdd").Index) Then
-                SeleccionarCategoria(True)
+                _HabilitarProductos()
+                ' SeleccionarCategoria(True)
             End If
         Catch ex As Exception
 
@@ -1771,7 +1679,7 @@ salirIf:
                 If (Lote = True) Then
                     If (cbConcepto.Value = 1) Then ''' Aqui pregunto si es con lote y tambien si es una 
                         ''entrada debe solo insertar solo el producto y no seguir con los lotes 
-                        InsertarProductosSinLote()
+                        'InsertarProductosSinLote()
 
                     Else
                         InsertarProductosConLote()
@@ -1779,7 +1687,7 @@ salirIf:
 
                 Else
 
-                    InsertarProductosSinLote()
+                    'InsertarProductosSinLote()
                 End If
                 '''''''''''''''
             Else
@@ -1847,7 +1755,7 @@ salirIf:
                     If (Lote = True) Then
                         If (cbConcepto.Value = 1) Then ''' Aqui pregunto si es con lote y tambien si es una 
                             ''entrada debe solo insertar solo el producto y no seguir con los lotes 
-                            InsertarProductosSinLote()
+                            'InsertarProductosSinLote()
 
                         Else
                             InsertarProductosConLote()
@@ -1855,7 +1763,7 @@ salirIf:
 
                     Else
 
-                        InsertarProductosSinLote()
+                        'InsertarProductosSinLote()
                     End If
                     '''''''''''''''
                 Else

@@ -1,9 +1,7 @@
-﻿
-Imports Logica.AccesoLogica
+﻿Imports DevComponents.DotNetBar
 Imports Janus.Windows.GridEX
-Imports DevComponents.DotNetBar
-Public Class F0_DetalleVenta
 
+Public Class F0_DetalleMovimiento
     Public dtProductoAll As DataTable
     Public dtDetalle As DataTable
     Public dtname As DataTable
@@ -17,13 +15,11 @@ Public Class F0_DetalleVenta
         tbProducto.Focus()
     End Sub
 
-    Public Sub New(dtp As DataTable, dtv As DataTable, dtn As DataTable, _CategoriaPrecio As Integer)
+    Public Sub New(dtp As DataTable, dtv As DataTable, dtn As DataTable)
         InitializeComponent()
         dtProductoAll = dtp
         dtDetalle = dtv
         dtname = dtn
-        CategoriaPrecio = _CategoriaPrecio
-
     End Sub
 
     Public Sub CargarProductosVentas()
@@ -44,27 +40,12 @@ Public Class F0_DetalleVenta
         grProductoSeleccionado.RetrieveStructure()
         grProductoSeleccionado.AlternatingColors = True
 
-        '      a.yfnumi ,a.yfcprod ,a.yfcdprod1,a.yfcdprod2 ,a.yfgr1,gr1.ycdes3 as grupo1,a.yfgr2
-        ',gr2.ycdes3 as grupo2 ,a.yfgr3,gr3.ycdes3 as grupo3,a.yfgr4 ,gr4 .ycdes3 as grupo4,a.yfumin ,Umin .ycdes3 as UnidMin
-        ' ,b.yhprecio PrecioReferencia
-        With grProductoSeleccionado.RootTable.Columns("PrecioReferencia")
-            .Width = 100
-            .Caption = "PrecioReferencia"
-            .Visible = False
 
-        End With
         With grProductoSeleccionado.RootTable.Columns("Item")
             .Width = 100
-            .Caption = "Item"
+            .Caption = "CODIGO"
             .Visible = False
 
-        End With
-
-        With grProductoSeleccionado.RootTable.Columns("Cantidad")
-            .Width = 120
-            .Caption = "Cantidad"
-            .Visible = True
-            .FormatString = "0.00"
         End With
         With grProductoSeleccionado.RootTable.Columns("CodigoFabrica")
             .Width = 100
@@ -85,7 +66,7 @@ Public Class F0_DetalleVenta
         With grProductoSeleccionado.RootTable.Columns("Marca")
             .Width = 90
             .Caption = "Cod.Marca"
-            .MaxLines = 150
+            .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
@@ -99,20 +80,16 @@ Public Class F0_DetalleVenta
             .Visible = True
         End With
         With grProductoSeleccionado.RootTable.Columns("yfcdprod1")
-            .Width = 550
+            .Width = 350
+            .Caption = "PRODUCTOS"
             .Visible = True
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Caption = "Descripcion"
+
         End With
-
-
-
         With grProductoSeleccionado.RootTable.Columns("yfgr1")
             .Width = 160
             .Visible = False
         End With
+
         If (dtname.Rows.Count > 0) Then
 
             With grProductoSeleccionado.RootTable.Columns("grupo1")
@@ -128,13 +105,13 @@ Public Class F0_DetalleVenta
                 .Visible = True
             End With
 
-            With grProductoSeleccionado.RootTable.Columns("grupo3")
+            With grProductoSeleccionado.RootTable.Columns("Laboratorio")
                 .Width = 120
                 .Caption = dtname.Rows(0).Item("Grupo 3").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductoSeleccionado.RootTable.Columns("grupo4")
+            With grProductoSeleccionado.RootTable.Columns("Presentacion")
                 .Width = 120
                 .Caption = dtname.Rows(0).Item("Grupo 4").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -153,13 +130,13 @@ Public Class F0_DetalleVenta
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductoSeleccionado.RootTable.Columns("grupo3")
+            With grProductoSeleccionado.RootTable.Columns("Laboratorio")
                 .Width = 120
                 .Caption = "Grupo 3"
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductoSeleccionado.RootTable.Columns("grupo4")
+            With grProductoSeleccionado.RootTable.Columns("Presentacion")
                 .Width = 120
                 .Caption = "Grupo 4"
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -185,8 +162,6 @@ Public Class F0_DetalleVenta
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
         End With
-
-
         With grProductoSeleccionado.RootTable.Columns("yfumin")
             .Width = 50
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -198,38 +173,27 @@ Public Class F0_DetalleVenta
             .Visible = False
             .Caption = "Unidad Min."
         End With
-        With grProductoSeleccionado.RootTable.Columns("yhprecio")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "Precio"
-            .FormatString = "0.00"
-        End With
-        With grProductoSeleccionado.RootTable.Columns("pcos")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-            .Caption = "Precio Costo"
-            .FormatString = "0.00"
-        End With
         With grProductoSeleccionado.RootTable.Columns("stock")
-            .Width = 120
-            .FormatString = "0.00"
+            .Width = 150
             .Visible = True
-            .Caption = "Stock"
+            .FormatString = "0.00"
+            .Caption = "STOCK"
+        End With
+        With grProductoSeleccionado.RootTable.Columns("Cantidad")
+            .Width = 150
+            .Visible = True
+            .FormatString = "0.00"
+            .Caption = "Cantidad"
         End With
 
         With grProductoSeleccionado
-            '.DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
-            '.FilterMode = FilterMode.Automatic
-            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            .FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
-            'diseño de la grilla
+            ' diseño de la grilla
             .VisualStyle = VisualStyle.Office2007
-
         End With
-
-
         If (bandera = True) Then
             CType(grProductoSeleccionado.DataSource, DataTable).Rows.Clear()
 
@@ -240,124 +204,106 @@ Public Class F0_DetalleVenta
         grProductos.RetrieveStructure()
         grProductos.AlternatingColors = True
 
-        '      a.yfnumi ,a.yfcprod ,a.yfcdprod1,a.yfcdprod2 ,a.yfgr1,gr1.ycdes3 as grupo1,a.yfgr2
-        ',gr2.ycdes3 as grupo2 ,a.yfgr3,gr3.ycdes3 as grupo3,a.yfgr4 ,gr4 .ycdes3 as grupo4,a.yfumin ,Umin .ycdes3 as UnidMin
-        ' ,b.yhprecio PrecioReferencia
-        With grProductos.RootTable.Columns("PrecioReferencia")
-            .Width = 100
-            .Caption = "PrecioReferencia"
-            .Visible = False
+
+        With grProductos.RootTable.Columns("item")
+            .Width = 50
+            .Caption = "codigo".ToUpper
+            .Visible = True
 
         End With
-        With grProductos.RootTable.Columns("Item")
+        With grProductos.RootTable.Columns("categoria")
             .Width = 100
-            .Caption = "Item"
-            .Visible = False
-
-        End With
-
-        With grProductos.RootTable.Columns("Cantidad")
-            .Width = 120
-            .Caption = "Cantidad"
-            .Visible = False
-
-        End With
-        With grProductos.RootTable.Columns("CodigoFabrica")
-            .Width = 100
-            .Caption = "CodigoFabrica"
+            .Caption = "categoria".ToUpper
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
         End With
-        With grProductos.RootTable.Columns("Medida")
+        With grProductos.RootTable.Columns("codigofabrica")
+            .Width = 100
+            .Caption = "codigo DE fabrica".ToUpper
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
+            .Visible = True
+        End With
+        With grProductos.RootTable.Columns("medida")
             .Width = 90
-            .Caption = "Medida"
+            .Caption = "medida".ToUpper
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = gb_CodigoBarra
         End With
-        With grProductos.RootTable.Columns("Marca")
+        With grProductos.RootTable.Columns("marca")
             .Width = 90
-            .Caption = "Cod.Marca"
-            .MaxLines = 150
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = True
-        End With
-        With grProductos.RootTable.Columns("Categoria")
-            .Width = 100
-            .Caption = "Categoria"
+            .Caption = "cod.marca".ToUpper
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
         End With
+
         With grProductos.RootTable.Columns("yfcdprod1")
-            .Width = 550
+            .Width = 350
+            .Caption = "productos".ToUpper
             .Visible = True
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Caption = "Descripcion"
+
         End With
-
-
-
         With grProductos.RootTable.Columns("yfgr1")
             .Width = 160
             .Visible = False
         End With
+
         If (dtname.Rows.Count > 0) Then
 
             With grProductos.RootTable.Columns("grupo1")
                 .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 1").ToString
+                .Caption = dtname.Rows(0).Item("grupo 1").ToString.ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
             End With
             With grProductos.RootTable.Columns("grupo2")
                 .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 2").ToString
+                .Caption = dtname.Rows(0).Item("grupo 2").ToString.ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
             End With
 
-            With grProductos.RootTable.Columns("grupo3")
+            With grProductos.RootTable.Columns("laboratorio")
                 .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 3").ToString
+                .Caption = dtname.Rows(0).Item("grupo 3").ToString.ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductos.RootTable.Columns("grupo4")
+            With grProductos.RootTable.Columns("presentacion")
                 .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 4").ToString
+                .Caption = dtname.Rows(0).Item("grupo 4").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
         Else
             With grProductos.RootTable.Columns("grupo1")
                 .Width = 120
-                .Caption = "Grupo 1"
+                .Caption = "grupo 1".ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
             End With
             With grProductos.RootTable.Columns("grupo2")
                 .Width = 120
-                .Caption = "Grupo 2"
+                .Caption = "grupo 2".ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductos.RootTable.Columns("grupo3")
+            With grProductos.RootTable.Columns("laboratorio")
                 .Width = 120
-                .Caption = "Grupo 3"
+                .Caption = "grupo 3".ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
-            With grProductos.RootTable.Columns("grupo4")
+            With grProductos.RootTable.Columns("presentacion")
                 .Width = 120
-                .Caption = "Grupo 4"
+                .Caption = "grupo 4".ToUpper
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
             End With
@@ -381,49 +327,45 @@ Public Class F0_DetalleVenta
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
         End With
-
-
         With grProductos.RootTable.Columns("yfumin")
             .Width = 50
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
         End With
-        With grProductos.RootTable.Columns("UnidMin")
+        With grProductos.RootTable.Columns("unidmin")
             .Width = 120
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
-            .Caption = "Unidad Min."
-        End With
-        With grProductos.RootTable.Columns("yhprecio")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "Precio"
-            .FormatString = "0.00"
-        End With
-        With grProductos.RootTable.Columns("pcos")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-            .Caption = "Precio Costo"
-            .FormatString = "0.00"
+            .Caption = "unidad min."
         End With
         With grProductos.RootTable.Columns("stock")
-            .Width = 120
+            .Width = 150
+            .Visible = False
             .FormatString = "0.00"
-            .Visible = True
-            .Caption = "Stock"
+            .Caption = "stock".ToUpper
         End With
-
+        With grProductos.RootTable.Columns("cantidad")
+            .Width = 150
+            .Visible = False
+            .FormatString = "0.00"
+            .Caption = "cantidad"
+        End With
+        With grProductos.RootTable.Columns("ListaAlmacen")
+            .Width = 200
+            .Caption = "Stock".ToUpper
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
+            .Visible = True
+        End With
         With grProductos
-            '.DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
-            '.FilterMode = FilterMode.Automatic
-            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            .FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             'diseño de la grilla
             .VisualStyle = VisualStyle.Office2007
         End With
-
 
         _prAplicarCondiccionJanusSinLote()
     End Sub
@@ -509,9 +451,9 @@ Public Class F0_DetalleVenta
                             Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
 
                             row.Item("Cantidad") = cantidad
-                            If (CategoriaPrecio = 50) Then
-                                row.Item("yhprecio") = ef.Precio
-                            End If
+                            'If (CategoriaPrecio = 50) Then
+                            '    row.Item("yhprecio") = ef.Precio
+                            'End If
 
                             CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
                             tbProducto.Focus()
@@ -737,10 +679,10 @@ Public Class F0_DetalleVenta
                         Dim dt As DataTable = CType(grProductos.DataSource, DataTable).Copy
                         Dim row As DataRow = dt.Rows(f)
 
-                        row.Item("Cantidad") = cantidad
-                        If (CategoriaPrecio = 50) Then
-                            row.Item("yhprecio") = ef.Precio
-                        End If
+                        'row.Item("Cantidad") = cantidad
+                        'If (CategoriaPrecio = 50) Then
+                        '    row.Item("yhprecio") = ef.Precio
+                        'End If
 
                         CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
                         tbProducto.Focus()
@@ -766,11 +708,4 @@ Public Class F0_DetalleVenta
         End If
     End Sub
 
-    Private Sub GPanelProductos_Click(sender As Object, e As EventArgs) Handles GPanelProductos.Click
-
-    End Sub
-
-    Private Sub GroupPanel1_Click(sender As Object, e As EventArgs) Handles GroupPanel1.Click
-
-    End Sub
 End Class

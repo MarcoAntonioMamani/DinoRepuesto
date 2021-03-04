@@ -40,12 +40,19 @@ Public Class F0_BuscarProductos
         'Item  CodigoFabrica	Marca	Medida	Categoria	yfcdprod1	yfgr1	grupo1	yfgr2	grupo2	yfgr3	grupo3	yfgr4	grupo4	yfumin	UnidMin	stock	PrecioFacturado	PrecioPublico	PrecioMecanico	Almacen
 
         With grProductos.RootTable.Columns("Item")
-            .Width = 100
+            .Width = 50
             .Caption = "Item"
-            .Visible = False
+            .Visible = True
 
         End With
-
+        With grProductos.RootTable.Columns("Categoria")
+            .Width = 100
+            .Caption = "Categoria"
+            .MaxLines = 100
+            .CellStyle.LineAlignment = TextAlignment.Near
+            .WordWrap = True
+            .Visible = True
+        End With
 
         With grProductos.RootTable.Columns("CodigoFabrica")
             .Width = 100
@@ -71,14 +78,7 @@ Public Class F0_BuscarProductos
             .WordWrap = True
             .Visible = True
         End With
-        With grProductos.RootTable.Columns("Categoria")
-            .Width = 100
-            .Caption = "Categoria"
-            .MaxLines = 100
-            .CellStyle.LineAlignment = TextAlignment.Near
-            .WordWrap = True
-            .Visible = True
-        End With
+
         'Item  CodigoFabrica	Marca	Medida	Categoria	yfcdprod1	yfgr1	grupo1	yfgr2	grupo2	yfgr3	grupo3	yfgr4	grupo4	yfumin	UnidMin	stock	PrecioFacturado	PrecioPublico	PrecioMecanico	Almacen
         With grProductos.RootTable.Columns("yfcdprod1")
             .Width = 550
@@ -104,7 +104,7 @@ Public Class F0_BuscarProductos
                 .Visible = True
             End With
             With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
+                .Width = 90
                 .Caption = dtname.Rows(0).Item("Grupo 2").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
@@ -130,7 +130,7 @@ Public Class F0_BuscarProductos
                 .Visible = True
             End With
             With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
+                .Width = 90
                 .Caption = "Grupo 2"
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = False
@@ -182,7 +182,7 @@ Public Class F0_BuscarProductos
         End With
         'Item  CodigoFabrica	Marca	Medida	Categoria	yfcdprod1	yfgr1	grupo1	yfgr2	grupo2	yfgr3	grupo3	yfgr4	grupo4	yfumin	UnidMin	stock	PrecioFacturado	PrecioPublico	PrecioMecanico	Almacen
         With grProductos.RootTable.Columns("stock")
-            .Width = 160
+            .Width = 250
             .FormatString = "0.00"
             .Visible = True
             .Caption = "Stock"
@@ -197,21 +197,21 @@ Public Class F0_BuscarProductos
         '    .Caption = "Almacen"
         'End With
         With grProductos.RootTable.Columns("PrecioFacturado")
-            .Width = 100
+            .Width = 60
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = True
             .Caption = "Facturado"
             .FormatString = "0.00"
         End With
         With grProductos.RootTable.Columns("PrecioPublico")
-            .Width = 100
+            .Width = 60
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = True
             .Caption = "Publico"
             .FormatString = "0.00"
         End With
         With grProductos.RootTable.Columns("PrecioMecanico")
-            .Width = 100
+            .Width = 60
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = True
             .Caption = "Mecanico"

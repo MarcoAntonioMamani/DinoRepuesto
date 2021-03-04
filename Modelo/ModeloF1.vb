@@ -56,7 +56,11 @@ Public Class ModeloF1
                     End If
                     If _MListEstBuscador.Item(i).formato <> String.Empty Then
                         .FormatString = _MListEstBuscador.Item(i).formato
+                    Else
+                        .MaxLines = 100
+                        .WordWrap = True
                     End If
+
                 Else
                     .Visible = False
                 End If

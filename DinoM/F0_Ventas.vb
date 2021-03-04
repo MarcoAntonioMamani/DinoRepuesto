@@ -1456,12 +1456,14 @@ Public Class F0_Ventas
             '_DesHabilitarProductos()
             tbProducto.Focus()
         Else
-            'If (existe) Then
-            '    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            '    ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-
-            '    tbProducto.Focus()
-            'End If
+            If (existe) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                grProductos.RemoveFilters()
+                grProductos.Focus()
+                grProductos.MoveTo(grProductos.FilterRow)
+                grProductos.Col = 1
+            End If
         End If
     End Sub
     Public Sub InsertarProductosConLote()
