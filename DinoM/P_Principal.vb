@@ -591,7 +591,7 @@ Public Class P_Principal
     Private Sub btInvMovimiento_Click(sender As Object, e As EventArgs) Handles btInvMovimiento.Click
         'SideNav1.IsMenuExpanded = False
         'Ventana.Select()
-        Dim frm As New F0_Movimiento
+        Dim frm As New F0_MovimientoNuevo
         frm._nameButton = btInvMovimiento.Name
         frm._modulo = FP_INVENTARIO
         'Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)

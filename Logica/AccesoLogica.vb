@@ -3265,6 +3265,89 @@ Public Class AccesoLogica
         Return _resultado
     End Function
 #End Region
+#Region "MOVIMIENTO NUEVO"
+    Public Shared Function l_MovimientoEliminar(_id As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", -1))
+        _listParam.Add(New Datos.DParametro("@id", _id))
+        _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        Return _Tabla
+    End Function
+    Public Shared Function l_MovimientoGuardar(ByRef _id As String, Fecha As String, ConceptoId As Integer, Observacion As String, _detalle As DataTable) As Boolean
+        Dim _resultado As Boolean
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@id", _id))
+        _listParam.Add(New Datos.DParametro("@Fecha", Fecha))
+        _listParam.Add(New Datos.DParametro("@ConceptoId", ConceptoId))
+        _listParam.Add(New Datos.DParametro("@Observacion", Observacion))
+        _listParam.Add(New Datos.DParametro("@Estado", 1))
+        _listParam.Add(New Datos.DParametro("@MovimientoProducto", "", _detalle))
+        _listParam.Add(New Datos.DParametro("@UsuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        If _Tabla.Rows.Count > 0 Then
+            _id = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+        Return _resultado
+    End Function
+    Public Shared Function l_MovimientoModificar(ByRef _id As String, Fecha As String, ConceptoId As Integer, Observacion As String, _detalle As DataTable) As Boolean
+        Dim _resultado As Boolean
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@id", _id))
+        _listParam.Add(New Datos.DParametro("@Fecha", Fecha))
+        _listParam.Add(New Datos.DParametro("@ConceptoId", ConceptoId))
+        _listParam.Add(New Datos.DParametro("@Observacion", Observacion))
+        _listParam.Add(New Datos.DParametro("@MovimientoProducto", "", _detalle))
+        _listParam.Add(New Datos.DParametro("@UsuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        If _Tabla.Rows.Count > 0 Then
+            _id = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+        Return _resultado
+    End Function
+    Public Shared Function l_obtenerMovimeintos() As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        Return _Tabla
+    End Function
+    Public Shared Function l_obtenerDetalleMovimiento(idMovimiento As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        _listParam.Add(New Datos.DParametro("@id", idMovimiento))
+        _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        Return _Tabla
+    End Function
+    Public Shared Function l_obtenerStockXAlmacenYProducto(alamacenId As String, productoId As String) As Integer
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        Dim _resultado = 0
+        _listParam.Add(New Datos.DParametro("@tipo", 5))
+        _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@almacenId", alamacenId))
+        _listParam.Add(New Datos.DParametro("@productoId", productoId))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        If _Tabla.Rows.Count > 0 And _Tabla.Rows(0).Item(0) <> 0 Then
+            _resultado = _Tabla.Rows(0).Item(0)
+        End If
+        Return _resultado
+    End Function
+#End Region
 
 #Region "TI002 MOVIMIENTOS "
     Public Shared Function L_fnGeneralMovimiento() As DataTable
@@ -3418,7 +3501,7 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
-    Public Shared Function L_prMovimientoListarProductos(dt As DataTable, _deposito As Integer) As DataTable
+    Public Shared Function L_prMovimientoListarProductos(_deposito As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)

@@ -10,7 +10,7 @@ Imports System.Threading
 Imports System.Drawing.Text
 Imports System.Reflection
 Imports System.Runtime.InteropServices
-
+Imports DinoM.JanusExtension
 Public Class F0_Movimiento
     Dim _Inter As Integer = 0
 #Region "Variables Globales"
@@ -175,6 +175,7 @@ Public Class F0_Movimiento
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
             .Visible = True
         End With
+
         If (GPanelProductos.Visible = True) Then
             GPanelProductos.Visible = False
             PanelInferior.Visible = True
@@ -222,8 +223,8 @@ Public Class F0_Movimiento
         '	(Sum(inv.iccven )+a.iccant  ) as stock
         With grdetalle.RootTable.Columns("icid")
             .Width = 100
-            .Caption = "CODIGO"
-            .Visible = False
+            .Caption = "ITEM".ToUpper
+            .Visible = True
 
         End With
 
@@ -236,7 +237,7 @@ Public Class F0_Movimiento
             .Visible = False
         End With
         With grdetalle.RootTable.Columns("CodigoFabrica")
-            .Caption = "Cod.Fabrica"
+            .Caption = "Cod.Fabrica".ToUpper
             .Width = 100
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -244,7 +245,7 @@ Public Class F0_Movimiento
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("CodigoMarca")
-            .Caption = "Cod.Marca"
+            .Caption = "Cod.Marca".ToUpper
             .Width = 100
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -252,7 +253,7 @@ Public Class F0_Movimiento
             .Visible = True
         End With
         With grdetalle.RootTable.Columns("Medida")
-            .Caption = "Medida"
+            .Caption = "Medida".ToUpper
             .Width = 90
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -261,7 +262,7 @@ Public Class F0_Movimiento
         End With
 
         With grdetalle.RootTable.Columns("CategoriaProducto")
-            .Caption = "Cat.Producto"
+            .Caption = "Cat.Producto".ToUpper
             .Width = 140
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -270,26 +271,12 @@ Public Class F0_Movimiento
 
         End With
         With grdetalle.RootTable.Columns("producto")
-            .Caption = "Productos"
+            .Caption = "Productos".ToUpper
             .Width = 220
             .MaxLines = 200
             .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .Visible = True
-        End With
-        With grdetalle.RootTable.Columns("Laboratorio")
-            .Caption = "ORIGEN"
-            .Width = 200
-            .Visible = False
-
-
-        End With
-        With grdetalle.RootTable.Columns("Presentacion")
-            .Caption = "PRESENTACION"
-            .Width = 150
-            .Visible = False
-
-
         End With
         With grdetalle.RootTable.Columns("iccant")
             .Width = 160
@@ -353,6 +340,7 @@ Public Class F0_Movimiento
             .Caption = "stock"
             .Visible = False
         End With
+
         With grdetalle
             .GroupByBoxVisible = False
             'diseño de la grilla
@@ -365,17 +353,19 @@ Public Class F0_Movimiento
     Private Sub _prCargarVenta()
         Dim dt As New DataTable
         dt = L_fnGeneralMovimiento()
-        grmovimiento.DataSource = dt
-        grmovimiento.RetrieveStructure()
-        grmovimiento.AlternatingColors = True
+        'grmovimiento.DataSource = dt
+        'grmovimiento.RetrieveStructure()
+        'grmovimiento.AlternatingColors = True
 
+        ConfigInicialVinculado(grmovimiento, dt, "Movimiento")
+        ColAL(grmovimiento, "ibid", "ITEM", 80)
 
-        With grmovimiento.RootTable.Columns("ibid")
-            .Width = 100
-            .Caption = "CODIGO"
-            .Visible = True
+        'With grmovimiento.RootTable.Columns("ibid")
+        '    .Width = 100
+        '    .Caption = "CODIGO"
+        '    .Visible = True
 
-        End With
+        'End With
 
         With grmovimiento.RootTable.Columns("ibfdoc")
             .Width = 90
@@ -476,18 +466,23 @@ Public Class F0_Movimiento
 
     End Sub
     Private Sub _prCargarProductos()
-        Dim dt As New DataTable
         Dim dtname As DataTable = L_fnNameLabel()
-        If (Lote = True And cbConcepto.Value <> 1) Then
-            dt = L_prMovimientoListarProductosConLote(cbAlmacenOrigen.Value)  ''1=Almacen
-            actualizarSaldoSinLote(dt)
-            'dtProductoGoblal = dt
-        Else
-            dt = L_prMovimientoListarProductos(CType(grdetalle.DataSource, DataTable), cbAlmacenOrigen.Value)  ''1=Almacen
-            'dtProductoGoblal = dt
+        ' Using a As New Object]
+        If dtProductoGoblal Is Nothing Then
+            If (Lote = True And cbConcepto.Value <> 1) Then
+                dtProductoGoblal = L_prMovimientoListarProductosConLote(cbAlmacenOrigen.Value)  ''1=Almacen
+                actualizarSaldoSinLote(dtProductoGoblal)
+                'dtProductoGoblal = dt
+            Else
+                dtProductoGoblal = L_prMovimientoListarProductos(cbAlmacenOrigen.Value)  ''1=Almacen
+                'dtProductoGoblal = dt
+            End If
         End If
 
-        Dim dtMovimiento As DataTable = dt.Copy
+
+
+
+        Dim dtMovimiento As DataTable = dtProductoGoblal.Copy
         dtMovimiento.Rows.Clear()
         Dim detalle As DataTable = CType(grdetalle.DataSource, DataTable)
         For i As Integer = 0 To detalle.Rows.Count - 1
@@ -495,12 +490,12 @@ Public Class F0_Movimiento
             If (detalle.Rows(i).Item("estado") >= 0) Then
                 Dim codigoProducto As Integer = detalle.Rows(i).Item("iccprod")
 
-                For j As Integer = 0 To dt.Rows.Count - 1 Step 1
+                For j As Integer = 0 To dtProductoGoblal.Rows.Count - 1 Step 1
 
-                    If (dt.Rows(j).Item("Item") = codigoProducto) Then
-                        dt.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("iccant")
+                    If (dtProductoGoblal.Rows(j).Item("Item") = codigoProducto) Then
+                        dtProductoGoblal.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("iccant")
                         'dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
-                        dtMovimiento.ImportRow(dt.Rows(j))
+                        dtMovimiento.ImportRow(dtProductoGoblal.Rows(j))
                     End If
 
                 Next
@@ -510,9 +505,12 @@ Public Class F0_Movimiento
 
 
         Next
-        Dim frm As F0_DetalleMovimiento
-        frm = New F0_DetalleMovimiento(dt, dtMovimiento, dtname)
 
+        Dim frm As F0_DetalleMovimiento
+
+        frm = New F0_DetalleMovimiento(dtProductoGoblal, dtMovimiento, dtname)
+        frm.lbConcepto.Text = cbConcepto.Text
+        frm.tbAlmacenNombre.Text = cbAlmacenOrigen.Text
         frm.ShowDialog()
         Dim dtProd As DataTable = frm.dtDetalle
 
@@ -520,7 +518,7 @@ Public Class F0_Movimiento
 
             InsertarProductosSinLote(dtProd, i)
         Next
-        dt.Rows.Clear()
+        'End Using
         dtMovimiento.Rows.Clear()
     End Sub
     Public Sub actualizarSaldo(ByRef dt As DataTable, CodProducto As Integer)
@@ -625,18 +623,65 @@ Public Class F0_Movimiento
         grProductos.RootTable.FormatConditions.Add(fc)
     End Sub
     Private Sub _prAddDetalleVenta()
-        'a.icid ,a.icibid ,a.iccprod ,b.cadesc as producto,a.iccant ,Cast(null as image ) as img,1 as estado
+        Try
+            Dim Bin As New MemoryStream
+            Dim Bin02 As New MemoryStream
+            Dim img As New Bitmap(My.Resources.delete, 28, 28)
+            Dim img02 As New Bitmap(My.Resources.add, 28, 28)
+            img.Save(Bin, Imaging.ImageFormat.Png)
+            img02.Save(Bin02, Imaging.ImageFormat.Png)
 
-        '      a.icid ,a.icibid ,a.iccprod ,b.yfcdprod1  as producto,a.iccant ,
-        'a.iclot ,a.icfvenc ,Cast(null as image ) as img,1 as estado,
-        '(Sum(inv.iccven )+a.iccant  ) as stock
-        Dim Bin As New MemoryStream
-        Dim Bin02 As New MemoryStream
-        Dim img As New Bitmap(My.Resources.delete, 28, 28)
-        Dim img02 As New Bitmap(My.Resources.add, 28, 28)
-        img.Save(Bin, Imaging.ImageFormat.Png)
-        img02.Save(Bin02, Imaging.ImageFormat.Png)
-        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", "", "", "", "", "", "", 0, "20500101", CDate("2050/01/01"), Bin.GetBuffer, Bin02.GetBuffer, 0, 0)
+            'CType(grdetalle.DataSource, DataTable).Columns.Add("eliminar", Type.GetType("System.Image"))
+            'CType(grdetalle.DataSource, DataTable).Columns.Add("nuevo", Type.GetType("System.Byte[]"))
+            'CType(grdetalle.DataSource, DataTable).Columns("Eliminar").AllowDBNull = True
+            'CType(grdetalle.DataSource, DataTable).Columns("Nuevo").AllowDBNull = True
+            'Dim data As Byte() = Bin.ToArray()
+            'Dim ms = New MemoryStream(data)
+            'Dim imagen = Image.FromStream(ms)
+
+            'CType(grdetalle.DataSource, DataTable).Columns("img").DataType = System.Type.GetType(“System.Image”)
+            'CType(grdetalle.DataSource, DataTable).Columns("imgAdd").DataType = System.Type.GetType(“System.Image”)
+            'Dim imagena As Byte() = Bin.ToArray()
+            ''Dim imagenn As Image = Image.FromStream(Bin)
+            ''Dim a As ImageConverter = New ImageConverter()
+            'Bin.Write(imagena, 0, imagena.Length)
+
+            CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", "", "", "", "", 0, "20500101", CDate("2050/01/01"), Bin.GetBuffer(), Bin02.GetBuffer(), 0, 0)
+            'CType(grdetalle.DataSource, DataTable).Rows("Eliminar")
+            'CType(grdetalle.DataSource, DataTable).Rows(0).Add("Eliminar", Type.GetType("System.Iamge"))
+            'CType(grdetalle.DataSource, DataTable).Columns.Add("Nuevo", Type.GetType("System.Iamge"))
+            'CType(grdetalle.DataSource, DataTable).Columns("img") = a.ConvertTo(My.Resources.delete, System.Type.GetType("System.Byte[]"))
+
+            ' ImageConverter.ConvertTo(Properties.Resources._1, System.Type.GetType("System.Byte[]"));
+            '      var ImageConverter = New ImageConverter();
+            ' row["Column1"] = imageConverter.ConvertTo(Properties.Resources._1, System.Type.GetType("System.Byte[]")); 
+
+            '' Dim bs As System.IO.Stream
+            ' Dim b(8000) As Byte
+
+            ' bs = New System.IO.MemoryStream()
+            ' b = dsFotos.Tables("Fotos").Rows(0)("Thumb")
+            ' bs.Write(b, 0, b.Length)
+            ' picImagen.Image = Image.FromStream(bs)
+
+
+
+        Catch ex As Exception
+
+
+            MostrarMensajeError(ex.Message)
+        End Try
+
+
+    End Sub
+    Private Sub MostrarMensajeError(mensaje As String)
+        ToastNotification.Show(Me,
+                               mensaje.ToUpper,
+                               My.Resources.WARNING,
+                               5000,
+                               eToastGlowColor.Red,
+                               eToastPosition.TopCenter)
+
     End Sub
     Public Function _fnSiguienteNumi()
         Dim dt As DataTable = CType(grdetalle.DataSource, DataTable)
@@ -887,11 +932,11 @@ Public Class F0_Movimiento
         '      a.icid ,a.icibid ,a.iccprod ,b.yfcdprod1  as producto,a.iccant ,
         'a.iclot ,a.icfvenc ,Cast(null as image ) as img,1 as estado,
         '(Sum(inv.iccven )+a.iccant  ) as stock
-        If (dt.Rows(fila).Item("Stock") <= 0) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-            Return
-        End If
+        'If (dt.Rows(fila).Item("Stock") <= 0) Then
+        '    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+        '    ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+        '    Return
+        'End If
 
         Dim pos As Integer = -1
         grdetalle.Row = grdetalle.RowCount - 1
@@ -903,20 +948,6 @@ Public Class F0_Movimiento
 
         Dim existe As Boolean = _fnExisteProducto(dt.Rows(fila).Item("Item"))
         If ((pos >= 0) And (Not existe)) Then
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccprod") = grProductos.GetValue("Item")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = grProductos.GetValue("CodigoFabrica")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = grProductos.GetValue("Marca")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = grProductos.GetValue("Medida")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = grProductos.GetValue("Categoria")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = grProductos.GetValue("yfcdprod1")
-
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = grProductos.GetValue("stock")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = grProductos.GetValue("Laboratorio")
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = grProductos.GetValue("Presentacion")
-
-            'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccant") = 1
-
-
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccprod") = dt.Rows(fila).Item("Item")
 
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = dt.Rows(fila).Item("CodigoFabrica")
@@ -924,11 +955,7 @@ Public Class F0_Movimiento
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = dt.Rows(fila).Item("Medida")
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = dt.Rows(fila).Item("Categoria")
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = dt.Rows(fila).Item("yfcdprod1")
-
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = dt.Rows(fila).Item("Laboratorio")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = dt.Rows(fila).Item("Presentacion")
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iccant") = dt.Rows(fila).Item("Cantidad")
-
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = dt.Rows(fila).Item("stock")
 
             ''    _DesHabilitarProductos()
@@ -1200,9 +1227,6 @@ salirIf:
 
                         CType(grdetalle.DataSource, DataTable).Rows(pos).Item("iclot") = grProductos.GetValue("iclot")
                         CType(grdetalle.DataSource, DataTable).Rows(pos).Item("icfvenc") = grProductos.GetValue("icfven")
-
-                        CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Laboratorio") = FilaSelectLote.Item("Laboratorio")
-                        CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Presentacion") = FilaSelectLote.Item("Presentacion")
                         CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = FilaSelectLote.Item("CodigoFabrica")
 
                         FilaSelectLote = Nothing

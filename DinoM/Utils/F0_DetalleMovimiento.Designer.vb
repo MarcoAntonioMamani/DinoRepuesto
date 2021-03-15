@@ -26,6 +26,10 @@ Partial Class F0_DetalleMovimiento
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.grProductos = New Janus.Windows.GridEX.GridEX()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lbConcepto = New DevComponents.DotNetBar.LabelX()
+        Me.tbAlmacenNombre = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
+        Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
         Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
@@ -51,7 +55,7 @@ Partial Class F0_DetalleMovimiento
         Me.GPanelProductos.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GPanelProductos.Location = New System.Drawing.Point(0, 0)
         Me.GPanelProductos.Name = "GPanelProductos"
-        Me.GPanelProductos.Size = New System.Drawing.Size(800, 121)
+        Me.GPanelProductos.Size = New System.Drawing.Size(1362, 121)
         '
         '
         '
@@ -91,7 +95,7 @@ Partial Class F0_DetalleMovimiento
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(794, 98)
+        Me.Panel7.Size = New System.Drawing.Size(1356, 98)
         Me.Panel7.TabIndex = 0
         '
         'grProductos
@@ -113,12 +117,16 @@ Partial Class F0_DetalleMovimiento
         Me.grProductos.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grProductos.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.grProductos.Size = New System.Drawing.Size(794, 57)
+        Me.grProductos.Size = New System.Drawing.Size(1356, 57)
         Me.grProductos.TabIndex = 0
         Me.grProductos.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.lbConcepto)
+        Me.Panel3.Controls.Add(Me.tbAlmacenNombre)
+        Me.Panel3.Controls.Add(Me.LabelX1)
+        Me.Panel3.Controls.Add(Me.ButtonX1)
         Me.Panel3.Controls.Add(Me.btnAgregar)
         Me.Panel3.Controls.Add(Me.LabelX9)
         Me.Panel3.Controls.Add(Me.tbProducto)
@@ -126,8 +134,75 @@ Partial Class F0_DetalleMovimiento
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 41)
+        Me.Panel3.Size = New System.Drawing.Size(1356, 41)
         Me.Panel3.TabIndex = 1
+        '
+        'lbConcepto
+        '
+        Me.lbConcepto.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lbConcepto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lbConcepto.Dock = System.Windows.Forms.DockStyle.Right
+        Me.lbConcepto.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbConcepto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lbConcepto.Location = New System.Drawing.Point(1081, 0)
+        Me.lbConcepto.Name = "lbConcepto"
+        Me.lbConcepto.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lbConcepto.Size = New System.Drawing.Size(171, 41)
+        Me.lbConcepto.TabIndex = 376
+        Me.lbConcepto.Text = "Concepto"
+        '
+        'tbAlmacenNombre
+        '
+        Me.tbAlmacenNombre.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.tbAlmacenNombre.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbAlmacenNombre.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbAlmacenNombre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.tbAlmacenNombre.Location = New System.Drawing.Point(655, 11)
+        Me.tbAlmacenNombre.Name = "tbAlmacenNombre"
+        Me.tbAlmacenNombre.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.tbAlmacenNombre.Size = New System.Drawing.Size(333, 23)
+        Me.tbAlmacenNombre.TabIndex = 375
+        Me.tbAlmacenNombre.Text = "Alnacen"
+        Me.tbAlmacenNombre.Visible = False
+        '
+        'LabelX1
+        '
+        Me.LabelX1.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX1.Location = New System.Drawing.Point(568, 11)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX1.Size = New System.Drawing.Size(73, 23)
+        Me.LabelX1.TabIndex = 374
+        Me.LabelX1.Text = "Alnacen:"
+        Me.LabelX1.Visible = False
+        '
+        'ButtonX1
+        '
+        Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.ButtonX1.Dock = System.Windows.Forms.DockStyle.Right
+        Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.refresh_1
+        Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX1.Location = New System.Drawing.Point(1252, 0)
+        Me.ButtonX1.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonX1.Name = "ButtonX1"
+        Me.ButtonX1.Size = New System.Drawing.Size(104, 41)
+        Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX1.TabIndex = 373
+        Me.ButtonX1.Text = "Actualizar"
         '
         'btnAgregar
         '
@@ -186,7 +261,7 @@ Partial Class F0_DetalleMovimiento
         Me.GroupPanel1.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 121)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(800, 329)
+        Me.GroupPanel1.Size = New System.Drawing.Size(1362, 329)
         '
         '
         '
@@ -225,7 +300,7 @@ Partial Class F0_DetalleMovimiento
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 306)
+        Me.Panel1.Size = New System.Drawing.Size(1356, 306)
         Me.Panel1.TabIndex = 0
         '
         'grProductoSeleccionado
@@ -240,7 +315,7 @@ Partial Class F0_DetalleMovimiento
         Me.grProductoSeleccionado.Name = "grProductoSeleccionado"
         Me.grProductoSeleccionado.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grProductoSeleccionado.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grProductoSeleccionado.Size = New System.Drawing.Size(794, 306)
+        Me.grProductoSeleccionado.Size = New System.Drawing.Size(1356, 306)
         Me.grProductoSeleccionado.TabIndex = 0
         Me.grProductoSeleccionado.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -248,7 +323,7 @@ Partial Class F0_DetalleMovimiento
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1362, 450)
         Me.Controls.Add(Me.GPanelProductos)
         Me.Controls.Add(Me.GroupPanel1)
         Me.Name = "F0_DetalleMovimiento"
@@ -275,4 +350,8 @@ Partial Class F0_DetalleMovimiento
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents grProductoSeleccionado As Janus.Windows.GridEX.GridEX
+    Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lbConcepto As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbAlmacenNombre As DevComponents.DotNetBar.LabelX
 End Class
