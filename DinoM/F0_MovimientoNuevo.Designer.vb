@@ -31,6 +31,11 @@ Partial Class F0_MovimientoNuevo
         Me.grdetalle = New Janus.Windows.GridEX.GridEX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.grAlmacen = New Janus.Windows.GridEX.GridEX()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
+        Me.LblProducto = New DevComponents.DotNetBar.LabelX()
         Me.cbDepositoDestino = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
         Me.lbDepositoDestino = New DevComponents.DotNetBar.LabelX()
         Me.cbAlmacenOrigen = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
@@ -68,6 +73,9 @@ Partial Class F0_MovimientoNuevo
         CType(Me.grdetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        CType(Me.grAlmacen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         CType(Me.cbDepositoDestino, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbAlmacenOrigen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbFecha, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -276,11 +284,11 @@ Partial Class F0_MovimientoNuevo
         Me.grdetalle.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdetalle.Location = New System.Drawing.Point(0, 0)
         Me.grdetalle.Name = "grdetalle"
-        Me.grdetalle.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.grdetalle.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grdetalle.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.grdetalle.Size = New System.Drawing.Size(1323, 410)
         Me.grdetalle.TabIndex = 0
-        Me.grdetalle.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        Me.grdetalle.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
         '
         'GroupPanel1
         '
@@ -327,6 +335,7 @@ Partial Class F0_MovimientoNuevo
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Controls.Add(Me.cbDepositoDestino)
         Me.Panel2.Controls.Add(Me.lbDepositoDestino)
         Me.Panel2.Controls.Add(Me.cbAlmacenOrigen)
@@ -345,6 +354,73 @@ Partial Class F0_MovimientoNuevo
         Me.Panel2.Size = New System.Drawing.Size(1323, 174)
         Me.Panel2.TabIndex = 0
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.grAlmacen)
+        Me.Panel3.Controls.Add(Me.Panel4)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel3.Location = New System.Drawing.Point(923, 0)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(400, 174)
+        Me.Panel3.TabIndex = 237
+        '
+        'grAlmacen
+        '
+        Me.grAlmacen.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.grAlmacen.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grAlmacen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grAlmacen.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grAlmacen.Location = New System.Drawing.Point(0, 40)
+        Me.grAlmacen.Name = "grAlmacen"
+        Me.grAlmacen.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.grAlmacen.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.grAlmacen.Size = New System.Drawing.Size(400, 134)
+        Me.grAlmacen.TabIndex = 1
+        Me.grAlmacen.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.btnAgregar)
+        Me.Panel4.Controls.Add(Me.LblProducto)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(400, 40)
+        Me.Panel4.TabIndex = 0
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnAgregar.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.clase_practica
+        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnAgregar.Location = New System.Drawing.Point(278, 0)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(122, 40)
+        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnAgregar.TabIndex = 373
+        Me.btnAgregar.Text = "Agregar"
+        '
+        'LblProducto
+        '
+        Me.LblProducto.AutoSize = True
+        Me.LblProducto.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LblProducto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LblProducto.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblProducto.ForeColor = System.Drawing.Color.Red
+        Me.LblProducto.Location = New System.Drawing.Point(3, 3)
+        Me.LblProducto.Name = "LblProducto"
+        Me.LblProducto.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LblProducto.Size = New System.Drawing.Size(54, 17)
+        Me.LblProducto.TabIndex = 238
+        Me.LblProducto.Text = "Código:"
+        '
         'cbDepositoDestino
         '
         cbDepositoDestino_DesignTimeLayout.LayoutString = resources.GetString("cbDepositoDestino_DesignTimeLayout.LayoutString")
@@ -352,14 +428,14 @@ Partial Class F0_MovimientoNuevo
         Me.cbDepositoDestino.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbDepositoDestino.Location = New System.Drawing.Point(344, 81)
         Me.cbDepositoDestino.Name = "cbDepositoDestino"
-        Me.cbDepositoDestino.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.cbDepositoDestino.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbDepositoDestino.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.cbDepositoDestino.SelectedIndex = -1
         Me.cbDepositoDestino.SelectedItem = Nothing
         Me.cbDepositoDestino.Size = New System.Drawing.Size(176, 22)
         Me.cbDepositoDestino.TabIndex = 235
         Me.cbDepositoDestino.Visible = False
-        Me.cbDepositoDestino.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        Me.cbDepositoDestino.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
         '
         'lbDepositoDestino
         '
@@ -386,14 +462,14 @@ Partial Class F0_MovimientoNuevo
         Me.cbAlmacenOrigen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbAlmacenOrigen.Location = New System.Drawing.Point(344, 34)
         Me.cbAlmacenOrigen.Name = "cbAlmacenOrigen"
-        Me.cbAlmacenOrigen.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.cbAlmacenOrigen.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbAlmacenOrigen.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.cbAlmacenOrigen.SelectedIndex = -1
         Me.cbAlmacenOrigen.SelectedItem = Nothing
         Me.cbAlmacenOrigen.Size = New System.Drawing.Size(176, 22)
         Me.cbAlmacenOrigen.TabIndex = 4
         Me.cbAlmacenOrigen.Visible = False
-        Me.cbAlmacenOrigen.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        Me.cbAlmacenOrigen.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
         '
         'lbDepositoOrigen
         '
@@ -501,13 +577,13 @@ Partial Class F0_MovimientoNuevo
         Me.cbConcepto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbConcepto.Location = New System.Drawing.Point(118, 74)
         Me.cbConcepto.Name = "cbConcepto"
-        Me.cbConcepto.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.cbConcepto.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbConcepto.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.cbConcepto.SelectedIndex = -1
         Me.cbConcepto.SelectedItem = Nothing
         Me.cbConcepto.Size = New System.Drawing.Size(176, 22)
         Me.cbConcepto.TabIndex = 2
-        Me.cbConcepto.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        Me.cbConcepto.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
         '
         'LabelX3
         '
@@ -640,27 +716,27 @@ Partial Class F0_MovimientoNuevo
         '
         'grmovimiento
         '
-        Me.grmovimiento.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
+        Me.grmovimiento.AllowEdit = janus.Windows.GridEX.InheritableBoolean.[False]
         Me.grmovimiento.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grmovimiento.EnterKeyBehavior = Janus.Windows.GridEX.EnterKeyBehavior.None
+        Me.grmovimiento.EnterKeyBehavior = janus.Windows.GridEX.EnterKeyBehavior.None
         Me.grmovimiento.FlatBorderColor = System.Drawing.Color.DodgerBlue
-        Me.grmovimiento.FocusStyle = Janus.Windows.GridEX.FocusStyle.Solid
+        Me.grmovimiento.FocusStyle = janus.Windows.GridEX.FocusStyle.Solid
         Me.grmovimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grmovimiento.GridLineColor = System.Drawing.Color.DodgerBlue
-        Me.grmovimiento.GridLineStyle = Janus.Windows.GridEX.GridLineStyle.Solid
-        Me.grmovimiento.GroupRowVisualStyle = Janus.Windows.GridEX.GroupRowVisualStyle.UseRowStyle
+        Me.grmovimiento.GridLineStyle = janus.Windows.GridEX.GridLineStyle.Solid
+        Me.grmovimiento.GroupRowVisualStyle = janus.Windows.GridEX.GroupRowVisualStyle.UseRowStyle
         Me.grmovimiento.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grmovimiento.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
+        Me.grmovimiento.HideSelection = janus.Windows.GridEX.HideSelection.Highlight
         Me.grmovimiento.Location = New System.Drawing.Point(0, 0)
         Me.grmovimiento.Name = "grmovimiento"
-        Me.grmovimiento.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.grmovimiento.Office2007ColorScheme = janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grmovimiento.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.grmovimiento.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grmovimiento.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grmovimiento.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
         Me.grmovimiento.Size = New System.Drawing.Size(1323, 607)
         Me.grmovimiento.TabIndex = 0
-        Me.grmovimiento.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        Me.grmovimiento.VisualStyle = janus.Windows.GridEX.VisualStyle.Office2007
         '
         'Timer1
         '
@@ -699,6 +775,10 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        CType(Me.grAlmacen, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         CType(Me.cbDepositoDestino, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbAlmacenOrigen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbFecha, System.ComponentModel.ISupportInitialize).EndInit()
@@ -731,4 +811,9 @@ Partial Class F0_MovimientoNuevo
     Friend WithEvents grmovimiento As Janus.Windows.GridEX.GridEX
     Friend WithEvents SuperTabItem2 As DevComponents.DotNetBar.SuperTabItem
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents LblProducto As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnAgregar As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents grAlmacen As Janus.Windows.GridEX.GridEX
 End Class

@@ -1,14 +1,12 @@
-﻿
-Imports Logica.AccesoLogica
+﻿Imports Logica.AccesoLogica
 Imports Janus.Windows.GridEX
 Imports DevComponents.DotNetBar
 Imports System.IO
 Imports DevComponents.DotNetBar.SuperGrid
 Imports System.Drawing
 Imports DevComponents.DotNetBar.Controls
-Imports DinoM.JanusExtension
 Imports System.Transactions
-
+Imports DinoM.JanusExtension
 Public Class F0_MovimientoNuevo
     Dim _Inter As Integer = 0
 #Region "Variables Globales"
@@ -43,7 +41,6 @@ Public Class F0_MovimientoNuevo
             Else
                 Lote = False
             End If
-
         End If
     End Sub
     Private Sub _prCargarComboLibreriaDeposito(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo)
@@ -125,7 +122,6 @@ Public Class F0_MovimientoNuevo
             cbAlmacenOrigen.ReadOnly = False
             cbConcepto.ReadOnly = False
         End If
-
         ColArNro(grdetalle, "stock", "Stock", 80, "0.00")
         btnGrabar.Enabled = True
     End Sub
@@ -215,7 +211,6 @@ Public Class F0_MovimientoNuevo
             ColAL(grdetalle, "CodigoMarca", "Cod. Marca", 100)
             ColAL(grdetalle, "Medida", "Medida", 90)
             ColAL(grdetalle, "producto", "Producto", 250)
-            ColArNro(grdetalle, "Cantidad", "Cantidad", 80, "0")
             ColCombo(grdetalle, "AlmOrigenId", "Alm. Origen", 150, cbAlmacenOrigen, True)
             ColCombo(grdetalle, "AlmDestinoId", "Alm. Destino", 150, cbDepositoDestino, IIf(cbConcepto.Value = 6, True, False))
             ColNoVisible(grdetalle, "img")
@@ -247,21 +242,14 @@ Public Class F0_MovimientoNuevo
     End Sub
     Private Sub _prCargarProductos()
         Dim dtname As DataTable = L_fnNameLabel()
-        ' Using a As New Object]
         If dtProductoGoblal Is Nothing Then
             If (Lote = True And cbConcepto.Value <> 1) Then
-                dtProductoGoblal = L_prMovimientoListarProductosConLote(cbAlmacenOrigen.Value)  ''1=Almacen
+                dtProductoGoblal = L_prMovimientoListarProductosConLote(cbAlmacenOrigen.Value)
                 actualizarSaldoSinLote(dtProductoGoblal)
-                'dtProductoGoblal = dt
             Else
-                dtProductoGoblal = L_prMovimientoListarProductos(cbAlmacenOrigen.Value)  ''1=Almacen
-                'dtProductoGoblal = dt
+                dtProductoGoblal = L_prMovimientoListarProductos(cbAlmacenOrigen.Value)
             End If
         End If
-
-
-
-
         Dim dtMovimiento As DataTable = dtProductoGoblal.Copy
         dtMovimiento.Rows.Clear()
         Dim detalle As DataTable = CType(grdetalle.DataSource, DataTable)
@@ -274,37 +262,25 @@ Public Class F0_MovimientoNuevo
 
                     If (dtProductoGoblal.Rows(j).Item("Item") = codigoProducto) Then
                         dtProductoGoblal.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("Cantidad")
-                        'dt.Rows(j).Item("yhprecio") = detalle.Rows(i).Item("tbpbas")
                         dtMovimiento.ImportRow(dtProductoGoblal.Rows(j))
                     End If
-
                 Next
-
-
             End If
-
-
         Next
-
         Dim frm As F0_DetalleMovimiento
-
         frm = New F0_DetalleMovimiento(dtProductoGoblal, dtMovimiento, dtname)
         frm.lbConcepto.Text = cbConcepto.Text
         frm.tbAlmacenNombre.Text = cbAlmacenOrigen.Text
         frm.ShowDialog()
         Dim dtProd As DataTable = frm.dtDetalle
-
         For i As Integer = 0 To dtProd.Rows.Count - 1 Step 1
-
             InsertarProductosSinLote(dtProd, i)
         Next
-
         dtMovimiento.Rows.Clear()
     End Sub
     Public Sub actualizarSaldo(ByRef dt As DataTable, CodProducto As Integer)
 
         Dim _detalle As DataTable = CType(grdetalle.DataSource, DataTable)
-
         For i As Integer = 0 To dt.Rows.Count - 1 Step 1
             Dim lote As String = dt.Rows(i).Item("iclot")
             Dim FechaVenc As Date = dt.Rows(i).Item("icfven")
@@ -327,53 +303,13 @@ Public Class F0_MovimientoNuevo
         Try
             Dim Bin As New MemoryStream
             Dim Bin02 As New MemoryStream
-            Dim img As New Bitmap(My.Resources.delete, 28, 28)
-            Dim img02 As New Bitmap(My.Resources.add, 28, 28)
-            img.Save(Bin, Imaging.ImageFormat.Png)
-            img02.Save(Bin02, Imaging.ImageFormat.Png)
-
-            'CType(grdetalle.DataSource, DataTable).Columns.Add("eliminar", Type.GetType("System.Image"))
-            'CType(grdetalle.DataSource, DataTable).Columns.Add("nuevo", Type.GetType("System.Byte[]"))
-            'CType(grdetalle.DataSource, DataTable).Columns("Eliminar").AllowDBNull = True
-            'CType(grdetalle.DataSource, DataTable).Columns("Nuevo").AllowDBNull = True
-            'Dim data As Byte() = Bin.ToArray()
-            'Dim ms = New MemoryStream(data)
-            'Dim imagen = Image.FromStream(ms)
-
-            'CType(grdetalle.DataSource, DataTable).Columns("img").DataType = System.Type.GetType(“System.Image”)
-            'CType(grdetalle.DataSource, DataTable).Columns("imgAdd").DataType = System.Type.GetType(“System.Image”)
-            'Dim imagena As Byte() = Bin.ToArray()
-            ''Dim imagenn As Image = Image.FromStream(Bin)
-            ''Dim a As ImageConverter = New ImageConverter()
-            'Bin.Write(imagena, 0, imagena.Length)
-
-            CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", "", "", "", "", 0, 1, 1, Bin.GetBuffer(), Bin02.GetBuffer(), 0, 0)
-            'CType(grdetalle.DataSource, DataTable).Rows("Eliminar")
-            'CType(grdetalle.DataSource, DataTable).Rows(0).Add("Eliminar", Type.GetType("System.Iamge"))
-            'CType(grdetalle.DataSource, DataTable).Columns.Add("Nuevo", Type.GetType("System.Iamge"))
-            'CType(grdetalle.DataSource, DataTable).Columns("img") = a.ConvertTo(My.Resources.delete, System.Type.GetType("System.Byte[]"))
-
-            ' ImageConverter.ConvertTo(Properties.Resources._1, System.Type.GetType("System.Byte[]"));
-            '      var ImageConverter = New ImageConverter();
-            ' row["Column1"] = imageConverter.ConvertTo(Properties.Resources._1, System.Type.GetType("System.Byte[]")); 
-
-            '' Dim bs As System.IO.Stream
-            ' Dim b(8000) As Byte
-
-            ' bs = New System.IO.MemoryStream()
-            ' b = dsFotos.Tables("Fotos").Rows(0)("Thumb")
-            ' bs.Write(b, 0, b.Length)
-            ' picImagen.Image = Image.FromStream(bs)
-
-
-
+            ObtenerImagenAddDetalle(Bin, Bin02)
+            'Obtiene el Id Mayor
+            Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+            CType(grdetalle.DataSource, DataTable).Rows.Add(idMayor + 1, 0, 0, "", "", "", "", "", 0, 1, 1, Bin.GetBuffer(), Bin02.GetBuffer(), 0, 0)
         Catch ex As Exception
-
-
             MostrarMensajeError(ex.Message)
         End Try
-
-
     End Sub
     Private Sub MostrarMensajeError(mensaje As String)
         ToastNotification.Show(Me,
@@ -384,111 +320,62 @@ Public Class F0_MovimientoNuevo
                                eToastPosition.TopCenter)
 
     End Sub
-    Public Function _fnSiguienteNumi()
-        Dim dt As DataTable = CType(grdetalle.DataSource, DataTable)
-        Dim mayor As Integer = 0
-        For i As Integer = 0 To dt.Rows.Count - 1 Step 1
-            Dim data As Integer = IIf(IsDBNull(CType(grdetalle.DataSource, DataTable).Rows(i).Item("Id")), 0, CType(grdetalle.DataSource, DataTable).Rows(i).Item("Id"))
-            If (data > mayor) Then
-                mayor = data
+    Private Sub MostrarMensaje(mensaje As String)
+        ToastNotification.Show(Me,
+                               mensaje.ToUpper,
+                               My.Resources.mensaje,
+                               2000,
+                               eToastGlowColor.Red,
+                               eToastPosition.TopCenter)
 
-            End If
-        Next
-        Return mayor
-    End Function
+    End Sub
     Public Function _fnAccesible()
         Return tbFecha.IsInputReadOnly = False
     End Function
     Private Sub _HabilitarProductos()
         _prCargarProductos()
     End Sub
-
-    Public Sub _fnObtenerFilaDetalle(ByRef pos As Integer, numi As Integer)
-        For i As Integer = 0 To CType(grdetalle.DataSource, DataTable).Rows.Count - 1 Step 1
-            Dim _numi As Integer = CType(grdetalle.DataSource, DataTable).Rows(i).Item("Id")
-            If (_numi = numi) Then
-                pos = i
-                Return
-            End If
-        Next
-    End Sub
-
     Public Function _fnExisteProducto(idprod As Integer) As Boolean
         For i As Integer = 0 To CType(grdetalle.DataSource, DataTable).Rows.Count - 1 Step 1
             Dim _idprod As Integer = CType(grdetalle.DataSource, DataTable).Rows(i).Item("ProductoId")
             Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(i).Item("estado")
             If (_idprod = idprod And estado >= 0) Then
-
                 Return True
             End If
         Next
         Return False
     End Function
-    Public Sub _prEliminarFila()
-        If (grdetalle.Row >= 0) Then
-            If (grdetalle.RowCount >= 2) Then
-                Dim estado As Integer = grdetalle.GetValue("estado")
-                Dim pos As Integer = -1
-                Dim lin As Integer = grdetalle.GetValue("Id")
-                _fnObtenerFilaDetalle(pos, lin)
-                If (estado = 0) Then
-                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("estado") = -2
-
-                End If
-                If (estado = 1) Then
-                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("estado") = -1
-                End If
-                grdetalle.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grdetalle.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
-
-                grdetalle.Select()
-                grdetalle.Col = 4
-                grdetalle.Row = grdetalle.RowCount - 1
-            End If
-        End If
-
-
-    End Sub
     Public Function _ValidarCampos() As Boolean
         If (cbConcepto.SelectedIndex < 0) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            ToastNotification.Show(Me, "Por Favor Seleccione un Concepto".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-            cbConcepto.Focus()
+            MostrarMensaje("Por Favor Seleccione un Concepto")
             Return False
-
         End If
         If (cbAlmacenOrigen.SelectedIndex < 0) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            ToastNotification.Show(Me, "Por Favor Seleccione un Deposito".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            MostrarMensaje("Por Favor Seleccione un Deposito")
             cbAlmacenOrigen.Focus()
             Return False
         End If
         If (cbConcepto.SelectedIndex >= 0) Then
             If (cbConcepto.Value = 6) Then
                 If (cbDepositoDestino.SelectedIndex < 0) Then
-                    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-                    ToastNotification.Show(Me, "Por Favor Seleccione un Deposito Desitno".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                    MostrarMensaje("Por Favor Seleccione un Deposito Desitno")
                     cbDepositoDestino.Focus()
                     Return False
                 End If
             End If
         End If
         If (grdetalle.RowCount <= 0) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            ToastNotification.Show(Me, "Por Favor Inserte un Detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            MostrarMensaje("Por Favor Inserte un Detalle")
             grdetalle.Focus()
-
             Return False
         End If
         If (grdetalle.RowCount = 1) Then
             If (CType(grdetalle.DataSource, DataTable).Rows(0).Item("ProductoId") = 0) Then
-                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-                ToastNotification.Show(Me, "Por Favor Inserte un Detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                MostrarMensaje("Por Favor Inserte un Detalle")
                 grdetalle.Focus()
-
                 Return False
             End If
         End If
-
         Return True
     End Function
     Private Sub MostrarMensajeOk(mensaje As String)
@@ -498,28 +385,6 @@ Public Class F0_MovimientoNuevo
                                5000,
                                eToastGlowColor.Green,
                                eToastPosition.TopCenter)
-    End Sub
-    Sub _prGuardarTraspaso()
-        Dim Id As String = ""
-        Dim res As Boolean = L_prMovimientoChoferGrabar(Id, tbFecha.Value.ToString("yyyy/MM/dd"), cbConcepto.Value, tbObservacion.Text, cbAlmacenOrigen.Value, cbDepositoDestino.Value, 0, CType(grdetalle.DataSource, DataTable))
-        If res Then
-
-            Dim resDestino As Boolean = l_MovimientoGuardar(Id, tbFecha.Value.ToString("yyyy/MM/dd"), cbConcepto.Value, tbObservacion.Text, CType(grdetalle.DataSource, DataTable))
-            If resDestino Then
-                _prCargarMovimiento()
-                _Limpiar()
-                Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-                ToastNotification.Show(Me, "Código de Movimiento ".ToUpper + tbCodigo.Text + " Grabado con Exito.".ToUpper,
-                                          img, 2000,
-                                          eToastGlowColor.Green,
-                                          eToastPosition.TopCenter
-                                          )
-            End If
-
-        Else
-            Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "El Movimiento no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-        End If
     End Sub
     Public Sub _GuardarNuevo()
         Try
@@ -561,15 +426,11 @@ Public Class F0_MovimientoNuevo
         If btnGrabar.Enabled = True Then
             _prInhabiliitar()
             If grmovimiento.RowCount > 0 Then
-
                 _prMostrarRegistro(0)
-
             End If
         Else
-
             _modulo.Select()
             Me.Close()
-
         End If
     End Sub
     Public Sub _prCargarIconELiminar()
@@ -590,68 +451,32 @@ Public Class F0_MovimientoNuevo
             Next
         End If
     End Sub
-    Public Sub _PrimerRegistro()
-        Dim _MPos As Integer
-        If grmovimiento.RowCount > 0 Then
-            _MPos = 0
-            ''   _prMostrarRegistro(_MPos)
-            grmovimiento.Row = _MPos
-        End If
-    End Sub
-
     Public Sub InsertarProductosSinLote(dt As DataTable, fila As Integer)
-        Dim pos As Integer = -1
         grdetalle.Row = grdetalle.RowCount - 1
         If (grdetalle.GetValue("ProductoId") <> 0) Then
             _prAddDetalleVenta()
             grdetalle.Row = grdetalle.RowCount - 1
         End If
-        _fnObtenerFilaDetalle(pos, grdetalle.GetValue("Id"))
-
+        Dim posicionFila As Integer = ObtenerPosicionFila(grdetalle, "Id")
         Dim existe As Boolean = _fnExisteProducto(dt.Rows(fila).Item("Item"))
-        If ((pos >= 0) And (Not existe)) Then
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("ProductoId") = dt.Rows(fila).Item("Item")
-
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = dt.Rows(fila).Item("CodigoFabrica")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = dt.Rows(fila).Item("Marca")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Medida") = dt.Rows(fila).Item("Medida")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("CategoriaProducto") = dt.Rows(fila).Item("Categoria")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("producto") = dt.Rows(fila).Item("yfcdprod1")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Cantidad") = dt.Rows(fila).Item("Cantidad")
-            CType(grdetalle.DataSource, DataTable).Rows(pos).Item("stock") = dt.Rows(fila).Item("stock")
+        If ((posicionFila >= 0) And (Not existe)) Then
+            SetCelValor(grdetalle, posicionFila, "ProductoId", dt.Rows(fila).Item("Item"))
+            SetCelValor(grdetalle, posicionFila, "CodigoFabrica", dt.Rows(fila).Item("CodigoFabrica"))
+            SetCelValor(grdetalle, posicionFila, "CodigoMarca", dt.Rows(fila).Item("Marca"))
+            SetCelValor(grdetalle, posicionFila, "Medida", dt.Rows(fila).Item("Medida"))
+            SetCelValor(grdetalle, posicionFila, "CategoriaProducto", dt.Rows(fila).Item("Categoria"))
+            SetCelValor(grdetalle, posicionFila, "producto", dt.Rows(fila).Item("yfcdprod1"))
+            SetCelValor(grdetalle, posicionFila, "Cantidad", dt.Rows(fila).Item("Cantidad"))
+            SetCelValor(grdetalle, posicionFila, "stock", dt.Rows(fila).Item("stock"))
         Else
             If (existe) Then
-                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-                ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                MostrarMensaje("El producto ya existe en el detalle")
             End If
         End If
     End Sub
-
-    Public Function _fnExisteProductoConLote(idprod As Integer, lote As String, fechaVenci As Date) As Boolean
-        For i As Integer = 0 To CType(grdetalle.DataSource, DataTable).Rows.Count - 1 Step 1
-            Dim _idprod As Integer = CType(grdetalle.DataSource, DataTable).Rows(i).Item("ProductoId")
-            Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(i).Item("estado")
-            '          a.tbnumi ,a.tbtv1numi ,a.tbty5prod ,b.yfcdprod1 as producto,a.tbest ,a.tbcmin ,a.tbumin ,Umin .ycdes3 as unidad,a.tbpbas ,a.tbptot ,a.tbobs ,
-            'a.tbpcos,a.tblote ,a.tbfechaVenc , a.tbptot2, a.tbfact ,a.tbhact ,a.tbuact,1 as estado,Cast(null as Image) as img,
-            'Cast (0 as decimal (18,2)) as stock
-            Dim _LoteDetalle As String = CType(grdetalle.DataSource, DataTable).Rows(i).Item("iclot")
-            Dim _FechaVencDetalle As Date = CType(grdetalle.DataSource, DataTable).Rows(i).Item("icfvenc")
-            If (_idprod = idprod And estado >= 0 And lote = _LoteDetalle And fechaVenci = _FechaVencDetalle) Then
-
-                Return True
-            End If
-        Next
-        Return False
-    End Function
-
-
-
 #End Region
 
 #Region "Eventos Formulario"
-
-
-
     Private Sub F0_Movimiento_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _IniciarTodo()
         btnNuevo.PerformClick()
@@ -674,8 +499,6 @@ Public Class F0_MovimientoNuevo
 
     Private Sub grdetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grdetalle.EditingCell
         If (_fnAccesible()) Then
-
-            'Habilitar solo las columnas de Precio, %, Monto y Observación
             If (e.Column.Index = grdetalle.RootTable.Columns("Cantidad").Index Or e.Column.Index = grdetalle.RootTable.Columns("AlmOrigenId").Index Or
                 e.Column.Index = grdetalle.RootTable.Columns("AlmDestinoId").Index) Then
                 e.Cancel = False
@@ -686,99 +509,15 @@ Public Class F0_MovimientoNuevo
             e.Cancel = True
         End If
     End Sub
-    Public Function SeleccionarCategoria(newItem As Boolean) As Integer
-        Dim dt As DataTable
-        Dim idCategoria As Integer = 0
-        Dim nombreCategoria As String
-        dt = L_fnListarCategoriaVentas()
-        '   yccod3,ycdes3 
-
-        Dim listEstCeldas As New List(Of Modelo.Celda)
-        listEstCeldas.Add(New Modelo.Celda("yccod3,", True, "Codigo", 100))
-        listEstCeldas.Add(New Modelo.Celda("ycdes3", True, "Nombre Categoria", 500))
-
-        Dim ef = New Efecto
-        ef.tipo = 3
-        ef.dt = dt
-        ef.SeleclCol = 2
-        ef.listEstCeldas = listEstCeldas
-        ef.alto = 50
-        ef.ancho = 500
-        ef.Context = "Seleccione Categoria".ToUpper
-        ef.ShowDialog()
-        Dim bandera As Boolean = False
-        bandera = ef.band
-        If (bandera = True) Then
-            Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
-            ''yccod3,ycdes3 
-            idCategoria = Row.Cells("yccod3").Value
-            nombreCategoria = Row.Cells("ycdes3").Value
-            If (idCategoria > 0) Then
-                'If (newItem = True) Then
-                '    _prAddDetalleVenta()
-                'End If
-                _HabilitarProductos()
-            End If
-        End If
-        Return idCategoria
-    End Function
-    Private Sub grdetalle_KeyDown(sender As Object, e As KeyEventArgs) Handles grdetalle.KeyDown
-        If (Not _fnAccesible()) Then
-            Return
-        End If
-
-        If (e.KeyData = Keys.Enter) Then
-            Dim f, c As Integer
-            c = grdetalle.Col
-            f = grdetalle.Row
-
-            If (grdetalle.Col = grdetalle.RootTable.Columns("Cantidad").Index) Then
-                If (grdetalle.GetValue("producto") <> String.Empty) Then
-                    '_prAddDetalleVenta()
-                    _HabilitarProductos()
-                    ' SeleccionarCategoria(True)
-                Else
-                    ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
-                End If
-
-            End If
-            If (grdetalle.Col = grdetalle.RootTable.Columns("producto").Index) Then
-                If (grdetalle.GetValue("producto") <> String.Empty) Then
-                    '_prAddDetalleVenta()
-                    _HabilitarProductos()
-                    'SeleccionarCategoria(True)
-                Else
-                    ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
-                End If
-
-            End If
-salirIf:
-        End If
-
-        If (e.KeyData = Keys.Control + Keys.Enter And grdetalle.Row >= 0 And
-            grdetalle.Col = grdetalle.RootTable.Columns("producto").Index) Then
-            Dim indexfil As Integer = grdetalle.Row
-            Dim indexcol As Integer = grdetalle.Col
-            _HabilitarProductos()
-            'SeleccionarCategoria(True)
-        End If
-        If (e.KeyData = Keys.Escape And grdetalle.Row >= 0) Then
-
-            _prEliminarFila()
-
-
-        End If
-
-
-
-    End Sub
     Private Sub grdetalle_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.CellValueChanged
         Try
             'Celda Cantidad
             If (e.Column.Index = CelIndex(grdetalle, "Cantidad")) Then
                 Dim cantidad As Integer = grdetalle.GetValue("Cantidad")
                 Dim stock As Integer = grdetalle.GetValue("Stock")
-                Dim posicion = obtenerPosicion()
+
+                Dim posicion = ObtenerPosicionFila(grdetalle, "Id")
+
                 Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado")
                 If cbConcepto.Value = 2 And cbConcepto.Value = 6 Then
                     If cantidad > stock Then
@@ -804,7 +543,8 @@ salirIf:
 
             'Celda Almacen de origen
             If (e.Column.Index = CelIndex(grdetalle, "AlmOrigenId")) Then
-                Dim posicion = obtenerPosicion()
+
+                Dim posicion = ObtenerPosicionFila(grdetalle, "Id")
                 Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado")
 
                 Dim productoId As Integer = grdetalle.GetValue("ProductoId")
@@ -832,25 +572,15 @@ salirIf:
             CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado") = 2
         End If
     End Sub
-
-    Public Function obtenerPosicion() As Integer
-        Dim lin As Integer = grdetalle.GetValue("Id")
-        Dim pos As Integer = -1
-        _fnObtenerFilaDetalle(pos, lin)
-        Return pos
-    End Function
     Private Sub grdetalle_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.CellEdited
-        If (e.Column.Index = grdetalle.RootTable.Columns("Cantidad").Index) Then
+        If (e.Column.Index = CelIndex(grdetalle, "Cantidad")) Then
             If (Not IsNumeric(grdetalle.GetValue("Cantidad")) Or grdetalle.GetValue("Cantidad").ToString = String.Empty) Then
-
                 grdetalle.SetValue("Cantidad", 1)
             Else
                 If (grdetalle.GetValue("Cantidad") > 0) Then
                     Dim stock As Double = grdetalle.GetValue("stock")
                     If (grdetalle.GetValue("Cantidad") > stock And cbConcepto.Value <> 1) Then
-                        Dim lin As Integer = grdetalle.GetValue("Id")
-                        Dim pos As Integer = -1
-                        _fnObtenerFilaDetalle(pos, lin)
+                        Dim pos As Integer = ObtenerPosicionFila(grdetalle, "Id")
                         CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Cantidad") = stock
                         grdetalle.SetValue("Cantidad", stock)
                         Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
@@ -861,48 +591,48 @@ salirIf:
                           eToastPosition.BottomLeft)
                     End If
                 Else
-
                     grdetalle.SetValue("Cantidad", 1)
-
                 End If
             End If
         End If
     End Sub
 
     Private Sub grdetalle_MouseClick(sender As Object, e As MouseEventArgs) Handles grdetalle.MouseClick
-        If (Not _fnAccesible()) Then
-            Return
-        End If
-
-        If (grdetalle.RowCount >= 2) Then
-            If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
-                _prEliminarFila()
-            End If
-        End If
         Try
+            If (Not _fnAccesible()) Then
+                Return
+            End If
+
+            If (grdetalle.RowCount >= 2) Then
+                If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
+
+                    EliminarFilaDetalle()
+                End If
+            End If
+
             If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("imgAdd").Index) Then
                 _HabilitarProductos()
-                ' SeleccionarCategoria(True)
             End If
         Catch ex As Exception
-
+            MostrarMensajeError(ex.Message)
         End Try
-
     End Sub
-
+    Private Sub EliminarFilaDetalle()
+        Dim colProducto = 7
+        EliminarFIla(grdetalle, "Id", "estado")
+        grdetalle.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grdetalle.RootTable.Columns("estado"), janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+        grdetalle.Select()
+        grdetalle.Col = 7
+        grdetalle.Row = grdetalle.RowCount - 1
+    End Sub
     Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
         If _ValidarCampos() = False Then
             Exit Sub
         End If
-
         If (tbCodigo.Text = String.Empty) Then
             _GuardarNuevo()
         Else
-            If (tbCodigo.Text <> String.Empty) Then
-                _prGuardarModificado()
-                ''    _prInhabiliitar()
-
-            End If
+            _prGuardarModificado()
         End If
     End Sub
 
@@ -913,7 +643,6 @@ salirIf:
             btnModificar.Enabled = False
             btnEliminar.Enabled = False
             btnGrabar.Enabled = True
-
             PanelInferior.Enabled = False
             _prCargarIconELiminar()
         End If
@@ -921,8 +650,6 @@ salirIf:
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim ef = New Efecto
-
-
         ef.tipo = 2
         ef.Context = "¿esta seguro de eliminar el registro?".ToUpper
         ef.Header = "mensaje principal".ToUpper
@@ -933,77 +660,49 @@ salirIf:
             Dim mensajeError As String = ""
             Dim res As Boolean = L_prMovimientoEliminar(tbCodigo.Text)
             If res Then
-
-
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-
                 ToastNotification.Show(Me, "Código de Movimiento ".ToUpper + tbCodigo.Text + " eliminado con Exito.".ToUpper,
                                           img, 2000,
                                           eToastGlowColor.Green,
                                           eToastPosition.TopCenter)
-
                 _prFiltrar()
-
             Else
                 Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
                 ToastNotification.Show(Me, mensajeError, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
             End If
         End If
     End Sub
-
-    Private Sub btnSiguiente_Click(sender As Object, e As EventArgs) Handles btnSiguiente.Click
-        Dim _pos As Integer = grmovimiento.Row
-        If _pos < grmovimiento.RowCount - 1 Then
-            _pos = grmovimiento.Row + 1
-            '' _prMostrarRegistro(_pos)
-            grmovimiento.Row = _pos
-        End If
-    End Sub
-
     Private Sub btnPrimero_Click(sender As Object, e As EventArgs) Handles btnPrimero.Click
-        _PrimerRegistro()
+        navegarPrimerRegistro(grmovimiento)
     End Sub
-
+    Private Sub btnSiguiente_Click(sender As Object, e As EventArgs) Handles btnSiguiente.Click
+        navegarSiguienteRegistro(grmovimiento)
+    End Sub
     Private Sub btnUltimo_Click(sender As Object, e As EventArgs) Handles btnUltimo.Click
-        Dim _pos As Integer = grmovimiento.Row
-        If grmovimiento.RowCount > 0 Then
-            _pos = grmovimiento.RowCount - 1
-            ''  _prMostrarRegistro(_pos)
-            grmovimiento.Row = _pos
-        End If
+        navegarUltimoRegistro(grmovimiento)
     End Sub
 
     Private Sub btnAnterior_Click(sender As Object, e As EventArgs) Handles btnAnterior.Click
-        Dim _MPos As Integer = grmovimiento.Row
-        If _MPos > 0 And grmovimiento.RowCount > 0 Then
-            _MPos = _MPos - 1
-            ''  _prMostrarRegistro(_MPos)
-            grmovimiento.Row = _MPos
-        End If
+        navegarAnteriorRegistro(grmovimiento)
     End Sub
 
     Private Sub grdetalle_Enter(sender As Object, e As EventArgs) Handles grdetalle.Enter
         If (grdetalle.RowCount > 0) Then
             grdetalle.Select()
-            grdetalle.Col = 3
-            grdetalle.Row = 0
+            SeleccionarColumnaFila(grdetalle, 3, 0)
         End If
     End Sub
 
-    Private Sub cbAlmacen_KeyDown(sender As Object, e As KeyEventArgs) Handles cbAlmacenOrigen.KeyDown
+    Private Sub cbAlmacen_KeyDown(sender As Object, e As KeyEventArgs) Handles cbAlmacenOrigen.KeyDown, grdetalle.KeyDown
         If (_fnAccesible()) Then
             If e.KeyData = Keys.Enter Then
                 grdetalle.Focus()
-                'grdetalle.Select()
-                grdetalle.Col = 2
-                grdetalle.Row = 0
+                SeleccionarColumnaFila(grdetalle, 2, 0)
             End If
         End If
     End Sub
 
     Private Sub cbConcepto_ValueChanged(sender As Object, e As EventArgs) Handles cbConcepto.ValueChanged
-
-
         If (cbConcepto.SelectedIndex >= 0) Then
             If (cbConcepto.Value = 6) Then ''''Movimiento 6=Traspaso Salida
                 If (CType(cbAlmacenOrigen.DataSource, DataTable).Rows.Count > 1) Then
@@ -1053,19 +752,10 @@ salirIf:
         End If
     End Sub
 
-    Private Sub grProductos_DoubleClick(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub grmovimiento_SelectionChanged(sender As Object, e As EventArgs) Handles grmovimiento.SelectionChanged
         If (grmovimiento.RowCount >= 0 And grmovimiento.Row >= 0) Then
             _prMostrarRegistro(grmovimiento.Row)
         End If
     End Sub
-
-
-
-
-
 #End Region
 End Class

@@ -1,4 +1,6 @@
 ﻿Imports System.Drawing
+Imports System.IO
+Imports DevComponents.DotNetBar
 Imports Janus.Windows
 Imports Janus.Windows.GridEX
 Imports Janus.Windows.GridEX.EditControls
@@ -133,6 +135,10 @@ Public Class JanusExtension
     Public Shared Function CelIndex(grid As GridEX, key As String) As Integer
         Return grid.RootTable.Columns(key).Index
     End Function
+    Public Shared Sub SeleccionarColumnaFila(grid As GridEX, columna As Integer, fila As Integer)
+        grid.Col = columna
+        grid.Row = fila
+    End Sub
 
 #End Region
 
@@ -154,6 +160,16 @@ Public Class JanusExtension
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
         End With
     End Sub
+    Public Shared Sub ObtenerFilaDetalle(ByRef pos As Integer, numi As Integer, griex As GridEX)
+        For i As Integer = 0 To CType(griex.DataSource, DataTable).Rows.Count - 1 Step 1
+            Dim _numi As Integer = CType(griex.DataSource, DataTable).Rows(i).Item("Id")
+            If (_numi = numi) Then
+                pos = i
+                Return
+            End If
+        Next
+    End Sub
+
 #End Region
 #Region "MultiColumnCombo"
     Public Shared Sub seleccionarPrimero(combo As MultiColumnCombo)
@@ -162,6 +178,70 @@ Public Class JanusExtension
         Catch ex As Exception
 
         End Try
+    End Sub
+#End Region
+#Region "Imagenes"
+    Public Shared Sub ObtenerImagenAddDetalle(ByRef bin As MemoryStream, Optional ByRef Bin02 As MemoryStream = Nothing)
+        Dim img As New Bitmap(My.Resources.delete, 28, 28)
+        Dim img02 As New Bitmap(My.Resources.add, 28, 28)
+        img.Save(bin, Imaging.ImageFormat.Png)
+        img02.Save(Bin02, Imaging.ImageFormat.Png)
+    End Sub
+#End Region
+#Region "Metodos Datatable"
+    Public Shared Function ObtenerIdMayor(griex As GridEX, key As String) As Integer
+        Dim dt As DataTable = CType(griex.DataSource, DataTable)
+        Dim mayor As Integer = 0
+        For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+            Dim data As Integer = IIf(IsDBNull(CType(griex.DataSource, DataTable).Rows(i).Item(key)), 0, CType(griex.DataSource, DataTable).Rows(i).Item(key))
+            If (data > mayor) Then
+                mayor = data
+            End If
+        Next
+        Return mayor
+    End Function
+    Public Shared Sub EliminarFIla(griex As GridEX, key As String, keyEstado As String)
+        If (griex.Row >= 0) Then
+            If (griex.RowCount >= 2) Then
+                Dim estado As Integer = griex.GetValue(keyEstado)
+                Dim posicion = ObtenerPosicionFila(griex, key)
+                If (estado = 0) Then
+                    SetCelValor(griex, posicion, keyEstado, -2)
+                End If
+                If (estado = 1) Then
+                    SetCelValor(griex, posicion, keyEstado, -1)
+                End If
+            End If
+        End If
+    End Sub
+    Public Shared Function ObtenerPosicionFila(griex As GridEX, key As String) As Integer
+        Dim valor As Integer = griex.GetValue(key)
+        Dim posicion As Integer = -1
+        ObtenerFilaDetalle(posicion, valor, griex)
+        Return posicion
+    End Function
+
+    Public Shared Sub navegarPrimerRegistro(griex As GridEX)
+        If griex.RowCount > 0 Then
+            griex.Row = 0
+        End If
+    End Sub
+    Public Shared Sub navegarSiguienteRegistro(griex As GridEX)
+        Dim posicion As Integer = griex.Row
+        If posicion < griex.RowCount - 1 Then
+            griex.Row = griex.Row + 1
+        End If
+    End Sub
+    Public Shared Sub navegarUltimoRegistro(griex As GridEX)
+        If griex.RowCount > 0 Then
+            griex.Row = griex.RowCount - 1
+        End If
+    End Sub
+    Public Shared Sub navegarAnteriorRegistro(griex As GridEX)
+        Dim posicion As Integer = griex.Row
+        If posicion > 0 And griex.RowCount > 0 Then
+            griex.Row = griex.Row - 1
+        End If
     End Sub
 #End Region
 

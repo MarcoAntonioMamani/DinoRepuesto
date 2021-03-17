@@ -221,7 +221,7 @@ Partial Class F1_Productos
         Me.SuperTabPrincipal.ControlBox.MenuBox.Name = ""
         Me.SuperTabPrincipal.ControlBox.Name = ""
         Me.SuperTabPrincipal.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabPrincipal.ControlBox.MenuBox, Me.SuperTabPrincipal.ControlBox.CloseBox})
-        Me.SuperTabPrincipal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabPrincipal.Size = New System.Drawing.Size(1354, 711)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelBuscador, 0)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelRegistro, 0)
@@ -229,12 +229,12 @@ Partial Class F1_Productos
         'SuperTabControlPanelBuscador
         '
         Me.SuperTabControlPanelBuscador.Location = New System.Drawing.Point(0, 0)
-        Me.SuperTabControlPanelBuscador.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanelBuscador.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControlPanelBuscador.Size = New System.Drawing.Size(1322, 711)
         '
         'SuperTabControlPanelRegistro
         '
-        Me.SuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControlPanelRegistro.Size = New System.Drawing.Size(1322, 711)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelSuperior, 0)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelInferior, 0)
@@ -242,7 +242,7 @@ Partial Class F1_Productos
         '
         'PanelSuperior
         '
-        Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelSuperior.Size = New System.Drawing.Size(1322, 72)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
@@ -257,7 +257,7 @@ Partial Class F1_Productos
         '
         Me.PanelInferior.Controls.Add(Me.btnBuscar)
         Me.PanelInferior.Location = New System.Drawing.Point(0, 675)
-        Me.PanelInferior.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelInferior.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelInferior.Size = New System.Drawing.Size(1322, 36)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelInferior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
@@ -296,7 +296,7 @@ Partial Class F1_Productos
         '
         'TxtNombreUsu
         '
-        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(4)
         Me.TxtNombreUsu.Size = New System.Drawing.Size(200, 36)
         '
         'btnSalir
@@ -309,7 +309,7 @@ Partial Class F1_Productos
         '
         Me.PanelToolBar2.Controls.Add(Me.btExcel)
         Me.PanelToolBar2.Location = New System.Drawing.Point(1167, 0)
-        Me.PanelToolBar2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelToolBar2.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelToolBar2.Size = New System.Drawing.Size(155, 72)
         Me.PanelToolBar2.Controls.SetChildIndex(Me.btnImprimir, 0)
         Me.PanelToolBar2.Controls.SetChildIndex(Me.btExcel, 0)
@@ -317,14 +317,14 @@ Partial Class F1_Productos
         'MPanelSup
         '
         Me.MPanelSup.Controls.Add(Me.TableLayoutPanel1)
-        Me.MPanelSup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPanelSup.Margin = New System.Windows.Forms.Padding(4)
         Me.MPanelSup.Size = New System.Drawing.Size(1322, 358)
         Me.MPanelSup.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.MPanelSup.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
         '
         'PanelPrincipal
         '
-        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelPrincipal.Size = New System.Drawing.Size(1322, 603)
         '
         'GroupPanelBuscador
@@ -332,7 +332,7 @@ Partial Class F1_Productos
         Me.GroupPanelBuscador.Controls.Add(Me.Panel8)
         Me.GroupPanelBuscador.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanelBuscador.Location = New System.Drawing.Point(0, 358)
-        Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupPanelBuscador.Size = New System.Drawing.Size(1322, 245)
         '
         '
@@ -386,7 +386,7 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.HeaderFormatStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center
         Me.JGrM_Buscador.Hierarchical = True
         Me.JGrM_Buscador.Location = New System.Drawing.Point(0, 48)
-        Me.JGrM_Buscador.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.JGrM_Buscador.Margin = New System.Windows.Forms.Padding(4)
         Me.JGrM_Buscador.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.JGrM_Buscador.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.JGrM_Buscador.RecordNavigator = True
@@ -400,7 +400,7 @@ Partial Class F1_Productos
         'PanelUsuario
         '
         Me.PanelUsuario.Location = New System.Drawing.Point(869, 7)
-        Me.PanelUsuario.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelUsuario.Margin = New System.Windows.Forms.Padding(4)
         '
         'lblFecha
         '
@@ -410,7 +410,7 @@ Partial Class F1_Productos
         '
         Me.btnImprimir.Dock = System.Windows.Forms.DockStyle.Right
         Me.btnImprimir.Location = New System.Drawing.Point(48, 0)
-        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(4)
         Me.btnImprimir.Size = New System.Drawing.Size(107, 72)
         Me.btnImprimir.Visible = False
         '
@@ -421,7 +421,7 @@ Partial Class F1_Productos
         'MPanelUserAct
         '
         Me.MPanelUserAct.Location = New System.Drawing.Point(1122, 0)
-        Me.MPanelUserAct.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MPanelUserAct.Margin = New System.Windows.Forms.Padding(4)
         '
         'GroupBox1
         '
@@ -1457,9 +1457,9 @@ Partial Class F1_Productos
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox, Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.CloseBox})
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel1)
-        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
-        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel2)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl_Imagenes_DetalleProducto.Location = New System.Drawing.Point(0, 0)
         Me.SuperTabControl_Imagenes_DetalleProducto.Name = "SuperTabControl_Imagenes_DetalleProducto"
@@ -1501,7 +1501,7 @@ Partial Class F1_Productos
         Me.PanelImagenes.Controls.Add(Me.PanelListImagenes)
         Me.PanelImagenes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelImagenes.Location = New System.Drawing.Point(0, 0)
-        Me.PanelImagenes.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PanelImagenes.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelImagenes.Name = "PanelImagenes"
         Me.PanelImagenes.Size = New System.Drawing.Size(430, 319)
         Me.PanelImagenes.TabIndex = 3
@@ -1584,7 +1584,7 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel4.Controls.Add(Me.Panel7)
         Me.SuperTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel4.Location = New System.Drawing.Point(0, 25)
-        Me.SuperTabControlPanel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SuperTabControlPanel4.Margin = New System.Windows.Forms.Padding(2)
         Me.SuperTabControlPanel4.Name = "SuperTabControlPanel4"
         Me.SuperTabControlPanel4.Size = New System.Drawing.Size(433, 321)
         Me.SuperTabControlPanel4.TabIndex = 0
@@ -1604,7 +1604,7 @@ Partial Class F1_Productos
         Me.Panel7.Controls.Add(Me.tbPrecioCosto)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(433, 321)
         Me.Panel7.TabIndex = 0
@@ -1689,10 +1689,10 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel3.Controls.Add(Me.Panel6)
         Me.SuperTabControlPanel3.Controls.Add(Me.Panel5)
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 25)
-        Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 27)
+        Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(2)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(433, 321)
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(430, 319)
         Me.SuperTabControlPanel3.TabIndex = 0
         Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem1
         '
@@ -1701,9 +1701,9 @@ Partial Class F1_Productos
         Me.Panel6.Controls.Add(Me.GroupPanel4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(0, 98)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(433, 223)
+        Me.Panel6.Size = New System.Drawing.Size(430, 221)
         Me.Panel6.TabIndex = 1
         '
         'GroupPanel4
@@ -1715,9 +1715,9 @@ Partial Class F1_Productos
         Me.GroupPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel4.Font = New System.Drawing.Font("Georgia", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel4.Location = New System.Drawing.Point(0, 0)
-        Me.GroupPanel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupPanel4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(433, 223)
+        Me.GroupPanel4.Size = New System.Drawing.Size(430, 221)
         '
         '
         '
@@ -1757,10 +1757,10 @@ Partial Class F1_Productos
         Me.JGr_Descuentos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JGr_Descuentos.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
         Me.JGr_Descuentos.Location = New System.Drawing.Point(0, 0)
-        Me.JGr_Descuentos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.JGr_Descuentos.Margin = New System.Windows.Forms.Padding(2)
         Me.JGr_Descuentos.Name = "JGr_Descuentos"
         Me.JGr_Descuentos.RowFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.JGr_Descuentos.Size = New System.Drawing.Size(427, 203)
+        Me.JGr_Descuentos.Size = New System.Drawing.Size(424, 201)
         Me.JGr_Descuentos.TabIndex = 0
         '
         'Panel5
@@ -1778,9 +1778,9 @@ Partial Class F1_Productos
         Me.Panel5.Controls.Add(Me.LabelX19)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(433, 98)
+        Me.Panel5.Size = New System.Drawing.Size(430, 98)
         Me.Panel5.TabIndex = 0
         '
         'btGrabarP
@@ -1808,7 +1808,7 @@ Partial Class F1_Productos
         Me.tbPrecioDescuento.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioDescuento.Increment = 1.0R
         Me.tbPrecioDescuento.Location = New System.Drawing.Point(59, 31)
-        Me.tbPrecioDescuento.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tbPrecioDescuento.Margin = New System.Windows.Forms.Padding(2)
         Me.tbPrecioDescuento.Name = "tbPrecioDescuento"
         Me.tbPrecioDescuento.Size = New System.Drawing.Size(98, 23)
         Me.tbPrecioDescuento.TabIndex = 236
@@ -1840,7 +1840,7 @@ Partial Class F1_Productos
         Me.tbMontoHasta.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbMontoHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbMontoHasta.Location = New System.Drawing.Point(239, 4)
-        Me.tbMontoHasta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tbMontoHasta.Margin = New System.Windows.Forms.Padding(2)
         Me.tbMontoHasta.Name = "tbMontoHasta"
         Me.tbMontoHasta.Size = New System.Drawing.Size(90, 23)
         Me.tbMontoHasta.TabIndex = 234
@@ -1872,7 +1872,7 @@ Partial Class F1_Productos
         Me.tbMontoDesde.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbMontoDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbMontoDesde.Location = New System.Drawing.Point(59, 5)
-        Me.tbMontoDesde.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tbMontoDesde.Margin = New System.Windows.Forms.Padding(2)
         Me.tbMontoDesde.Name = "tbMontoDesde"
         Me.tbMontoDesde.Size = New System.Drawing.Size(90, 23)
         Me.tbMontoDesde.TabIndex = 232
@@ -2035,9 +2035,9 @@ Partial Class F1_Productos
         '
         Me.SuperTabControlPanel2.Controls.Add(Me.dgjDetalleProducto)
         Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 25)
+        Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 27)
         Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
-        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(433, 321)
+        Me.SuperTabControlPanel2.Size = New System.Drawing.Size(430, 319)
         Me.SuperTabControlPanel2.TabIndex = 0
         Me.SuperTabControlPanel2.TabItem = Me.SuperTabItem_DetalleProducto
         '
@@ -2046,7 +2046,7 @@ Partial Class F1_Productos
         Me.dgjDetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgjDetalleProducto.Location = New System.Drawing.Point(0, 0)
         Me.dgjDetalleProducto.Name = "dgjDetalleProducto"
-        Me.dgjDetalleProducto.Size = New System.Drawing.Size(433, 321)
+        Me.dgjDetalleProducto.Size = New System.Drawing.Size(430, 319)
         Me.dgjDetalleProducto.TabIndex = 0
         '
         'SuperTabItem_DetalleProducto
@@ -2122,7 +2122,7 @@ Partial Class F1_Productos
         Me.Panel8.Controls.Add(Me.tbProducto)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel8.Location = New System.Drawing.Point(0, 0)
-        Me.Panel8.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(1316, 48)
         Me.Panel8.TabIndex = 1
@@ -2135,7 +2135,7 @@ Partial Class F1_Productos
         Me.ButtonX2.Image = Global.DinoM.My.Resources.Resources.search
         Me.ButtonX2.ImageFixedSize = New System.Drawing.Size(30, 30)
         Me.ButtonX2.Location = New System.Drawing.Point(404, 11)
-        Me.ButtonX2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ButtonX2.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonX2.Name = "ButtonX2"
         Me.ButtonX2.Size = New System.Drawing.Size(110, 31)
         Me.ButtonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
@@ -2150,7 +2150,7 @@ Partial Class F1_Productos
         Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.add
         Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
         Me.ButtonX1.Location = New System.Drawing.Point(691, 9)
-        Me.ButtonX1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ButtonX1.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonX1.Name = "ButtonX1"
         Me.ButtonX1.Size = New System.Drawing.Size(152, 31)
         Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
@@ -2165,7 +2165,7 @@ Partial Class F1_Productos
         Me.btnCategoria.Image = Global.DinoM.My.Resources.Resources.search
         Me.btnCategoria.ImageFixedSize = New System.Drawing.Size(30, 30)
         Me.btnCategoria.Location = New System.Drawing.Point(541, 9)
-        Me.btnCategoria.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnCategoria.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCategoria.Name = "btnCategoria"
         Me.btnCategoria.Size = New System.Drawing.Size(152, 31)
         Me.btnCategoria.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
@@ -2213,7 +2213,7 @@ Partial Class F1_Productos
         Me.btnBuscar.Image = Global.DinoM.My.Resources.Resources.search
         Me.btnBuscar.ImageFixedSize = New System.Drawing.Size(30, 30)
         Me.btnBuscar.Location = New System.Drawing.Point(288, 0)
-        Me.btnBuscar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnBuscar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(148, 36)
         Me.btnBuscar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
@@ -2247,7 +2247,7 @@ Partial Class F1_Productos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1354, 711)
         Me.Location = New System.Drawing.Point(0, 0)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "F1_Productos"
         Me.Text = "F1_Productos"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
