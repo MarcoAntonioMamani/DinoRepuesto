@@ -1326,7 +1326,6 @@ Public Class F0_Venta2
     Public Function rearmarDetalle() As DataTable
         Dim dt, dtDetalle, dtSaldos As DataTable
         Dim cantidadRepetido, contar, IdAux As Integer
-        Dim ResultadoInventario = False
 
         dt = CType(grdetalle.DataSource, DataTable)
         'Ordena el detalle por codigo importante

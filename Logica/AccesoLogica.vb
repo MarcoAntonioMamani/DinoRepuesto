@@ -3266,14 +3266,21 @@ Public Class AccesoLogica
     End Function
 #End Region
 #Region "MOVIMIENTO NUEVO"
-    Public Shared Function l_MovimientoEliminar(_id As String) As DataTable
+    Public Shared Function l_MovimientoEliminar(_id As String) As Boolean
+        Dim _resultado As Boolean
         Dim _Tabla As DataTable
         Dim _listParam As New List(Of Datos.DParametro)
         _listParam.Add(New Datos.DParametro("@tipo", -1))
         _listParam.Add(New Datos.DParametro("@id", _id))
         _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
         _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
-        Return _Tabla
+        If _Tabla.Rows.Count > 0 Then
+            _id = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+        Return _resultado
     End Function
     Public Shared Function l_MovimientoGuardar(ByRef _id As String, Fecha As String, ConceptoId As Integer, Observacion As String, _detalle As DataTable) As Boolean
         Dim _resultado As Boolean
@@ -3347,7 +3354,7 @@ Public Class AccesoLogica
         End If
         Return _resultado
     End Function
-    Public Shared Function l_obtenerMovimeintos(productoId As Integer) As DataTable
+    Public Shared Function l_obtenerAlmacensXIdProducto(productoId As Integer) As DataTable
         Dim _Tabla As DataTable
         Dim _listParam As New List(Of Datos.DParametro)
         _listParam.Add(New Datos.DParametro("@tipo", 6))

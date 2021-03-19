@@ -7,6 +7,8 @@ Imports System.Drawing
 Imports DevComponents.DotNetBar.Controls
 Imports System.Transactions
 Imports DinoM.JanusExtension
+Imports DinoM.JanusVerificaciones
+Imports DinoM.JanusMetodos
 Public Class F0_MovimientoNuevo
     Dim _Inter As Integer = 0
 #Region "Variables Globales"
@@ -18,6 +20,7 @@ Public Class F0_MovimientoNuevo
     Dim FilaSelectLote As DataRow = Nothing
     Dim dtProductoGoblal As DataTable
     Dim tMovimiento As DataTable
+    Dim detalleId As Integer = 0
 #End Region
 #Region "Metodos Privados"
     Private Sub _IniciarTodo()
@@ -109,6 +112,7 @@ Public Class F0_MovimientoNuevo
 
         PanelInferior.Enabled = True
         FilaSelectLote = Nothing
+        Panel_AlmacenGrupo.Visible = False
     End Sub
     Private Sub _prhabilitar()
         tbObservacion.ReadOnly = False
@@ -124,6 +128,7 @@ Public Class F0_MovimientoNuevo
         End If
         ColArNro(grdetalle, "stock", "Stock", 80, "0.00")
         btnGrabar.Enabled = True
+        'Panel_AlmacenGrupo.Visible = True
     End Sub
     Public Sub _prFiltrar()
         Dim _Mpos As Integer
@@ -137,35 +142,41 @@ Public Class F0_MovimientoNuevo
         End If
     End Sub
     Private Sub _Limpiar()
-        tbCodigo.Clear()
-        tbObservacion.Clear()
-        tbFecha.Value = Now.Date
-        cargarDetalle(-1)
+        Try
+            tbCodigo.Clear()
+            tbObservacion.Clear()
+            tbFecha.Value = Now.Date
+            cargarDetalle(-1)
+            With grdetalle.RootTable.Columns("img")
+                .Width = 70
+                .Caption = "Eliminar"
+                .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
+                .Visible = True
+            End With
+            With grdetalle.RootTable.Columns("imgAdd")
+                .Width = 70
+                .Caption = "Nuevo"
+                .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
+                .Visible = True
+            End With
+            ColArNro(grdetalle, "stock", "Stock", 80, "0.00")
 
-        With grdetalle.RootTable.Columns("img")
-            .Width = 70
-            .Caption = "Eliminar"
-            .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
-            .Visible = True
-        End With
-        With grdetalle.RootTable.Columns("imgAdd")
-            .Width = 70
-            .Caption = "Nuevo"
-            .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
-            .Visible = True
-        End With
-        ColArNro(grdetalle, "stock", "Stock", 80, "0.00")
+            If (CType(cbAlmacenOrigen.DataSource, DataTable).Rows.Count > 0) Then
+                cbAlmacenOrigen.SelectedIndex = 0
+            End If
+            _prAddDetalleVenta()
+            If (CType(cbConcepto.DataSource, DataTable).Rows.Count > 0) Then
+                cbConcepto.SelectedIndex = 0
+            End If
 
-        If (CType(cbAlmacenOrigen.DataSource, DataTable).Rows.Count > 0) Then
-            cbAlmacenOrigen.SelectedIndex = 0
-        End If
-        _prAddDetalleVenta()
-        If (CType(cbConcepto.DataSource, DataTable).Rows.Count > 0) Then
-            cbConcepto.SelectedIndex = 0
-        End If
+            cbConcepto.Focus()
+            FilaSelectLote = Nothing
+            limpiarAlmacenGrupo()
+            Panel_AlmacenGrupo.Visible = False
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
 
-        cbConcepto.Focus()
-        FilaSelectLote = Nothing
     End Sub
     Public Sub _prMostrarRegistro(_N As Integer)
         With grmovimiento
@@ -211,6 +222,7 @@ Public Class F0_MovimientoNuevo
             ColAL(grdetalle, "CodigoMarca", "Cod. Marca", 100)
             ColAL(grdetalle, "Medida", "Medida", 90)
             ColAL(grdetalle, "producto", "Producto", 250)
+            ColArNro(grdetalle, "cantidad", "Cantidad", 100, "0")
             ColCombo(grdetalle, "AlmOrigenId", "Alm. Origen", 150, cbAlmacenOrigen, True)
             ColCombo(grdetalle, "AlmDestinoId", "Alm. Destino", 150, cbDepositoDestino, IIf(cbConcepto.Value = 6, True, False))
             ColNoVisible(grdetalle, "img")
@@ -321,9 +333,10 @@ Public Class F0_MovimientoNuevo
 
     End Sub
     Private Sub MostrarMensaje(mensaje As String)
+        Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
         ToastNotification.Show(Me,
                                mensaje.ToUpper,
-                               My.Resources.mensaje,
+                               img,
                                2000,
                                eToastGlowColor.Red,
                                eToastPosition.TopCenter)
@@ -457,7 +470,7 @@ Public Class F0_MovimientoNuevo
             _prAddDetalleVenta()
             grdetalle.Row = grdetalle.RowCount - 1
         End If
-        Dim posicionFila As Integer = ObtenerPosicionFila(grdetalle, "Id")
+        Dim posicionFila As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
         Dim existe As Boolean = _fnExisteProducto(dt.Rows(fila).Item("Item"))
         If ((posicionFila >= 0) And (Not existe)) Then
             SetCelValor(grdetalle, posicionFila, "ProductoId", dt.Rows(fila).Item("Item"))
@@ -515,28 +528,22 @@ Public Class F0_MovimientoNuevo
             If (e.Column.Index = CelIndex(grdetalle, "Cantidad")) Then
                 Dim cantidad As Integer = grdetalle.GetValue("Cantidad")
                 Dim stock As Integer = grdetalle.GetValue("Stock")
-
-                Dim posicion = ObtenerPosicionFila(grdetalle, "Id")
-
+                Dim posicion = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
                 Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado")
-                If cbConcepto.Value = 2 And cbConcepto.Value = 6 Then
-                    If cantidad > stock Then
-                        CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 1
-                        grdetalle.SetValue("Cantidad", 1)
-                        Throw New Exception("La cantidad que se quiere sacar es mayor a la que existe 
-                                         en el stock solo puede Sacar : ".ToUpper + Str(stock).Trim)
-                    End If
-                End If
+
+                ValidarExistenciaStock(cantidad, stock, posicion, 0)
 
                 If (Not IsNumeric(cantidad) Or
                     cantidad.ToString = String.Empty) Then
 
-                    CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 1
+                    CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                    grdetalle.SetValue("Cantidad", 0)
                     cambiarEstado(posicion, estado)
                 Else
                     cambiarEstado(posicion, estado)
                     If (cantidad = 0) Then
-                        CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 1
+                        CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                        grdetalle.SetValue("Cantidad", 0)
                     End If
                 End If
             End If
@@ -544,7 +551,7 @@ Public Class F0_MovimientoNuevo
             'Celda Almacen de origen
             If (e.Column.Index = CelIndex(grdetalle, "AlmOrigenId")) Then
 
-                Dim posicion = ObtenerPosicionFila(grdetalle, "Id")
+                Dim posicion = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
                 Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado")
 
                 Dim productoId As Integer = grdetalle.GetValue("ProductoId")
@@ -567,6 +574,32 @@ Public Class F0_MovimientoNuevo
         grdetalle.Col = celdadCantidad
         grdetalle.Row = posicion
     End Sub
+    Private Sub cargarDetalleAlmacen(productoId As Integer, validadarTabla As Boolean)
+        Try
+            Dim tAlmacen As DataTable = l_obtenerAlmacensXIdProducto(productoId)
+            If validadarTabla Then
+                jVerificar_ExisteFIlaDatatable(tAlmacen)
+            End If
+            armarDetalleAlmacenGrid(grAlmacen, tAlmacen)
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub limpiarAlmacenGrupo()
+        cargarDetalleAlmacen(-1, False)
+        lbProductoId.Text = "0"
+        LblProducto.Text = ""
+        lbStock.Text = "0"
+        detalleId = 0
+    End Sub
+    Private Sub armarDetalleAlmacenGrid(griex As GridEX, tabla As DataTable)
+        ConfigInicialVinculado(griex, tabla, "Almacenes")
+        ColAL(griex, "almacenId", "Id", 60)
+        ColAL(griex, "almacen", "Almacen", 100)
+        ColArNro(griex, "stock", "Stock", 80, "0")
+        ColArNro(griex, "cantidad", "Cantidad", 80, "0")
+        ConfigFinalDetalle(griex)
+    End Sub
     Private Sub cambiarEstado(posicion As Integer, estado As Integer)
         If (estado = 1) Then
             CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("estado") = 2
@@ -575,12 +608,14 @@ Public Class F0_MovimientoNuevo
     Private Sub grdetalle_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.CellEdited
         If (e.Column.Index = CelIndex(grdetalle, "Cantidad")) Then
             If (Not IsNumeric(grdetalle.GetValue("Cantidad")) Or grdetalle.GetValue("Cantidad").ToString = String.Empty) Then
-                grdetalle.SetValue("Cantidad", 1)
+                grdetalle.SetValue("Cantidad", 0)
             Else
                 If (grdetalle.GetValue("Cantidad") > 0) Then
                     Dim stock As Double = grdetalle.GetValue("stock")
                     If (grdetalle.GetValue("Cantidad") > stock And cbConcepto.Value <> 1) Then
-                        Dim pos As Integer = ObtenerPosicionFila(grdetalle, "Id")
+
+                        Dim pos As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
+
                         CType(grdetalle.DataSource, DataTable).Rows(pos).Item("Cantidad") = stock
                         grdetalle.SetValue("Cantidad", stock)
                         Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
@@ -591,7 +626,7 @@ Public Class F0_MovimientoNuevo
                           eToastPosition.BottomLeft)
                     End If
                 Else
-                    grdetalle.SetValue("Cantidad", 1)
+                    grdetalle.SetValue("Cantidad", 0)
                 End If
             End If
         End If
@@ -606,7 +641,7 @@ Public Class F0_MovimientoNuevo
             If (grdetalle.RowCount >= 2) Then
                 If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
 
-                    EliminarFilaDetalle()
+                    EliminarFilaDetalle(grdetalle, "Id", "Estado", grdetalle.GetValue("Id"))
                 End If
             End If
 
@@ -617,10 +652,10 @@ Public Class F0_MovimientoNuevo
             MostrarMensajeError(ex.Message)
         End Try
     End Sub
-    Private Sub EliminarFilaDetalle()
+    Private Sub EliminarFilaDetalle(griex As GridEX, key As String, keyEstado As String, valor As Integer)
         Dim colProducto = 7
-        EliminarFIla(grdetalle, "Id", "estado")
-        grdetalle.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grdetalle.RootTable.Columns("estado"), janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+        EliminarFIla(griex, key, keyEstado, valor)
+        grdetalle.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grdetalle.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
         grdetalle.Select()
         grdetalle.Col = 7
         grdetalle.Row = grdetalle.RowCount - 1
@@ -658,7 +693,7 @@ Public Class F0_MovimientoNuevo
         bandera = ef.band
         If (bandera = True) Then
             Dim mensajeError As String = ""
-            Dim res As Boolean = L_prMovimientoEliminar(tbCodigo.Text)
+            Dim res As Boolean = l_MovimientoEliminar(tbCodigo.Text)
             If res Then
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
                 ToastNotification.Show(Me, "Código de Movimiento ".ToUpper + tbCodigo.Text + " eliminado con Exito.".ToUpper,
@@ -757,5 +792,221 @@ Public Class F0_MovimientoNuevo
             _prMostrarRegistro(grmovimiento.Row)
         End If
     End Sub
+
+    Private Sub grAlmacen_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grAlmacen.EditingCell
+        If (_fnAccesible()) Then
+            If (e.Column.Index = CelIndex(grAlmacen, "Cantidad")) Then
+                e.Cancel = False
+            Else
+                e.Cancel = True
+            End If
+        Else
+            e.Cancel = True
+        End If
+    End Sub
+    Private Sub grdetalle_DoubleClick(sender As Object, e As EventArgs) Handles grdetalle.DoubleClick
+        If (_fnAccesible()) Then
+            Dim productoId As Integer = grdetalle.GetValue("ProductoId")
+            If productoId <> 0 Then
+                LblProducto.Text = grdetalle.GetValue("producto")
+                lbProductoId.Text = productoId
+                cargarDetalleAlmacen(productoId, True)
+                lbStock.Text = jMetodo_SumarFila(grAlmacen, "Stock")
+                Panel_AlmacenGrupo.Visible = True
+                detalleId = grdetalle.GetValue("Id")
+            Else
+                MostrarMensajeError("Item vacio")
+            End If
+        End If
+    End Sub
+
+    Private Sub grAlmacen_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grAlmacen.CellValueChanged
+        'Celda Cantidad
+        Try
+            If (e.Column.Index = CelIndex(grAlmacen, "Cantidad")) Then
+                Dim cantidad As Integer = grAlmacen.GetValue("Cantidad")
+                Dim posicion = ObtenerPosicionFila(grAlmacen, "AlmacenId", grdetalle.GetValue("id"))
+
+                If (Not IsNumeric(cantidad) Or cantidad.ToString = String.Empty) Then
+                    CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                Else
+                    Dim stock As Integer = grAlmacen.GetValue("Stock")
+                    ValidarExistenciaStock(cantidad, stock, posicion, 0)
+                End If
+
+            End If
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub ValidarExistenciaStock(cantidad As Integer, stockTotal As Integer, posicion As Integer, valor As Integer)
+        If cbConcepto.Value = 2 Or cbConcepto.Value = 6 Then
+            If cantidad > stockTotal Then
+                CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = valor
+                grAlmacen.SetValue("Cantidad", valor)
+                Throw New Exception("La cantidad que se quiere sacar es mayor a la que existe 
+                                         en el stock solo puede Sacar : ".ToUpper + Str(stockTotal).Trim)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        ''****eLIMNADO FILA
+        'Dim posicion As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
+
+        'Dim filaDetalle As DataRow = CType(grdetalle.DataSource, DataTable).Rows(posicion)
+        'For Each fila As DataRow In CType(grdetalle.DataSource, DataTable).Rows
+        '    If fila("productoId") = lbProductoId.Text Then
+        '        EliminarFilaDetalle(grdetalle, "Id", "Estado", fila("Id"))
+        '    End If
+        'Next
+        'For Each fila As DataRow In CType(grAlmacen.DataSource, DataTable).Rows
+        '    If fila("Cantidad") > 0 Then
+        '        CType(grdetalle.DataSource, DataTable).ImportRow(filaDetalle)
+        '        Dim cantidafila = contarFilas()
+        '        Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+        '        SetCelValor(grdetalle, cantidafila - 1, "Id", idMayor + 1)
+        '        SetCelValor(grdetalle, cantidafila - 1, "Cantidad", fila("Cantidad"))
+        '        SetCelValor(grdetalle, cantidafila - 1, "AlmOrigenId", fila("AlmacenId"))
+        '        SetCelValor(grdetalle, cantidafila - 1, "Stock", fila("stock"))
+        '        SetCelValor(grdetalle, cantidafila - 1, "Estado", 0)
+        '    End If
+
+        'Next
+        'seleccionarCeldaCantidad(cantidafila - 1)
+        For Each fila As DataRow In CType(grAlmacen.DataSource, DataTable).Rows
+            If fila("Cantidad") > 0 Then
+                Dim resultado As Boolean = False
+                For Each filadetalle As DataRow In CType(grdetalle.DataSource, DataTable).Rows
+                    If filadetalle("productoId") = lbProductoId.Text And
+                        filadetalle("AlmOrigenId") = fila("AlmacenId") And
+                        filadetalle("Estado") >= 0 Then
+
+                        Dim valor As Integer = filadetalle("Id")
+                        Dim posicion As Integer = -1
+                        ObtenerFilaDetalle(posicion, valor, grdetalle, "Id")
+
+                        SetCelValor(grdetalle, posicion, "Cantidad", fila("Cantidad"))
+                        SetCelValor(grdetalle, posicion, "AlmOrigenId", fila("AlmacenId"))
+                        SetCelValor(grdetalle, posicion, "Stock", fila("stock"))
+                        resultado = True
+
+                        'If filadetalle("Cantidad") = 0 Then
+
+
+                        '    'If existeItemAlamacenRepetido(lbProductoId.Text, fila("AlmacenId")) Then
+
+                        '    'Else
+                        '    '    CType(grdetalle.DataSource, DataTable).ImportRow(filadetalle)
+                        '    '    Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+                        '    '    SetCelValor(grdetalle, grdetalle.RowCount - 1, "Id", idMayor + 1)
+                        '    '    SetCelValor(grdetalle, grdetalle.RowCount - 1, "Cantidad", fila("Cantidad"))
+                        '    '    SetCelValor(grdetalle, grdetalle.RowCount - 1, "AlmOrigenId", fila("AlmacenId"))
+                        '    '    SetCelValor(grdetalle, grdetalle.RowCount - 1, "Stock", fila("stock"))
+                        '    'End If
+                        'End If
+
+                        'If filadetalle("cantidad") = 0 Then
+                        '    SetCelValor(grdetalle, posicion, "Cantidad", fila("Cantidad"))
+                        '    SetCelValor(grdetalle, posicion, "AlmOrigenId", fila("AlmacenId"))
+                        '    SetCelValor(grdetalle, posicion, "Stock", fila("stock"))
+                        '    Exit For
+                        'Else
+
+
+                        'End If
+                    End If
+                    'If filadetalle("productoId") = lbProductoId.Text And
+                    '    filadetalle("AlmOrigenId") <> fila("AlmacenId") And
+                    '    filadetalle("Estado") >= 0 And fila("Cantidad") = 0 Then
+                    '    Dim valor As Integer = filadetalle("Id")
+                    '    Dim posicion As Integer = -1
+                    '    ObtenerFilaDetalle(posicion, valor, grdetalle, "Id")
+
+                    '    SetCelValor(grdetalle, posicion, "Cantidad", fila("Cantidad"))
+                    '    SetCelValor(grdetalle, posicion, "AlmOrigenId", fila("AlmacenId"))
+                    '    SetCelValor(grdetalle, posicion, "Stock", fila("stock"))
+
+                    '    Dim estado As Integer = CType(grdetalle.DataSource, DataTable).Rows(posicion).Item("Estado")
+                    '    cambiarEstado(posicion, estado)
+                    '    resultado = True
+                    'End If
+                Next
+                If resultado = False Then
+                    Dim posicion As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
+                    Dim filaDetalle As DataRow = CType(grdetalle.DataSource, DataTable).Rows(posicion)
+                    CType(grdetalle.DataSource, DataTable).ImportRow(filaDetalle)
+                    Dim cantidafila = contarFilas()
+
+                    Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+                    SetCelValor(grdetalle, cantidafila - 1, "Id", idMayor + 1)
+                    SetCelValor(grdetalle, cantidafila - 1, "Cantidad", fila("Cantidad"))
+                    SetCelValor(grdetalle, cantidafila - 1, "AlmOrigenId", fila("AlmacenId"))
+                    SetCelValor(grdetalle, cantidafila - 1, "Stock", fila("stock"))
+                    SetCelValor(grdetalle, cantidafila - 1, "Estado", 0)
+                End If
+            End If
+
+            'If fila("Cantidad") <> 0 Then
+            '    'Optiene la fila del detalle seleccionado
+            '    Dim posicion As Integer = ObtenerPosicionFila(grdetalle, "Id")
+            '    Dim filaDetalle As DataRow = CType(grdetalle.DataSource, DataTable).Rows(posicion)
+
+            '    If grdetalle.GetValue("Cantidad") = 0 Then
+            '        SetCelValor(grdetalle, posicion, "Cantidad", fila("Cantidad"))
+            '        SetCelValor(grdetalle, posicion, "AlmOrigenId", fila("AlmacenId"))
+            '        SetCelValor(grdetalle, posicion, "Stock", fila("stock"))
+            '    Else
+            '        CType(grdetalle.DataSource, DataTable).ImportRow(filaDetalle)
+            '        Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+            '        SetCelValor(grdetalle, grdetalle.RowCount - 1, "Id", idMayor + 1)
+            '        SetCelValor(grdetalle, grdetalle.RowCount - 1, "Cantidad", fila("Cantidad"))
+            '        SetCelValor(grdetalle, grdetalle.RowCount - 1, "AlmOrigenId", fila("AlmacenId"))
+            '        SetCelValor(grdetalle, grdetalle.RowCount - 1, "Stock", fila("stock"))
+            '    End If
+            '    'Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
+            '    'filaDetalle("Id") = idMayor
+            '    'filaDetalle("Cantidad") = fila("Cantidad")
+            '    'filaDetalle("AlmOrigenId") = fila("AlmacenId")
+            '    'filaDetalle("Stock") = fila("stock")
+
+            '    'Inserta y modifica los campos
+
+
+
+            '    ''Ordena el detalle por Id
+            '    'CType(grdetalle.DataSource, DataTable).DefaultView.Sort = "ProductoId ASC"
+            '    'CType(grdetalle.DataSource, DataTable).DefaultView.ToTable()
+            'End If
+        Next
+    End Sub
+    Private Function contarFilas() As Integer
+        Dim cantidadFila = 0
+        For Each fila As DataRow In CType(grdetalle.DataSource, DataTable).Rows
+            cantidadFila = cantidadFila + 1
+        Next
+        Return cantidadFila
+    End Function
+    Private Function existeItemAlamacenRepetido(productoId As Integer, almacenId As Integer) As Boolean
+        For Each fila As DataRow In CType(grdetalle.DataSource, DataTable).Rows
+            If fila("productoId") = productoId And fila("AlmOrigenId") = almacenId And fila("Estado") >= 0 Then
+                If fila("cantidad") = 0 Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End If
+        Next
+        Return False
+    End Function
+    Private Sub ordenarGrid(productoId As String)
+        Dim query = From order In CType(grdetalle.DataSource, DataTable).AsEnumerable()
+                    Where order.Item("ProductoId") = productoId
+                    Select order
+
+    End Sub
+
 #End Region
 End Class

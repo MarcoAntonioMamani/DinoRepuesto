@@ -400,6 +400,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MetodosExtension\JanusExtension.vb" />
+    <Compile Include="MetodosExtension\JanusMetodos.vb" />
+    <Compile Include="MetodosExtension\JanusVerificaciones.vb" />
     <Compile Include="Pr_EstadoCuentasClientes.Designer.vb">
       <DependentUpon>Pr_EstadoCuentasClientes.vb</DependentUpon>
     </Compile>

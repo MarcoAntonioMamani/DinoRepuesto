@@ -160,9 +160,9 @@ Public Class JanusExtension
             .CellStyle.ImageHorizontalAlignment = ImageHorizontalAlignment.Center
         End With
     End Sub
-    Public Shared Sub ObtenerFilaDetalle(ByRef pos As Integer, numi As Integer, griex As GridEX)
+    Public Shared Sub ObtenerFilaDetalle(ByRef pos As Integer, numi As Integer, griex As GridEX, key As String)
         For i As Integer = 0 To CType(griex.DataSource, DataTable).Rows.Count - 1 Step 1
-            Dim _numi As Integer = CType(griex.DataSource, DataTable).Rows(i).Item("Id")
+            Dim _numi As Integer = CType(griex.DataSource, DataTable).Rows(i).Item(key)
             If (_numi = numi) Then
                 pos = i
                 Return
@@ -200,11 +200,11 @@ Public Class JanusExtension
         Next
         Return mayor
     End Function
-    Public Shared Sub EliminarFIla(griex As GridEX, key As String, keyEstado As String)
+    Public Shared Sub EliminarFIla(griex As GridEX, key As String, keyEstado As String, valor As Integer)
         If (griex.Row >= 0) Then
             If (griex.RowCount >= 2) Then
                 Dim estado As Integer = griex.GetValue(keyEstado)
-                Dim posicion = ObtenerPosicionFila(griex, key)
+                Dim posicion = ObtenerPosicionFila(griex, key, valor)
                 If (estado = 0) Then
                     SetCelValor(griex, posicion, keyEstado, -2)
                 End If
@@ -214,10 +214,10 @@ Public Class JanusExtension
             End If
         End If
     End Sub
-    Public Shared Function ObtenerPosicionFila(griex As GridEX, key As String) As Integer
-        Dim valor As Integer = griex.GetValue(key)
+    Public Shared Function ObtenerPosicionFila(griex As GridEX, key As String, valor As Integer) As Integer
+        'Dim valor As Integer = griex.GetValue(key)
         Dim posicion As Integer = -1
-        ObtenerFilaDetalle(posicion, valor, griex)
+        ObtenerFilaDetalle(posicion, valor, griex, key)
         Return posicion
     End Function
 
