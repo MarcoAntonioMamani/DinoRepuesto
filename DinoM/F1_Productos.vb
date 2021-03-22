@@ -6,7 +6,7 @@ Imports System.IO
 Imports DevComponents.DotNetBar.SuperGrid
 Imports DevComponents.DotNetBar.Controls
 Imports System.ComponentModel
-
+Imports DinoM.JanusExtension
 
 Public Class F1_Productos
     Dim _Inter As Integer = 0
@@ -74,7 +74,7 @@ Public Class F1_Productos
         Me.Icon = ico
 
         _prEliminarContenidoImage()
-
+        JGrM_Buscador.Enabled = True
         SeleccionarCategoria()
     End Sub
 
@@ -926,9 +926,10 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("yffact", False))
         listEstCeldas.Add(New Modelo.Celda("yfhact", False))
         listEstCeldas.Add(New Modelo.Celda("yfuact", False))
+        listEstCeldas.Add(New Modelo.Celda("VentaFacturado", True, "V. Facturado", 80, "0.00"))
         listEstCeldas.Add(New Modelo.Celda("VentaNormal", True, "V. Publico", 80, "0.00"))
         listEstCeldas.Add(New Modelo.Celda("VentaMecanico", True, "V. Mecanico", 80, "0.00"))
-        listEstCeldas.Add(New Modelo.Celda("VentaFacturado", True, "V. Facturado", 80, "0.00"))
+
         listEstCeldas.Add(New Modelo.Celda("PrecioCosto", False))
         listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", True, "CodigoMarca", 90))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 80))
@@ -2141,5 +2142,12 @@ Public Class F1_Productos
         btnNuevo.PerformClick()
 
 
+    End Sub
+
+    Private Sub JGrM_Buscador_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGrM_Buscador.EditingCell
+        e.Cancel = e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfcprod").Index And
+           e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfCodigoMarca").Index And
+           e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfcdprod2").Index And
+           e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfdetprod").Index
     End Sub
 End Class

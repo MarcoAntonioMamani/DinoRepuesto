@@ -1,7 +1,7 @@
 ﻿Imports Logica.AccesoLogica
 Imports Janus.Windows.GridEX
 Imports DevComponents.DotNetBar
-
+Imports DinoM.JanusExtension
 Public Class F0_BuscarProductos
 
     Public dtProductoAll As DataTable
@@ -421,6 +421,18 @@ Public Class F0_BuscarProductos
     Private Sub ButtonX2_Click(sender As Object, e As EventArgs) Handles ButtonX2.Click
         FiltrarProducto()
 
+
+    End Sub
+
+    Private Sub grProductos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductos.EditingCell
+        If (e.Column.Index = CelIndex(grProductos, "CodigoFabrica") Or
+            e.Column.Index = CelIndex(grProductos, "Marca") Or
+            e.Column.Index = CelIndex(grProductos, "Medida") Or
+            e.Column.Index = CelIndex(grProductos, "yfcdprod1")) Then
+            e.Cancel = False
+        Else
+            e.Cancel = True
+        End If
 
     End Sub
 End Class

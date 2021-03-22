@@ -26,10 +26,10 @@ Partial Class F0_BuscarProductos
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.grProductos = New Janus.Windows.GridEX.GridEX()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.ButtonX2 = New DevComponents.DotNetBar.ButtonX()
         Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
         Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.ButtonX2 = New DevComponents.DotNetBar.ButtonX()
         Me.GPanelProductos.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.grProductos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,9 +45,8 @@ Partial Class F0_BuscarProductos
         Me.GPanelProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GPanelProductos.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GPanelProductos.Location = New System.Drawing.Point(0, 0)
-        Me.GPanelProductos.Margin = New System.Windows.Forms.Padding(4)
         Me.GPanelProductos.Name = "GPanelProductos"
-        Me.GPanelProductos.Size = New System.Drawing.Size(1018, 675)
+        Me.GPanelProductos.Size = New System.Drawing.Size(764, 548)
         '
         '
         '
@@ -86,14 +85,12 @@ Partial Class F0_BuscarProductos
         Me.Panel7.Controls.Add(Me.Panel3)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(1012, 648)
+        Me.Panel7.Size = New System.Drawing.Size(758, 525)
         Me.Panel7.TabIndex = 0
         '
         'grProductos
         '
-        Me.grProductos.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.grProductos.BackColor = System.Drawing.Color.GhostWhite
         Me.grProductos.ColumnAutoResize = True
         Me.grProductos.Dock = System.Windows.Forms.DockStyle.Fill
@@ -102,8 +99,7 @@ Partial Class F0_BuscarProductos
         Me.grProductos.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.grProductos.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
-        Me.grProductos.Location = New System.Drawing.Point(0, 50)
-        Me.grProductos.Margin = New System.Windows.Forms.Padding(4)
+        Me.grProductos.Location = New System.Drawing.Point(0, 41)
         Me.grProductos.Name = "grProductos"
         Me.grProductos.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grProductos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -111,7 +107,7 @@ Partial Class F0_BuscarProductos
         Me.grProductos.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grProductos.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.grProductos.Size = New System.Drawing.Size(1012, 598)
+        Me.grProductos.Size = New System.Drawing.Size(758, 484)
         Me.grProductos.TabIndex = 0
         Me.grProductos.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -123,9 +119,25 @@ Partial Class F0_BuscarProductos
         Me.Panel3.Controls.Add(Me.tbProducto)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1012, 50)
+        Me.Panel3.Size = New System.Drawing.Size(758, 41)
         Me.Panel3.TabIndex = 1
+        '
+        'ButtonX2
+        '
+        Me.ButtonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.ButtonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta
+        Me.ButtonX2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonX2.Image = Global.DinoM.My.Resources.Resources.search
+        Me.ButtonX2.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.ButtonX2.Location = New System.Drawing.Point(388, 6)
+        Me.ButtonX2.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonX2.Name = "ButtonX2"
+        Me.ButtonX2.Size = New System.Drawing.Size(110, 31)
+        Me.ButtonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.ButtonX2.TabIndex = 377
+        Me.ButtonX2.Text = "Buscar"
         '
         'btnAgregar
         '
@@ -134,9 +146,10 @@ Partial Class F0_BuscarProductos
         Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.reload_5
         Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnAgregar.Location = New System.Drawing.Point(700, 7)
+        Me.btnAgregar.Location = New System.Drawing.Point(525, 6)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(202, 39)
+        Me.btnAgregar.Size = New System.Drawing.Size(152, 32)
         Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.btnAgregar.TabIndex = 372
         Me.btnAgregar.Text = "Actualizar"
@@ -150,11 +163,10 @@ Partial Class F0_BuscarProductos
         Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX9.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX9.Location = New System.Drawing.Point(12, 14)
-        Me.LabelX9.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX9.Location = New System.Drawing.Point(9, 11)
         Me.LabelX9.Name = "LabelX9"
         Me.LabelX9.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX9.Size = New System.Drawing.Size(151, 28)
+        Me.LabelX9.Size = New System.Drawing.Size(113, 23)
         Me.LabelX9.TabIndex = 226
         Me.LabelX9.Text = "Buscar Producto:"
         '
@@ -168,34 +180,20 @@ Partial Class F0_BuscarProductos
         Me.tbProducto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbProducto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
-        Me.tbProducto.Location = New System.Drawing.Point(179, 16)
-        Me.tbProducto.Margin = New System.Windows.Forms.Padding(4)
+        Me.tbProducto.Location = New System.Drawing.Point(134, 13)
         Me.tbProducto.Name = "tbProducto"
         Me.tbProducto.PreventEnterBeep = True
-        Me.tbProducto.Size = New System.Drawing.Size(332, 26)
+        Me.tbProducto.Size = New System.Drawing.Size(249, 22)
         Me.tbProducto.TabIndex = 3
-        '
-        'ButtonX2
-        '
-        Me.ButtonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.ButtonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.Magenta
-        Me.ButtonX2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonX2.Image = Global.DinoM.My.Resources.Resources.search
-        Me.ButtonX2.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.ButtonX2.Location = New System.Drawing.Point(518, 7)
-        Me.ButtonX2.Name = "ButtonX2"
-        Me.ButtonX2.Size = New System.Drawing.Size(146, 38)
-        Me.ButtonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
-        Me.ButtonX2.TabIndex = 377
-        Me.ButtonX2.Text = "Buscar"
         '
         'F0_BuscarProductos
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1018, 675)
+        Me.ClientSize = New System.Drawing.Size(764, 548)
         Me.Controls.Add(Me.GPanelProductos)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "F0_BuscarProductos"
         Me.Text = "F0_BuscarProductos"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

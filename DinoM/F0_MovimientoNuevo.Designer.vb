@@ -31,6 +31,9 @@ Partial Class F0_MovimientoNuevo
         Me.grdetalle = New Janus.Windows.GridEX.GridEX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel_AlmacenGrupoTraspaso = New System.Windows.Forms.Panel()
+        Me.grAlmacenSalida = New Janus.Windows.GridEX.GridEX()
+        Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel_AlmacenGrupo = New System.Windows.Forms.Panel()
         Me.grAlmacen = New Janus.Windows.GridEX.GridEX()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -56,9 +59,8 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.grmovimiento = New Janus.Windows.GridEX.GridEX()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.grAlmacenSalida = New Janus.Windows.GridEX.GridEX()
-        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.lblTituloAlmacen = New DevComponents.DotNetBar.LabelX()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,6 +81,9 @@ Partial Class F0_MovimientoNuevo
         CType(Me.grdetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel_AlmacenGrupoTraspaso.SuspendLayout()
+        CType(Me.grAlmacenSalida, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
         Me.Panel_AlmacenGrupo.SuspendLayout()
         CType(Me.grAlmacen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
@@ -89,13 +94,11 @@ Partial Class F0_MovimientoNuevo
         Me.SuperTabControlPanel2.SuspendLayout()
         Me.GroupPanel4.SuspendLayout()
         CType(Me.grmovimiento, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel3.SuspendLayout()
-        CType(Me.grAlmacenSalida, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PanelSuperior
         '
-        Me.PanelSuperior.Size = New System.Drawing.Size(1362, 72)
+        Me.PanelSuperior.Size = New System.Drawing.Size(1394, 72)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
@@ -113,7 +116,7 @@ Partial Class F0_MovimientoNuevo
         'PanelInferior
         '
         Me.PanelInferior.Location = New System.Drawing.Point(0, 702)
-        Me.PanelInferior.Size = New System.Drawing.Size(1362, 39)
+        Me.PanelInferior.Size = New System.Drawing.Size(1394, 39)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelInferior.Style.BackColor1.Color = System.Drawing.Color.Transparent
         Me.PanelInferior.Style.BackColor2.Color = System.Drawing.Color.Transparent
@@ -168,11 +171,11 @@ Partial Class F0_MovimientoNuevo
         '
         'PanelToolBar2
         '
-        Me.PanelToolBar2.Location = New System.Drawing.Point(1282, 0)
+        Me.PanelToolBar2.Location = New System.Drawing.Point(1314, 0)
         '
         'PanelPrincipal
         '
-        Me.PanelPrincipal.Size = New System.Drawing.Size(1362, 741)
+        Me.PanelPrincipal.Size = New System.Drawing.Size(1394, 741)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelInferior, 0)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.PanelPrincipal.Controls.SetChildIndex(Me.PanelSuperior, 0)
@@ -192,7 +195,7 @@ Partial Class F0_MovimientoNuevo
         '
         'MPanelUserAct
         '
-        Me.MPanelUserAct.Location = New System.Drawing.Point(1162, 0)
+        Me.MPanelUserAct.Location = New System.Drawing.Point(1194, 0)
         '
         'MRlAccion
         '
@@ -200,21 +203,21 @@ Partial Class F0_MovimientoNuevo
         '
         '
         Me.MRlAccion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.MRlAccion.Size = New System.Drawing.Size(906, 72)
+        Me.MRlAccion.Size = New System.Drawing.Size(938, 72)
         '
         'PanelContent
         '
         Me.PanelContent.Controls.Add(Me.GroupPanel3)
         Me.PanelContent.Controls.Add(Me.GroupPanel1)
-        Me.PanelContent.Size = New System.Drawing.Size(1329, 630)
+        Me.PanelContent.Size = New System.Drawing.Size(1361, 630)
         '
         'Panel1
         '
-        Me.Panel1.Size = New System.Drawing.Size(1362, 630)
+        Me.Panel1.Size = New System.Drawing.Size(1394, 630)
         '
         'MSuperTabControlPanel1
         '
-        Me.MSuperTabControlPanel1.Size = New System.Drawing.Size(1329, 630)
+        Me.MSuperTabControlPanel1.Size = New System.Drawing.Size(1361, 630)
         '
         'MSuperTabControl
         '
@@ -232,14 +235,14 @@ Partial Class F0_MovimientoNuevo
         Me.MSuperTabControl.ControlBox.Name = ""
         Me.MSuperTabControl.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.MSuperTabControl.ControlBox.MenuBox, Me.MSuperTabControl.ControlBox.CloseBox})
         Me.MSuperTabControl.Controls.Add(Me.SuperTabControlPanel2)
-        Me.MSuperTabControl.Size = New System.Drawing.Size(1362, 630)
+        Me.MSuperTabControl.Size = New System.Drawing.Size(1394, 630)
         Me.MSuperTabControl.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem2})
         Me.MSuperTabControl.Controls.SetChildIndex(Me.SuperTabControlPanel2, 0)
         Me.MSuperTabControl.Controls.SetChildIndex(Me.MSuperTabControlPanel1, 0)
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(1089, 0)
+        Me.PictureBox1.Location = New System.Drawing.Point(1121, 0)
         '
         'GroupPanel3
         '
@@ -249,9 +252,9 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel3.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupPanel3.Location = New System.Drawing.Point(0, 197)
+        Me.GroupPanel3.Location = New System.Drawing.Point(0, 227)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(1329, 433)
+        Me.GroupPanel3.Size = New System.Drawing.Size(1361, 403)
         '
         '
         '
@@ -294,7 +297,7 @@ Partial Class F0_MovimientoNuevo
         Me.grdetalle.Name = "grdetalle"
         Me.grdetalle.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grdetalle.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grdetalle.Size = New System.Drawing.Size(1323, 410)
+        Me.grdetalle.Size = New System.Drawing.Size(1355, 380)
         Me.grdetalle.TabIndex = 0
         Me.grdetalle.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -308,7 +311,7 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel1.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(1329, 197)
+        Me.GroupPanel1.Size = New System.Drawing.Size(1361, 227)
         '
         '
         '
@@ -343,7 +346,7 @@ Partial Class F0_MovimientoNuevo
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
-        Me.Panel2.Controls.Add(Me.Panel3)
+        Me.Panel2.Controls.Add(Me.Panel_AlmacenGrupoTraspaso)
         Me.Panel2.Controls.Add(Me.Panel_AlmacenGrupo)
         Me.Panel2.Controls.Add(Me.cbDepositoDestino)
         Me.Panel2.Controls.Add(Me.lbDepositoDestino)
@@ -360,17 +363,50 @@ Partial Class F0_MovimientoNuevo
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1323, 174)
+        Me.Panel2.Size = New System.Drawing.Size(1355, 204)
         Me.Panel2.TabIndex = 0
+        '
+        'Panel_AlmacenGrupoTraspaso
+        '
+        Me.Panel_AlmacenGrupoTraspaso.Controls.Add(Me.grAlmacenSalida)
+        Me.Panel_AlmacenGrupoTraspaso.Controls.Add(Me.Panel5)
+        Me.Panel_AlmacenGrupoTraspaso.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel_AlmacenGrupoTraspaso.Location = New System.Drawing.Point(395, 0)
+        Me.Panel_AlmacenGrupoTraspaso.Name = "Panel_AlmacenGrupoTraspaso"
+        Me.Panel_AlmacenGrupoTraspaso.Size = New System.Drawing.Size(480, 204)
+        Me.Panel_AlmacenGrupoTraspaso.TabIndex = 238
+        '
+        'grAlmacenSalida
+        '
+        Me.grAlmacenSalida.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.grAlmacenSalida.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grAlmacenSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grAlmacenSalida.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grAlmacenSalida.Location = New System.Drawing.Point(0, 55)
+        Me.grAlmacenSalida.Name = "grAlmacenSalida"
+        Me.grAlmacenSalida.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.grAlmacenSalida.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.grAlmacenSalida.Size = New System.Drawing.Size(480, 149)
+        Me.grAlmacenSalida.TabIndex = 1
+        Me.grAlmacenSalida.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.LabelX5)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel5.Location = New System.Drawing.Point(0, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(480, 55)
+        Me.Panel5.TabIndex = 0
         '
         'Panel_AlmacenGrupo
         '
         Me.Panel_AlmacenGrupo.Controls.Add(Me.grAlmacen)
         Me.Panel_AlmacenGrupo.Controls.Add(Me.Panel4)
         Me.Panel_AlmacenGrupo.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel_AlmacenGrupo.Location = New System.Drawing.Point(823, 0)
+        Me.Panel_AlmacenGrupo.Location = New System.Drawing.Point(875, 0)
         Me.Panel_AlmacenGrupo.Name = "Panel_AlmacenGrupo"
-        Me.Panel_AlmacenGrupo.Size = New System.Drawing.Size(500, 174)
+        Me.Panel_AlmacenGrupo.Size = New System.Drawing.Size(480, 204)
         Me.Panel_AlmacenGrupo.TabIndex = 237
         '
         'grAlmacen
@@ -379,16 +415,17 @@ Partial Class F0_MovimientoNuevo
         Me.grAlmacen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grAlmacen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grAlmacen.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grAlmacen.Location = New System.Drawing.Point(0, 40)
+        Me.grAlmacen.Location = New System.Drawing.Point(0, 55)
         Me.grAlmacen.Name = "grAlmacen"
         Me.grAlmacen.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.grAlmacen.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grAlmacen.Size = New System.Drawing.Size(500, 134)
+        Me.grAlmacen.Size = New System.Drawing.Size(480, 149)
         Me.grAlmacen.TabIndex = 1
         Me.grAlmacen.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.lblTituloAlmacen)
         Me.Panel4.Controls.Add(Me.lbProductoId)
         Me.Panel4.Controls.Add(Me.LabelX6)
         Me.Panel4.Controls.Add(Me.lbStock)
@@ -397,7 +434,7 @@ Partial Class F0_MovimientoNuevo
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(500, 40)
+        Me.Panel4.Size = New System.Drawing.Size(480, 55)
         Me.Panel4.TabIndex = 0
         '
         'lbProductoId
@@ -410,7 +447,7 @@ Partial Class F0_MovimientoNuevo
         Me.lbProductoId.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lbProductoId.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbProductoId.ForeColor = System.Drawing.Color.Red
-        Me.lbProductoId.Location = New System.Drawing.Point(0, 3)
+        Me.lbProductoId.Location = New System.Drawing.Point(2, 18)
         Me.lbProductoId.Name = "lbProductoId"
         Me.lbProductoId.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbProductoId.Size = New System.Drawing.Size(54, 17)
@@ -427,7 +464,7 @@ Partial Class F0_MovimientoNuevo
         Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX6.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX6.Location = New System.Drawing.Point(3, 19)
+        Me.LabelX6.Location = New System.Drawing.Point(5, 34)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX6.Size = New System.Drawing.Size(76, 16)
@@ -444,7 +481,7 @@ Partial Class F0_MovimientoNuevo
         Me.lbStock.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.lbStock.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbStock.ForeColor = System.Drawing.Color.Red
-        Me.lbStock.Location = New System.Drawing.Point(93, 18)
+        Me.lbStock.Location = New System.Drawing.Point(95, 33)
         Me.lbStock.Name = "lbStock"
         Me.lbStock.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbStock.Size = New System.Drawing.Size(12, 17)
@@ -459,10 +496,10 @@ Partial Class F0_MovimientoNuevo
         Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.clase_practica
         Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnAgregar.Location = New System.Drawing.Point(378, 0)
+        Me.btnAgregar.Location = New System.Drawing.Point(380, 0)
         Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(122, 40)
+        Me.btnAgregar.Size = New System.Drawing.Size(100, 55)
         Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.btnAgregar.TabIndex = 373
         Me.btnAgregar.Text = "Agregar"
@@ -477,7 +514,7 @@ Partial Class F0_MovimientoNuevo
         Me.LblProducto.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LblProducto.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblProducto.ForeColor = System.Drawing.Color.Red
-        Me.LblProducto.Location = New System.Drawing.Point(56, 3)
+        Me.LblProducto.Location = New System.Drawing.Point(58, 18)
         Me.LblProducto.Name = "LblProducto"
         Me.LblProducto.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LblProducto.Size = New System.Drawing.Size(69, 17)
@@ -806,43 +843,45 @@ Partial Class F0_MovimientoNuevo
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
         '
-        'Panel3
+        'LabelX5
         '
-        Me.Panel3.Controls.Add(Me.grAlmacenSalida)
-        Me.Panel3.Controls.Add(Me.Panel5)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel3.Location = New System.Drawing.Point(423, 0)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(400, 174)
-        Me.Panel3.TabIndex = 238
+        Me.LabelX5.AutoSize = True
+        Me.LabelX5.BackColor = System.Drawing.Color.Transparent
         '
-        'grAlmacenSalida
         '
-        Me.grAlmacenSalida.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.grAlmacenSalida.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grAlmacenSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grAlmacenSalida.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grAlmacenSalida.Location = New System.Drawing.Point(0, 40)
-        Me.grAlmacenSalida.Name = "grAlmacenSalida"
-        Me.grAlmacenSalida.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
-        Me.grAlmacenSalida.Office2007CustomColor = System.Drawing.Color.DodgerBlue
-        Me.grAlmacenSalida.Size = New System.Drawing.Size(400, 134)
-        Me.grAlmacenSalida.TabIndex = 1
-        Me.grAlmacenSalida.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
-        'Panel5
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX5.ForeColor = System.Drawing.Color.Red
+        Me.LabelX5.Location = New System.Drawing.Point(3, 3)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX5.Size = New System.Drawing.Size(158, 17)
+        Me.LabelX5.TabIndex = 239
+        Me.LabelX5.Text = "ALMACEN DE ORIGEN"
         '
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(400, 40)
-        Me.Panel5.TabIndex = 0
+        'lblTituloAlmacen
+        '
+        Me.lblTituloAlmacen.AutoSize = True
+        Me.lblTituloAlmacen.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lblTituloAlmacen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblTituloAlmacen.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTituloAlmacen.ForeColor = System.Drawing.Color.Red
+        Me.lblTituloAlmacen.Location = New System.Drawing.Point(3, 0)
+        Me.lblTituloAlmacen.Name = "lblTituloAlmacen"
+        Me.lblTituloAlmacen.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lblTituloAlmacen.Size = New System.Drawing.Size(166, 17)
+        Me.lblTituloAlmacen.TabIndex = 376
+        Me.lblTituloAlmacen.Text = "ALMACEN DE DESTINO"
         '
         'F0_MovimientoNuevo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1362, 741)
+        Me.ClientSize = New System.Drawing.Size(1394, 741)
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "F0_MovimientoNuevo"
         Me.Text = "F0_MovimientoNuevo"
@@ -870,6 +909,10 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel_AlmacenGrupoTraspaso.ResumeLayout(False)
+        CType(Me.grAlmacenSalida, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.Panel_AlmacenGrupo.ResumeLayout(False)
         CType(Me.grAlmacen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
@@ -881,8 +924,6 @@ Partial Class F0_MovimientoNuevo
         Me.SuperTabControlPanel2.ResumeLayout(False)
         Me.GroupPanel4.ResumeLayout(False)
         CType(Me.grmovimiento, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel3.ResumeLayout(False)
-        CType(Me.grAlmacenSalida, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -916,7 +957,9 @@ Partial Class F0_MovimientoNuevo
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lbStock As DevComponents.DotNetBar.LabelX
     Friend WithEvents lbProductoId As DevComponents.DotNetBar.LabelX
-    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel_AlmacenGrupoTraspaso As Panel
     Friend WithEvents grAlmacenSalida As Janus.Windows.GridEX.GridEX
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents lblTituloAlmacen As DevComponents.DotNetBar.LabelX
 End Class

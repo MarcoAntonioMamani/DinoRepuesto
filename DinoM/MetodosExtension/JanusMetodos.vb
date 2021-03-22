@@ -7,6 +7,7 @@ Imports Janus.Windows.GridEX.EditControls
 Public Class JanusMetodos
     Public Shared Function jMetodo_SumarFila(grid As GridEX, key As String) As Double
         Dim stock As Double = 0
+        grid.UpdateData()
         For Each fila As DataRow In CType(grid.DataSource, DataTable).Rows
             stock += fila(key)
         Next
