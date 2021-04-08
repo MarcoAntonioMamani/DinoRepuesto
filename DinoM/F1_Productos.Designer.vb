@@ -377,6 +377,7 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.FocusCellFormatStyle.BackColor = System.Drawing.Color.Transparent
         Me.JGrM_Buscador.FocusCellFormatStyle.ForeColor = System.Drawing.Color.Black
         Me.JGrM_Buscador.FocusStyle = Janus.Windows.GridEX.FocusStyle.Solid
+        Me.JGrM_Buscador.Font = New System.Drawing.Font("Calibri", 10.2!)
         Me.JGrM_Buscador.GridLineColor = System.Drawing.SystemColors.MenuHighlight
         Me.JGrM_Buscador.HeaderFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.JGrM_Buscador.HeaderFormatStyle.BackColorGradient = System.Drawing.Color.DodgerBlue
@@ -391,7 +392,7 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.RecordNavigator = True
         Me.JGrM_Buscador.RowCheckStateBehavior = Janus.Windows.GridEX.RowCheckStateBehavior.CheckStateDependsOnChild
         Me.JGrM_Buscador.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
-        Me.JGrM_Buscador.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.JGrM_Buscador.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JGrM_Buscador.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
         Me.JGrM_Buscador.Size = New System.Drawing.Size(1316, 174)
         Me.JGrM_Buscador.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
@@ -645,6 +646,7 @@ Partial Class F1_Productos
         Me.lbgrupo4.Size = New System.Drawing.Size(57, 16)
         Me.lbgrupo4.TabIndex = 32
         Me.lbgrupo4.Text = "Grupo 4:"
+        Me.lbgrupo4.Visible = False
         '
         'cbgrupo1
         '
@@ -710,6 +712,7 @@ Partial Class F1_Productos
         Me.cbgrupo4.SelectedItem = Nothing
         Me.cbgrupo4.Size = New System.Drawing.Size(144, 22)
         Me.cbgrupo4.TabIndex = 4
+        Me.cbgrupo4.Visible = False
         Me.cbgrupo4.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'btgrupo1
@@ -1078,10 +1081,10 @@ Partial Class F1_Productos
         Me.tbMedida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbMedida.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbMedida.Location = New System.Drawing.Point(169, 235)
-        Me.tbMedida.MaxLength = 15
+        Me.tbMedida.MaxLength = 50
         Me.tbMedida.Name = "tbMedida"
         Me.tbMedida.PreventEnterBeep = True
-        Me.tbMedida.Size = New System.Drawing.Size(166, 21)
+        Me.tbMedida.Size = New System.Drawing.Size(243, 21)
         Me.tbMedida.TabIndex = 231
         '
         'LabelX4
@@ -1158,7 +1161,7 @@ Partial Class F1_Productos
         Me.tbDescDet.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbDescDet.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbDescDet.Location = New System.Drawing.Point(169, 177)
-        Me.tbDescDet.MaxLength = 250
+        Me.tbDescDet.MaxLength = 500
         Me.tbDescDet.Multiline = True
         Me.tbDescDet.Name = "tbDescDet"
         Me.tbDescDet.PreventEnterBeep = True

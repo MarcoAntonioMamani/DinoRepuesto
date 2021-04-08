@@ -382,16 +382,16 @@ Public Class F1_Productos
 
     Private Sub _prCargarComboLibreria(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
         Dim dt As New DataTable
-        If (IsNothing(dtLibreria)) Then
+        'If (IsNothing(dtLibreria)) Then
 
-            dtLibreria = L_prObtenerTodaLaLibreria()
-        End If
-
-
-        dt = dtLibreria.Select("yccod1=" + cod1 + " and yccod2=" + cod2, "ycdes3 asc").CopyToDataTable().DefaultView.ToTable(False, "yccod3", "ycdes3")
+        '    dtLibreria = L_prObtenerTodaLaLibreria()
+        'End If
 
 
-        'dt = L_prLibreriaClienteLGeneral(cod1, cod2)
+        'dt = dtLibreria.Select("yccod1=" + cod1 + " and yccod2=" + cod2, "ycdes3 asc").CopyToDataTable().DefaultView.ToTable(False, "yccod3", "ycdes3")
+
+
+        dt = L_prLibreriaClienteLGeneral(cod1, cod2)
         With mCombo
             .DropDownList.Columns.Clear()
             .DropDownList.Columns.Add("yccod3").Width = 70
@@ -490,7 +490,7 @@ Public Class F1_Productos
         cbgrupo2.ReadOnly = False
         cbgrupo3.ReadOnly = False
         cbgrupo4.ReadOnly = False
-        '' cbgrupo5.ReadOnly = False  a solicitud de rosely se bloquea el campo
+        cbgrupo5.ReadOnly = False  'a solicitud de rosely se bloquea el campo
         cbUMed.ReadOnly = False
         swEstado.IsReadOnly = False
         cbUniVenta.ReadOnly = False
@@ -635,7 +635,7 @@ Public Class F1_Productos
             tbPrecioCosto.Value = 0
             tbPrecioMecanico.Value = 0
             tbPrecioVentaNormal.Value = 0
-            tbCodigoMarca.Clear()
+
             tbPrecioFacturado.Value = 0
 
 
@@ -905,10 +905,11 @@ Public Class F1_Productos
         'a.yfMed, a.yfumin, a.yfusup, a.yfmstk, a.yfclot, a.yfsmin, a.yfap, a.yfimg, a.yffact, a.yfhact, a.yfuact
         listEstCeldas.Add(New Modelo.Celda("yfnumi", True, "ITem".ToUpper, 50))
         listEstCeldas.Add(New Modelo.Celda("grupo5", True, "CATEGORÍA".ToUpper, 90))
+        listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", True, "CodigoMarca", 90))
         listEstCeldas.Add(New Modelo.Celda("yfcprod", True, "Cod.Fabrica", 100))
-        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", True, "Medida".ToUpper, 140))
+        listEstCeldas.Add(New Modelo.Celda("yfcdprod2", True, "Medida".ToUpper, 90))
         listEstCeldas.Add(New Modelo.Celda("yfcbarra", False, "Cod.Barra".ToUpper, 140))
-        listEstCeldas.Add(New Modelo.Celda("yfdetprod", True, "Descripcion Producto".ToUpper, 300))
+        listEstCeldas.Add(New Modelo.Celda("yfdetprod", True, "Descripcion Producto".ToUpper, 360))
         listEstCeldas.Add(New Modelo.Celda("yfgr1", False))
         listEstCeldas.Add(New Modelo.Celda("yfgr2", False))
         listEstCeldas.Add(New Modelo.Celda("yfgr3", False))
@@ -931,7 +932,7 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("VentaMecanico", True, "V. Mecanico", 80, "0.00"))
 
         listEstCeldas.Add(New Modelo.Celda("PrecioCosto", False))
-        listEstCeldas.Add(New Modelo.Celda("yfCodigoMarca", True, "CodigoMarca", 90))
+        listEstCeldas.Add(New Modelo.Celda("yfcdprod1", False, "Descripcion".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("grupo1", True, lbgrupo1.Text.Substring(0, lbgrupo1.Text.Length - 1).ToUpper, 80))
         listEstCeldas.Add(New Modelo.Celda("grupo2", True, lbgrupo2.Text.Substring(0, lbgrupo2.Text.Length - 1).ToUpper, 80))
         listEstCeldas.Add(New Modelo.Celda("grupo3", False, lbgrupo3.Text.Substring(0, lbgrupo3.Text.Length - 1).ToUpper, 100))
@@ -939,8 +940,8 @@ Public Class F1_Productos
         listEstCeldas.Add(New Modelo.Celda("Umedida", False, "UMedida".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("UnidMin", False, "UniVenta".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("Umax", False, "UniCaja".ToUpper, 150))
-        listEstCeldas.Add(New Modelo.Celda("yfcdprod1", False, "Descripcion".ToUpper, 150))
 
+        listEstCeldas.Add(New Modelo.Celda("listaAlmacen", True, "Stock".ToUpper, 250))
         Return listEstCeldas
     End Function
 
@@ -1662,7 +1663,7 @@ Public Class F1_Productos
             Dim PrecioVentaFactura As Double
 
 
-            PrecioVentaFactura = (PrecioCosto + (PrecioCosto * 0.25) + (PrecioCosto * 0.16)) * 2
+            PrecioVentaFactura = ((PrecioCosto + (PrecioCosto * 0.25) + (PrecioCosto * 0.16)) * 2) * 7
 
             tbPrecioFacturado.Value = PrecioVentaFactura
             tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
@@ -1675,7 +1676,19 @@ Public Class F1_Productos
 
 
     End Sub
+    Private Sub tbPrecioFacturado_ValueChanged(sender As Object, e As EventArgs) Handles tbPrecioFacturado.ValueChanged
+        If (tbCodBarra.ReadOnly = False) Then
+            If (tbPrecioFacturado.Value > 0) Then
+                Dim PrecioVentaFactura As Double
+                PrecioVentaFactura = tbPrecioFacturado.Value
+                tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
+                tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.18)
+            End If
 
+
+        End If
+
+    End Sub
     Private Sub LabelX17_Click(sender As Object, e As EventArgs) Handles LabelX17.Click
 
     End Sub

@@ -27,7 +27,6 @@ Partial Class F0_DetalleMovimiento
         Me.grProductos = New Janus.Windows.GridEX.GridEX()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.lbConcepto = New DevComponents.DotNetBar.LabelX()
-        Me.tbAlmacenNombre = New DevComponents.DotNetBar.LabelX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
         Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
@@ -124,7 +123,6 @@ Partial Class F0_DetalleMovimiento
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.lbConcepto)
-        Me.Panel3.Controls.Add(Me.tbAlmacenNombre)
         Me.Panel3.Controls.Add(Me.LabelX1)
         Me.Panel3.Controls.Add(Me.ButtonX1)
         Me.Panel3.Controls.Add(Me.btnAgregar)
@@ -147,29 +145,12 @@ Partial Class F0_DetalleMovimiento
         Me.lbConcepto.Dock = System.Windows.Forms.DockStyle.Right
         Me.lbConcepto.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbConcepto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.lbConcepto.Location = New System.Drawing.Point(1081, 0)
+        Me.lbConcepto.Location = New System.Drawing.Point(1185, 0)
         Me.lbConcepto.Name = "lbConcepto"
         Me.lbConcepto.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbConcepto.Size = New System.Drawing.Size(171, 41)
         Me.lbConcepto.TabIndex = 376
         Me.lbConcepto.Text = "Concepto"
-        '
-        'tbAlmacenNombre
-        '
-        Me.tbAlmacenNombre.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.tbAlmacenNombre.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbAlmacenNombre.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbAlmacenNombre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.tbAlmacenNombre.Location = New System.Drawing.Point(655, 11)
-        Me.tbAlmacenNombre.Name = "tbAlmacenNombre"
-        Me.tbAlmacenNombre.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.tbAlmacenNombre.Size = New System.Drawing.Size(333, 23)
-        Me.tbAlmacenNombre.TabIndex = 375
-        Me.tbAlmacenNombre.Text = "Alnacen"
-        Me.tbAlmacenNombre.Visible = False
         '
         'LabelX1
         '
@@ -178,28 +159,27 @@ Partial Class F0_DetalleMovimiento
         '
         '
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX1.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX1.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX1.Location = New System.Drawing.Point(568, 11)
+        Me.LabelX1.Location = New System.Drawing.Point(698, 13)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX1.Size = New System.Drawing.Size(73, 23)
+        Me.LabelX1.Size = New System.Drawing.Size(440, 23)
         Me.LabelX1.TabIndex = 374
-        Me.LabelX1.Text = "Alnacen:"
+        Me.LabelX1.Text = "Para actualizar el Stock debe precionar el boton Actualizar"
         Me.LabelX1.Visible = False
         '
         'ButtonX1
         '
         Me.ButtonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.ButtonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
-        Me.ButtonX1.Dock = System.Windows.Forms.DockStyle.Right
         Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.refresh_1
         Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.ButtonX1.Location = New System.Drawing.Point(1252, 0)
+        Me.ButtonX1.Location = New System.Drawing.Point(543, 3)
         Me.ButtonX1.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonX1.Name = "ButtonX1"
-        Me.ButtonX1.Size = New System.Drawing.Size(104, 41)
+        Me.ButtonX1.Size = New System.Drawing.Size(150, 32)
         Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.ButtonX1.TabIndex = 373
         Me.ButtonX1.Text = "Actualizar"
@@ -308,7 +288,7 @@ Partial Class F0_DetalleMovimiento
         Me.grProductoSeleccionado.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.grProductoSeleccionado.BackColor = System.Drawing.Color.GhostWhite
         Me.grProductoSeleccionado.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grProductoSeleccionado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductoSeleccionado.Font = New System.Drawing.Font("Calibri", 10.2!)
         Me.grProductoSeleccionado.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductoSeleccionado.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.grProductoSeleccionado.Location = New System.Drawing.Point(0, 0)
@@ -353,5 +333,4 @@ Partial Class F0_DetalleMovimiento
     Friend WithEvents ButtonX1 As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
     Friend WithEvents lbConcepto As DevComponents.DotNetBar.LabelX
-    Friend WithEvents tbAlmacenNombre As DevComponents.DotNetBar.LabelX
 End Class

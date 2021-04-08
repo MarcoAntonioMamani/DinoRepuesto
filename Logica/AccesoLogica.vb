@@ -85,6 +85,23 @@ Public Class AccesoLogica
         Next
         Return result
     End Function
+    Public Shared Function L_fnbValidarEliminacionLibreria(_numi As String, _tablaOri As String, _campoOri As String, ByRef _respuesta As String, idGrupo1 As Integer, idGrupo2 As Integer) As Boolean
+        Dim _Tabla As DataTable
+        Dim _Where, _campos As String
+        _Where = "bbtori='" + _tablaOri + "' and bbtran=1" + " and bbIdGrupo1 =" + idGrupo1.ToString() + " and bbIdGrupo2 =" + idGrupo2.ToString()
+        _campos = "bbnumi,bbtran,bbtori,bbcori,bbtdes,bbcdes,bbprog"
+        _Tabla = D_Datos_Tabla(_campos, "TB002", _Where)
+        _respuesta = "no se puede eliminar el registro: ".ToUpper + _numi + " por que esta siendo usado en los siguientes programas: ".ToUpper + vbCrLf
+
+        Dim result As Boolean = True
+        For Each fila As DataRow In _Tabla.Rows
+            If L_fnbExisteRegEnTabla(_numi, fila.Item("bbtdes").ToString, fila.Item("bbcdes").ToString) = True Then
+                _respuesta = _respuesta + fila.Item("bbprog").ToString + vbCrLf
+                result = False
+            End If
+        Next
+        Return result
+    End Function
 
     Private Shared Function L_fnbExisteRegEnTabla(_numiOri As String, _tablaDest As String, _campoDest As String) As Boolean
         Dim _Tabla As DataTable
@@ -1204,26 +1221,36 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_fnGrabarLibreriasPrograma(_ygnumi As String, _dt As DataTable) As Boolean
+    Public Shared Sub guardarLibreria(fila As DataRow, tipo As Integer)
         Dim _Tabla As DataTable
-        Dim _resultado As Boolean
         Dim _listParam As New List(Of Datos.DParametro)
-
-        _listParam.Add(New Datos.DParametro("@tipo", 12))
-        _listParam.Add(New Datos.DParametro("@TY0031", "", _dt))
-        _listParam.Add(New Datos.DParametro("@yguact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@tipo", tipo))
+        _listParam.Add(New Datos.DParametro("@yccod1", fila("yccod1")))
+        _listParam.Add(New Datos.DParametro("@yccod2", fila("yccod2")))
+        _listParam.Add(New Datos.DParametro("@yccod3 ", fila("yccod3")))
+        _listParam.Add(New Datos.DParametro("@ycdes3", fila("ycdes3")))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY006", _listParam)
+    End Sub
+    Public Shared Sub L_fnGrabarLibreriasPrograma(_ygnumi As String, _dt As DataTable, ByRef mensaje As String)
+        'Representa el numero de procedimiento almacenado
+        Dim nuevo = 14
+        Dim modificar = 15
+        Dim eliminar = 16
+        For Each fila As DataRow In _dt.Rows
 
-
-        If _Tabla.Rows.Count > 0 Then
-            _ygnumi = _Tabla.Rows(0).Item(0)
-            _resultado = True
-        Else
-            _resultado = False
-        End If
-
-        Return _resultado
-    End Function
+            Select Case fila("estado")
+                Case 0
+                    guardarLibreria(fila, nuevo)
+                Case 2
+                    guardarLibreria(fila, modificar)
+                Case -1
+                    If L_fnbValidarEliminacionLibreria(fila("yccod3"), "TY0031", "yccod3", mensaje, fila("yccod1"), fila("yccod2")) = True Then
+                        guardarLibreria(fila, eliminar)
+                        mensaje = ""
+                    End If
+            End Select
+        Next
+    End Sub
 #End Region
 
 #Region "TZ001 Zonas"

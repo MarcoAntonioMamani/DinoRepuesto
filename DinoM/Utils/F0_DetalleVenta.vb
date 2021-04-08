@@ -54,7 +54,7 @@ Public Class F0_DetalleVenta
 
         End With
         With grProductoSeleccionado.RootTable.Columns("Item")
-            .Width = 100
+            .Width = 50
             .Caption = "Item"
             .Visible = False
 
@@ -91,7 +91,7 @@ Public Class F0_DetalleVenta
             .Visible = True
         End With
         With grProductoSeleccionado.RootTable.Columns("Categoria")
-            .Width = 100
+            .Width = 90
             .Caption = "Categoria"
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -99,7 +99,7 @@ Public Class F0_DetalleVenta
             .Visible = True
         End With
         With grProductoSeleccionado.RootTable.Columns("yfcdprod1")
-            .Width = 550
+            .Width = 450
             .Visible = True
             .MaxLines = 100
             .CellStyle.LineAlignment = TextAlignment.Near
@@ -116,13 +116,13 @@ Public Class F0_DetalleVenta
         If (dtname.Rows.Count > 0) Then
 
             With grProductoSeleccionado.RootTable.Columns("grupo1")
-                .Width = 120
+                .Width = 100
                 .Caption = dtname.Rows(0).Item("Grupo 1").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
             End With
             With grProductoSeleccionado.RootTable.Columns("grupo2")
-                .Width = 120
+                .Width = 100
                 .Caption = dtname.Rows(0).Item("Grupo 2").ToString
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
                 .Visible = True
@@ -199,21 +199,21 @@ Public Class F0_DetalleVenta
             .Caption = "Unidad Min."
         End With
         With grProductoSeleccionado.RootTable.Columns("yhprecio")
-            .Width = 120
+            .Width = 90
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = True
             .Caption = "Precio"
             .FormatString = "0.00"
         End With
         With grProductoSeleccionado.RootTable.Columns("pcos")
-            .Width = 120
+            .Width = 90
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
             .Caption = "Precio Costo"
             .FormatString = "0.00"
         End With
         With grProductoSeleccionado.RootTable.Columns("stock")
-            .Width = 120
+            .Width = 90
             .FormatString = "0.00"
             .Visible = True
             .Caption = "Stock"

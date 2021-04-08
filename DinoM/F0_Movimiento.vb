@@ -510,7 +510,7 @@ Public Class F0_Movimiento
 
         frm = New F0_DetalleMovimiento(dtProductoGoblal, dtMovimiento, dtname)
         frm.lbConcepto.Text = cbConcepto.Text
-        frm.tbAlmacenNombre.Text = cbAlmacenOrigen.Text
+
         frm.ShowDialog()
         Dim dtProd As DataTable = frm.dtDetalle
 

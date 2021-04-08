@@ -13,7 +13,7 @@ Imports System.Drawing
 Imports DevComponents.DotNetBar.Controls
 Imports System.Threading
 Imports System.Drawing.Text
-
+Imports DinoM.JanusExtension
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -319,10 +319,21 @@ Public Class F0_Libreria
             e.Cancel = True
         End If
     End Sub
-    Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
+    Private Sub EliminarFilaDetalle(griex As GridEX, key As String, keyEstado As String, valor As Integer)
+        Dim colProducto = 2
+        EliminarFIla(griex, key, keyEstado, valor)
+        grLibreria.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grLibreria.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+        grLibreria.Select()
+        grLibreria.Col = 2
+        grLibreria.Row = grLibreria.RowCount - 1
+    End Sub
 
-        Dim grabar As Boolean = L_fnGrabarLibreriasPrograma("", CType(grLibreria.DataSource, DataTable))
-        If (grabar) Then
+    Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
+        Dim mensajeError As String = ""
+        L_fnGrabarLibreriasPrograma("", CType(grLibreria.DataSource, DataTable), mensajeError)
+        _prCargarTablaLibrerias()
+
+        If (mensajeError = String.Empty) Then
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "categoria Grabado con Exito.".ToUpper,
                                       img, 2000,
@@ -335,7 +346,7 @@ Public Class F0_Libreria
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La categoria no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, mensajeError, img, 3000, eToastGlowColor.Red, eToastPosition.BottomCenter)
         End If
 
     End Sub
@@ -383,6 +394,32 @@ Public Class F0_Libreria
             Me.Opacity = 100
             Timer1.Enabled = False
         End If
+
+    End Sub
+
+    Private Sub grLibreria_MouseClick(sender As Object, e As MouseEventArgs) Handles grLibreria.MouseClick
+        Try
+            If (Not _fnAccesible()) Then
+                Return
+            End If
+
+            If (grLibreria.RowCount >= 2) Then
+                If (grLibreria.CurrentColumn.Index = grLibreria.RootTable.Columns("img").Index) Then
+
+                    EliminarFilaDetalle(grLibreria, "yccod3", "Estado", grLibreria.GetValue("yccod3"))
+                End If
+            End If
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Private Sub MostrarMensajeError(mensaje As String)
+        ToastNotification.Show(Me,
+                               mensaje.ToUpper,
+                               My.Resources.WARNING,
+                               5000,
+                               eToastGlowColor.Red,
+                               eToastPosition.TopCenter)
 
     End Sub
 End Class

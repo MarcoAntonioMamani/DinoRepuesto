@@ -24,6 +24,7 @@ Public Class JanusExtension
     Public Shared Sub ColAL(grid As GridEX, key As String, nombre As String, ancho As Integer, Optional tamFuente As Integer = 8)
         With grid.RootTable.Columns(key)
             .CellStyle.TextAlignment = TextAlignment.Near
+            .CellStyle.LineAlignment = TextAlignment.Near
             .WordWrap = True
             .MaxLines = 20
             .Visible = True
@@ -56,6 +57,7 @@ Public Class JanusExtension
     Public Shared Sub ColArNro(grid As GridEX, key As String, nombre As String, ancho As Integer, formato As String, Optional tamFuente As Integer = 8)
         With grid.RootTable.Columns(key)
             .CellStyle.TextAlignment = TextAlignment.Far
+            .CellStyle.LineAlignment = TextAlignment.Center
             .FormatString = formato
             .Visible = True
             ColPropiedadesComun(grid, key, nombre, ancho)

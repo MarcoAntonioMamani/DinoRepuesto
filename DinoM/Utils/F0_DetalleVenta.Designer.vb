@@ -26,12 +26,12 @@ Partial Class F0_DetalleVenta
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.grProductos = New Janus.Windows.GridEX.GridEX()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
         Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.grProductoSeleccionado = New Janus.Windows.GridEX.GridEX()
-        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.GPanelProductos.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.grProductos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,7 +101,7 @@ Partial Class F0_DetalleVenta
         Me.grProductos.ColumnAutoResize = True
         Me.grProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grProductos.FocusStyle = Janus.Windows.GridEX.FocusStyle.Solid
-        Me.grProductos.Font = New System.Drawing.Font("Calibri", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grProductos.Font = New System.Drawing.Font("Calibri", 10.2!)
         Me.grProductos.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grProductos.HeaderFormatStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.grProductos.HideSelection = Janus.Windows.GridEX.HideSelection.Highlight
@@ -124,10 +124,25 @@ Partial Class F0_DetalleVenta
         Me.Panel3.Controls.Add(Me.tbProducto)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(856, 41)
         Me.Panel3.TabIndex = 1
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.atras1
+        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnAgregar.Location = New System.Drawing.Point(388, 2)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(152, 32)
+        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnAgregar.TabIndex = 372
+        Me.btnAgregar.Text = "Confirmar / Salir"
         '
         'LabelX9
         '
@@ -229,21 +244,6 @@ Partial Class F0_DetalleVenta
         Me.grProductoSeleccionado.TabIndex = 0
         Me.grProductoSeleccionado.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
-        'btnAgregar
-        '
-        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
-        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.atras1
-        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnAgregar.Location = New System.Drawing.Point(388, 2)
-        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(152, 32)
-        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
-        Me.btnAgregar.TabIndex = 372
-        Me.btnAgregar.Text = "Confirmar / Salir"
-        '
         'F0_DetalleVenta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -252,7 +252,7 @@ Partial Class F0_DetalleVenta
         Me.Controls.Add(Me.GPanelProductos)
         Me.Controls.Add(Me.GroupPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "F0_DetalleVenta"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Top"

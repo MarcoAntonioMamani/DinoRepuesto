@@ -57,6 +57,8 @@ Public Class ModeloF1
                     If _MListEstBuscador.Item(i).formato <> String.Empty Then
                         .FormatString = _MListEstBuscador.Item(i).formato
                     Else
+                        .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+                        .CellStyle.LineAlignment = TextAlignment.Near
                         .MaxLines = 100
                         .WordWrap = True
                     End If
