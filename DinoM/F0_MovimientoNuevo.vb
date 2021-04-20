@@ -299,6 +299,7 @@ Public Class F0_MovimientoNuevo
         frm.lbConcepto.Text = cbConcepto.Text
 
         frm.ShowDialog()
+        dtProductoGoblal = frm.dtProductoAll
         Dim dtProd As DataTable = frm.dtDetalle
         For i As Integer = 0 To dtProd.Rows.Count - 1 Step 1
             InsertarProductosSinLote(dtProd, i)

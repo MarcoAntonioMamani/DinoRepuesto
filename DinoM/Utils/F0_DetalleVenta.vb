@@ -567,6 +567,7 @@ Public Class F0_DetalleVenta
             For i As Integer = 0 To dt.Rows.Count - 1 Step 1
                 Dim nombre As String = dt.Rows(i).Item("yfcdprod1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("categoria").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Marca").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +

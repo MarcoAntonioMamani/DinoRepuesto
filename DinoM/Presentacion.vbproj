@@ -399,6 +399,7 @@
       <DependentUpon>KardexClienteRes.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MetodosExtension\DovnetMensajes.vb" />
     <Compile Include="MetodosExtension\JanusExtension.vb" />
     <Compile Include="MetodosExtension\JanusMetodos.vb" />
     <Compile Include="MetodosExtension\JanusVerificaciones.vb" />

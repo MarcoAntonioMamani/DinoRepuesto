@@ -9,7 +9,7 @@ Imports System.Threading
 Imports System.Drawing.Text
 Imports System.Reflection
 Imports System.Runtime.InteropServices
-
+Imports DinoM.DovnetMensajes
 Public Class F0_KardexMovimiento
     Dim _Inter As Integer = 0
 #Region "Variables Globales"
@@ -18,6 +18,8 @@ Public Class F0_KardexMovimiento
     Dim Dt2KardexTotal As DataTable
     Dim _DuracionSms As Integer = 5
     Dim Lote As Boolean = False
+    Dim dtProductoGoblal As DataTable
+
 #End Region
 #Region "Variables Globales"
     Public _nameButton As String
@@ -110,58 +112,48 @@ Public Class F0_KardexMovimiento
         tbFechaI.Value = Now.Date
     End Sub
 
+    Private Sub _prCargarProductos()
+        Dim dtname As DataTable = L_fnNameLabel()
+        'Obtiene la lista de productos
+        If dtProductoGoblal Is Nothing Then
+            If (Lote = True) Then
+                dtProductoGoblal = L_prMovimientoListarProductosConLote(cbAlmacen.Value)
+                ' actualizarSaldoSinLote(dtProductoGoblal)
+            Else
+                dtProductoGoblal = L_prMovimientoListarProductos(cbAlmacen.Value)
+            End If
+        End If
+        Dim dtMovimiento As DataTable = dtProductoGoblal.Copy
+        dtMovimiento.Rows.Clear()
+        'Intancia vista 
+        Dim frm As F0_DetalleMovimiento
+        frm = New F0_DetalleMovimiento(dtProductoGoblal, dtMovimiento, dtname)
 
+        'Envia valores de configuracion
+        frm.lbConcepto.Text = ""
+        frm.detalleSeleccionHabilitado = False
+        frm.GroupPanel1.Visible = False
+        frm.btnAgregar.Visible = False
+        frm.ShowDialog()
+        dtMovimiento.Rows.Clear()
+        'Devuelve valores de seleccion
+        tbCodigo.Text = frm.pedidoId.ToString()
+        tbproducto.Text = frm.producto.ToString()
+        tbsaldo.Text = frm.stock.ToString()
+    End Sub
 
     Private Sub tbCodigo_KeyDown(sender As Object, e As KeyEventArgs) Handles tbCodigo.KeyDown
-
-        If (cbAlmacen.SelectedIndex < 0) Then
-            Return
-
-        End If
-        If e.KeyData = Keys.Control + Keys.Enter Then
-
-            Dim dt As DataTable
-
-            dt = L_fnListarProductosKardex(cbAlmacen.Value)
-            ' a.yfnumi ,a.yfcdprod1 as producto,a.yfcdprod2 as descripcioncorta,a.yfcprod,b.iccven as stock 
-
-            Dim listEstCeldas As New List(Of Modelo.Celda)
-            listEstCeldas.Add(New Modelo.Celda("yfnumi", True, "ID", 50))
-            listEstCeldas.Add(New Modelo.Celda("producto", True, "PRODUCTO", 280))
-            listEstCeldas.Add(New Modelo.Celda("descripcioncorta", True, "DESC. CORTA".ToUpper, 150))
-            listEstCeldas.Add(New Modelo.Celda("yfcprod", False, "COD PRODUCTO", 150))
-
-            listEstCeldas.Add(New Modelo.Celda("stock", True, "StockGeneral".ToUpper, 100))
-            Dim ef = New Efecto
-            ef.tipo = 3
-            ef.dt = dt
-            ef.SeleclCol = 2
-            ef.listEstCeldas = listEstCeldas
-            ef.alto = 50
-            ef.ancho = 350
-            ef.Context = "Seleccione PRODUCTO".ToUpper
-            ef.ShowDialog()
-            Dim bandera As Boolean = False
-            bandera = ef.band
-            If (bandera = True) Then
-                Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
-                ' a.yfnumi ,a.yfcdprod1 as producto,a.yfcdprod2 as descripcioncorta,a.yfcprod,b.iccven as stock 
-                If (IsNothing(Row)) Then
-                    Return
-                End If
-                tbCodigo.Text = ""
-                P_ArmarGrillaDatos()
-                tbCodigo.Text = Row.Cells("yfnumi").Value
-                tbproducto.Text = Row.Cells("producto").Value
-                tbsaldo.Text = Row.Cells("stock").Value
-                tbFechaI.Focus()
-                tblote.Clear()
-                tbFechaVenc.Clear()
-
+        Try
+            If (cbAlmacen.SelectedIndex < 0) Then
+                Return
+            End If
+            If e.KeyData = Keys.Control + Keys.Enter Then
+                _prCargarProductos()
             End If
 
-        End If
-
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message, Me)
+        End Try
     End Sub
 
     Private Sub F0_KardexMovimiento_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -280,12 +272,12 @@ Public Class F0_KardexMovimiento
         Dt2KardexTotal = New DataTable
 
         _prInterpretarDatosLotes()
-        Dgj1Datos.BoundMode = Janus.Data.BoundMode.Bound
-        Dgj1Datos.DataSource = Dt1Kardex
-        Dgj1Datos.RetrieveStructure()
+        grDatos.BoundMode = Janus.Data.BoundMode.Bound
+        grDatos.DataSource = Dt1Kardex
+        grDatos.RetrieveStructure()
 
         'dar formato a las columnas
-        With Dgj1Datos.RootTable.Columns(0)
+        With grDatos.RootTable.Columns(0)
             .Caption = "Dcto"
             .Key = "id"
             .Width = 70
@@ -295,7 +287,7 @@ Public Class F0_KardexMovimiento
             .Visible = True
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(1)
+        With grDatos.RootTable.Columns(1)
             .Caption = "ALMACEN"
             .Key = "almacen"
             .Width = 100
@@ -305,7 +297,7 @@ Public Class F0_KardexMovimiento
             .Visible = True
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(2)
+        With grDatos.RootTable.Columns(2)
             .Caption = "Fecha".ToUpper
             .Key = "fdoc"
             .FormatString = "yyyy/MM/dd"
@@ -317,7 +309,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
         End With
 
-        With Dgj1Datos.RootTable.Columns(3)
+        With grDatos.RootTable.Columns(3)
             .Caption = ""
             .Key = "concep"
             .Width = 0
@@ -328,7 +320,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
         End With
 
-        With Dgj1Datos.RootTable.Columns(4)
+        With grDatos.RootTable.Columns(4)
             .Caption = "Concepto".ToUpper
             .Key = "descConcep"
             .Width = 180
@@ -338,7 +330,7 @@ Public Class F0_KardexMovimiento
             .Visible = True
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(5)
+        With grDatos.RootTable.Columns(5)
             .Caption = "Observación".ToUpper
             .Key = "obs"
             .Width = 400
@@ -351,7 +343,7 @@ Public Class F0_KardexMovimiento
 
         ''''''''''''''
 
-        With Dgj1Datos.RootTable.Columns(6)
+        With grDatos.RootTable.Columns(6)
             .Caption = "LOTE"
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -360,7 +352,7 @@ Public Class F0_KardexMovimiento
             .Visible = True
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(7)
+        With grDatos.RootTable.Columns(7)
             .Caption = "F. VENC"
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -370,10 +362,10 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
         End With
         If (Lote = False) Then
-            Dgj1Datos.RootTable.Columns(7).Visible = False
-            Dgj1Datos.RootTable.Columns(6).Visible = False
+            grDatos.RootTable.Columns(7).Visible = False
+            grDatos.RootTable.Columns(6).Visible = False
         End If
-        With Dgj1Datos.RootTable.Columns(8)
+        With grDatos.RootTable.Columns(8)
             .Caption = ""
             .Key = "est"
             .Width = 0
@@ -383,7 +375,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(9)
+        With grDatos.RootTable.Columns(9)
             .Caption = ""
             .Key = "alm"
             .Width = 0
@@ -393,7 +385,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(10)
+        With grDatos.RootTable.Columns(10)
             .Caption = ""
             .Key = "id2"
             .Width = 0
@@ -403,7 +395,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(11)
+        With grDatos.RootTable.Columns(11)
             .Caption = "Código"
             .Key = "cprod"
             .Width = 80
@@ -414,7 +406,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-        With Dgj1Datos.RootTable.Columns(12)
+        With grDatos.RootTable.Columns(12)
             .Caption = "Producto"
             .Key = "descProd"
             .Width = 200
@@ -424,7 +416,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(13)
+        With grDatos.RootTable.Columns(13)
             .Caption = ""
             .Key = "desc2Prod"
             .Width = 0
@@ -434,7 +426,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             '.CellStyle.BackColor = Color.AliceBlue
         End With
-        With Dgj1Datos.RootTable.Columns(14)
+        With grDatos.RootTable.Columns(14)
             .Caption = "ENTRADA"
             .Key = "entrada"
             .Width = 80
@@ -445,7 +437,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-        With Dgj1Datos.RootTable.Columns(15)
+        With grDatos.RootTable.Columns(15)
             .Caption = "SALIDA"
             .Key = "salida"
             .Width = 80
@@ -456,7 +448,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-        With Dgj1Datos.RootTable.Columns(16)
+        With grDatos.RootTable.Columns(16)
             .Caption = "Saldo"
             .Key = "saldo"
             .Width = 80
@@ -467,7 +459,7 @@ Public Class F0_KardexMovimiento
             '.CellStyle.BackColor = Color.AliceBlue
             .FormatString = "0.00"
         End With
-        With Dgj1Datos.RootTable.Columns(17)
+        With grDatos.RootTable.Columns(17)
             .Caption = "Cliente"
             .Key = "cliente"
             .Width = 300
@@ -477,7 +469,7 @@ Public Class F0_KardexMovimiento
             .Visible = False
             .Position = 2
         End With
-        With Dgj1Datos.RootTable.Columns(18)
+        With grDatos.RootTable.Columns(18)
             .Caption = "Cliente"
             .Key = "cliente"
             .Width = 300
@@ -489,7 +481,7 @@ Public Class F0_KardexMovimiento
             .Position = 2
         End With
         'Habilitar Filtradores
-        With Dgj1Datos
+        With grDatos
             .GroupByBoxVisible = False
             '.FilterRowFormatStyle.BackColor = Color.Blue
             '.DefaultFilterRowComparison = FilterConditionOperator.Contains
@@ -506,7 +498,7 @@ Public Class F0_KardexMovimiento
     End Sub
     Public Sub _prAplicarCondiccionJanus()
         Dim fc As GridEXFormatCondition
-        fc = New GridEXFormatCondition(Dgj1Datos.RootTable.Columns("saldo"), ConditionOperator.LessThan, 0)
+        fc = New GridEXFormatCondition(grDatos.RootTable.Columns("saldo"), ConditionOperator.LessThan, 0)
         fc.FormatStyle.BackColor = Color.Red
         fc.FormatStyle.ForeColor = Color.White
         fc.FormatStyle.FontBold = TriState.True
@@ -515,12 +507,12 @@ Public Class F0_KardexMovimiento
 
 
 
-        Dgj1Datos.RootTable.FormatConditions.Add(fc)
+        grDatos.RootTable.FormatConditions.Add(fc)
 
     End Sub
 
     Private Sub btImprimir_Click(sender As Object, e As EventArgs) Handles btImprimir.Click
-        If (Dgj1Datos.GetRows.Count > 0) Then
+        If (grDatos.GetRows.Count > 0) Then
             P_GenerarReporte()
         Else
             ToastNotification.Show(Me, "No hay kardex para el rango de fecha".ToUpper,
@@ -542,7 +534,7 @@ Public Class F0_KardexMovimiento
             Dim objrep As New R_KardexInventarioProducto
             '' GenerarNro(_dt)
             ''objrep.SetDataSource(Dt1Kardex)
-            objrep.SetDataSource(CType(Dgj1Datos.DataSource, DataTable))
+            objrep.SetDataSource(CType(grDatos.DataSource, DataTable))
             objrep.SetParameterValue("FechaIni", tbFechaI.Value.ToString("yyyy/MM/dd"))
             objrep.SetParameterValue("FechaFin", tbFechaF.Value.ToString("yyyy/MM/dd"))
             objrep.SetParameterValue("Saldo", tbsaldo.Text)
@@ -559,7 +551,7 @@ Public Class F0_KardexMovimiento
             Dim objrep As New R_KardexInventarioProductoSinLote
             '' GenerarNro(_dt)
             ''objrep.SetDataSource(Dt1Kardex)
-            objrep.SetDataSource(CType(Dgj1Datos.DataSource, DataTable))
+            objrep.SetDataSource(CType(grDatos.DataSource, DataTable))
             objrep.SetParameterValue("FechaIni", tbFechaI.Value.ToString("yyyy/MM/dd"))
             objrep.SetParameterValue("FechaFin", tbFechaF.Value.ToString("yyyy/MM/dd"))
             objrep.SetParameterValue("Saldo", tbsaldo.Text)
@@ -663,7 +655,7 @@ Public Class F0_KardexMovimiento
                     Return
                 End If
 
-                CType(Dgj1Datos.DataSource, DataTable).Rows.Clear()
+                CType(grDatos.DataSource, DataTable).Rows.Clear()
 
                 tblote.Text = Row.Cells("iclot").Value
                 tbsaldo.Text = Row.Cells("iccven").Value
@@ -679,7 +671,7 @@ Public Class F0_KardexMovimiento
             Dim dt As DataTable = L_fnObtenerSaldoProducto(cbAlmacen.Value, tbCodigo.Text)
             If (dt.Rows.Count > 0) Then
                 tbsaldo.Text = dt.Rows(0).Item("stock")
-                CType(Dgj1Datos.DataSource, DataTable).Rows.Clear()
+                CType(grDatos.DataSource, DataTable).Rows.Clear()
 
 
             End If
@@ -707,4 +699,13 @@ Public Class F0_KardexMovimiento
             Timer1.Enabled = False
         End If
     End Sub
+
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+        Try
+            _prCargarProductos()
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message, Me)
+        End Try
+    End Sub
+
 End Class

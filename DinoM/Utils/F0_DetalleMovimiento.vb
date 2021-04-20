@@ -7,6 +7,13 @@ Public Class F0_DetalleMovimiento
     Public dtDetalle As DataTable
     Public dtname As DataTable
     Public CategoriaPrecio As Integer
+
+    Public detalleSeleccionHabilitado = True
+
+    'Variables para kardex
+    Public pedidoId As Integer
+    Public producto As String
+    Public stock As Decimal
     Public Sub IniciarTodod()
         CargarProductos()
         CargarProductosVentas()
@@ -278,6 +285,7 @@ Public Class F0_DetalleMovimiento
             For i As Integer = 0 To dt.Rows.Count - 1 Step 1
                 Dim nombre As String = dt.Rows(i).Item("yfcdprod1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("Categoria").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Marca").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
@@ -405,7 +413,15 @@ Public Class F0_DetalleMovimiento
     End Sub
 
     Private Sub grProductos_DoubleClick(sender As Object, e As EventArgs) Handles grProductos.DoubleClick
-        seleccionarCelda()
+        If detalleSeleccionHabilitado Then
+            seleccionarCelda()
+        Else
+            pedidoId = grProductos.GetValue("item")
+            producto = grProductos.GetValue("yfcdprod1")
+            stock = grProductos.GetValue("stock")
+            Me.Close()
+        End If
+
     End Sub
 
     Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click

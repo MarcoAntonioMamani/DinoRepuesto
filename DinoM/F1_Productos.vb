@@ -1892,6 +1892,7 @@ Public Class F1_Productos
             For i As Integer = 0 To dt.Rows.Count - 1 Step 1
                 Dim nombre As String = dt.Rows(i).Item("yfcdprod2").ToString.ToUpper +
                     " " + dt.Rows(i).Item("yfcprod").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("yfdetprod").ToString.ToUpper +
                     " " + dt.Rows(i).Item("yfcbarra").ToString.ToUpper +
                     " " + dt.Rows(i).Item("yfcdprod1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("yfCodigoMarca").ToString.ToUpper +
@@ -2019,7 +2020,7 @@ Public Class F1_Productos
             Dim cont As Integer = 12
 
             'Split con array de delimitadores
-            Dim delimitadores() As String = {" ", ".", ",", ";", "-"}
+            Dim delimitadores() As String = {" ", ".", ",", ";"}
             Dim vectoraux() As String
             vectoraux = charSequence.Split(delimitadores, StringSplitOptions.None)
 

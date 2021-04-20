@@ -166,6 +166,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         '
         Me.MReportViewer.Margin = New System.Windows.Forms.Padding(4)
         Me.MReportViewer.Size = New System.Drawing.Size(967, 705)
+        Me.MReportViewer.ToolPanelWidth = 200
         '
         'MGPFiltros
         '
@@ -270,7 +271,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         '
         Me.Panel1.Controls.Add(Me.CheckTodosAlmacen)
         Me.Panel1.Controls.Add(Me.checkUnaAlmacen)
-        Me.Panel1.Location = New System.Drawing.Point(232, 36)
+        Me.Panel1.Location = New System.Drawing.Point(235, 36)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(120, 35)
@@ -311,7 +312,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         '
         Me.Panel2.Controls.Add(Me.checkTodosGrupos)
         Me.Panel2.Controls.Add(Me.checkUnaGrupo)
-        Me.Panel2.Location = New System.Drawing.Point(236, 110)
+        Me.Panel2.Location = New System.Drawing.Point(239, 110)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(119, 35)
@@ -375,12 +376,12 @@ Partial Class Pr_SAldosPorAlmacenLinea
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX1.Location = New System.Drawing.Point(10, 119)
+        Me.LabelX1.Location = New System.Drawing.Point(3, 117)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX1.Size = New System.Drawing.Size(42, 16)
+        Me.LabelX1.Size = New System.Drawing.Size(66, 16)
         Me.LabelX1.TabIndex = 250
-        Me.LabelX1.Text = "Linea:"
+        Me.LabelX1.Text = "Categoria:"
         '
         'cbGrupos
         '
@@ -389,7 +390,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         Me.cbGrupos.DesignTimeLayout = cbGrupos_DesignTimeLayout
         Me.cbGrupos.DisabledBackColor = System.Drawing.Color.White
         Me.cbGrupos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbGrupos.Location = New System.Drawing.Point(63, 117)
+        Me.cbGrupos.Location = New System.Drawing.Point(66, 117)
         Me.cbGrupos.Name = "cbGrupos"
         Me.cbGrupos.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbGrupos.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -406,7 +407,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         Me.cbAlmacen.DesignTimeLayout = cbAlmacen_DesignTimeLayout
         Me.cbAlmacen.DisabledBackColor = System.Drawing.Color.White
         Me.cbAlmacen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbAlmacen.Location = New System.Drawing.Point(64, 45)
+        Me.cbAlmacen.Location = New System.Drawing.Point(67, 45)
         Me.cbAlmacen.Name = "cbAlmacen"
         Me.cbAlmacen.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbAlmacen.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -452,9 +453,7 @@ Partial Class Pr_SAldosPorAlmacenLinea
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Pr_SAldosPorAlmacenLinea"
-        Me.Opacity = 0.05R
         Me.Text = "SALDOS DE PRODUCTOS"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.Controls.SetChildIndex(Me.SuperTabPrincipal, 0)
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabPrincipal.ResumeLayout(False)
