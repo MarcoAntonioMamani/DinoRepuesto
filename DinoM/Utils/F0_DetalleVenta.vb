@@ -2,12 +2,14 @@
 Imports Logica.AccesoLogica
 Imports Janus.Windows.GridEX
 Imports DevComponents.DotNetBar
+Imports DinoM.JanusExtension
 Public Class F0_DetalleVenta
 
     Public dtProductoAll As DataTable
     Public dtDetalle As DataTable
     Public dtname As DataTable
-
+    Public almacenId As Integer
+    Public precio As Decimal
     Public CategoriaPrecio As Integer
 
     Public Sub IniciarTodod()
@@ -540,6 +542,22 @@ Public Class F0_DetalleVenta
     End Sub
 
     Private Sub tbProducto_TextChanged(sender As Object, e As EventArgs) Handles tbProducto.TextChanged
+        Dim charSequence As String
+        charSequence = tbProducto.Text.ToUpper
+        If (charSequence.Trim = String.Empty) Then
+
+
+            grProductos.DataSource = dtProductoAll.Copy
+        Else
+            Dim Len As Integer = tbProducto.Text.Length
+            Dim Ch As String = tbProducto.Text(Len - 1)
+            If (Ch.Trim = String.Empty) Then
+                FiltrarProducto()
+            End If
+
+        End If
+    End Sub
+    Private Sub FiltrarProducto()
         Dim dtProductoCopy As DataTable
         dtProductoCopy = dtProductoAll.Copy
         dtProductoCopy.Rows.Clear()
@@ -552,7 +570,7 @@ Public Class F0_DetalleVenta
             Dim cont As Integer = 12
 
             'Split con array de delimitadores
-            Dim delimitadores() As String = {" ", ".", ",", ";", "-"}
+            Dim delimitadores() As String = {" ", ".", ",", ";"}
             Dim vectoraux() As String
             vectoraux = charSequence.Split(delimitadores, StringSplitOptions.None)
 
@@ -681,9 +699,6 @@ Public Class F0_DetalleVenta
         Else
             grProductos.DataSource = dtProductoAll.Copy
         End If
-
-
-
     End Sub
     Private Sub tbProducto_KeyDown(sender As Object, e As KeyEventArgs) Handles tbProducto.KeyDown
         If e.KeyData = Keys.Escape Then
@@ -767,11 +782,19 @@ Public Class F0_DetalleVenta
         End If
     End Sub
 
-    Private Sub GPanelProductos_Click(sender As Object, e As EventArgs) Handles GPanelProductos.Click
-
+    Private Sub grProductoSeleccionado_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductoSeleccionado.EditingCell
+        If (e.Column.Index = CelIndex(grProductos, "CodigoFabrica") Or
+           e.Column.Index = CelIndex(grProductos, "Marca") Or
+           e.Column.Index = CelIndex(grProductos, "Medida") Or
+           e.Column.Index = CelIndex(grProductos, "yfcdprod1")) Then
+            e.Cancel = False
+        Else
+            e.Cancel = True
+        End If
     End Sub
 
-    Private Sub GroupPanel1_Click(sender As Object, e As EventArgs) Handles GroupPanel1.Click
-
+    Private Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
+        dtProductoAll = L_fnListarProductosSinLote(almacenId, precio, 0)
+        CargarProductos()
     End Sub
 End Class

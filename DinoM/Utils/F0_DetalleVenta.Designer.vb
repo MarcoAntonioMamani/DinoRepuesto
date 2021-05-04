@@ -32,6 +32,7 @@ Partial Class F0_DetalleVenta
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.grProductoSeleccionado = New Janus.Windows.GridEX.GridEX()
+        Me.btnActualizar = New DevComponents.DotNetBar.ButtonX()
         Me.GPanelProductos.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.grProductos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,6 +120,7 @@ Partial Class F0_DetalleVenta
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.btnActualizar)
         Me.Panel3.Controls.Add(Me.btnAgregar)
         Me.Panel3.Controls.Add(Me.LabelX9)
         Me.Panel3.Controls.Add(Me.tbProducto)
@@ -244,6 +246,21 @@ Partial Class F0_DetalleVenta
         Me.grProductoSeleccionado.TabIndex = 0
         Me.grProductoSeleccionado.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
+        'btnActualizar
+        '
+        Me.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnActualizar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnActualizar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActualizar.Image = Global.DinoM.My.Resources.Resources.refresh_1
+        Me.btnActualizar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnActualizar.Location = New System.Drawing.Point(544, 2)
+        Me.btnActualizar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnActualizar.Name = "btnActualizar"
+        Me.btnActualizar.Size = New System.Drawing.Size(150, 32)
+        Me.btnActualizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnActualizar.TabIndex = 374
+        Me.btnActualizar.Text = "Actualizar"
+        '
         'F0_DetalleVenta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -278,4 +295,5 @@ Partial Class F0_DetalleVenta
     Friend WithEvents Panel1 As Panel
     Friend WithEvents grProductoSeleccionado As Janus.Windows.GridEX.GridEX
     Friend WithEvents btnAgregar As DevComponents.DotNetBar.ButtonX
+    Friend WithEvents btnActualizar As DevComponents.DotNetBar.ButtonX
 End Class

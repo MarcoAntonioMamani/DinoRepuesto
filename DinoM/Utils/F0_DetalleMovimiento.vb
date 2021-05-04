@@ -270,7 +270,7 @@ Public Class F0_DetalleMovimiento
             Dim cont As Integer = 12
 
             'Split con array de delimitadores
-            Dim delimitadores() As String = {" ", ".", ",", ";", "-"}
+            Dim delimitadores() As String = {" ", ".", ",", ";"}
             Dim vectoraux() As String
             vectoraux = charSequence.Split(delimitadores, StringSplitOptions.None)
 

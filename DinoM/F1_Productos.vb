@@ -1825,7 +1825,7 @@ Public Class F1_Productos
 
             CategoriaSeleccionada = Row.Cells("yccod3").Value
             CargarDatasourceProducto(CategoriaSeleccionada)
-
+            lblCategoria.Text = Row.Cells("ycdes3").Value
         End If
 
     End Sub
@@ -1877,7 +1877,7 @@ Public Class F1_Productos
             Dim cont As Integer = 12
 
             'Split con array de delimitadores
-            Dim delimitadores() As String = {" ", ".", ",", ";", "-"}
+            Dim delimitadores() As String = {" ", ".", ",", ";"}
             Dim vectoraux() As String
             vectoraux = charSequence.Split(delimitadores, StringSplitOptions.None)
 
@@ -2163,5 +2163,12 @@ Public Class F1_Productos
            e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfCodigoMarca").Index And
            e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfcdprod2").Index And
            e.Column.Index <> JGrM_Buscador.RootTable.Columns("yfdetprod").Index
+    End Sub
+
+    Private Sub btnAgregar_Click_1(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        If CategoriaSeleccionada > 0 Then
+            CargarDatasourceProducto(CategoriaSeleccionada)
+        End If
+
     End Sub
 End Class

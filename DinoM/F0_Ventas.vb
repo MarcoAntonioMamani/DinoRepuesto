@@ -865,18 +865,21 @@ Public Class F0_Ventas
         Dim dtname As DataTable = L_fnNameLabel()
         Dim dt As New DataTable
 
-        If (G_Lote = True) Then
-            dt = L_fnListarProductos(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
-            'Table_Producto = dt.Copy
-            dtProductoGoblal = dt
-        Else
+        If dtProductoGoblal Is Nothing Then
+            If (G_Lote = True) Then
+                dtProductoGoblal = L_fnListarProductos(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
+                'Table_Producto = dt.Copy
 
-            dt = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
-            'Table_Producto = dt.Copy
-            dtProductoGoblal = dt
+            Else
+
+                dtProductoGoblal = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
+                'Table_Producto = dt.Copy
+
+            End If
         End If
+        dt = dtProductoGoblal
 
-        Dim dtVenta As DataTable = dt.Copy
+        Dim dtVenta As DataTable = dtProductoGoblal.Copy
         dtVenta.Rows.Clear()
         Dim detalle As DataTable = CType(grdetalle.DataSource, DataTable)
         For i As Integer = 0 To detalle.Rows.Count - 1
@@ -900,17 +903,18 @@ Public Class F0_Ventas
 
         Next
         Dim frm As F0_DetalleVenta
-        frm = New F0_DetalleVenta(dt, dtVenta, dtname, cbPrecio.Value)
-
+        frm = New F0_DetalleVenta(dtProductoGoblal, dtVenta, dtname, cbPrecio.Value)
+        frm.almacenId = cbSucursal.Value
+        frm.precio = cbPrecio.Value
         frm.ShowDialog()
         Dim dtProd As DataTable = frm.dtDetalle
-
+        dtProductoGoblal = frm.dtProductoAll
         For i As Integer = 0 To dtProd.Rows.Count - 1 Step 1
 
             InsertarProductosSinLote(dtProd, i)
         Next
 
-
+        dtVenta.Clear()
     End Sub
     Public Sub _prAplicarCondiccionJanusSinLote()
         Dim fc As GridEXFormatCondition
@@ -2996,44 +3000,46 @@ salirIf:
         Table_Producto = Nothing
     End Sub
     Public Function SeleccionarCategoria(newItem As Boolean) As Integer
-        Dim dt As DataTable
-        Dim idCategoria As Integer = 0
-        Dim nombreCategoria As String
-        dt = L_fnListarCategoriaVentas()
-        '   yccod3,ycdes3 
 
-        Dim listEstCeldas As New List(Of Modelo.Celda)
-        listEstCeldas.Add(New Modelo.Celda("yccod3,", True, "Codigo", 100))
-        listEstCeldas.Add(New Modelo.Celda("ycdes3", True, "Nombre Categoria", 500))
+        _HabilitarProductos(0)
+        'Dim dt As DataTable
+        'Dim idCategoria As Integer = 0
+        'Dim nombreCategoria As String
+        'dt = L_fnListarCategoriaVentas()
+        ''   yccod3,ycdes3 
 
-        Dim ef = New Efecto
-        ef.tipo = 3
-        ef.dt = dt
-        ef.SeleclCol = 2
-        ef.listEstCeldas = listEstCeldas
-        ef.alto = 50
-        ef.ancho = 800
-        ef.Context = "Seleccione Categoria".ToUpper
-        ef.ShowDialog()
-        Dim bandera As Boolean = False
-        bandera = ef.band
-        If (bandera = True) Then
-            Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
-            ''yccod3,ycdes3 
-            idCategoria = Row.Cells("yccod3").Value
-            nombreCategoria = Row.Cells("ycdes3").Value
-            If (idCategoria > 0) Then
-                'If (newItem = True) Then
-                '    _prAddDetalleVenta()
-                'End If
+        'Dim listEstCeldas As New List(Of Modelo.Celda)
+        'listEstCeldas.Add(New Modelo.Celda("yccod3,", True, "Codigo", 100))
+        'listEstCeldas.Add(New Modelo.Celda("ycdes3", True, "Nombre Categoria", 500))
 
-                _HabilitarProductos(idCategoria)
-            End If
+        'Dim ef = New Efecto
+        'ef.tipo = 3
+        'ef.dt = dt
+        'ef.SeleclCol = 2
+        'ef.listEstCeldas = listEstCeldas
+        'ef.alto = 50
+        'ef.ancho = 800
+        'ef.Context = "Seleccione Categoria".ToUpper
+        'ef.ShowDialog()
+        'Dim bandera As Boolean = False
+        'bandera = ef.band
+        'If (bandera = True) Then
+        '    Dim Row As Janus.Windows.GridEX.GridEXRow = ef.Row
+        '    ''yccod3,ycdes3 
+        '    idCategoria = Row.Cells("yccod3").Value
+        '    nombreCategoria = Row.Cells("ycdes3").Value
+        '    If (idCategoria > 0) Then
+        '        'If (newItem = True) Then
+        '        '    _prAddDetalleVenta()
+        '        'End If
+
+        '        _HabilitarProductos(idCategoria)
+        '    End If
 
 
 
-        End If
-        Return idCategoria
+        'End If
+        'Return idCategoria
     End Function
 
     Private Sub s(sender As Object, e As PaintEventArgs) Handles Panel2.Paint

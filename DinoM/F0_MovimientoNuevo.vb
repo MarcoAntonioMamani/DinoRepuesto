@@ -286,7 +286,6 @@ Public Class F0_MovimientoNuevo
                 Dim codigoProducto As Integer = detalle.Rows(i).Item("ProductoId")
 
                 For j As Integer = 0 To dtProductoGoblal.Rows.Count - 1 Step 1
-
                     If (dtProductoGoblal.Rows(j).Item("Item") = codigoProducto) Then
                         dtProductoGoblal.Rows(j).Item("Cantidad") = detalle.Rows(i).Item("Cantidad")
                         dtMovimiento.ImportRow(dtProductoGoblal.Rows(j))
@@ -1099,8 +1098,12 @@ Public Class F0_MovimientoNuevo
                     CType(grAlmacenSalida.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
                     grAlmacenSalida.SetValue("Cantidad", 0)
                 Else
-                    Dim stock As Integer = grAlmacenSalida.GetValue("Stock")
-                    ValidarExistenciaStock(grAlmacenSalida, cantidad, stock, posicion, 0, 6)
+                    If cantidad > 0 Then
+                        Dim stock As Integer = grAlmacenSalida.GetValue("Stock")
+                        ValidarExistenciaStock(grAlmacenSalida, cantidad, stock, posicion, 0, 6)
+                    Else
+                        grAlmacen.SetValue("Cantidad", 0)
+                    End If
                 End If
             End If
         Catch ex As Exception
@@ -1122,11 +1125,14 @@ Public Class F0_MovimientoNuevo
                     CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
                     grAlmacen.SetValue("Cantidad", 0)
                 Else
-                    Dim stock As Integer = grAlmacen.GetValue("Stock")
-                    ValidarExistenciaStock(grAlmacen, cantidad, stock, posicion, 0, 2)
+                    If cantidad > 0 Then
+                        Dim stock As Integer = grAlmacen.GetValue("Stock")
+                        ValidarExistenciaStock(grAlmacen, cantidad, stock, posicion, 0, 2)
 
-                    validarExistenciaStockXConceptoTraspaso(grAlmacen, posicion, 0)
-
+                        validarExistenciaStockXConceptoTraspaso(grAlmacen, posicion, 0)
+                    Else
+                        grAlmacen.SetValue("Cantidad", 0)
+                    End If
                 End If
 
             End If

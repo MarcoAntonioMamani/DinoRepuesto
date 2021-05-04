@@ -133,6 +133,8 @@ Partial Class F1_Productos
         Me.MenuStripDescuento = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.InhabilitarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
+        Me.lblCategoria = New DevComponents.DotNetBar.LabelX()
         Me.ButtonX2 = New DevComponents.DotNetBar.ButtonX()
         Me.ButtonX1 = New DevComponents.DotNetBar.ButtonX()
         Me.btnCategoria = New DevComponents.DotNetBar.ButtonX()
@@ -222,7 +224,7 @@ Partial Class F1_Productos
         Me.SuperTabPrincipal.ControlBox.Name = ""
         Me.SuperTabPrincipal.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabPrincipal.ControlBox.MenuBox, Me.SuperTabPrincipal.ControlBox.CloseBox})
         Me.SuperTabPrincipal.Margin = New System.Windows.Forms.Padding(4)
-        Me.SuperTabPrincipal.Size = New System.Drawing.Size(1354, 711)
+        Me.SuperTabPrincipal.Size = New System.Drawing.Size(1376, 711)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelBuscador, 0)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelRegistro, 0)
         '
@@ -235,7 +237,7 @@ Partial Class F1_Productos
         'SuperTabControlPanelRegistro
         '
         Me.SuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(4)
-        Me.SuperTabControlPanelRegistro.Size = New System.Drawing.Size(1322, 711)
+        Me.SuperTabControlPanelRegistro.Size = New System.Drawing.Size(1344, 711)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelSuperior, 0)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelInferior, 0)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelPrincipal, 0)
@@ -243,7 +245,7 @@ Partial Class F1_Productos
         'PanelSuperior
         '
         Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(4)
-        Me.PanelSuperior.Size = New System.Drawing.Size(1322, 72)
+        Me.PanelSuperior.Size = New System.Drawing.Size(1344, 72)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
         Me.PanelSuperior.Style.BackColor2.Color = System.Drawing.Color.DarkSlateGray
@@ -258,7 +260,7 @@ Partial Class F1_Productos
         Me.PanelInferior.Controls.Add(Me.btnBuscar)
         Me.PanelInferior.Location = New System.Drawing.Point(0, 675)
         Me.PanelInferior.Margin = New System.Windows.Forms.Padding(4)
-        Me.PanelInferior.Size = New System.Drawing.Size(1322, 36)
+        Me.PanelInferior.Size = New System.Drawing.Size(1344, 36)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelInferior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
         Me.PanelInferior.Style.BackColor2.Color = System.Drawing.Color.DarkSlateGray
@@ -308,7 +310,7 @@ Partial Class F1_Productos
         'PanelToolBar2
         '
         Me.PanelToolBar2.Controls.Add(Me.btExcel)
-        Me.PanelToolBar2.Location = New System.Drawing.Point(1167, 0)
+        Me.PanelToolBar2.Location = New System.Drawing.Point(1189, 0)
         Me.PanelToolBar2.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelToolBar2.Size = New System.Drawing.Size(155, 72)
         Me.PanelToolBar2.Controls.SetChildIndex(Me.btnImprimir, 0)
@@ -318,14 +320,14 @@ Partial Class F1_Productos
         '
         Me.MPanelSup.Controls.Add(Me.TableLayoutPanel1)
         Me.MPanelSup.Margin = New System.Windows.Forms.Padding(4)
-        Me.MPanelSup.Size = New System.Drawing.Size(1322, 358)
+        Me.MPanelSup.Size = New System.Drawing.Size(1344, 358)
         Me.MPanelSup.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.MPanelSup.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
         '
         'PanelPrincipal
         '
         Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(4)
-        Me.PanelPrincipal.Size = New System.Drawing.Size(1322, 603)
+        Me.PanelPrincipal.Size = New System.Drawing.Size(1344, 603)
         '
         'GroupPanelBuscador
         '
@@ -333,7 +335,7 @@ Partial Class F1_Productos
         Me.GroupPanelBuscador.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanelBuscador.Location = New System.Drawing.Point(0, 358)
         Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(4)
-        Me.GroupPanelBuscador.Size = New System.Drawing.Size(1322, 245)
+        Me.GroupPanelBuscador.Size = New System.Drawing.Size(1344, 245)
         '
         '
         '
@@ -394,7 +396,7 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.JGrM_Buscador.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.JGrM_Buscador.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.JGrM_Buscador.Size = New System.Drawing.Size(1316, 174)
+        Me.JGrM_Buscador.Size = New System.Drawing.Size(1338, 174)
         Me.JGrM_Buscador.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'PanelUsuario
@@ -420,7 +422,7 @@ Partial Class F1_Productos
         '
         'MPanelUserAct
         '
-        Me.MPanelUserAct.Location = New System.Drawing.Point(1122, 0)
+        Me.MPanelUserAct.Location = New System.Drawing.Point(1144, 0)
         Me.MPanelUserAct.Margin = New System.Windows.Forms.Padding(4)
         '
         'GroupBox1
@@ -844,7 +846,7 @@ Partial Class F1_Productos
         Me.tbCodProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodProd.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodProd.Location = New System.Drawing.Point(168, 44)
-        Me.tbCodProd.MaxLength = 25
+        Me.tbCodProd.MaxLength = 50
         Me.tbCodProd.Name = "tbCodProd"
         Me.tbCodProd.PreventEnterBeep = True
         Me.tbCodProd.Size = New System.Drawing.Size(166, 21)
@@ -1012,7 +1014,7 @@ Partial Class F1_Productos
         Me.GroupPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.GroupPanel1.Location = New System.Drawing.Point(3, 3)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(434, 352)
+        Me.GroupPanel1.Size = New System.Drawing.Size(441, 352)
         '
         '
         '
@@ -1068,7 +1070,7 @@ Partial Class F1_Productos
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(428, 329)
+        Me.Panel3.Size = New System.Drawing.Size(435, 329)
         Me.Panel3.TabIndex = 227
         '
         'tbMedida
@@ -1081,7 +1083,7 @@ Partial Class F1_Productos
         Me.tbMedida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbMedida.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbMedida.Location = New System.Drawing.Point(169, 235)
-        Me.tbMedida.MaxLength = 50
+        Me.tbMedida.MaxLength = 100
         Me.tbMedida.Name = "tbMedida"
         Me.tbMedida.PreventEnterBeep = True
         Me.tbMedida.Size = New System.Drawing.Size(243, 21)
@@ -1129,7 +1131,7 @@ Partial Class F1_Productos
         Me.tbCodigoMarca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodigoMarca.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodigoMarca.Location = New System.Drawing.Point(168, 72)
-        Me.tbCodigoMarca.MaxLength = 25
+        Me.tbCodigoMarca.MaxLength = 50
         Me.tbCodigoMarca.Name = "tbCodigoMarca"
         Me.tbCodigoMarca.PreventEnterBeep = True
         Me.tbCodigoMarca.Size = New System.Drawing.Size(166, 21)
@@ -1190,9 +1192,9 @@ Partial Class F1_Productos
         Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel2.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupPanel2.Location = New System.Drawing.Point(443, 3)
+        Me.GroupPanel2.Location = New System.Drawing.Point(450, 3)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(434, 352)
+        Me.GroupPanel2.Size = New System.Drawing.Size(442, 352)
         '
         '
         '
@@ -1250,7 +1252,7 @@ Partial Class F1_Productos
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(428, 329)
+        Me.Panel2.Size = New System.Drawing.Size(436, 329)
         Me.Panel2.TabIndex = 216
         '
         'btgrupo5
@@ -1410,9 +1412,9 @@ Partial Class F1_Productos
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel3.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupPanel3.Location = New System.Drawing.Point(883, 3)
+        Me.GroupPanel3.Location = New System.Drawing.Point(898, 3)
         Me.GroupPanel3.Name = "GroupPanel3"
-        Me.GroupPanel3.Size = New System.Drawing.Size(436, 352)
+        Me.GroupPanel3.Size = New System.Drawing.Size(443, 352)
         '
         '
         '
@@ -1468,7 +1470,7 @@ Partial Class F1_Productos
         Me.SuperTabControl_Imagenes_DetalleProducto.ReorderTabsEnabled = True
         Me.SuperTabControl_Imagenes_DetalleProducto.SelectedTabFont = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold)
         Me.SuperTabControl_Imagenes_DetalleProducto.SelectedTabIndex = 0
-        Me.SuperTabControl_Imagenes_DetalleProducto.Size = New System.Drawing.Size(430, 346)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Size = New System.Drawing.Size(437, 346)
         Me.SuperTabControl_Imagenes_DetalleProducto.TabFont = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl_Imagenes_DetalleProducto.TabIndex = 224
         Me.SuperTabControl_Imagenes_DetalleProducto.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem_Imagenes, Me.SuperTabItem_DetalleProducto, Me.SuperTabItem1, Me.SuperTabItem2})
@@ -1480,7 +1482,7 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 27)
         Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
-        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(430, 319)
+        Me.SuperTabControlPanel1.Size = New System.Drawing.Size(437, 319)
         Me.SuperTabControlPanel1.TabIndex = 1
         Me.SuperTabControlPanel1.TabItem = Me.SuperTabItem_Imagenes
         '
@@ -1493,7 +1495,7 @@ Partial Class F1_Productos
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(430, 319)
+        Me.Panel1.Size = New System.Drawing.Size(437, 319)
         Me.Panel1.TabIndex = 223
         '
         'PanelImagenes
@@ -1505,7 +1507,7 @@ Partial Class F1_Productos
         Me.PanelImagenes.Location = New System.Drawing.Point(0, 0)
         Me.PanelImagenes.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelImagenes.Name = "PanelImagenes"
-        Me.PanelImagenes.Size = New System.Drawing.Size(430, 319)
+        Me.PanelImagenes.Size = New System.Drawing.Size(437, 319)
         Me.PanelImagenes.TabIndex = 3
         '
         'PanelVerImagen
@@ -1517,7 +1519,7 @@ Partial Class F1_Productos
         Me.PanelVerImagen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelVerImagen.Location = New System.Drawing.Point(157, 0)
         Me.PanelVerImagen.Name = "PanelVerImagen"
-        Me.PanelVerImagen.Size = New System.Drawing.Size(273, 319)
+        Me.PanelVerImagen.Size = New System.Drawing.Size(280, 319)
         Me.PanelVerImagen.TabIndex = 2
         '
         'btnImagen
@@ -1560,7 +1562,7 @@ Partial Class F1_Productos
         Me.pbImgProdu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pbImgProdu.Location = New System.Drawing.Point(0, 0)
         Me.pbImgProdu.Name = "pbImgProdu"
-        Me.pbImgProdu.Size = New System.Drawing.Size(273, 319)
+        Me.pbImgProdu.Size = New System.Drawing.Size(280, 319)
         Me.pbImgProdu.TabIndex = 0
         Me.pbImgProdu.TabStop = False
         '
@@ -2091,7 +2093,7 @@ Partial Class F1_Productos
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 358.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1322, 358)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1344, 358)
         Me.TableLayoutPanel1.TabIndex = 227
         '
         'Timer1
@@ -2117,6 +2119,8 @@ Partial Class F1_Productos
         'Panel8
         '
         Me.Panel8.BackColor = System.Drawing.Color.White
+        Me.Panel8.Controls.Add(Me.btnAgregar)
+        Me.Panel8.Controls.Add(Me.lblCategoria)
         Me.Panel8.Controls.Add(Me.ButtonX2)
         Me.Panel8.Controls.Add(Me.ButtonX1)
         Me.Panel8.Controls.Add(Me.btnCategoria)
@@ -2126,8 +2130,40 @@ Partial Class F1_Productos
         Me.Panel8.Location = New System.Drawing.Point(0, 0)
         Me.Panel8.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(1316, 48)
+        Me.Panel8.Size = New System.Drawing.Size(1338, 48)
         Me.Panel8.TabIndex = 1
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnAgregar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnAgregar.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnAgregar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.Image = Global.DinoM.My.Resources.Resources.reload_5
+        Me.btnAgregar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnAgregar.Location = New System.Drawing.Point(1234, 0)
+        Me.btnAgregar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(104, 48)
+        Me.btnAgregar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnAgregar.TabIndex = 378
+        Me.btnAgregar.Text = "Actualizar"
+        '
+        'lblCategoria
+        '
+        Me.lblCategoria.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lblCategoria.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblCategoria.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCategoria.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.lblCategoria.Location = New System.Drawing.Point(804, 11)
+        Me.lblCategoria.Name = "lblCategoria"
+        Me.lblCategoria.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lblCategoria.Size = New System.Drawing.Size(425, 23)
+        Me.lblCategoria.TabIndex = 377
+        Me.lblCategoria.Text = "Categoria"
         '
         'ButtonX2
         '
@@ -2151,10 +2187,10 @@ Partial Class F1_Productos
         Me.ButtonX1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonX1.Image = Global.DinoM.My.Resources.Resources.add
         Me.ButtonX1.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.ButtonX1.Location = New System.Drawing.Point(691, 9)
+        Me.ButtonX1.Location = New System.Drawing.Point(660, 9)
         Me.ButtonX1.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonX1.Name = "ButtonX1"
-        Me.ButtonX1.Size = New System.Drawing.Size(152, 31)
+        Me.ButtonX1.Size = New System.Drawing.Size(140, 31)
         Me.ButtonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
         Me.ButtonX1.TabIndex = 375
         Me.ButtonX1.Text = "Nuevo Producto"
@@ -2166,7 +2202,7 @@ Partial Class F1_Productos
         Me.btnCategoria.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCategoria.Image = Global.DinoM.My.Resources.Resources.search
         Me.btnCategoria.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnCategoria.Location = New System.Drawing.Point(541, 9)
+        Me.btnCategoria.Location = New System.Drawing.Point(512, 9)
         Me.btnCategoria.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCategoria.Name = "btnCategoria"
         Me.btnCategoria.Size = New System.Drawing.Size(152, 31)
@@ -2247,7 +2283,7 @@ Partial Class F1_Productos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1354, 711)
+        Me.ClientSize = New System.Drawing.Size(1376, 711)
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "F1_Productos"
@@ -2437,4 +2473,6 @@ Partial Class F1_Productos
     Friend WithEvents VerDatosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonX2 As DevComponents.DotNetBar.ButtonX
     Friend WithEvents ClonarNuevoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblCategoria As DevComponents.DotNetBar.LabelX
+    Friend WithEvents btnAgregar As DevComponents.DotNetBar.ButtonX
 End Class
