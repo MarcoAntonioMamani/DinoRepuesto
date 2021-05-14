@@ -333,7 +333,7 @@ Public Class F0_MovimientoNuevo
             ObtenerImagenAddDetalle(Bin, Bin02)
             'Obtiene el Id Mayor
             Dim idMayor As Integer = ObtenerIdMayor(grdetalle, "Id")
-            CType(grdetalle.DataSource, DataTable).Rows.Add(idMayor + 1, 0, 0, "", "", "", "", "", "", 0, 1, 2, Bin.GetBuffer(), Bin02.GetBuffer(), 0, 0, 0)
+            CType(grdetalle.DataSource, DataTable).Rows.Add(idMayor + 1, 0, 0, "", "", "", "", "", "", 0, gi_userSuc, 2, Bin.GetBuffer(), Bin02.GetBuffer(), 0, 0, 0)
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -383,6 +383,12 @@ Public Class F0_MovimientoNuevo
             cbAlmacenOrigen.Focus()
             Return False
         End If
+        If (tbObservacion.Text = String.Empty) Then
+            MostrarMensaje("Por introducir una observación")
+            tbObservacion.Focus()
+            Return False
+        End If
+
         If (cbConcepto.SelectedIndex >= 0) Then
             If (cbConcepto.Value = 6) Then
                 If (cbDepositoDestino.SelectedIndex < 0) Then
@@ -512,6 +518,7 @@ Public Class F0_MovimientoNuevo
             SetCelValor(grdetalle, posicionFila, "producto", dt.Rows(fila).Item("yfcdprod1"))
             SetCelValor(grdetalle, posicionFila, "Cantidad", dt.Rows(fila).Item("Cantidad"))
             SetCelValor(grdetalle, posicionFila, "stock", dt.Rows(fila).Item("stock"))
+            SetCelValor(grdetalle, posicionFila, "AlmOrigenId", gi_userSuc)
         Else
             If (existe) Then
                 MostrarMensaje("El producto ya existe en el detalle")
@@ -543,7 +550,7 @@ Public Class F0_MovimientoNuevo
 
     Private Sub grdetalle_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grdetalle.EditingCell
         If (_fnAccesible()) Then
-            If (e.Column.Index = grdetalle.RootTable.Columns("Cantidad").Index Or e.Column.Index = grdetalle.RootTable.Columns("AlmOrigenId").Index Or
+            If (e.Column.Index = grdetalle.RootTable.Columns("AlmOrigenId").Index Or
                 e.Column.Index = grdetalle.RootTable.Columns("AlmDestinoId").Index) Then
                 e.Cancel = False
             Else
@@ -891,7 +898,6 @@ Public Class F0_MovimientoNuevo
     End Sub
 
     Private Sub grAlmacen_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grAlmacen.CellValueChanged
-
     End Sub
 
     Private Sub ValidarExistenciaStock(grid As GridEX, cantidad As Integer, stockTotal As Integer, posicion As Integer, valor As Integer, concepto As Integer)
@@ -1085,30 +1091,7 @@ Public Class F0_MovimientoNuevo
     End Sub
 
     Private Sub grAlmacenSalida_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grAlmacenSalida.CellValueChanged
-        'Celda Cantidad
-        Try
-            If (e.Column.Index = CelIndex(grAlmacenSalida, "Cantidad")) Then
-                Dim cantidad As Integer = grAlmacenSalida.GetValue("Cantidad")
-                Dim posicion = ObtenerPosicionFila(grAlmacenSalida, "AlmacenId", grdetalle.GetValue("id"))
 
-                If (Not IsNumeric(cantidad) Or
-                    cantidad.ToString = String.Empty Or
-                    cantidad < 0) Then
-
-                    CType(grAlmacenSalida.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
-                    grAlmacenSalida.SetValue("Cantidad", 0)
-                Else
-                    If cantidad > 0 Then
-                        Dim stock As Integer = grAlmacenSalida.GetValue("Stock")
-                        ValidarExistenciaStock(grAlmacenSalida, cantidad, stock, posicion, 0, 6)
-                    Else
-                        grAlmacen.SetValue("Cantidad", 0)
-                    End If
-                End If
-            End If
-        Catch ex As Exception
-            MostrarMensajeError(ex.Message)
-        End Try
     End Sub
 
 
@@ -1116,8 +1099,15 @@ Public Class F0_MovimientoNuevo
         'Celda Cantidad
         Try
             If (e.Column.Index = CelIndex(grAlmacen, "Cantidad")) Then
-                Dim cantidad As Integer = grAlmacen.GetValue("Cantidad")
                 Dim posicion = ObtenerPosicionFila(grAlmacen, "AlmacenId", grAlmacen.GetValue("AlmacenId"))
+
+                If IsDBNull(grAlmacen.GetValue("Cantidad")) Then
+                    CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                    grAlmacen.SetValue("Cantidad", 0)
+                    Return
+                End If
+
+                Dim cantidad As Integer = grAlmacen.GetValue("Cantidad")
 
                 If (Not IsNumeric(cantidad) Or
                     cantidad.ToString = String.Empty Or
@@ -1135,6 +1125,39 @@ Public Class F0_MovimientoNuevo
                     End If
                 End If
 
+            End If
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub grAlmacenSalida_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grAlmacenSalida.CellEdited
+        'Celda Cantidad
+        Try
+            If (e.Column.Index = CelIndex(grAlmacenSalida, "Cantidad")) Then
+
+                Dim posicion = ObtenerPosicionFila(grAlmacenSalida, "AlmacenId", grdetalle.GetValue("id"))
+
+                If IsDBNull(grAlmacen.GetValue("Cantidad")) Then
+                    CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                    grAlmacen.SetValue("Cantidad", 0)
+                    Return
+                End If
+                Dim cantidad As Integer = grAlmacenSalida.GetValue("Cantidad")
+                If (Not IsNumeric(cantidad) Or
+                    cantidad.ToString = String.Empty Or
+                    cantidad < 0) Then
+
+                    CType(grAlmacenSalida.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                    grAlmacenSalida.SetValue("Cantidad", 0)
+                Else
+                    If cantidad > 0 Then
+                        Dim stock As Integer = grAlmacenSalida.GetValue("Stock")
+                        ValidarExistenciaStock(grAlmacenSalida, cantidad, stock, posicion, 0, 6)
+                    Else
+                        grAlmacen.SetValue("Cantidad", 0)
+                    End If
+                End If
             End If
         Catch ex As Exception
             MostrarMensajeError(ex.Message)

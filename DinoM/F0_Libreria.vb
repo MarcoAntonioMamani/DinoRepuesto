@@ -324,8 +324,8 @@ Public Class F0_Libreria
         EliminarFIla(griex, key, keyEstado, valor)
         grLibreria.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grLibreria.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
         grLibreria.Select()
-        grLibreria.Col = 2
-        grLibreria.Row = grLibreria.RowCount - 1
+        'grLibreria.Col = 2
+        'grLibreria.Row = grLibreria.RowCount - 1
     End Sub
 
     Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click

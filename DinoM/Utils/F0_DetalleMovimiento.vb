@@ -228,6 +228,7 @@ Public Class F0_DetalleMovimiento
                 Dim cantidad As Double = 0
                 Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
                 row.Item("Cantidad") = cantidad
+                'row.Item("AlmacenId") = gi_userSuc
                 CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
                 tbProducto.Focus()
             Else
@@ -427,5 +428,16 @@ Public Class F0_DetalleMovimiento
     Private Sub ButtonX1_Click(sender As Object, e As EventArgs) Handles ButtonX1.Click
         dtProductoAll = L_prMovimientoListarProductos(1)  ''1=Almacen
         CargarProductos()
+    End Sub
+
+    Private Sub grProductos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductos.EditingCell
+        If (e.Column.Index = CelIndex(grProductos, "CodigoFabrica") Or
+                  e.Column.Index = CelIndex(grProductos, "Marca") Or
+                  e.Column.Index = CelIndex(grProductos, "Medida") Or
+                  e.Column.Index = CelIndex(grProductos, "yfcdprod1")) Then
+            e.Cancel = False
+        Else
+            e.Cancel = True
+        End If
     End Sub
 End Class

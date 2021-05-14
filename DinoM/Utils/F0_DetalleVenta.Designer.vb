@@ -26,13 +26,13 @@ Partial Class F0_DetalleVenta
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.grProductos = New Janus.Windows.GridEX.GridEX()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnActualizar = New DevComponents.DotNetBar.ButtonX()
         Me.btnAgregar = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
         Me.tbProducto = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.grProductoSeleccionado = New Janus.Windows.GridEX.GridEX()
-        Me.btnActualizar = New DevComponents.DotNetBar.ButtonX()
         Me.GPanelProductos.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.grProductos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,6 +130,21 @@ Partial Class F0_DetalleVenta
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(856, 41)
         Me.Panel3.TabIndex = 1
+        '
+        'btnActualizar
+        '
+        Me.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
+        Me.btnActualizar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
+        Me.btnActualizar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActualizar.Image = Global.DinoM.My.Resources.Resources.refresh_1
+        Me.btnActualizar.ImageFixedSize = New System.Drawing.Size(30, 30)
+        Me.btnActualizar.Location = New System.Drawing.Point(544, 2)
+        Me.btnActualizar.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnActualizar.Name = "btnActualizar"
+        Me.btnActualizar.Size = New System.Drawing.Size(150, 32)
+        Me.btnActualizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
+        Me.btnActualizar.TabIndex = 374
+        Me.btnActualizar.Text = "Actualizar"
         '
         'btnAgregar
         '
@@ -245,21 +260,6 @@ Partial Class F0_DetalleVenta
         Me.grProductoSeleccionado.Size = New System.Drawing.Size(856, 306)
         Me.grProductoSeleccionado.TabIndex = 0
         Me.grProductoSeleccionado.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
-        '
-        'btnActualizar
-        '
-        Me.btnActualizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btnActualizar.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground
-        Me.btnActualizar.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnActualizar.Image = Global.DinoM.My.Resources.Resources.refresh_1
-        Me.btnActualizar.ImageFixedSize = New System.Drawing.Size(30, 30)
-        Me.btnActualizar.Location = New System.Drawing.Point(544, 2)
-        Me.btnActualizar.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnActualizar.Name = "btnActualizar"
-        Me.btnActualizar.Size = New System.Drawing.Size(150, 32)
-        Me.btnActualizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014
-        Me.btnActualizar.TabIndex = 374
-        Me.btnActualizar.Text = "Actualizar"
         '
         'F0_DetalleVenta
         '

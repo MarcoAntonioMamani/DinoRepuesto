@@ -501,7 +501,7 @@ Public Class F1_Productos
         tbCodigoMarca.ReadOnly = False
         tbPrecioMecanico.IsInputReadOnly = False
         tbPrecioCosto.IsInputReadOnly = False
-
+        btnBuscar.Enabled = False
         btGrabarP.Visible = True
         _prCrearCarpetaImagenes()
         _prCrearCarpetaTemporal()
@@ -540,6 +540,7 @@ Public Class F1_Productos
         tbCodigo.ReadOnly = True
         tbCodBarra.ReadOnly = True
         tbCodProd.ReadOnly = True
+        btnBuscar.Enabled = True
         tbDescPro.ReadOnly = True
         tbMedida.ReadOnly = True
         tbDescDet.ReadOnly = True
@@ -838,6 +839,15 @@ Public Class F1_Productos
         '    MEP.SetError(tbDescCort, "")
         'End If
 
+        If tbStockMinimo.Text = String.Empty Then
+            tbStockMinimo.BackColor = Color.Red
+            AddHandler tbStockMinimo.KeyDown, AddressOf TextBox_KeyDown
+            MEP.SetError(tbStockMinimo, "ingrese stock minimo del producto!".ToUpper)
+            _ok = False
+        Else
+            tbStockMinimo.BackColor = Color.White
+            MEP.SetError(tbStockMinimo, "")
+        End If
         If cbgrupo1.SelectedIndex < 0 Then
             cbgrupo1.BackColor = Color.Red
             MEP.SetError(cbgrupo1, "Selecciones grupo del producto!".ToUpper)

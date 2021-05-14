@@ -34,9 +34,11 @@ Partial Class F0_MovimientoNuevo
         Me.Panel_AlmacenGrupoTraspaso = New System.Windows.Forms.Panel()
         Me.grAlmacenSalida = New Janus.Windows.GridEX.GridEX()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.Panel_AlmacenGrupo = New System.Windows.Forms.Panel()
         Me.grAlmacen = New Janus.Windows.GridEX.GridEX()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblTituloAlmacen = New DevComponents.DotNetBar.LabelX()
         Me.lbProductoId = New DevComponents.DotNetBar.LabelX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.lbStock = New DevComponents.DotNetBar.LabelX()
@@ -59,8 +61,6 @@ Partial Class F0_MovimientoNuevo
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.grmovimiento = New Janus.Windows.GridEX.GridEX()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.lblTituloAlmacen = New DevComponents.DotNetBar.LabelX()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -399,6 +399,23 @@ Partial Class F0_MovimientoNuevo
         Me.Panel5.Size = New System.Drawing.Size(480, 55)
         Me.Panel5.TabIndex = 0
         '
+        'LabelX5
+        '
+        Me.LabelX5.AutoSize = True
+        Me.LabelX5.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX5.ForeColor = System.Drawing.Color.Red
+        Me.LabelX5.Location = New System.Drawing.Point(3, 3)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX5.Size = New System.Drawing.Size(158, 17)
+        Me.LabelX5.TabIndex = 239
+        Me.LabelX5.Text = "ALMACEN DE ORIGEN"
+        '
         'Panel_AlmacenGrupo
         '
         Me.Panel_AlmacenGrupo.Controls.Add(Me.grAlmacen)
@@ -436,6 +453,23 @@ Partial Class F0_MovimientoNuevo
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(480, 55)
         Me.Panel4.TabIndex = 0
+        '
+        'lblTituloAlmacen
+        '
+        Me.lblTituloAlmacen.AutoSize = True
+        Me.lblTituloAlmacen.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.lblTituloAlmacen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.lblTituloAlmacen.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTituloAlmacen.ForeColor = System.Drawing.Color.Red
+        Me.lblTituloAlmacen.Location = New System.Drawing.Point(3, 0)
+        Me.lblTituloAlmacen.Name = "lblTituloAlmacen"
+        Me.lblTituloAlmacen.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.lblTituloAlmacen.Size = New System.Drawing.Size(166, 17)
+        Me.lblTituloAlmacen.TabIndex = 376
+        Me.lblTituloAlmacen.Text = "ALMACEN DE DESTINO"
         '
         'lbProductoId
         '
@@ -842,40 +876,6 @@ Partial Class F0_MovimientoNuevo
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
-        '
-        'LabelX5
-        '
-        Me.LabelX5.AutoSize = True
-        Me.LabelX5.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX5.ForeColor = System.Drawing.Color.Red
-        Me.LabelX5.Location = New System.Drawing.Point(3, 3)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX5.Size = New System.Drawing.Size(158, 17)
-        Me.LabelX5.TabIndex = 239
-        Me.LabelX5.Text = "ALMACEN DE ORIGEN"
-        '
-        'lblTituloAlmacen
-        '
-        Me.lblTituloAlmacen.AutoSize = True
-        Me.lblTituloAlmacen.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.lblTituloAlmacen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.lblTituloAlmacen.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTituloAlmacen.ForeColor = System.Drawing.Color.Red
-        Me.lblTituloAlmacen.Location = New System.Drawing.Point(3, 0)
-        Me.lblTituloAlmacen.Name = "lblTituloAlmacen"
-        Me.lblTituloAlmacen.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.lblTituloAlmacen.Size = New System.Drawing.Size(166, 17)
-        Me.lblTituloAlmacen.TabIndex = 376
-        Me.lblTituloAlmacen.Text = "ALMACEN DE DESTINO"
         '
         'F0_MovimientoNuevo
         '
