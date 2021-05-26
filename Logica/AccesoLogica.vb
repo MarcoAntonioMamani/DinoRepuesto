@@ -1228,7 +1228,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@yccod1", fila("yccod1")))
         _listParam.Add(New Datos.DParametro("@yccod2", fila("yccod2")))
         _listParam.Add(New Datos.DParametro("@yccod3 ", fila("yccod3")))
-        _listParam.Add(New Datos.DParametro("@ycdes3", fila("ycdes3")))
+        _listParam.Add(New Datos.DParametro("@ycdes3", IIf(IsDBNull(fila("ycdes3")), "", fila("ycdes3"))))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TY006", _listParam)
     End Sub
     Public Shared Sub L_fnGrabarLibreriasPrograma(_ygnumi As String, _dt As DataTable, ByRef mensaje As String)

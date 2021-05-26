@@ -123,9 +123,9 @@ Public Class F0_Libreria
         btnAgregarlibreria.Visible = True
         btnGrabar.Enabled = True
         tblibreria.Clear()
-        'If (CType(grLibreria.DataSource, DataTable).Rows.Count > 0) Then
-        '    grLibreria.RootTable.Columns("img").Visible = True
-        'End If
+        If (CType(grLibreria.DataSource, DataTable).Rows.Count > 0) Then
+            grLibreria.RootTable.Columns("img").Visible = True
+        End If
     End Sub
     Private Function _fnBytesArchivo(img As Bitmap, ancho As Integer, alto As Integer) As Object
         Bin = New MemoryStream()
@@ -218,6 +218,9 @@ Public Class F0_Libreria
             grLibreria.VisualStyle = VisualStyle.Office2007
 
         End With
+
+
+
 
 
     End Sub
@@ -420,6 +423,10 @@ Public Class F0_Libreria
                                5000,
                                eToastGlowColor.Red,
                                eToastPosition.TopCenter)
+
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
 
     End Sub
 End Class
