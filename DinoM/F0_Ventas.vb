@@ -865,8 +865,8 @@ Public Class F0_Ventas
         Dim dtname As DataTable = L_fnNameLabel()
         Dim dt As New DataTable
 
-        If dtProductoGoblal Is Nothing Then
-            If (G_Lote = True) Then
+
+        If (G_Lote = True) Then
                 dtProductoGoblal = L_fnListarProductos(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
                 'Table_Producto = dt.Copy
 
@@ -876,8 +876,8 @@ Public Class F0_Ventas
                 'Table_Producto = dt.Copy
 
             End If
-        End If
-        dt = dtProductoGoblal
+
+            dt = dtProductoGoblal
 
         Dim dtVenta As DataTable = dtProductoGoblal.Copy
         dtVenta.Rows.Clear()
