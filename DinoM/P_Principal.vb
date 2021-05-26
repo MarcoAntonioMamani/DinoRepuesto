@@ -30,14 +30,21 @@ Public Class P_Principal
         _prLeerArchivoConfig()
 
         L_prAbrirConexion(gs_Ip, gs_UsuarioSql, gs_ClaveSql, gs_NombreBD)
-        L_prAbrirConexionBitacora(gs_Ip, gs_UsuarioSql, gs_ClaveSql, "BDDiconDinoEco")
+        ''L_prAbrirConexionBitacora(gs_Ip, gs_UsuarioSql, gs_ClaveSql, "BDDiconDinoEco")
 
         Me.WindowState = FormWindowState.Maximized
 
         'iniciar login de usuario
         _prLogin()
+        Try
+            If System.IO.File.Exists(gs_CarpetaRaiz + "\LogoIco.ico") Then
+                Me.Icon = Icon.ExtractAssociatedIcon(gs_CarpetaRaiz + "\LogoIco.ico")
+            End If
 
-        Me.Icon = Icon.ExtractAssociatedIcon(gs_CarpetaRaiz + "\LogoIco.ico")
+        Catch ex As Exception
+
+        End Try
+
 
     End Sub
 

@@ -502,28 +502,33 @@ Public Class F0_MovimientoNuevo
     End Sub
     Public Sub InsertarProductosSinLote(dt As DataTable, fila As Integer)
         grdetalle.Row = grdetalle.RowCount - 1
-        If (grdetalle.GetValue("ProductoId") <> 0) Then
-            _prAddDetalleVenta()
-            grdetalle.Row = grdetalle.RowCount - 1
-        End If
-        Dim posicionFila As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
         Dim existe As Boolean = _fnExisteProducto(dt.Rows(fila).Item("Item"))
-        If ((posicionFila >= 0) And (Not existe)) Then
-            SetCelValor(grdetalle, posicionFila, "ProductoId", dt.Rows(fila).Item("Item"))
-            SetCelValor(grdetalle, posicionFila, "CodigoFabrica", dt.Rows(fila).Item("CodigoFabrica"))
-            SetCelValor(grdetalle, posicionFila, "CodigoMarca", dt.Rows(fila).Item("Marca"))
-            SetCelValor(grdetalle, posicionFila, "Medida", dt.Rows(fila).Item("Medida"))
-            SetCelValor(grdetalle, posicionFila, "Marca", dt.Rows(fila).Item("Grupo1"))
-            SetCelValor(grdetalle, posicionFila, "Procedencia", dt.Rows(fila).Item("Grupo2"))
-            SetCelValor(grdetalle, posicionFila, "producto", dt.Rows(fila).Item("yfcdprod1"))
-            SetCelValor(grdetalle, posicionFila, "Cantidad", dt.Rows(fila).Item("Cantidad"))
-            SetCelValor(grdetalle, posicionFila, "stock", dt.Rows(fila).Item("stock"))
-            SetCelValor(grdetalle, posicionFila, "AlmOrigenId", gi_userSuc)
-        Else
-            If (existe) Then
-                MostrarMensaje("El producto ya existe en el detalle")
+
+        If (Not existe) Then
+            If (grdetalle.GetValue("ProductoId") <> 0) Then
+                _prAddDetalleVenta()
+                grdetalle.Row = grdetalle.RowCount - 1
+            End If
+            Dim posicionFila As Integer = ObtenerPosicionFila(grdetalle, "Id", grdetalle.GetValue("id"))
+
+            If ((posicionFila >= 0) And (Not existe)) Then
+                SetCelValor(grdetalle, posicionFila, "ProductoId", dt.Rows(fila).Item("Item"))
+                SetCelValor(grdetalle, posicionFila, "CodigoFabrica", dt.Rows(fila).Item("CodigoFabrica"))
+                SetCelValor(grdetalle, posicionFila, "CodigoMarca", dt.Rows(fila).Item("Marca"))
+                SetCelValor(grdetalle, posicionFila, "Medida", dt.Rows(fila).Item("Medida"))
+                SetCelValor(grdetalle, posicionFila, "Marca", dt.Rows(fila).Item("Grupo1"))
+                SetCelValor(grdetalle, posicionFila, "Procedencia", dt.Rows(fila).Item("Grupo2"))
+                SetCelValor(grdetalle, posicionFila, "producto", dt.Rows(fila).Item("yfcdprod1"))
+                SetCelValor(grdetalle, posicionFila, "Cantidad", dt.Rows(fila).Item("Cantidad"))
+                SetCelValor(grdetalle, posicionFila, "stock", dt.Rows(fila).Item("stock"))
+                SetCelValor(grdetalle, posicionFila, "AlmOrigenId", gi_userSuc)
+            Else
+                'If (existe) Then
+                '    MostrarMensaje("El producto ya existe en el detalle")
+                'End If
             End If
         End If
+
     End Sub
 #End Region
 
@@ -1100,8 +1105,8 @@ Public Class F0_MovimientoNuevo
         Try
             If (e.Column.Index = CelIndex(grAlmacen, "Cantidad")) Then
                 Dim posicion = ObtenerPosicionFila(grAlmacen, "AlmacenId", grAlmacen.GetValue("AlmacenId"))
+                If (IsDBNull(grAlmacen.GetValue("Cantidad")) Or grAlmacen.GetValue("Cantidad").ToString.Trim = "") Then
 
-                If IsDBNull(grAlmacen.GetValue("Cantidad")) Then
                     CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
                     grAlmacen.SetValue("Cantidad", 0)
                     Return
@@ -1109,23 +1114,23 @@ Public Class F0_MovimientoNuevo
 
                 Dim cantidad As Integer = grAlmacen.GetValue("Cantidad")
 
-                If (Not IsNumeric(cantidad) Or
+                    If (Not IsNumeric(cantidad) Or
                     cantidad.ToString = String.Empty Or
                     cantidad < 0) Then
-                    CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
-                    grAlmacen.SetValue("Cantidad", 0)
-                Else
-                    If cantidad > 0 Then
-                        Dim stock As Integer = grAlmacen.GetValue("Stock")
-                        ValidarExistenciaStock(grAlmacen, cantidad, stock, posicion, 0, 2)
-
-                        validarExistenciaStockXConceptoTraspaso(grAlmacen, posicion, 0)
-                    Else
+                        CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
                         grAlmacen.SetValue("Cantidad", 0)
-                    End If
-                End If
+                    Else
+                        If cantidad > 0 Then
+                            Dim stock As Integer = grAlmacen.GetValue("Stock")
+                            ValidarExistenciaStock(grAlmacen, cantidad, stock, posicion, 0, 2)
 
-            End If
+                            validarExistenciaStockXConceptoTraspaso(grAlmacen, posicion, 0)
+                        Else
+                            grAlmacen.SetValue("Cantidad", 0)
+                        End If
+                    End If
+
+                End If
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -1138,9 +1143,9 @@ Public Class F0_MovimientoNuevo
 
                 Dim posicion = ObtenerPosicionFila(grAlmacenSalida, "AlmacenId", grdetalle.GetValue("id"))
 
-                If IsDBNull(grAlmacen.GetValue("Cantidad")) Then
-                    CType(grAlmacen.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
-                    grAlmacen.SetValue("Cantidad", 0)
+                If (IsDBNull(grAlmacenSalida.GetValue("Cantidad")) Or grAlmacenSalida.GetValue("Cantidad").ToString.Trim = "") Then
+                    CType(grAlmacenSalida.DataSource, DataTable).Rows(posicion).Item("Cantidad") = 0
+                    grAlmacenSalida.SetValue("Cantidad", 0)
                     Return
                 End If
                 Dim cantidad As Integer = grAlmacenSalida.GetValue("Cantidad")
@@ -1155,7 +1160,7 @@ Public Class F0_MovimientoNuevo
                         Dim stock As Integer = grAlmacenSalida.GetValue("Stock")
                         ValidarExistenciaStock(grAlmacenSalida, cantidad, stock, posicion, 0, 6)
                     Else
-                        grAlmacen.SetValue("Cantidad", 0)
+                        grAlmacenSalida.SetValue("Cantidad", 0)
                     End If
                 End If
             End If

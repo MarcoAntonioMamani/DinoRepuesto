@@ -18,6 +18,7 @@ Public Class JanusExtension
     Public Shared Sub ColNoVisible(grid As GridEX, key As String)
         With grid.RootTable.Columns(key)
             .Visible = False
+            .AllowSort = False
         End With
     End Sub
 
@@ -28,6 +29,7 @@ Public Class JanusExtension
             .WordWrap = True
             .MaxLines = 20
             .Visible = True
+            .AllowSort = False
             ColPropiedadesComun(grid, key, nombre, ancho)
         End With
     End Sub
@@ -37,6 +39,7 @@ Public Class JanusExtension
             .Visible = visible
             .EditType = EditType.MultiColumnCombo
             .DropDown = combo.DropDownList
+            .AllowSort = False
             ColPropiedadesComun(grid, key, nombre, ancho)
         End With
     End Sub
@@ -60,6 +63,7 @@ Public Class JanusExtension
             .CellStyle.LineAlignment = TextAlignment.Center
             .FormatString = formato
             .Visible = True
+            .AllowSort = False
             ColPropiedadesComun(grid, key, nombre, ancho)
         End With
     End Sub

@@ -845,8 +845,17 @@ Public Class F1_Productos
             MEP.SetError(tbStockMinimo, "ingrese stock minimo del producto!".ToUpper)
             _ok = False
         Else
-            tbStockMinimo.BackColor = Color.White
-            MEP.SetError(tbStockMinimo, "")
+            If (tbStockMinimo.Value <= 0) Then
+                tbStockMinimo.BackColor = Color.Red
+                AddHandler tbStockMinimo.KeyDown, AddressOf TextBox_KeyDown
+                MEP.SetError(tbStockMinimo, "ingrese stock minimo del producto valido!".ToUpper)
+                _ok = False
+
+            Else
+                tbStockMinimo.BackColor = Color.White
+                MEP.SetError(tbStockMinimo, "")
+            End If
+
         End If
         If cbgrupo1.SelectedIndex < 0 Then
             cbgrupo1.BackColor = Color.Red
@@ -1334,13 +1343,18 @@ Public Class F1_Productos
     End Sub
 
     Private Sub TextBox_KeyDown(sender As Object, e As KeyEventArgs)
-        Dim tb As TextBoxX = CType(sender, TextBoxX)
-        If tb.Text = String.Empty Then
+        Try
+            Dim tb As TextBoxX = CType(sender, TextBoxX)
+            If tb.Text = String.Empty Then
 
-        Else
-            tb.BackColor = Color.White
-            MEP.SetError(tb, "")
-        End If
+            Else
+                tb.BackColor = Color.White
+                MEP.SetError(tb, "")
+            End If
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
