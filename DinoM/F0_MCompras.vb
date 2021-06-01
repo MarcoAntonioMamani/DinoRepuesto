@@ -134,7 +134,7 @@ Public Class F0_MCompras
         If (GPanelProductos.Visible = True) Then
             _DesHabilitarProductos()
         End If
-
+        btnAgregar.Visible = False
     End Sub
     Private Sub _prhabilitar()
         grCompra.Enabled = False
@@ -168,6 +168,10 @@ Public Class F0_MCompras
 
         swMoneda.IsReadOnly = False
         tbTipoCambio.IsInputReadOnly = False
+
+
+
+        btnAgregar.Visible = True
 
     End Sub
     Public Sub _prFiltrar()
@@ -699,166 +703,110 @@ Public Class F0_MCompras
     Private Sub _prCargarProductos(_cliente As String)
 
         Dim dtname As DataTable = L_fnNameLabel()
-        Dim dt As New DataTable
+        Dim dtProductoGoblal As New DataTable
         If (cbSucursal.SelectedIndex < 0) Then
             Return
         End If
 
-        dt = L_fnListarProductosCompra(cbSucursal.Value, 73)
+        dtProductoGoblal = L_fnListarProductosCompra(cbSucursal.Value, 73)
 
-        ''1=Almacen  73=Cat Precio Costo
-        grProductos.DataSource = dt
-        grProductos.RetrieveStructure()
-        grProductos.AlternatingColors = True
-
-        '      a.yfnumi ,a.yfcprod ,a.yfcdprod1,a.yfcdprod2 ,a.yfgr1,gr1.ycdes3 as grupo1,a.yfgr2
-        ',gr2.ycdes3 as grupo2 ,a.yfgr3,gr3.ycdes3 as grupo3,a.yfgr4 ,gr4 .ycdes3 as grupo4,a.yfumin ,Umin .ycdes3 as UnidMin
-        ' ,b.yhprecio 
-
-        With grProductos.RootTable.Columns("yfnumi")
-            .Width = 100
-            .Caption = "CODIGO"
-            .Visible = False
-
-        End With
-        With grProductos.RootTable.Columns("yfcprod")
-            .Width = 120
-            .Caption = "COD. PRODUCTO"
-            .Visible = True
-
-        End With
-
-        With grProductos.RootTable.Columns("yfcdprod1")
-            .Width = 200
-            .Visible = True
-            .Caption = "DESCRIPCIÓN"
-        End With
-        With grProductos.RootTable.Columns("yfcdprod2")
-            .Width = 150
-            .Visible = False
-            .Caption = "Descripcion Corta"
-        End With
-
-        With grProductos.RootTable.Columns("yfgr1")
-            .Width = 160
-            .Visible = False
-        End With
-        If (dtname.Rows.Count > 0) Then
-
-            With grProductos.RootTable.Columns("grupo1")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 1").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 2").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-
-            With grProductos.RootTable.Columns("grupo3")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 3").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo4")
-                .Width = 120
-                .Caption = dtname.Rows(0).Item("Grupo 4").ToString
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-        Else
-            With grProductos.RootTable.Columns("grupo1")
-                .Width = 120
-                .Caption = "Grupo 1"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo2")
-                .Width = 120
-                .Caption = "Grupo 2"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo3")
-                .Width = 120
-                .Caption = "Grupo 3"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-            With grProductos.RootTable.Columns("grupo4")
-                .Width = 120
-                .Caption = "Grupo 4"
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-                .Visible = True
-            End With
-        End If
+        Dim frm As F0_DetalleCompras
+        frm = New F0_DetalleCompras(dtProductoGoblal, CType(grdetalle.DataSource, DataTable), dtname)
 
 
-        With grProductos.RootTable.Columns("yfgr2")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
+        frm.ShowDialog()
+        dtProductoGoblal = frm.dtProductoAll
+        'Dim dtProd As DataTable = frm.dtDetalle
+        'For i As Integer = 0 To dtProd.Rows.Count - 1 Step 1
+        '    InsertarProductosSinLote(dtProd, i)
+        'Next
+        'dtMovimiento.Rows.Clear()
 
-        With grProductos.RootTable.Columns("yfgr3")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
+        '''1=Almacen  73=Cat Precio Costo
+        'grProductos.DataSource = dt
+        'grProductos.RetrieveStructure()
+        'grProductos.AlternatingColors = True
 
-        With grProductos.RootTable.Columns("yfgr4")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
+        ' yfnumi	Categoria	CodigoFabrica	Marca	Medida	yfcdprod1	grupo1	grupo2	yhprecio	venta	stock
 
+        'With grProductos.RootTable.Columns("yfnumi")
+        '    .Width = 100
+        '    .Caption = "Item"
+        '    .Visible = False
 
-        With grProductos.RootTable.Columns("yfumin")
-            .Width = 50
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = False
-        End With
-        With grProductos.RootTable.Columns("UnidMin")
-            .Width = 100
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "UNIDAD MIN."
-        End With
-        With grProductos.RootTable.Columns("yhprecio")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "PRECIO COSTO"
-            .FormatString = "0.00"
-        End With
+        'End With
+        'With grProductos.RootTable.Columns("Categoria")
+        '    .Width = 150
+        '    .Caption = "Categoria"
+        '    .Visible = True
 
-        With grProductos.RootTable.Columns("venta")
-            .Width = 120
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "PRECIO VENTA"
-            .FormatString = "0.00"
-        End With
-        With grProductos.RootTable.Columns("stock")
-            .Width = 100
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
-            .Visible = True
-            .Caption = "STOCK"
-            .FormatString = "0.00"
-        End With
+        'End With
+        'With grProductos.RootTable.Columns("CodigoFabrica")
+        '    .Width = 150
+        '    .Visible = True
+        '    .Caption = "Codigo Fabrica"
+        'End With
+        'With grProductos.RootTable.Columns("Marca")
+        '    .Width = 150
+        '    .Visible = True
+        '    .Caption = "Marca"
+        'End With
+        'With grProductos.RootTable.Columns("Medida")
+        '    .Width = 150
+        '    .Visible = True
+        '    .Caption = "Medida"
+        'End With
 
-        With grProductos
-            .DefaultFilterRowComparison = FilterConditionOperator.Contains
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
-            .GroupByBoxVisible = False
-            'diseño de la grilla
-            .VisualStyle = VisualStyle.Office2007
-        End With
+        '' yfnumi	Categoria	CodigoFabrica	Marca	Medida	yfcdprod1	grupo1	grupo2	yhprecio	venta	stock
+
+        'With grProductos.RootTable.Columns("yfcdprod1")
+        '    .Width = 200
+        '    .Visible = True
+        '    .Caption = "Producto"
+        'End With
+
+        'With grProductos.RootTable.Columns("grupo1")
+        '    .Width = 150
+        '    .Visible = True
+        '    .Caption = "Marca"
+        'End With
+        'With grProductos.RootTable.Columns("grupo2")
+        '    .Width = 150
+        '    .Visible = True
+        '    .Caption = "Procedencia"
+        'End With
+
+        'With grProductos.RootTable.Columns("yhprecio")
+        '    .Width = 120
+        '    .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+        '    .Visible = True
+        '    .Caption = "PRECIO COSTO"
+        '    .FormatString = "0.00"
+        'End With
+
+        'With grProductos.RootTable.Columns("venta")
+        '    .Width = 120
+        '    .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+        '    .Visible = True
+        '    .Caption = "PRECIO VENTA"
+        '    .FormatString = "0.00"
+        'End With
+        'With grProductos.RootTable.Columns("stock")
+        '    .Width = 100
+        '    .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+        '    .Visible = True
+        '    .Caption = "STOCK"
+        '    .FormatString = "0.00"
+        'End With
+
+        'With grProductos
+        '    .DefaultFilterRowComparison = FilterConditionOperator.Contains
+        '    .FilterMode = FilterMode.Automatic
+        '    .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+        '    .GroupByBoxVisible = False
+        '    'diseño de la grilla
+        '    .VisualStyle = VisualStyle.Office2007
+        'End With
     End Sub
     Private Sub _prAddDetalleVenta()
         '     a.cbnumi ,a.cbtv1numi ,a.cbty5prod ,b.yfcdprod1 as producto,a.cbest ,a.cbcmin 
@@ -884,15 +832,15 @@ Public Class F0_MCompras
         Return tbFechaVenta.IsInputReadOnly = False
     End Function
     Private Sub _HabilitarProductos()
-        'GPanelProductos.Height = 300
-        GPanelProductos.Visible = True
-        PanelTotal.Visible = False
-        PanelInferior.Visible = False
+        ''GPanelProductos.Height = 300
+        'GPanelProductos.Visible = True
+        'PanelTotal.Visible = False
+        'PanelInferior.Visible = False
         _prCargarProductos(73) ''''Aqui poner el Primer Precio de Costo
-        grProductos.Focus()
-        grProductos.MoveTo(grProductos.FilterRow)
-        grProductos.Col = 2
-        PanelDetalle.Height = 370
+        'grProductos.Focus()
+        'grProductos.MoveTo(grProductos.FilterRow)
+        'grProductos.Col = 2
+        'PanelDetalle.Height = 370
         'GPanelProductos.Height = 260
         'grProductos.Height = 260
 
@@ -1433,7 +1381,7 @@ Public Class F0_MCompras
 
             If (grdetalle.Col = grdetalle.RootTable.Columns("cbcmin").Index) Then
                 If (grdetalle.GetValue("producto") <> String.Empty) Then
-                    _prAddDetalleVenta()
+
                     _HabilitarProductos()
                 Else
                     ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
@@ -1442,7 +1390,7 @@ Public Class F0_MCompras
             End If
             If (grdetalle.Col = grdetalle.RootTable.Columns("producto").Index) Then
                 If (grdetalle.GetValue("producto") <> String.Empty) Then
-                    _prAddDetalleVenta()
+
                     _HabilitarProductos()
                 Else
                     ToastNotification.Show(Me, "Seleccione un Producto Por Favor", My.Resources.WARNING, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
@@ -1989,6 +1937,10 @@ salirIf:
 
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
         P_GenerarReporteCompra()
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        _HabilitarProductos()
     End Sub
 
 #End Region
