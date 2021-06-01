@@ -215,7 +215,7 @@ Public Class F0_MCompras
         tbSACF.Clear()
 
         _prCargarDetalleVenta(-1)
-
+        CType(grdetalle.DataSource, DataTable).Rows.Clear()
         MSuperTabControl.SelectedTabIndex = 0
 
         tbPdesc.Value = 0
@@ -236,6 +236,8 @@ Public Class F0_MCompras
         End If
         tbProveedor.Focus()
         Table_Producto = Nothing
+
+
 
         'Validar si es recibo o factura
         If swEmision.Value = False Then
@@ -410,7 +412,7 @@ Public Class F0_MCompras
 
         With grdetalle.RootTable.Columns("producto")
             .Caption = "PRODUCTOS"
-            .Width = 500
+            .Width = 400
             .WordWrap = True
             .MaxLines = 2
             .Visible = True
@@ -451,14 +453,14 @@ Public Class F0_MCompras
             With grdetalle.RootTable.Columns("cbutven")
                 .Width = 110
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-                .Visible = True
+                .Visible = False
                 .FormatString = "0.00"
                 .Caption = "Utilidad (%)".ToUpper
             End With
             With grdetalle.RootTable.Columns("cbprven")
                 .Width = 120
                 .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-                .Visible = True
+                .Visible = False
                 .FormatString = "0.00"
                 .Caption = "Precio Venta".ToUpper
             End With
@@ -1026,7 +1028,7 @@ Public Class F0_MCompras
 
     Public Sub _GuardarNuevo()
         Try
-            RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconDino en la Tabla TFC001
+            '' RecuperarDatosTFC001()  'Recupera datos para grabar en la BDDiconDino en la Tabla TFC001
             Dim res As Boolean = L_fnGrabarCompra("", cbSucursal.Value, tbFechaVenta.Value.ToString("yyyy/MM/dd"),
                                                   _CodProveedor, IIf(swTipoVenta.Value = True, 1, 0), IIf(swTipoVenta.Value = True,
                                                   Now.Date.ToString("yyyy/MM/dd"), tbFechaVenc.Value.ToString("yyyy/MM/dd")),
@@ -1133,7 +1135,7 @@ Public Class F0_MCompras
 
 
     Private Sub _prGuardarModificado()
-        RecuperarDatosTFC001()
+        ''RecuperarDatosTFC001()
         Dim res As Boolean = L_fnModificarCompra(tbCodigo.Text, cbSucursal.Value, tbFechaVenta.Value.ToString("yyyy/MM/dd"), _CodProveedor, IIf(swTipoVenta.Value = True, 1, 0), IIf(swTipoVenta.Value = True, Now.Date.ToString("yyyy/MM/dd"), tbFechaVenc.Value.ToString("yyyy/MM/dd")), IIf(swMoneda.Value = True, 1, 0), tbObservacion.Text, tbMdesc.Value, tbtotal.Value, CType(grdetalle.DataSource, DataTable), _detalleCompras, IIf(swEmision.Value = True, 1, 0), tbNFactura.Text, IIf(swConsigna.Value = True, 1, 0), IIf(swRetencion.Value = True, 1, 0), IIf(swMoneda.Value = True, 1, tbTipoCambio.Value))
         If res Then
 
@@ -1678,11 +1680,17 @@ salirIf:
         If (Not _fnAccesible()) Then
             Return
         End If
-        If (grdetalle.RowCount >= 2) Then
-            If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
-                _prEliminarFila()
+
+        Try
+            If (grdetalle.RowCount >= 2) Then
+                If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
+                    _prEliminarFila()
+                End If
             End If
-        End If
+        Catch ex As Exception
+
+        End Try
+
 
 
     End Sub

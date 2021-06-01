@@ -1920,7 +1920,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@caretenc", _retenc))
         _listParam.Add(New Datos.DParametro("@catipocambio", _tipocambio))
         _listParam.Add(New Datos.DParametro("@TC0011", "", detalle))
-        _listParam.Add(New Datos.DParametro("@TFC001", "", detalleCompra))
+        '_listParam.Add(New Datos.DParametro("@TFC001", "", detalleCompra))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TC001", _listParam)
 
 
@@ -1974,7 +1974,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@caretenc", _retenc))
         _listParam.Add(New Datos.DParametro("@catipocambio", _tipocambio))
         _listParam.Add(New Datos.DParametro("@TC0011", "", detalle))
-        _listParam.Add(New Datos.DParametro("@TFC001", "", detalleCompra))
+        '_listParam.Add(New Datos.DParametro("@TFC001", "", detalleCompra))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TC001", _listParam)
 
         If _Tabla.Rows.Count > 0 Then

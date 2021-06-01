@@ -91,7 +91,7 @@ Public Class F0_DetalleCompras
 
         With grProductoSeleccionado.RootTable.Columns("producto")
             .Caption = "PRODUCTOS"
-            .Width = 280
+            .Width = 400
             .Visible = True
 
         End With
