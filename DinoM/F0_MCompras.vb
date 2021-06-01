@@ -410,7 +410,9 @@ Public Class F0_MCompras
 
         With grdetalle.RootTable.Columns("producto")
             .Caption = "PRODUCTOS"
-            .Width = 280
+            .Width = 500
+            .WordWrap = True
+            .MaxLines = 2
             .Visible = True
 
         End With
@@ -1941,6 +1943,8 @@ salirIf:
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         _HabilitarProductos()
+        _prCalcularPrecioTotal()
+
     End Sub
 
 #End Region

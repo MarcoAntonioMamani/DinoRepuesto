@@ -344,6 +344,7 @@ Partial Class F0_MCompras
         'grdetalle
         '
         Me.grdetalle.BackColor = System.Drawing.Color.GhostWhite
+        Me.grdetalle.ColumnAutoResize = True
         Me.grdetalle.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdetalle.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

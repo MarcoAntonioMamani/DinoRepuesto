@@ -853,6 +853,12 @@
     <Compile Include="Utils\F0_BuscarProductos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utils\F0_DetalleCompras.Designer.vb">
+      <DependentUpon>F0_DetalleCompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\F0_DetalleCompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utils\F0_DetalleMovimiento.Designer.vb">
       <DependentUpon>F0_DetalleMovimiento.vb</DependentUpon>
     </Compile>
@@ -1272,6 +1278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\F0_BuscarProductos.resx">
       <DependentUpon>F0_BuscarProductos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\F0_DetalleCompras.resx">
+      <DependentUpon>F0_DetalleCompras.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\F0_DetalleMovimiento.resx">
       <DependentUpon>F0_DetalleMovimiento.vb</DependentUpon>

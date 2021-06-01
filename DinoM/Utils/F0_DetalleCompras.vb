@@ -3,6 +3,8 @@ Imports DevComponents.DotNetBar
 Imports Janus.Windows.GridEX
 Imports DinoM.JanusExtension
 Imports Logica.AccesoLogica
+Imports System.IO
+
 Public Class F0_DetalleCompras
     Public dtProductoAll As DataTable
     Public dtDetalle As DataTable
@@ -58,17 +60,17 @@ Public Class F0_DetalleCompras
         '    End With
         'Else
         With grProductoSeleccionado.RootTable.Columns("cblote")
-                .Width = 150
-                .Caption = "LOTE"
-                .Visible = False
-                .MaxLength = 50
-            End With
-            With grProductoSeleccionado.RootTable.Columns("cbfechavenc")
-                .Width = 120
-                .Caption = "FECHA VENC."
-                .Visible = False
-                .FormatString = "dd/MM/yyyy"
-            End With
+            .Width = 150
+            .Caption = "LOTE"
+            .Visible = False
+            .MaxLength = 50
+        End With
+        With grProductoSeleccionado.RootTable.Columns("cbfechavenc")
+            .Width = 120
+            .Caption = "FECHA VENC."
+            .Visible = False
+            .FormatString = "dd/MM/yyyy"
+        End With
         'End If
 
 
@@ -141,19 +143,19 @@ Public Class F0_DetalleCompras
         '    End With
         'Else
         With grProductoSeleccionado.RootTable.Columns("cbutven")
-                .Width = 120
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-                .Visible = False
-                .FormatString = "0.00"
-                .Caption = "Utilidad.".ToUpper
-            End With
-            With grProductoSeleccionado.RootTable.Columns("cbprven")
-                .Width = 120
-                .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
-                .Visible = False
-                .FormatString = "0.00"
-                .Caption = "Precio Venta.".ToUpper
-            End With
+            .Width = 120
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
+            .FormatString = "0.00"
+            .Caption = "Utilidad.".ToUpper
+        End With
+        With grProductoSeleccionado.RootTable.Columns("cbprven")
+            .Width = 120
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
+            .FormatString = "0.00"
+            .Caption = "Precio Venta.".ToUpper
+        End With
         'End If
 
         With grProductoSeleccionado.RootTable.Columns("cbptot")
@@ -229,9 +231,9 @@ Public Class F0_DetalleCompras
             ColAL(grProductos, "yfcdprod1", "Producto", 350)
             ColAL(grProductos, "grupo1", "Marca", 150)
             ColAL(grProductos, "grupo2", "Procedencia", 150)
-            ColAL(grProductos, "stock", "Stock", 80)
-            ColAL(grProductos, "yhprecio", "Precio Costo", 90)
-            ColAL(grProductos, "venta", "Precio Venta", 90)
+            ColArNro(grProductos, "stock", "Stock", 80, "0.00")
+            ColArNro(grProductos, "yhprecio", "Precio Costo", 90, "0.00")
+            ColArNro(grProductos, "venta", "Precio Venta", 90, "0.00")
 
             ConfigFinalBasica(grProductos)
         Catch ex As Exception
@@ -259,7 +261,7 @@ Public Class F0_DetalleCompras
 
         For i As Integer = 0 To dt.Rows.Count - 1 Step 1
 
-            If (dt.Rows(i).Item("Item") = Id) Then
+            If (dt.Rows(i).Item("cbty5prod") = Id) Then
                 Return True
             End If
 
@@ -279,20 +281,91 @@ Public Class F0_DetalleCompras
 
         End If
     End Sub
+    Public Sub _fnObtenerFilaDetalle(ByRef pos As Integer, numi As Integer)
+        For i As Integer = 0 To CType(grProductoSeleccionado.DataSource, DataTable).Rows.Count - 1 Step 1
+            Dim _numi As Integer = CType(grProductoSeleccionado.DataSource, DataTable).Rows(i).Item("cbnumi")
+            If (_numi = numi) Then
+                pos = i
+                Return
+            End If
+        Next
 
+    End Sub
+    Private Sub _prAddDetalleVenta()
+        '     a.cbnumi ,a.cbtv1numi ,a.cbty5prod ,b.yfcdprod1 as producto,a.cbest ,a.cbcmin 
+        ',a.cbumin ,Umin .ycdes3 as unidad,a.cbpcost,a.cblote ,a.cbfechavenc ,a.cbptot 
+        ',a.cbutven ,a.cbprven   ,a.cbobs ,
+        'a.cbfact ,a.cbhact ,a.cbuact,1 as estado,Cast(null as Image) as img,a.cbpcost as costo,a.cbprven as venta
+        Dim Bin As New MemoryStream
+        Dim img As New Bitmap(My.Resources.delete, 28, 28)
+        img.Save(Bin, Imaging.ImageFormat.Png)
+        CType(grProductoSeleccionado.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", 0, 0, 0, "",
+                                                        0, "20500101", CDate("2050/01/01"), 0, 0, 0, "", Now.Date, "", "", 0, Bin.GetBuffer, 0, 0)
+    End Sub
+    Public Function _fnSiguienteNumi()
+        Dim dt As DataTable = CType(grProductoSeleccionado.DataSource, DataTable)
+        Dim rows() As DataRow = dt.Select("cbnumi=MAX(cbnumi)")
+        If (rows.Count > 0) Then
+            Return rows(rows.Count - 1).Item("cbnumi")
+        End If
+        Return 1
+    End Function
     Private Sub seleccionarCelda()
+
+        Dim _PorcentajeUtil As Double = 0 '' En esta varible obtendre de la libreria el porcentaje de 
         Dim f, c As Integer
         c = grProductos.Col
         f = grProductos.Row
         If (f >= 0) Then
 
             If (Not ExisteProducto(grProductos.GetValue("yfnumi"))) Then
-                Dim cantidad As Double = 0
-                Dim row As DataRow = CType(grProductos.DataSource, DataTable).Rows(f)
-                row.Item("Cantidad") = cantidad
-                'row.Item("AlmacenId") = gi_userSuc
-                CType(grProductoSeleccionado.DataSource, DataTable).ImportRow(row)
-                tbProducto.Focus()
+                Dim pos As Integer = -1
+                grProductoSeleccionado.Row = grProductoSeleccionado.RowCount - 1
+
+                If (grProductoSeleccionado.GetValue("cbty5prod") > 0) Then
+                    _prAddDetalleVenta()
+                End If
+                grProductoSeleccionado.Row = grProductoSeleccionado.RowCount - 1
+
+                _fnObtenerFilaDetalle(pos, grProductoSeleccionado.GetValue("cbnumi"))
+                If (pos >= 0) Then ''And (Not existe))
+
+
+
+
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbty5prod") = grProductos.GetValue("yfnumi")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("producto") = grProductos.GetValue("yfcdprod1")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbumin") = 0
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("unidad") = grProductos.GetValue("Medida")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost") = grProductos.GetValue("yhprecio")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = grProductos.GetValue("yhprecio")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbcmin") = 1
+
+                    Dim PrecioVenta As Double = IIf(IsDBNull(grProductos.GetValue("venta")), 0, grProductos.GetValue("venta"))
+                    If (PrecioVenta > 0) Then
+                        CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = PrecioVenta
+                        Dim montodesc As Double = PrecioVenta - grProductos.GetValue("yhprecio")
+                        Dim precio As Integer = IIf(IsDBNull(grProductos.GetValue("yhprecio")), 0, grProductos.GetValue("yhprecio"))
+                        If (precio = 0) Then
+                            CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbutven") = 100
+                        Else
+                            Dim pordesc As Double = ((montodesc * 100) / grProductos.GetValue("yhprecio"))
+                            CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbutven") = pordesc
+                        End If
+
+
+                    Else
+                        CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbutven") = _PorcentajeUtil
+                        CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = (grProductos.GetValue("yhprecio") + ((grProductos.GetValue("yhprecio")) * (_PorcentajeUtil / 100)))
+
+
+                    End If
+
+
+
+
+                End If
+
             Else
                 Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
                 ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
@@ -344,15 +417,26 @@ Public Class F0_DetalleCompras
             '    Console.WriteLine("'{0}'", item)
             'Next
             Dim cant As Integer = vectoraux.Length
-
+            'ColAL(grProductos, "yfnumi", "Item", 50)
+            'ColAL(grProductos, "Categoria", "Categoria", 150)
+            'ColAL(grProductos, "CodigoFabrica", "Cod. Fabrica", 150)
+            'ColAL(grProductos, "Marca", "Cod. Marca", 150)
+            'ColAL(grProductos, "Medida", "Medida", 150)
+            'ColAL(grProductos, "yfcdprod1", "Producto", 350)
+            'ColAL(grProductos, "grupo1", "Marca", 150)
+            'ColAL(grProductos, "grupo2", "Procedencia", 150)
+            'ColAL(grProductos, "stock", "Stock", 80)
+            'ColAL(grProductos, "yhprecio", "Precio Costo", 90)
+            'ColAL(grProductos, "venta", "Precio Venta", 90)
             For i As Integer = 0 To dt.Rows.Count - 1 Step 1
-                Dim nombre As String = dt.Rows(i).Item("yfcdprod1").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
+                Dim nombre As String = dt.Rows(i).Item("yfnumi").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Categoria").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Marca").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper
+                    " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("grupo2").ToString.ToUpper
                 Select Case cant
                     Case 1
 
@@ -492,14 +576,202 @@ Public Class F0_DetalleCompras
         CargarProductos()
     End Sub
 
-    Private Sub grProductos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductos.EditingCell
-        If (e.Column.Index = CelIndex(grProductos, "CodigoFabrica") Or
-                  e.Column.Index = CelIndex(grProductos, "Marca") Or
-                  e.Column.Index = CelIndex(grProductos, "Medida") Or
-                  e.Column.Index = CelIndex(grProductos, "yfcdprod1")) Then
+    Public Sub P_PonerTotal(rowIndex As Integer)
+        If (rowIndex < grProductoSeleccionado.RowCount) Then
+
+            Dim lin As Integer = grProductoSeleccionado.GetValue("cbnumi")
+            Dim pos As Integer = -1
+            _fnObtenerFilaDetalle(pos, lin)
+            Dim cant As Double = grProductoSeleccionado.GetValue("cbcmin")
+            Dim uni As Double = grProductoSeleccionado.GetValue("cbpcost")
+            If (pos >= 0) Then
+                Dim TotalUnitario As Double = cant * uni
+                'grProductoSeleccionado.SetValue("lcmdes", montodesc)
+
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = TotalUnitario
+                grProductoSeleccionado.SetValue("cbptot", TotalUnitario)
+                Dim estado As Integer = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("estado")
+                If (estado = 1) Then
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("estado") = 2
+                End If
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = (uni + (uni * (grProductoSeleccionado.GetValue("cbutven") / 100))) * 6.96
+                grProductoSeleccionado.SetValue("cbprven", (uni + (uni * (grProductoSeleccionado.GetValue("cbutven") / 100))) * 6.96)
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta") = (uni + (uni * (grProductoSeleccionado.GetValue("cbutven") / 100))) * 6.96
+                grProductoSeleccionado.SetValue("cbprven", (uni + (uni * (grProductoSeleccionado.GetValue("cbutven") / 100))) * 6.96)
+            End If
+            '_prCalcularPrecioTotal()
+        End If
+
+
+
+    End Sub
+    Private Sub grProductoSeleccionado_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grProductoSeleccionado.CellValueChanged
+        Dim _PorcentajeUtil As Double = 0
+        Dim lin As Integer = grProductoSeleccionado.GetValue("cbnumi")
+        Dim pos As Integer = -1
+        _fnObtenerFilaDetalle(pos, lin)
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbcmin").Index) Then
+            If (Not IsNumeric(grProductoSeleccionado.GetValue("cbcmin")) Or grProductoSeleccionado.GetValue("cbcmin").ToString = String.Empty) Then
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbcmin") = 1
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+            Else
+                If (grProductoSeleccionado.GetValue("cbcmin") > 0) Then
+                    Dim rowIndex02 As Integer = grProductoSeleccionado.Row
+                    P_PonerTotal(rowIndex02)
+                Else
+
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbcmin") = 1
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    '_prCalcularPrecioTotal()
+                End If
+            End If
+        End If
+
+        ''''''''''''''''''''''COSTO  ''''''''''''''''''''''''''''''''''''''''''
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbpcost").Index) Then
+            If (Not IsNumeric(grProductoSeleccionado.GetValue("cbpcost")) Or grProductoSeleccionado.GetValue("cbpcost").ToString = String.Empty) Then
+                Dim cantidad As Double = grProductoSeleccionado.GetValue("cbcmin")
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = cantidad * CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = _PorcentajeUtil * CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+
+
+            Else
+                If (grProductoSeleccionado.GetValue("cbpcost") > 0) Then
+                    Dim rowIndex01 As Integer = grProductoSeleccionado.Row
+                    P_PonerTotal(rowIndex01)
+                Else
+
+                    Dim cantidad As Double = grProductoSeleccionado.GetValue("cbcmin")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbptot") = cantidad * CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = _PorcentajeUtil * CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                End If
+            End If
+        End If
+
+        ''''''''''''''''''PRECIO VENTA '''''''''   CONTINUARA  '''''''''''''
+        'Habilitar solo las columnas de Precio, %, Monto y Observación
+        '     a.cbnumi ,a.cbtv1numi ,a.cbty5prod ,b.yfcdprod1 as producto,a.cbest ,a.cbcmin ,a.cbumin ,Umin .ycdes3 as unidad,a.cbpcost 
+        ',a.cbutven ,a.cbprven  ,a.cbptot ,a.cbobs ,
+        'a.cbfact ,a.cbhact ,a.cbuact,1 as escado,Cast(null as Image) as img,costo,venta
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbprven").Index) Then
+            If (Not IsNumeric(grProductoSeleccionado.GetValue("cbprven")) Or grProductoSeleccionado.GetValue("cbprven").ToString = String.Empty) Then
+
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta")
+                Dim montodesc As Double = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta") - grProductoSeleccionado.GetValue("cbpcost")
+                Dim pordesc As Double = ((montodesc * 100) / CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost"))
+            Else
+                If (grProductoSeleccionado.GetValue("cbprven") > 0) Then
+
+                    'Dim montodesc As Double = grProductoSeleccionado.GetValue("cbprven") - CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    'Dim pordesc As Double = ((montodesc * 100) / CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost"))
+                    'grProductoSeleccionado.SetValue("cbutven", pordesc)
+
+                    Dim montodesc As Double = grProductoSeleccionado.GetValue("cbprven") - (grProductoSeleccionado.GetValue("cbpcost") * 6.96)
+                    Dim pordesc As Double = ((montodesc * 100) / (grProductoSeleccionado.GetValue("cbpcost") * 6.96))
+                    grProductoSeleccionado.SetValue("cbutven", pordesc)
+
+                Else
+
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta")
+                    Dim montodesc As Double = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta") - CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    Dim pordesc As Double = ((montodesc * 100) / CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost"))
+                End If
+            End If
+        End If
+
+
+
+        ''''''''''''''''''PORCENTAJE PRECIO VENTA '''''''''   CONTINUARA  '''''''''''''
+        'Habilitar solo las columnas de Precio, %, Monto y Observación
+        '     a.cbnumi ,a.cbtv1numi ,a.cbty5prod ,b.yfcdprod1 as producto,a.cbest ,a.cbcmin ,a.cbumin ,Umin .ycdes3 as unidad,a.cbpcost 
+        ',a.cbutven ,a.cbprven  ,a.cbptot ,a.cbobs ,
+        'a.cbfact ,a.cbhact ,a.cbuact,1 as escado,Cast(null as Image) as img,costo,venta
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbutven").Index) Then
+
+            Dim venta As Double = IIf(IsDBNull(CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta")), 0, CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta"))
+            Dim PrecioCosto As Double = IIf(IsDBNull(grProductoSeleccionado.GetValue("cbpcost")), 0, (grProductoSeleccionado.GetValue("cbpcost") * 6.96))
+            If (Not IsNumeric(grProductoSeleccionado.GetValue("cbutven")) Or grProductoSeleccionado.GetValue("cbutven").ToString = String.Empty) Then
+
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta")
+                Dim montodesc As Double = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta") - grProductoSeleccionado.GetValue("cbpcost")
+
+                Dim pordesc As Double = ((montodesc * 100) / CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost"))
+
+                CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbutven") = pordesc
+            Else
+                If (grProductoSeleccionado.GetValue("cbutven") > 0) Then
+
+                    Dim porcentaje As Double = grProductoSeleccionado.GetValue("cbutven")
+
+                    Dim monto As Double = ((grProductoSeleccionado.GetValue("cbpcost") * 6.96) * (porcentaje / 100))
+                    Dim precioventa As Double = monto + (grProductoSeleccionado.GetValue("cbpcost") * 6.96)
+                    grProductoSeleccionado.SetValue("cbprven", precioventa)
+
+                Else
+
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbprven") = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta")
+                    Dim montodesc As Double = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("venta") - CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost")
+                    Dim pordesc As Double = ((montodesc * 100) / CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbpcost"))
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("cbutven") = pordesc
+                End If
+            End If
+        End If
+        Dim estado As Integer = CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("estado")
+        If (estado = 1) Then
+            CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("estado") = 2
+        End If
+
+        Dim rowIndex As Integer = grProductoSeleccionado.Row
+        P_PonerTotal(rowIndex)
+
+    End Sub
+
+    Private Sub grProductoSeleccionado_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grProductoSeleccionado.CellEdited
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbcmin").Index) Then
+            If (Not IsNumeric(grProductoSeleccionado.GetValue("cbcmin")) Or grProductoSeleccionado.GetValue("cbcmin").ToString = String.Empty) Then
+
+
+                grProductoSeleccionado.SetValue("cbcmin", 1)
+                grProductoSeleccionado.SetValue("cbptot", grProductoSeleccionado.GetValue("cbpcost"))
+            Else
+                If (grProductoSeleccionado.GetValue("cbcmin") > 0) Then
+
+
+                Else
+
+                    grProductoSeleccionado.SetValue("cbcmin", 1)
+                    grProductoSeleccionado.SetValue("cbptot", grProductoSeleccionado.GetValue("cbpcost"))
+
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub grProductoSeleccionado_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductoSeleccionado.EditingCell
+
+
+
+        If (e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbcmin").Index Or e.Column.Index = grProductoSeleccionado.RootTable.Columns("cbpcost").Index) Then
             e.Cancel = False
         Else
             e.Cancel = True
         End If
+
+
+
+
+    End Sub
+
+
+    Private Sub grProductos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grProductos.EditingCell
+        'If (e.Column.Index = CelIndex(grProductos, "CodigoFabrica") Or
+        '          e.Column.Index = CelIndex(grProductos, "Marca") Or
+        '          e.Column.Index = CelIndex(grProductos, "Medida") Or
+        '          e.Column.Index = CelIndex(grProductos, "yfcdprod1")) Then
+        '    e.Cancel = False
+        'Else
+        e.Cancel = True
+        'End If
     End Sub
 End Class

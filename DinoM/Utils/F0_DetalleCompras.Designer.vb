@@ -99,8 +99,8 @@ Partial Class F0_DetalleCompras
         '
         'grProductoSeleccionado
         '
-        Me.grProductoSeleccionado.AllowEdit = Janus.Windows.GridEX.InheritableBoolean.[False]
         Me.grProductoSeleccionado.BackColor = System.Drawing.Color.GhostWhite
+        Me.grProductoSeleccionado.ColumnAutoResize = True
         Me.grProductoSeleccionado.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grProductoSeleccionado.Font = New System.Drawing.Font("Calibri", 10.2!)
         Me.grProductoSeleccionado.HeaderFormatStyle.Font = New System.Drawing.Font("Georgia", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
