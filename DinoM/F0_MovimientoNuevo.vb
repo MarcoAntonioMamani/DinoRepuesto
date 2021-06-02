@@ -180,7 +180,7 @@ Public Class F0_MovimientoNuevo
             limpiarAlmacenGrupo()
             Panel_AlmacenGrupo.Visible = False
             Panel_AlmacenGrupoTraspaso.Visible = False
-            lblTituloAlmacen.Text = "ALMACEN DE ORIGEN"
+            lblTituloAlmacen.Text = "ALMACEN DE DESTINO"
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -701,6 +701,8 @@ Public Class F0_MovimientoNuevo
                 If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("img").Index) Then
 
                     EliminarFilaDetalle(grdetalle, "Id", "Estado", grdetalle.GetValue("Id"))
+                    Panel_AlmacenGrupoTraspaso.Visible = False
+                    Panel_AlmacenGrupo.Visible = False
                 End If
             End If
 
