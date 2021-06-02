@@ -220,7 +220,7 @@ Public Class F0_Libreria
         End With
 
 
-
+        grLibreria.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grLibreria.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
 
 
     End Sub
@@ -325,7 +325,15 @@ Public Class F0_Libreria
     Private Sub EliminarFilaDetalle(griex As GridEX, key As String, keyEstado As String, valor As Integer)
         Dim colProducto = 2
         EliminarFIla(griex, key, keyEstado, valor)
+
+        Dim dt As DataTable = CType(griex.DataSource, DataTable)
         grLibreria.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grLibreria.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+
+        btnGrabar.PerformClick()
+        btnModificar.PerformClick()
+
+
+
         grLibreria.Select()
         'grLibreria.Col = 2
         'grLibreria.Row = grLibreria.RowCount - 1
@@ -406,14 +414,24 @@ Public Class F0_Libreria
                 Return
             End If
 
-            If (grLibreria.RowCount >= 2) Then
+            If (grLibreria.RowCount >= 1) Then
                 If (grLibreria.CurrentColumn.Index = grLibreria.RootTable.Columns("img").Index) Then
+                    Dim ef = New Efecto
+                    ef.tipo = 2
+                    ef.Context = "¿esta seguro de eliminar Permanentemente el registro ".ToUpper + grLibreria.GetValue("ycdes3").ToString
+                    ef.Header = "Si Acepta El registro Seleccionado sera Eliminado Directamente".ToUpper
+                    ef.ShowDialog()
+                    Dim bandera As Boolean = False
+                    bandera = ef.band
+                    If (bandera = True) Then
+                        EliminarFilaDetalle(grLibreria, "yccod3", "Estado", grLibreria.GetValue("yccod3"))
+                    End If
 
-                    EliminarFilaDetalle(grLibreria, "yccod3", "Estado", grLibreria.GetValue("yccod3"))
+
                 End If
             End If
         Catch ex As Exception
-            MostrarMensajeError(ex.Message)
+            ''MostrarMensajeError(ex.Message)
         End Try
     End Sub
     Private Sub MostrarMensajeError(mensaje As String)
@@ -427,6 +445,10 @@ Public Class F0_Libreria
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+    End Sub
+
+    Private Sub grLibreria_ApplyingFilter(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles grLibreria.ApplyingFilter
 
     End Sub
 End Class

@@ -208,7 +208,7 @@ Public Class JanusExtension
     End Function
     Public Shared Sub EliminarFIla(griex As GridEX, key As String, keyEstado As String, valor As Integer)
         If (griex.Row >= 0) Then
-            If (griex.RowCount >= 2) Then
+            If (griex.RowCount >= 1) Then
                 Dim estado As Integer = griex.GetValue(keyEstado)
                 Dim posicion = ObtenerPosicionFila(griex, key, valor)
                 If (estado = 0) Then
