@@ -32,7 +32,12 @@ Public Class F0_Ventas
     Dim FilaSelectLote As DataRow = Nothing
     Dim Table_Producto As DataTable
     Dim G_Lote As Boolean = False '1=igual a mostrar las columnas de lote y fecha de Vencimiento
-    Dim dtProductoGoblal As DataTable
+    Dim dtProductoGoblal As DataTable = Nothing
+
+    Dim SucursalSeleccionada As Integer = 0
+    Dim CategoriaPrecioSeleccionada As Integer = 0
+
+
 
 #End Region
 
@@ -868,14 +873,29 @@ Public Class F0_Ventas
 
         If (G_Lote = True) Then
                 dtProductoGoblal = L_fnListarProductos(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
-                'Table_Producto = dt.Copy
+            Table_Producto = dt.Copy
+
+        Else
+            If (IsNothing(dtProductoGoblal)) Then
+                dtProductoGoblal = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
+                Table_Producto = dt.Copy
+
+                SucursalSeleccionada = cbSucursal.Value
+                CategoriaPrecioSeleccionada = cbPrecio.Value
+
 
             Else
+                If (cbSucursal.Value <> SucursalSeleccionada Or cbPrecio.Value <> CategoriaPrecioSeleccionada) Then
+                    dtProductoGoblal = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
+                    Table_Producto = dt.Copy
 
-                dtProductoGoblal = L_fnListarProductosSinLote(cbSucursal.Value, cbPrecio.Value, idCategoria)  ''1=Almacen
-                'Table_Producto = dt.Copy
-
+                    SucursalSeleccionada = cbSucursal.Value
+                    CategoriaPrecioSeleccionada = cbPrecio.Value
+                End If
             End If
+
+
+        End If
 
             dt = dtProductoGoblal
 
@@ -1400,11 +1420,11 @@ Public Class F0_Ventas
         '        a.tbpcos, a.tblote, a.tbfechaVenc, a.tbptot2, a.tbfact, a.tbhact, a.tbuact, 1 As estado, Cast(null As Image) As img,
         '        (Sum(inv.iccven) + a.tbcmin) as stock
 
-        If (dt.Rows(fila).Item("Stock") <= 0) Then
-            Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-            ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-            Return
-        End If
+        'If (dt.Rows(fila).Item("Stock") <= 0) Then
+        '    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+        '    ToastNotification.Show(Me, "El producto no tiene stock disponible".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+        '    Return
+        'End If
 
         Dim pos As Integer = -1
         grdetalle.Row = grdetalle.RowCount - 1
@@ -1460,14 +1480,14 @@ Public Class F0_Ventas
             '_DesHabilitarProductos()
             tbProducto.Focus()
         Else
-            If (existe) Then
-                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
-                ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-                grProductos.RemoveFilters()
-                grProductos.Focus()
-                grProductos.MoveTo(grProductos.FilterRow)
-                grProductos.Col = 1
-            End If
+            'If (existe) Then
+            '    Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+            '    ToastNotification.Show(Me, "El producto ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            '    grProductos.RemoveFilters()
+            '    grProductos.Focus()
+            '    grProductos.MoveTo(grProductos.FilterRow)
+            '    grProductos.Col = 1
+            'End If
         End If
     End Sub
     Public Sub InsertarProductosConLote()
