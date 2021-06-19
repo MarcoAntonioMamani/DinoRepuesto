@@ -706,6 +706,8 @@ Public Class F0_MovimientoNuevo
                 End If
             End If
 
+
+
             If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("imgAdd").Index) Then
                 _HabilitarProductos()
             End If
@@ -1169,6 +1171,19 @@ Public Class F0_MovimientoNuevo
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
+    End Sub
+
+    Private Sub grdetalle_ColumnHeaderClick(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.ColumnHeaderClick
+
+        Try
+            grdetalle.Focus()
+
+            grdetalle.Col = 1
+        Catch ex As Exception
+
+        End Try
+
+
     End Sub
 
 #End Region
