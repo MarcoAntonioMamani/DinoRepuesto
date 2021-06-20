@@ -436,7 +436,7 @@ Public Class F0_DetalleCompras
                     " " + dt.Rows(i).Item("Medida").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("grupo2").ToString.ToUpper
+                    " " + dt.Rows(i).Item("yfnumi").ToString.ToUpper
                 Select Case cant
                     Case 1
 

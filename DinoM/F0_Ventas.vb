@@ -1375,20 +1375,32 @@ Public Class F0_Ventas
         End If
     End Sub
     Private Sub _prSalir()
+
         If btnGrabar.Enabled = True Then
-            _prInhabiliitar()
-            If grVentas.RowCount > 0 Then
+            Dim ef = New Efecto
+            ef.tipo = 2
+            ef.Header = "¿Los Datos No Se Guardaron Debe Hacer Clic en el Boton Grabar. En Caso de Que no Quiera Guardarlo Confirme Este Mensaje?".ToUpper
+            ef.Context = "mensaje principal".ToUpper
+            ef.ShowDialog()
+            Dim bandera As Boolean = False
+            bandera = ef.band
+            If (bandera = True) Then
+                _prInhabiliitar()
+                If grVentas.RowCount > 0 Then
 
-                _prMostrarRegistro(0)
+                    _prMostrarRegistro(0)
 
+                End If
             End If
         Else
             _modulo.Select()
             If (Not IsNothing(_tab)) Then
                 _tab.Close()
             End If
-
         End If
+
+
+
     End Sub
     Public Sub _prCargarIconELiminar()
         For i As Integer = 0 To CType(grdetalle.DataSource, DataTable).Rows.Count - 1 Step 1

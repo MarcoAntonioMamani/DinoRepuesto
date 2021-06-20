@@ -283,8 +283,30 @@ Public Class F0_Libreria
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
-        If (_fnAccesible()) Then
-            _prInhabiliitar()
+
+
+        'If (_fnAccesible()) Then
+        '    _prInhabiliitar()
+        'Else
+        '    _modulo.Select()
+        '    Me.Close()
+        'End If
+        _prSalir()
+    End Sub
+
+    Private Sub _prSalir()
+        If btnGrabar.Enabled = True Then
+            Dim ef = New Efecto
+            ef.tipo = 2
+            ef.Header = "¿Los Datos No Se Guardaron Debe Hacer Clic en el Boton Grabar. En Caso de Que no Quiera Guardarlo Confirme Este Mensaje?".ToUpper
+            ef.Context = "mensaje principal".ToUpper
+            ef.ShowDialog()
+            Dim bandera As Boolean = False
+            bandera = ef.band
+            If (bandera = True) Then
+                _prInhabiliitar()
+
+            End If
         Else
             _modulo.Select()
             Me.Close()

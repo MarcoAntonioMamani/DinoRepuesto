@@ -309,7 +309,8 @@ Public Class F0_BuscarProductos
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Categoria").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper
+                    " " + dt.Rows(i).Item("Medida").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("Item").ToString.ToUpper
                 Select Case cant
                     Case 1
 

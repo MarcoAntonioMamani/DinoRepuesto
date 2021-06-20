@@ -324,6 +324,8 @@ Public Class F0_KardexMovimiento
             .Caption = "Concepto".ToUpper
             .Key = "descConcep"
             .Width = 180
+            .WordWrap = True
+            .MaxLines = 3
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.FontSize = 9
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -333,6 +335,8 @@ Public Class F0_KardexMovimiento
         With grDatos.RootTable.Columns(5)
             .Caption = "Observación".ToUpper
             .Key = "obs"
+            .WordWrap = True
+            .MaxLines = 3
             .Width = 400
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.FontSize = 9
@@ -410,6 +414,8 @@ Public Class F0_KardexMovimiento
             .Caption = "Producto"
             .Key = "descProd"
             .Width = 200
+            .WordWrap = True
+            .MaxLines = 3
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.FontSize = 9
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near

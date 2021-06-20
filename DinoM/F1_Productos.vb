@@ -651,7 +651,7 @@ Public Class F1_Productos
             tbMontoDesde.Value = 0
             tbMontoHasta.Value = 0
             tbPrecioDescuento.Value = 0
-
+            tbStockMinimo.Value = 0
             _PCargarGridCategoriasPrecios(-1)
             BanderaClonar = False
         End If
