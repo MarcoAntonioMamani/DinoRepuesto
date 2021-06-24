@@ -110,10 +110,10 @@ Public Class JanusExtension
         With grid
             .GroupByBoxVisible = False
             .AlternatingColors = True
-            .FilterRowButtonStyle = FilterRowButtonStyle.ConditionOperatorDropDown
-            .DefaultFilterRowComparison = FilterConditionOperator.Contains
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            '.FilterRowButtonStyle = FilterRowButtonStyle.ConditionOperatorDropDown
+            '.DefaultFilterRowComparison = FilterConditionOperator.Contains
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .VisualStyle = VisualStyle.Office2007
             .AllowEdit = InheritableBoolean.False
         End With
