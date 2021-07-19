@@ -1061,7 +1061,7 @@ Public Class F0_Ventas
         Dim img02 As New Bitmap(My.Resources.add, 28, 28)
         img.Save(Bin, Imaging.ImageFormat.Png)
         img02.Save(Bin02, Imaging.ImageFormat.Png)
-        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, 0, "", "", "", "", "", 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, "", 0, "20170101", CDate("2017/01/01"), 0, Now.Date, "", "", 0, Bin.GetBuffer, Bin02.GetBuffer, 0)
+        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, 0, "", "", "", "", "", 0, 0, 0, "", 0, 0, 0, 0, 0, 0, 0, "", 0, "20500101", CDate("2050/01/01"), 0, Now.Date, "", "", 0, Bin.GetBuffer, Bin02.GetBuffer, 0)
     End Sub
 
     Public Function _fnSiguienteNumi()
