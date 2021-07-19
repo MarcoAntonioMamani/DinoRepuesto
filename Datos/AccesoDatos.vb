@@ -70,6 +70,7 @@ Public Class AccesoDatos
 
     Public Shared Function D_ProcedimientoConParam(_Nombre As String, _listaParam As List(Of DParametro)) As DataTable
         _comandoProcedimiento.Parameters.Clear()
+
         _comandoProcedimiento.CommandText = _Nombre
         For i = 0 To _listaParam.Count - 1
             Dim nombre As String = _listaParam.Item(i).nombre

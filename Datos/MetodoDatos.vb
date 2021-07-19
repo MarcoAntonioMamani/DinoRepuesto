@@ -17,10 +17,14 @@ Public Class MetodoDatos
         Dim _cadenaConexion = Configuracion.CadenaConexion(Ip, UsuarioSql, ClaveSql, NombreBD)
         Dim _conexion As New SqlConnection() 'SqlConnection()
         _conexion.ConnectionString = _cadenaConexion
-        Dim _comando As New SqlCommand() 'SqlCommand()
+        Dim _comando As New SqlCommand()
+        'SqlCommand()
         _comando = _conexion.CreateCommand()
         _comando.CommandType = CommandType.StoredProcedure
+        _comando.CommandText = "SET ARITHABORT ON;"
+
         'abrir
+
         _comando.Connection.Open()
         Return _comando
     End Function
@@ -64,13 +68,15 @@ Public Class MetodoDatos
         Dim _adaptador As New SqlDataAdapter 'SqlDataAdapter()
             _adaptador.SelectCommand = Comando
 
-            _adaptador.Fill(_tabla)
-            'Catch ex As Exception
-            '    MsgBox(ex.Message)
-            '    'Finally
-            '    '    Comando.Connection.Close()
-            'End Try
-            Return _tabla
+        _adaptador.Fill(_tabla)
+        '_adaptador.Dispose()
+
+        'Catch ex As Exception
+        '    MsgBox(ex.Message)
+        '    'Finally
+        '    '    Comando.Connection.Close()
+        'End Try
+        Return _tabla
     End Function
 
 End Class
