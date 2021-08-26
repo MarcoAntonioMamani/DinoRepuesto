@@ -1690,8 +1690,8 @@ Public Class F1_Productos
             PrecioVentaFactura = ((PrecioCosto + (PrecioCosto * 0.25) + (PrecioCosto * 0.16)) * 2) * 7
 
             tbPrecioFacturado.Value = PrecioVentaFactura
-            tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
-            tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.18)
+            tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.1)
+            tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
 
 
 
@@ -1705,8 +1705,8 @@ Public Class F1_Productos
             If (tbPrecioFacturado.Value > 0) Then
                 Dim PrecioVentaFactura As Double
                 PrecioVentaFactura = tbPrecioFacturado.Value
-                tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
-                tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.18)
+                tbPrecioVentaNormal.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.1)
+                tbPrecioMecanico.Value = PrecioVentaFactura - (PrecioVentaFactura * 0.15)
             End If
 
 

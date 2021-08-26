@@ -223,7 +223,7 @@ Partial Class F1_Productos
         Me.SuperTabPrincipal.ControlBox.MenuBox.Name = ""
         Me.SuperTabPrincipal.ControlBox.Name = ""
         Me.SuperTabPrincipal.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabPrincipal.ControlBox.MenuBox, Me.SuperTabPrincipal.ControlBox.CloseBox})
-        Me.SuperTabPrincipal.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.SuperTabPrincipal.Margin = New System.Windows.Forms.Padding(5)
         Me.SuperTabPrincipal.Size = New System.Drawing.Size(1835, 875)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelBuscador, 0)
         Me.SuperTabPrincipal.Controls.SetChildIndex(Me.SuperTabControlPanelRegistro, 0)
@@ -231,12 +231,12 @@ Partial Class F1_Productos
         'SuperTabControlPanelBuscador
         '
         Me.SuperTabControlPanelBuscador.Location = New System.Drawing.Point(0, 0)
-        Me.SuperTabControlPanelBuscador.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.SuperTabControlPanelBuscador.Margin = New System.Windows.Forms.Padding(5)
         Me.SuperTabControlPanelBuscador.Size = New System.Drawing.Size(1763, 875)
         '
         'SuperTabControlPanelRegistro
         '
-        Me.SuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.SuperTabControlPanelRegistro.Margin = New System.Windows.Forms.Padding(5)
         Me.SuperTabControlPanelRegistro.Size = New System.Drawing.Size(1800, 875)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelSuperior, 0)
         Me.SuperTabControlPanelRegistro.Controls.SetChildIndex(Me.PanelInferior, 0)
@@ -244,7 +244,7 @@ Partial Class F1_Productos
         '
         'PanelSuperior
         '
-        Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.PanelSuperior.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelSuperior.Size = New System.Drawing.Size(1800, 89)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
@@ -259,7 +259,7 @@ Partial Class F1_Productos
         '
         Me.PanelInferior.Controls.Add(Me.btnBuscar)
         Me.PanelInferior.Location = New System.Drawing.Point(0, 831)
-        Me.PanelInferior.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.PanelInferior.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelInferior.Size = New System.Drawing.Size(1800, 44)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelInferior.Style.BackColor1.Color = System.Drawing.Color.DarkSlateGray
@@ -298,7 +298,7 @@ Partial Class F1_Productos
         '
         'TxtNombreUsu
         '
-        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.TxtNombreUsu.Margin = New System.Windows.Forms.Padding(5)
         '
         'btnSalir
         '
@@ -310,7 +310,7 @@ Partial Class F1_Productos
         '
         Me.PanelToolBar2.Controls.Add(Me.btExcel)
         Me.PanelToolBar2.Location = New System.Drawing.Point(1593, 0)
-        Me.PanelToolBar2.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.PanelToolBar2.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelToolBar2.Size = New System.Drawing.Size(207, 89)
         Me.PanelToolBar2.Controls.SetChildIndex(Me.btnImprimir, 0)
         Me.PanelToolBar2.Controls.SetChildIndex(Me.btExcel, 0)
@@ -318,14 +318,14 @@ Partial Class F1_Productos
         'MPanelSup
         '
         Me.MPanelSup.Controls.Add(Me.TableLayoutPanel1)
-        Me.MPanelSup.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.MPanelSup.Margin = New System.Windows.Forms.Padding(5)
         Me.MPanelSup.Size = New System.Drawing.Size(1800, 441)
         Me.MPanelSup.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.MPanelSup.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
         '
         'PanelPrincipal
         '
-        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.PanelPrincipal.Margin = New System.Windows.Forms.Padding(5)
         Me.PanelPrincipal.Size = New System.Drawing.Size(1800, 742)
         '
         'GroupPanelBuscador
@@ -333,7 +333,7 @@ Partial Class F1_Productos
         Me.GroupPanelBuscador.Controls.Add(Me.Panel8)
         Me.GroupPanelBuscador.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanelBuscador.Location = New System.Drawing.Point(0, 441)
-        Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.GroupPanelBuscador.Margin = New System.Windows.Forms.Padding(5)
         Me.GroupPanelBuscador.Size = New System.Drawing.Size(1800, 301)
         '
         '
@@ -387,7 +387,7 @@ Partial Class F1_Productos
         Me.JGrM_Buscador.HeaderFormatStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Center
         Me.JGrM_Buscador.Hierarchical = True
         Me.JGrM_Buscador.Location = New System.Drawing.Point(0, 59)
-        Me.JGrM_Buscador.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.JGrM_Buscador.Margin = New System.Windows.Forms.Padding(5)
         Me.JGrM_Buscador.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.JGrM_Buscador.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.JGrM_Buscador.RecordNavigator = True
@@ -401,7 +401,7 @@ Partial Class F1_Productos
         'PanelUsuario
         '
         Me.PanelUsuario.Location = New System.Drawing.Point(1159, 9)
-        Me.PanelUsuario.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.PanelUsuario.Margin = New System.Windows.Forms.Padding(5)
         '
         'lblFecha
         '
@@ -411,18 +411,18 @@ Partial Class F1_Productos
         '
         Me.btnImprimir.Dock = System.Windows.Forms.DockStyle.Right
         Me.btnImprimir.Location = New System.Drawing.Point(64, 0)
-        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.btnImprimir.Margin = New System.Windows.Forms.Padding(5)
         Me.btnImprimir.Size = New System.Drawing.Size(143, 89)
         Me.btnImprimir.Visible = False
         '
         'btnUltimo
         '
-        Me.btnUltimo.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.btnUltimo.Margin = New System.Windows.Forms.Padding(5)
         '
         'MPanelUserAct
         '
         Me.MPanelUserAct.Location = New System.Drawing.Point(1533, 0)
-        Me.MPanelUserAct.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.MPanelUserAct.Margin = New System.Windows.Forms.Padding(5)
         '
         'GroupBox1
         '
@@ -432,9 +432,9 @@ Partial Class F1_Productos
         Me.GroupBox1.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.GroupBox1.Location = New System.Drawing.Point(19, 233)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(549, 122)
         Me.GroupBox1.TabIndex = 28
         Me.GroupBox1.TabStop = False
@@ -454,7 +454,7 @@ Partial Class F1_Productos
         Me.Panel4.Controls.Add(Me.LabelX6)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(4, 26)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(541, 92)
         Me.Panel4.TabIndex = 210
@@ -465,7 +465,7 @@ Partial Class F1_Productos
         Me.cbUniVenta.DesignTimeLayout = cbUniVenta_DesignTimeLayout
         Me.cbUniVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUniVenta.Location = New System.Drawing.Point(127, 15)
-        Me.cbUniVenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbUniVenta.Margin = New System.Windows.Forms.Padding(4)
         Me.cbUniVenta.Name = "cbUniVenta"
         Me.cbUniVenta.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbUniVenta.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -486,7 +486,7 @@ Partial Class F1_Productos
         Me.LabelX5.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX5.Location = New System.Drawing.Point(9, 17)
-        Me.LabelX5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX5.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX5.Name = "LabelX5"
         Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX5.Size = New System.Drawing.Size(100, 20)
@@ -500,7 +500,7 @@ Partial Class F1_Productos
         Me.btUniMaxima.Image = Global.DinoM.My.Resources.Resources.add
         Me.btUniMaxima.ImageFixedSize = New System.Drawing.Size(28, 28)
         Me.btUniMaxima.Location = New System.Drawing.Point(493, 10)
-        Me.btUniMaxima.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btUniMaxima.Margin = New System.Windows.Forms.Padding(4)
         Me.btUniMaxima.Name = "btUniMaxima"
         Me.btUniMaxima.Size = New System.Drawing.Size(45, 36)
         Me.btUniMaxima.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -514,7 +514,7 @@ Partial Class F1_Productos
         Me.btUniVenta.Image = Global.DinoM.My.Resources.Resources.add
         Me.btUniVenta.ImageFixedSize = New System.Drawing.Size(28, 28)
         Me.btUniVenta.Location = New System.Drawing.Point(213, 10)
-        Me.btUniVenta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btUniVenta.Margin = New System.Windows.Forms.Padding(4)
         Me.btUniVenta.Name = "btUniVenta"
         Me.btUniVenta.Size = New System.Drawing.Size(45, 36)
         Me.btUniVenta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -527,7 +527,7 @@ Partial Class F1_Productos
         Me.cbUnidMaxima.DesignTimeLayout = cbUnidMaxima_DesignTimeLayout
         Me.cbUnidMaxima.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUnidMaxima.Location = New System.Drawing.Point(400, 16)
-        Me.cbUnidMaxima.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbUnidMaxima.Margin = New System.Windows.Forms.Padding(4)
         Me.cbUnidMaxima.Name = "cbUnidMaxima"
         Me.cbUnidMaxima.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
         Me.cbUnidMaxima.Office2007CustomColor = System.Drawing.Color.DodgerBlue
@@ -548,7 +548,7 @@ Partial Class F1_Productos
         Me.tbConversion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbConversion.Increment = 1.0R
         Me.tbConversion.Location = New System.Drawing.Point(121, 58)
-        Me.tbConversion.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbConversion.Margin = New System.Windows.Forms.Padding(4)
         Me.tbConversion.MinValue = 0R
         Me.tbConversion.Name = "tbConversion"
         Me.tbConversion.Size = New System.Drawing.Size(119, 26)
@@ -565,7 +565,7 @@ Partial Class F1_Productos
         Me.LabelX7.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX7.Location = New System.Drawing.Point(9, 58)
-        Me.LabelX7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX7.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX7.Name = "LabelX7"
         Me.LabelX7.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX7.Size = New System.Drawing.Size(105, 28)
@@ -584,7 +584,7 @@ Partial Class F1_Productos
         Me.LabelX6.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX6.Location = New System.Drawing.Point(263, 17)
-        Me.LabelX6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX6.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX6.Name = "LabelX6"
         Me.LabelX6.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX6.Size = New System.Drawing.Size(89, 20)
@@ -602,7 +602,7 @@ Partial Class F1_Productos
         Me.lbgrupo1.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbgrupo1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbgrupo1.Location = New System.Drawing.Point(19, 18)
-        Me.lbgrupo1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbgrupo1.Margin = New System.Windows.Forms.Padding(4)
         Me.lbgrupo1.Name = "lbgrupo1"
         Me.lbgrupo1.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbgrupo1.Size = New System.Drawing.Size(69, 20)
@@ -620,7 +620,7 @@ Partial Class F1_Productos
         Me.lbgrupo2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbgrupo2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbgrupo2.Location = New System.Drawing.Point(20, 53)
-        Me.lbgrupo2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbgrupo2.Margin = New System.Windows.Forms.Padding(4)
         Me.lbgrupo2.Name = "lbgrupo2"
         Me.lbgrupo2.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbgrupo2.Size = New System.Drawing.Size(71, 20)
@@ -638,7 +638,7 @@ Partial Class F1_Productos
         Me.lbgrupo3.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbgrupo3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbgrupo3.Location = New System.Drawing.Point(19, 119)
-        Me.lbgrupo3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbgrupo3.Margin = New System.Windows.Forms.Padding(4)
         Me.lbgrupo3.Name = "lbgrupo3"
         Me.lbgrupo3.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbgrupo3.Size = New System.Drawing.Size(71, 20)
@@ -656,7 +656,7 @@ Partial Class F1_Productos
         Me.lbgrupo4.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbgrupo4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbgrupo4.Location = New System.Drawing.Point(19, 158)
-        Me.lbgrupo4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbgrupo4.Margin = New System.Windows.Forms.Padding(4)
         Me.lbgrupo4.Name = "lbgrupo4"
         Me.lbgrupo4.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbgrupo4.Size = New System.Drawing.Size(71, 20)
@@ -672,7 +672,7 @@ Partial Class F1_Productos
         Me.cbgrupo1.DesignTimeLayout = cbgrupo1_DesignTimeLayout
         Me.cbgrupo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbgrupo1.Location = New System.Drawing.Point(172, 16)
-        Me.cbgrupo1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbgrupo1.Margin = New System.Windows.Forms.Padding(4)
         Me.cbgrupo1.MaxLength = 40
         Me.cbgrupo1.Name = "cbgrupo1"
         Me.cbgrupo1.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -689,7 +689,7 @@ Partial Class F1_Productos
         Me.cbgrupo2.DesignTimeLayout = cbgrupo2_DesignTimeLayout
         Me.cbgrupo2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbgrupo2.Location = New System.Drawing.Point(172, 53)
-        Me.cbgrupo2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbgrupo2.Margin = New System.Windows.Forms.Padding(4)
         Me.cbgrupo2.MaxLength = 40
         Me.cbgrupo2.Name = "cbgrupo2"
         Me.cbgrupo2.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -706,7 +706,7 @@ Partial Class F1_Productos
         Me.cbgrupo3.DesignTimeLayout = cbgrupo3_DesignTimeLayout
         Me.cbgrupo3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbgrupo3.Location = New System.Drawing.Point(172, 121)
-        Me.cbgrupo3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbgrupo3.Margin = New System.Windows.Forms.Padding(4)
         Me.cbgrupo3.MaxLength = 40
         Me.cbgrupo3.Name = "cbgrupo3"
         Me.cbgrupo3.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -723,7 +723,7 @@ Partial Class F1_Productos
         Me.cbgrupo4.DesignTimeLayout = cbgrupo4_DesignTimeLayout
         Me.cbgrupo4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbgrupo4.Location = New System.Drawing.Point(172, 158)
-        Me.cbgrupo4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbgrupo4.Margin = New System.Windows.Forms.Padding(4)
         Me.cbgrupo4.MaxLength = 40
         Me.cbgrupo4.Name = "cbgrupo4"
         Me.cbgrupo4.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -743,7 +743,7 @@ Partial Class F1_Productos
         Me.btgrupo1.Image = Global.DinoM.My.Resources.Resources.add
         Me.btgrupo1.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btgrupo1.Location = New System.Drawing.Point(481, 16)
-        Me.btgrupo1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btgrupo1.Margin = New System.Windows.Forms.Padding(4)
         Me.btgrupo1.Name = "btgrupo1"
         Me.btgrupo1.Size = New System.Drawing.Size(37, 28)
         Me.btgrupo1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -758,7 +758,7 @@ Partial Class F1_Productos
         Me.btgrupo2.Image = Global.DinoM.My.Resources.Resources.add
         Me.btgrupo2.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btgrupo2.Location = New System.Drawing.Point(481, 53)
-        Me.btgrupo2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btgrupo2.Margin = New System.Windows.Forms.Padding(4)
         Me.btgrupo2.Name = "btgrupo2"
         Me.btgrupo2.Size = New System.Drawing.Size(37, 28)
         Me.btgrupo2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -773,7 +773,7 @@ Partial Class F1_Productos
         Me.btgrupo3.Image = Global.DinoM.My.Resources.Resources.add
         Me.btgrupo3.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btgrupo3.Location = New System.Drawing.Point(372, 122)
-        Me.btgrupo3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btgrupo3.Margin = New System.Windows.Forms.Padding(4)
         Me.btgrupo3.Name = "btgrupo3"
         Me.btgrupo3.Size = New System.Drawing.Size(37, 28)
         Me.btgrupo3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -788,7 +788,7 @@ Partial Class F1_Productos
         Me.btgrupo4.Image = Global.DinoM.My.Resources.Resources.add
         Me.btgrupo4.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btgrupo4.Location = New System.Drawing.Point(372, 160)
-        Me.btgrupo4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btgrupo4.Margin = New System.Windows.Forms.Padding(4)
         Me.btgrupo4.Name = "btgrupo4"
         Me.btgrupo4.Size = New System.Drawing.Size(37, 28)
         Me.btgrupo4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -803,7 +803,7 @@ Partial Class F1_Productos
         Me.btUMedida.Image = Global.DinoM.My.Resources.Resources.add
         Me.btUMedida.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btUMedida.Location = New System.Drawing.Point(372, 197)
-        Me.btUMedida.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btUMedida.Margin = New System.Windows.Forms.Padding(4)
         Me.btUMedida.Name = "btUMedida"
         Me.btUMedida.Size = New System.Drawing.Size(37, 28)
         Me.btUMedida.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -816,7 +816,7 @@ Partial Class F1_Productos
         Me.cbUMed.DesignTimeLayout = cbUMed_DesignTimeLayout
         Me.cbUMed.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbUMed.Location = New System.Drawing.Point(172, 198)
-        Me.cbUMed.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbUMed.Margin = New System.Windows.Forms.Padding(4)
         Me.cbUMed.MaxLength = 10
         Me.cbUMed.Name = "cbUMed"
         Me.cbUMed.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -838,7 +838,7 @@ Partial Class F1_Productos
         Me.LabelX8.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX8.Location = New System.Drawing.Point(20, 198)
-        Me.LabelX8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX8.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX8.Name = "LabelX8"
         Me.LabelX8.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX8.Size = New System.Drawing.Size(127, 20)
@@ -855,7 +855,7 @@ Partial Class F1_Productos
         Me.LabelX12.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX12.Location = New System.Drawing.Point(12, 320)
-        Me.LabelX12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX12.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX12.Name = "LabelX12"
         Me.LabelX12.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX12.Size = New System.Drawing.Size(167, 28)
@@ -872,7 +872,7 @@ Partial Class F1_Productos
         Me.tbCodProd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodProd.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodProd.Location = New System.Drawing.Point(224, 54)
-        Me.tbCodProd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbCodProd.Margin = New System.Windows.Forms.Padding(4)
         Me.tbCodProd.MaxLength = 50
         Me.tbCodProd.Name = "tbCodProd"
         Me.tbCodProd.PreventEnterBeep = True
@@ -889,7 +889,7 @@ Partial Class F1_Productos
         Me.tbCodBarra.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodBarra.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodBarra.Location = New System.Drawing.Point(225, 121)
-        Me.tbCodBarra.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbCodBarra.Margin = New System.Windows.Forms.Padding(4)
         Me.tbCodBarra.MaxLength = 15
         Me.tbCodBarra.Name = "tbCodBarra"
         Me.tbCodBarra.PreventEnterBeep = True
@@ -906,7 +906,7 @@ Partial Class F1_Productos
         Me.LabelX10.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX10.Location = New System.Drawing.Point(12, 117)
-        Me.LabelX10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX10.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX10.Name = "LabelX10"
         Me.LabelX10.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX10.Size = New System.Drawing.Size(151, 28)
@@ -921,7 +921,7 @@ Partial Class F1_Productos
         Me.swEstado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.swEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.swEstado.Location = New System.Drawing.Point(225, 357)
-        Me.swEstado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.swEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.swEstado.Name = "swEstado"
         Me.swEstado.OffBackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.swEstado.OffText = "PASIVO"
@@ -945,7 +945,7 @@ Partial Class F1_Productos
         Me.LabelX9.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX9.Location = New System.Drawing.Point(13, 357)
-        Me.LabelX9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX9.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX9.Name = "LabelX9"
         Me.LabelX9.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX9.Size = New System.Drawing.Size(105, 23)
@@ -962,7 +962,7 @@ Partial Class F1_Productos
         Me.tbDescPro.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbDescPro.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbDescPro.Location = New System.Drawing.Point(225, 158)
-        Me.tbDescPro.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbDescPro.Margin = New System.Windows.Forms.Padding(4)
         Me.tbDescPro.MaxLength = 50
         Me.tbDescPro.Multiline = True
         Me.tbDescPro.Name = "tbDescPro"
@@ -980,7 +980,7 @@ Partial Class F1_Productos
         Me.LabelX3.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX3.Location = New System.Drawing.Point(12, 151)
-        Me.LabelX3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX3.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX3.Size = New System.Drawing.Size(197, 28)
@@ -998,7 +998,7 @@ Partial Class F1_Productos
         Me.LabelX1.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX1.Location = New System.Drawing.Point(11, 17)
-        Me.LabelX1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX1.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX1.Size = New System.Drawing.Size(44, 20)
@@ -1015,7 +1015,7 @@ Partial Class F1_Productos
         Me.LabelX2.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX2.Location = New System.Drawing.Point(11, 50)
-        Me.LabelX2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX2.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX2.Size = New System.Drawing.Size(151, 28)
@@ -1032,7 +1032,7 @@ Partial Class F1_Productos
         Me.tbCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodigo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodigo.Location = New System.Drawing.Point(224, 16)
-        Me.tbCodigo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbCodigo.Margin = New System.Windows.Forms.Padding(4)
         Me.tbCodigo.Name = "tbCodigo"
         Me.tbCodigo.PreventEnterBeep = True
         Me.tbCodigo.Size = New System.Drawing.Size(84, 24)
@@ -1049,7 +1049,7 @@ Partial Class F1_Productos
         Me.GroupPanel1.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.GroupPanel1.Location = New System.Drawing.Point(4, 4)
-        Me.GroupPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupPanel1.Name = "GroupPanel1"
         Me.GroupPanel1.Size = New System.Drawing.Size(591, 433)
         '
@@ -1106,7 +1106,7 @@ Partial Class F1_Productos
         Me.Panel3.Controls.Add(Me.LabelX9)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(585, 406)
         Me.Panel3.TabIndex = 227
@@ -1121,7 +1121,7 @@ Partial Class F1_Productos
         Me.tbMedida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbMedida.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbMedida.Location = New System.Drawing.Point(225, 289)
-        Me.tbMedida.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbMedida.Margin = New System.Windows.Forms.Padding(4)
         Me.tbMedida.MaxLength = 100
         Me.tbMedida.Name = "tbMedida"
         Me.tbMedida.PreventEnterBeep = True
@@ -1138,7 +1138,7 @@ Partial Class F1_Productos
         Me.LabelX4.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX4.Location = New System.Drawing.Point(12, 286)
-        Me.LabelX4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX4.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX4.Size = New System.Drawing.Size(151, 28)
@@ -1155,7 +1155,7 @@ Partial Class F1_Productos
         Me.LabelX16.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX16.Location = New System.Drawing.Point(11, 84)
-        Me.LabelX16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX16.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX16.Name = "LabelX16"
         Me.LabelX16.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX16.Size = New System.Drawing.Size(151, 28)
@@ -1172,7 +1172,7 @@ Partial Class F1_Productos
         Me.tbCodigoMarca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCodigoMarca.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbCodigoMarca.Location = New System.Drawing.Point(224, 89)
-        Me.tbCodigoMarca.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbCodigoMarca.Margin = New System.Windows.Forms.Padding(4)
         Me.tbCodigoMarca.MaxLength = 50
         Me.tbCodigoMarca.Name = "tbCodigoMarca"
         Me.tbCodigoMarca.PreventEnterBeep = True
@@ -1189,7 +1189,7 @@ Partial Class F1_Productos
         Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX13.Location = New System.Drawing.Point(12, 217)
-        Me.LabelX13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX13.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX13.Name = "LabelX13"
         Me.LabelX13.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX13.Size = New System.Drawing.Size(197, 28)
@@ -1206,7 +1206,7 @@ Partial Class F1_Productos
         Me.tbDescDet.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbDescDet.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbDescDet.Location = New System.Drawing.Point(225, 218)
-        Me.tbDescDet.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbDescDet.Margin = New System.Windows.Forms.Padding(4)
         Me.tbDescDet.MaxLength = 500
         Me.tbDescDet.Multiline = True
         Me.tbDescDet.Name = "tbDescDet"
@@ -1224,7 +1224,8 @@ Partial Class F1_Productos
         Me.tbStockMinimo.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.tbStockMinimo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbStockMinimo.Location = New System.Drawing.Point(225, 321)
-        Me.tbStockMinimo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbStockMinimo.Margin = New System.Windows.Forms.Padding(4)
+        Me.tbStockMinimo.MinValue = 0
         Me.tbStockMinimo.Name = "tbStockMinimo"
         Me.tbStockMinimo.Size = New System.Drawing.Size(168, 24)
         Me.tbStockMinimo.TabIndex = 6
@@ -1238,7 +1239,7 @@ Partial Class F1_Productos
         Me.GroupPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel2.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel2.Location = New System.Drawing.Point(603, 4)
-        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupPanel2.Name = "GroupPanel2"
         Me.GroupPanel2.Size = New System.Drawing.Size(592, 433)
         '
@@ -1297,7 +1298,7 @@ Partial Class F1_Productos
         Me.Panel2.Controls.Add(Me.btUMedida)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(586, 406)
         Me.Panel2.TabIndex = 216
@@ -1310,7 +1311,7 @@ Partial Class F1_Productos
         Me.btgrupo5.Image = Global.DinoM.My.Resources.Resources.add
         Me.btgrupo5.ImageFixedSize = New System.Drawing.Size(25, 23)
         Me.btgrupo5.Location = New System.Drawing.Point(372, 90)
-        Me.btgrupo5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btgrupo5.Margin = New System.Windows.Forms.Padding(4)
         Me.btgrupo5.Name = "btgrupo5"
         Me.btgrupo5.Size = New System.Drawing.Size(37, 28)
         Me.btgrupo5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1328,7 +1329,7 @@ Partial Class F1_Productos
         Me.lbgrupo5.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbgrupo5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbgrupo5.Location = New System.Drawing.Point(20, 89)
-        Me.lbgrupo5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbgrupo5.Margin = New System.Windows.Forms.Padding(4)
         Me.lbgrupo5.Name = "lbgrupo5"
         Me.lbgrupo5.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbgrupo5.Size = New System.Drawing.Size(106, 20)
@@ -1341,7 +1342,7 @@ Partial Class F1_Productos
         Me.cbgrupo5.DesignTimeLayout = cbgrupo5_DesignTimeLayout
         Me.cbgrupo5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbgrupo5.Location = New System.Drawing.Point(172, 89)
-        Me.cbgrupo5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbgrupo5.Margin = New System.Windows.Forms.Padding(4)
         Me.cbgrupo5.MaxLength = 40
         Me.cbgrupo5.Name = "cbgrupo5"
         Me.cbgrupo5.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
@@ -1363,7 +1364,7 @@ Partial Class F1_Productos
         Me.LabelX17.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX17.Location = New System.Drawing.Point(72, 153)
-        Me.LabelX17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX17.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX17.Name = "LabelX17"
         Me.LabelX17.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX17.Size = New System.Drawing.Size(172, 20)
@@ -1381,7 +1382,7 @@ Partial Class F1_Productos
         Me.tbPrecioMecanico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioMecanico.Increment = 1.0R
         Me.tbPrecioMecanico.Location = New System.Drawing.Point(275, 148)
-        Me.tbPrecioMecanico.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbPrecioMecanico.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioMecanico.MinValue = 0R
         Me.tbPrecioMecanico.Name = "tbPrecioMecanico"
         Me.tbPrecioMecanico.Size = New System.Drawing.Size(200, 26)
@@ -1399,7 +1400,7 @@ Partial Class F1_Productos
         Me.LabelX18.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX18.Location = New System.Drawing.Point(103, 50)
-        Me.LabelX18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX18.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX18.Name = "LabelX18"
         Me.LabelX18.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX18.Size = New System.Drawing.Size(152, 20)
@@ -1417,7 +1418,7 @@ Partial Class F1_Productos
         Me.tbPrecioCosto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioCosto.Increment = 1.0R
         Me.tbPrecioCosto.Location = New System.Drawing.Point(275, 42)
-        Me.tbPrecioCosto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbPrecioCosto.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioCosto.MinValue = 0R
         Me.tbPrecioCosto.Name = "tbPrecioCosto"
         Me.tbPrecioCosto.Size = New System.Drawing.Size(200, 26)
@@ -1435,7 +1436,7 @@ Partial Class F1_Productos
         Me.LabelX14.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX14.Location = New System.Drawing.Point(39, 121)
-        Me.LabelX14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX14.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX14.Name = "LabelX14"
         Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX14.Size = New System.Drawing.Size(205, 20)
@@ -1453,7 +1454,7 @@ Partial Class F1_Productos
         Me.tbPrecioVentaNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioVentaNormal.Increment = 1.0R
         Me.tbPrecioVentaNormal.Location = New System.Drawing.Point(275, 114)
-        Me.tbPrecioVentaNormal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbPrecioVentaNormal.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioVentaNormal.MinValue = 0R
         Me.tbPrecioVentaNormal.Name = "tbPrecioVentaNormal"
         Me.tbPrecioVentaNormal.Size = New System.Drawing.Size(200, 26)
@@ -1469,7 +1470,7 @@ Partial Class F1_Productos
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel3.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel3.Location = New System.Drawing.Point(1203, 4)
-        Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Size = New System.Drawing.Size(593, 433)
         '
@@ -1523,7 +1524,7 @@ Partial Class F1_Productos
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl_Imagenes_DetalleProducto.Location = New System.Drawing.Point(0, 0)
-        Me.SuperTabControl_Imagenes_DetalleProducto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControl_Imagenes_DetalleProducto.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Name = "SuperTabControl_Imagenes_DetalleProducto"
         Me.SuperTabControl_Imagenes_DetalleProducto.ReorderTabsEnabled = True
         Me.SuperTabControl_Imagenes_DetalleProducto.SelectedTabFont = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold)
@@ -1539,7 +1540,7 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel1.Controls.Add(Me.Panel1)
         Me.SuperTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel1.Location = New System.Drawing.Point(0, 31)
-        Me.SuperTabControlPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControlPanel1.Name = "SuperTabControlPanel1"
         Me.SuperTabControlPanel1.Size = New System.Drawing.Size(587, 396)
         Me.SuperTabControlPanel1.TabIndex = 1
@@ -1553,7 +1554,7 @@ Partial Class F1_Productos
         Me.Panel1.Controls.Add(Me.PanelImagenes)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(587, 396)
         Me.Panel1.TabIndex = 223
@@ -1578,7 +1579,7 @@ Partial Class F1_Productos
         Me.PanelVerImagen.Controls.Add(Me.pbImgProdu)
         Me.PanelVerImagen.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelVerImagen.Location = New System.Drawing.Point(209, 0)
-        Me.PanelVerImagen.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelVerImagen.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelVerImagen.Name = "PanelVerImagen"
         Me.PanelVerImagen.Size = New System.Drawing.Size(378, 396)
         Me.PanelVerImagen.TabIndex = 2
@@ -1593,7 +1594,7 @@ Partial Class F1_Productos
         Me.btnImagen.ImageFixedSize = New System.Drawing.Size(60, 60)
         Me.btnImagen.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
         Me.btnImagen.Location = New System.Drawing.Point(8, 10)
-        Me.btnImagen.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnImagen.Margin = New System.Windows.Forms.Padding(4)
         Me.btnImagen.Name = "btnImagen"
         Me.btnImagen.Padding = New System.Windows.Forms.Padding(0, 0, 0, 25)
         Me.btnImagen.Size = New System.Drawing.Size(88, 66)
@@ -1611,7 +1612,7 @@ Partial Class F1_Productos
         Me.btnDelete.ImageFixedSize = New System.Drawing.Size(60, 60)
         Me.btnDelete.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
         Me.btnDelete.Location = New System.Drawing.Point(8, 92)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Padding = New System.Windows.Forms.Padding(0, 0, 0, 25)
         Me.btnDelete.Size = New System.Drawing.Size(88, 66)
@@ -1624,7 +1625,7 @@ Partial Class F1_Productos
         Me.pbImgProdu.BackColor = System.Drawing.Color.White
         Me.pbImgProdu.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pbImgProdu.Location = New System.Drawing.Point(0, 0)
-        Me.pbImgProdu.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pbImgProdu.Margin = New System.Windows.Forms.Padding(4)
         Me.pbImgProdu.Name = "pbImgProdu"
         Me.pbImgProdu.Size = New System.Drawing.Size(378, 396)
         Me.pbImgProdu.TabIndex = 0
@@ -1636,7 +1637,7 @@ Partial Class F1_Productos
         Me.PanelListImagenes.BackColor = System.Drawing.Color.WhiteSmoke
         Me.PanelListImagenes.Dock = System.Windows.Forms.DockStyle.Left
         Me.PanelListImagenes.Location = New System.Drawing.Point(0, 0)
-        Me.PanelListImagenes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelListImagenes.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelListImagenes.Name = "PanelListImagenes"
         Me.PanelListImagenes.Size = New System.Drawing.Size(209, 396)
         Me.PanelListImagenes.TabIndex = 3
@@ -1653,7 +1654,7 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel2.Controls.Add(Me.dgjDetalleProducto)
         Me.SuperTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel2.Location = New System.Drawing.Point(0, 33)
-        Me.SuperTabControlPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SuperTabControlPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.SuperTabControlPanel2.Name = "SuperTabControlPanel2"
         Me.SuperTabControlPanel2.Size = New System.Drawing.Size(573, 393)
         Me.SuperTabControlPanel2.TabIndex = 0
@@ -1663,7 +1664,7 @@ Partial Class F1_Productos
         '
         Me.dgjDetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgjDetalleProducto.Location = New System.Drawing.Point(0, 0)
-        Me.dgjDetalleProducto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgjDetalleProducto.Margin = New System.Windows.Forms.Padding(4)
         Me.dgjDetalleProducto.Name = "dgjDetalleProducto"
         Me.dgjDetalleProducto.Size = New System.Drawing.Size(573, 393)
         Me.dgjDetalleProducto.TabIndex = 0
@@ -1781,7 +1782,7 @@ Partial Class F1_Productos
         Me.btGrabarP.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btGrabarP.ImageFixedSize = New System.Drawing.Size(25, 25)
         Me.btGrabarP.Location = New System.Drawing.Point(79, 71)
-        Me.btGrabarP.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btGrabarP.Margin = New System.Windows.Forms.Padding(4)
         Me.btGrabarP.Name = "btGrabarP"
         Me.btGrabarP.Size = New System.Drawing.Size(131, 37)
         Me.btGrabarP.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
@@ -1816,7 +1817,7 @@ Partial Class F1_Productos
         Me.LabelX23.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX23.Location = New System.Drawing.Point(16, 44)
-        Me.LabelX23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX23.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX23.Name = "LabelX23"
         Me.LabelX23.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX23.Size = New System.Drawing.Size(58, 20)
@@ -1849,7 +1850,7 @@ Partial Class F1_Productos
         Me.LabelX22.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX22.Location = New System.Drawing.Point(257, 6)
-        Me.LabelX22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX22.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX22.Name = "LabelX22"
         Me.LabelX22.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX22.Size = New System.Drawing.Size(53, 20)
@@ -1882,7 +1883,7 @@ Partial Class F1_Productos
         Me.LabelX21.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX21.Location = New System.Drawing.Point(16, 11)
-        Me.LabelX21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX21.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX21.Name = "LabelX21"
         Me.LabelX21.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX21.Size = New System.Drawing.Size(55, 20)
@@ -1901,7 +1902,7 @@ Partial Class F1_Productos
         Me.tbHasta.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbHasta.IsPopupCalendarOpen = False
         Me.tbHasta.Location = New System.Drawing.Point(469, 49)
-        Me.tbHasta.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbHasta.Margin = New System.Windows.Forms.Padding(4)
         '
         '
         '
@@ -1949,7 +1950,7 @@ Partial Class F1_Productos
         Me.tbDesde.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbDesde.IsPopupCalendarOpen = False
         Me.tbDesde.Location = New System.Drawing.Point(279, 49)
-        Me.tbDesde.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbDesde.Margin = New System.Windows.Forms.Padding(4)
         '
         '
         '
@@ -1996,7 +1997,7 @@ Partial Class F1_Productos
         Me.LabelX20.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX20.Location = New System.Drawing.Point(447, 57)
-        Me.LabelX20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX20.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX20.Name = "LabelX20"
         Me.LabelX20.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX20.Size = New System.Drawing.Size(25, 20)
@@ -2015,7 +2016,7 @@ Partial Class F1_Productos
         Me.LabelX19.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX19.Location = New System.Drawing.Point(243, 55)
-        Me.LabelX19.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX19.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX19.Name = "LabelX19"
         Me.LabelX19.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX19.Size = New System.Drawing.Size(34, 20)
@@ -2071,7 +2072,7 @@ Partial Class F1_Productos
         Me.lbPorcentajeVentaMecanico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbPorcentajeVentaMecanico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbPorcentajeVentaMecanico.Location = New System.Drawing.Point(483, 148)
-        Me.lbPorcentajeVentaMecanico.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbPorcentajeVentaMecanico.Margin = New System.Windows.Forms.Padding(4)
         Me.lbPorcentajeVentaMecanico.Name = "lbPorcentajeVentaMecanico"
         Me.lbPorcentajeVentaMecanico.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbPorcentajeVentaMecanico.Size = New System.Drawing.Size(26, 25)
@@ -2089,7 +2090,7 @@ Partial Class F1_Productos
         Me.lbPorcentajeVentaPublico.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbPorcentajeVentaPublico.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lbPorcentajeVentaPublico.Location = New System.Drawing.Point(483, 112)
-        Me.lbPorcentajeVentaPublico.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lbPorcentajeVentaPublico.Margin = New System.Windows.Forms.Padding(4)
         Me.lbPorcentajeVentaPublico.Name = "lbPorcentajeVentaPublico"
         Me.lbPorcentajeVentaPublico.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lbPorcentajeVentaPublico.Size = New System.Drawing.Size(26, 25)
@@ -2107,7 +2108,7 @@ Partial Class F1_Productos
         Me.LabelX11.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX11.Location = New System.Drawing.Point(19, 89)
-        Me.LabelX11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX11.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX11.Size = New System.Drawing.Size(226, 20)
@@ -2125,7 +2126,7 @@ Partial Class F1_Productos
         Me.tbPrecioFacturado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbPrecioFacturado.Increment = 1.0R
         Me.tbPrecioFacturado.Location = New System.Drawing.Point(275, 76)
-        Me.tbPrecioFacturado.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbPrecioFacturado.Margin = New System.Windows.Forms.Padding(4)
         Me.tbPrecioFacturado.MinValue = 0R
         Me.tbPrecioFacturado.Name = "tbPrecioFacturado"
         Me.tbPrecioFacturado.Size = New System.Drawing.Size(200, 26)
@@ -2149,7 +2150,7 @@ Partial Class F1_Productos
         Me.btExcel.ImageFixedSize = New System.Drawing.Size(45, 50)
         Me.btExcel.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
         Me.btExcel.Location = New System.Drawing.Point(0, 0)
-        Me.btExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btExcel.Name = "btExcel"
         Me.btExcel.Padding = New System.Windows.Forms.Padding(0, 0, 0, 25)
         Me.btExcel.Size = New System.Drawing.Size(64, 89)
@@ -2169,7 +2170,7 @@ Partial Class F1_Productos
         Me.TableLayoutPanel1.Controls.Add(Me.GroupPanel2, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2240,7 +2241,7 @@ Partial Class F1_Productos
         Me.lblCategoria.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCategoria.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.lblCategoria.Location = New System.Drawing.Point(1072, 14)
-        Me.lblCategoria.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lblCategoria.Margin = New System.Windows.Forms.Padding(4)
         Me.lblCategoria.Name = "lblCategoria"
         Me.lblCategoria.SingleLineColor = System.Drawing.SystemColors.Control
         Me.lblCategoria.Size = New System.Drawing.Size(567, 28)
@@ -2302,7 +2303,7 @@ Partial Class F1_Productos
         Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
         Me.LabelX15.Location = New System.Drawing.Point(32, 11)
-        Me.LabelX15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LabelX15.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX15.Name = "LabelX15"
         Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX15.Size = New System.Drawing.Size(151, 28)
@@ -2320,7 +2321,7 @@ Partial Class F1_Productos
         Me.tbProducto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbProducto.ForeColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.tbProducto.Location = New System.Drawing.Point(199, 14)
-        Me.tbProducto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbProducto.Margin = New System.Windows.Forms.Padding(4)
         Me.tbProducto.Name = "tbProducto"
         Me.tbProducto.PreventEnterBeep = True
         Me.tbProducto.Size = New System.Drawing.Size(332, 26)
@@ -2369,7 +2370,7 @@ Partial Class F1_Productos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1835, 875)
         Me.Location = New System.Drawing.Point(0, 0)
-        Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "F1_Productos"
         Me.Text = "F1_Productos"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

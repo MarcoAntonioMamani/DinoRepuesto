@@ -570,7 +570,7 @@ Public Class F0_Ventas
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .Visible = True
             .FormatString = "0.00"
-            .Caption = "Pre. Ref."
+            .Caption = "Pre. Fact."
             .AllowSort = False
         End With
         With grdetalle.RootTable.Columns("tbPorcentajeReferencia")
@@ -728,6 +728,7 @@ Public Class F0_Ventas
             .GroupByBoxVisible = False
             'diseño de la grilla
             .VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
     End Sub
 
@@ -1559,7 +1560,7 @@ Public Class F0_Ventas
             If (gb_FacturaIncluirICE) Then
                 CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpcos") = dt.Rows(fila).Item("pcos") * dt.Rows(fila).Item("Cantidad")
             Else
-                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpcos") = 0
+                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpcos") = dt.Rows(fila).Item("pcos")
             End If
             CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot2") = dt.Rows(fila).Item("pcos") * dt.Rows(fila).Item("Cantidad")
 
@@ -2568,6 +2569,8 @@ salirIf:
         End If
     End Sub
     Private Sub grdetalle_CellValueChanged(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.CellValueChanged
+
+
         If (e.Column.Index = grdetalle.RootTable.Columns("tbcmin").Index) Or (e.Column.Index = grdetalle.RootTable.Columns("tbpbas").Index) Then
             If (Not IsNumeric(grdetalle.GetValue("tbcmin")) Or grdetalle.GetValue("tbcmin").ToString = String.Empty) Then
 
@@ -2586,7 +2589,7 @@ salirIf:
                 'grdetalle.SetValue("tbcmin", 1)
                 'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
             Else
-                If (grdetalle.GetValue("tbcmin") > 0) Then
+                If (grdetalle.GetValue("tbcmin") > 0 And IsNumeric(grdetalle.GetValue("tbpbas"))) Then
                     Dim rowIndex As Integer = grdetalle.Row
                     Dim porcdesc As Double = grdetalle.GetValue("tbporc")
                     Dim montodesc As Double = ((grdetalle.GetValue("tbpbas") * grdetalle.GetValue("tbcmin")) * (porcdesc / 100))
@@ -2861,6 +2864,18 @@ salirIf:
             If (grdetalle.CurrentColumn.Index = grdetalle.RootTable.Columns("imgAdd").Index) Then
                 SeleccionarCategoria(True)
             End If
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+    Private Sub grdetalle_ColumnHeaderClick(sender As Object, e As ColumnActionEventArgs) Handles grdetalle.ColumnHeaderClick
+
+        Try
+            grdetalle.Focus()
+
+            grdetalle.Col = 1
         Catch ex As Exception
 
         End Try
