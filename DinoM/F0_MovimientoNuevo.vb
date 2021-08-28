@@ -630,12 +630,37 @@ Public Class F0_MovimientoNuevo
         grdetalle.Col = celdadCantidad
         grdetalle.Row = posicion
     End Sub
-    Private Sub cargarDetalleAlmacen(grid As GridEX, productoId As Integer, validadarTabla As Boolean)
+    Private Sub cargarDetalleAlmacen(grid As GridEX, productoId As Integer, validadarTabla As Boolean, Optional ValidarStock As Boolean = False)
         Try
             Dim tAlmacen As DataTable = l_obtenerAlmacensXIdProducto(productoId)
             If validadarTabla Then
                 jVerificar_ExisteFIlaDatatable(tAlmacen)
             End If
+            If (ValidarStock) Then
+
+                For i As Integer = 0 To tAlmacen.Rows.Count - 1 Step 1
+                    Dim AlmacenId As Integer = tAlmacen.Rows(i).Item("AlmacenId")
+                    Dim Stock As Integer = 0
+                    Dim dt As DataTable = CType(grdetalle.DataSource, DataTable)
+
+                    For j As Integer = 0 To dt.Rows.Count - 1 Step 1
+
+                        If (dt.Rows(j).Item("ProductoId") = productoId And dt.Rows(j).Item("estado") >= 0 And dt.Rows(j).Item("AlmOrigenId") = AlmacenId) Then
+                            Stock += dt.Rows(j).Item("Cantidad")
+
+                        End If
+
+                    Next
+
+                    tAlmacen.Rows(i).Item("stock") = tAlmacen.Rows(i).Item("stock") - Stock
+
+
+
+                Next
+
+            End If
+
+
             armarDetalleAlmacenGrid(grid, tAlmacen)
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -994,6 +1019,11 @@ Public Class F0_MovimientoNuevo
 
             End If
         Next
+
+        If cbConcepto.Value = 6 Then
+            cargarDetalleAlmacen(grAlmacenSalida, lbProductoId.Text, True, True)
+        End If
+
         jMetodo_SetValorGrillaCompleta(grAlmacen, "Cantidad", "0")
         jMetodo_SetValorGrillaCompleta(grAlmacenSalida, "Cantidad", "0")
     End Sub
