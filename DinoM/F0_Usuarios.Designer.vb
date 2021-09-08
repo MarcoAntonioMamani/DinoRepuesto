@@ -34,6 +34,16 @@ Partial Class F0_Usuarios
         Me.Tb_Nombre = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.Tb_Id = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.swVentaMayorista = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX16 = New DevComponents.DotNetBar.LabelX()
+        Me.swVentaMecanico = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
+        Me.swVentaNormal = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
+        Me.swVentaFacturado = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
+        Me.tbDescuento = New DevComponents.Editors.DoubleInput()
+        Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX11 = New DevComponents.DotNetBar.LabelX()
         Me.swDescuento = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.btnSearch = New DevComponents.DotNetBar.ButtonX()
@@ -53,16 +63,8 @@ Partial Class F0_Usuarios
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_Buscador = New Janus.Windows.GridEX.GridEX()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
-        Me.tbDescuento = New DevComponents.Editors.DoubleInput()
-        Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
-        Me.swVentaFacturado = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.swVentaNormal = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
-        Me.swVentaMecanico = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
-        Me.swVentaMayorista = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.LabelX16 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX17 = New DevComponents.DotNetBar.LabelX()
+        Me.swPrecio = New DevComponents.DotNetBar.Controls.SwitchButton()
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabPrincipal.SuspendLayout()
         Me.SuperTabControlPanelRegistro.SuspendLayout()
@@ -80,10 +82,10 @@ Partial Class F0_Usuarios
         CType(Me.Tb_DiasPedidos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.JMC_Categoria, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        CType(Me.tbDescuento, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbSuc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.JGr_Buscador, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tbDescuento, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SuperTabPrincipal
@@ -371,6 +373,8 @@ Partial Class F0_Usuarios
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.LabelX17)
+        Me.Panel1.Controls.Add(Me.swPrecio)
         Me.Panel1.Controls.Add(Me.swVentaMayorista)
         Me.Panel1.Controls.Add(Me.LabelX16)
         Me.Panel1.Controls.Add(Me.swVentaMecanico)
@@ -411,6 +415,199 @@ Partial Class F0_Usuarios
         Me.Panel1.Size = New System.Drawing.Size(1781, 215)
         Me.Panel1.TabIndex = 44
         '
+        'swVentaMayorista
+        '
+        '
+        '
+        '
+        Me.swVentaMayorista.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swVentaMayorista.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swVentaMayorista.Location = New System.Drawing.Point(1299, 155)
+        Me.swVentaMayorista.Margin = New System.Windows.Forms.Padding(4)
+        Me.swVentaMayorista.Name = "swVentaMayorista"
+        Me.swVentaMayorista.OffBackColor = System.Drawing.Color.Black
+        Me.swVentaMayorista.OffText = "NO"
+        Me.swVentaMayorista.OffTextColor = System.Drawing.Color.White
+        Me.swVentaMayorista.OnBackColor = System.Drawing.Color.Gold
+        Me.swVentaMayorista.OnText = "ASIGNADO"
+        Me.swVentaMayorista.Size = New System.Drawing.Size(133, 27)
+        Me.swVentaMayorista.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swVentaMayorista.TabIndex = 251
+        Me.swVentaMayorista.ValueFalse = "0"
+        Me.swVentaMayorista.ValueObject = "0"
+        Me.swVentaMayorista.ValueTrue = "1"
+        '
+        'LabelX16
+        '
+        Me.LabelX16.AutoSize = True
+        Me.LabelX16.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX16.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX16.Location = New System.Drawing.Point(1087, 155)
+        Me.LabelX16.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX16.Name = "LabelX16"
+        Me.LabelX16.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX16.Size = New System.Drawing.Size(179, 20)
+        Me.LabelX16.TabIndex = 250
+        Me.LabelX16.Text = "Prec. Venta Mayorista:"
+        '
+        'swVentaMecanico
+        '
+        '
+        '
+        '
+        Me.swVentaMecanico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swVentaMecanico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swVentaMecanico.Location = New System.Drawing.Point(1299, 120)
+        Me.swVentaMecanico.Margin = New System.Windows.Forms.Padding(4)
+        Me.swVentaMecanico.Name = "swVentaMecanico"
+        Me.swVentaMecanico.OffBackColor = System.Drawing.Color.Black
+        Me.swVentaMecanico.OffText = "NO"
+        Me.swVentaMecanico.OffTextColor = System.Drawing.Color.White
+        Me.swVentaMecanico.OnBackColor = System.Drawing.Color.Gold
+        Me.swVentaMecanico.OnText = "ASIGNADO"
+        Me.swVentaMecanico.Size = New System.Drawing.Size(133, 27)
+        Me.swVentaMecanico.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swVentaMecanico.TabIndex = 249
+        Me.swVentaMecanico.ValueFalse = "0"
+        Me.swVentaMecanico.ValueObject = "0"
+        Me.swVentaMecanico.ValueTrue = "1"
+        '
+        'LabelX15
+        '
+        Me.LabelX15.AutoSize = True
+        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX15.Location = New System.Drawing.Point(1087, 120)
+        Me.LabelX15.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX15.Name = "LabelX15"
+        Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX15.Size = New System.Drawing.Size(175, 20)
+        Me.LabelX15.TabIndex = 248
+        Me.LabelX15.Text = "Prec. Venta Mecanico:"
+        '
+        'swVentaNormal
+        '
+        '
+        '
+        '
+        Me.swVentaNormal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swVentaNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swVentaNormal.Location = New System.Drawing.Point(1299, 87)
+        Me.swVentaNormal.Margin = New System.Windows.Forms.Padding(4)
+        Me.swVentaNormal.Name = "swVentaNormal"
+        Me.swVentaNormal.OffBackColor = System.Drawing.Color.Black
+        Me.swVentaNormal.OffText = "NO"
+        Me.swVentaNormal.OffTextColor = System.Drawing.Color.White
+        Me.swVentaNormal.OnBackColor = System.Drawing.Color.Gold
+        Me.swVentaNormal.OnText = "ASIGNADO"
+        Me.swVentaNormal.Size = New System.Drawing.Size(133, 27)
+        Me.swVentaNormal.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swVentaNormal.TabIndex = 247
+        Me.swVentaNormal.ValueFalse = "0"
+        Me.swVentaNormal.ValueObject = "0"
+        Me.swVentaNormal.ValueTrue = "1"
+        '
+        'LabelX14
+        '
+        Me.LabelX14.AutoSize = True
+        Me.LabelX14.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX14.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX14.Location = New System.Drawing.Point(1087, 87)
+        Me.LabelX14.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX14.Name = "LabelX14"
+        Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX14.Size = New System.Drawing.Size(160, 20)
+        Me.LabelX14.TabIndex = 246
+        Me.LabelX14.Text = "Prec. Venta Normal:"
+        '
+        'swVentaFacturado
+        '
+        '
+        '
+        '
+        Me.swVentaFacturado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swVentaFacturado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swVentaFacturado.Location = New System.Drawing.Point(1299, 55)
+        Me.swVentaFacturado.Margin = New System.Windows.Forms.Padding(4)
+        Me.swVentaFacturado.Name = "swVentaFacturado"
+        Me.swVentaFacturado.OffBackColor = System.Drawing.Color.Black
+        Me.swVentaFacturado.OffText = "NO"
+        Me.swVentaFacturado.OffTextColor = System.Drawing.Color.White
+        Me.swVentaFacturado.OnBackColor = System.Drawing.Color.Gold
+        Me.swVentaFacturado.OnText = "ASIGNADO"
+        Me.swVentaFacturado.Size = New System.Drawing.Size(133, 27)
+        Me.swVentaFacturado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swVentaFacturado.TabIndex = 245
+        Me.swVentaFacturado.ValueFalse = "0"
+        Me.swVentaFacturado.ValueObject = "0"
+        Me.swVentaFacturado.ValueTrue = "1"
+        '
+        'LabelX13
+        '
+        Me.LabelX13.AutoSize = True
+        Me.LabelX13.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX13.Location = New System.Drawing.Point(1087, 55)
+        Me.LabelX13.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX13.Name = "LabelX13"
+        Me.LabelX13.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX13.Size = New System.Drawing.Size(134, 20)
+        Me.LabelX13.TabIndex = 244
+        Me.LabelX13.Text = "Prec. Venta Fact:"
+        '
+        'tbDescuento
+        '
+        '
+        '
+        '
+        Me.tbDescuento.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbDescuento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbDescuento.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.tbDescuento.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbDescuento.Increment = 1.0R
+        Me.tbDescuento.Location = New System.Drawing.Point(1299, 22)
+        Me.tbDescuento.Name = "tbDescuento"
+        Me.tbDescuento.Size = New System.Drawing.Size(140, 28)
+        Me.tbDescuento.TabIndex = 243
+        '
+        'LabelX12
+        '
+        Me.LabelX12.AutoSize = True
+        Me.LabelX12.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX12.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX12.Location = New System.Drawing.Point(1087, 25)
+        Me.LabelX12.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX12.Name = "LabelX12"
+        Me.LabelX12.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX12.Size = New System.Drawing.Size(125, 20)
+        Me.LabelX12.TabIndex = 242
+        Me.LabelX12.Text = "Desc. Producto:"
+        '
         'LabelX11
         '
         Me.LabelX11.AutoSize = True
@@ -421,7 +618,7 @@ Partial Class F0_Usuarios
         Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX11.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX11.Location = New System.Drawing.Point(1500, 36)
+        Me.LabelX11.Location = New System.Drawing.Point(1500, 148)
         Me.LabelX11.Margin = New System.Windows.Forms.Padding(4)
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.SingleLineColor = System.Drawing.SystemColors.Control
@@ -661,7 +858,7 @@ Partial Class F0_Usuarios
         '
         Me.tbTodasSucursales.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbTodasSucursales.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbTodasSucursales.Location = New System.Drawing.Point(1639, 36)
+        Me.tbTodasSucursales.Location = New System.Drawing.Point(1639, 148)
         Me.tbTodasSucursales.Margin = New System.Windows.Forms.Padding(4)
         Me.tbTodasSucursales.Name = "tbTodasSucursales"
         Me.tbTodasSucursales.OffBackColor = System.Drawing.Color.Black
@@ -764,198 +961,44 @@ Partial Class F0_Usuarios
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 500
         '
-        'LabelX12
+        'LabelX17
         '
-        Me.LabelX12.AutoSize = True
-        Me.LabelX12.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX12.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX12.Location = New System.Drawing.Point(1087, 25)
-        Me.LabelX12.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX12.Name = "LabelX12"
-        Me.LabelX12.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX12.Size = New System.Drawing.Size(125, 20)
-        Me.LabelX12.TabIndex = 242
-        Me.LabelX12.Text = "Desc. Producto:"
-        '
-        'tbDescuento
+        Me.LabelX17.AutoSize = True
+        Me.LabelX17.BackColor = System.Drawing.Color.Transparent
         '
         '
         '
+        Me.LabelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX17.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX17.Location = New System.Drawing.Point(1463, 20)
+        Me.LabelX17.Margin = New System.Windows.Forms.Padding(4)
+        Me.LabelX17.Name = "LabelX17"
+        Me.LabelX17.SingleLineColor = System.Drawing.SystemColors.Control
+        Me.LabelX17.Size = New System.Drawing.Size(130, 37)
+        Me.LabelX17.TabIndex = 253
+        Me.LabelX17.Text = "Puede Modificar" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Precio"
         '
-        Me.tbDescuento.BackgroundStyle.Class = "DateTimeInputBackground"
-        Me.tbDescuento.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbDescuento.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.tbDescuento.Font = New System.Drawing.Font("Calibri", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbDescuento.Increment = 1.0R
-        Me.tbDescuento.Location = New System.Drawing.Point(1299, 22)
-        Me.tbDescuento.Name = "tbDescuento"
-        Me.tbDescuento.Size = New System.Drawing.Size(140, 28)
-        Me.tbDescuento.TabIndex = 243
-        '
-        'LabelX13
-        '
-        Me.LabelX13.AutoSize = True
-        Me.LabelX13.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX13.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX13.Location = New System.Drawing.Point(1087, 55)
-        Me.LabelX13.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX13.Name = "LabelX13"
-        Me.LabelX13.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX13.Size = New System.Drawing.Size(134, 20)
-        Me.LabelX13.TabIndex = 244
-        Me.LabelX13.Text = "Prec. Venta Fact:"
-        '
-        'swVentaFacturado
+        'swPrecio
         '
         '
         '
         '
-        Me.swVentaFacturado.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swVentaFacturado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swVentaFacturado.Location = New System.Drawing.Point(1299, 55)
-        Me.swVentaFacturado.Margin = New System.Windows.Forms.Padding(4)
-        Me.swVentaFacturado.Name = "swVentaFacturado"
-        Me.swVentaFacturado.OffBackColor = System.Drawing.Color.Black
-        Me.swVentaFacturado.OffText = "NO"
-        Me.swVentaFacturado.OffTextColor = System.Drawing.Color.White
-        Me.swVentaFacturado.OnBackColor = System.Drawing.Color.Gold
-        Me.swVentaFacturado.OnText = "ASIGNADO"
-        Me.swVentaFacturado.Size = New System.Drawing.Size(133, 27)
-        Me.swVentaFacturado.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swVentaFacturado.TabIndex = 245
-        Me.swVentaFacturado.ValueFalse = "0"
-        Me.swVentaFacturado.ValueObject = "0"
-        Me.swVentaFacturado.ValueTrue = "1"
-        '
-        'swVentaNormal
-        '
-        '
-        '
-        '
-        Me.swVentaNormal.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swVentaNormal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swVentaNormal.Location = New System.Drawing.Point(1299, 87)
-        Me.swVentaNormal.Margin = New System.Windows.Forms.Padding(4)
-        Me.swVentaNormal.Name = "swVentaNormal"
-        Me.swVentaNormal.OffBackColor = System.Drawing.Color.Black
-        Me.swVentaNormal.OffText = "NO"
-        Me.swVentaNormal.OffTextColor = System.Drawing.Color.White
-        Me.swVentaNormal.OnBackColor = System.Drawing.Color.Gold
-        Me.swVentaNormal.OnText = "ASIGNADO"
-        Me.swVentaNormal.Size = New System.Drawing.Size(133, 27)
-        Me.swVentaNormal.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swVentaNormal.TabIndex = 247
-        Me.swVentaNormal.ValueFalse = "0"
-        Me.swVentaNormal.ValueObject = "0"
-        Me.swVentaNormal.ValueTrue = "1"
-        '
-        'LabelX14
-        '
-        Me.LabelX14.AutoSize = True
-        Me.LabelX14.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX14.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX14.Location = New System.Drawing.Point(1087, 87)
-        Me.LabelX14.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX14.Name = "LabelX14"
-        Me.LabelX14.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX14.Size = New System.Drawing.Size(160, 20)
-        Me.LabelX14.TabIndex = 246
-        Me.LabelX14.Text = "Prec. Venta Normal:"
-        '
-        'swVentaMecanico
-        '
-        '
-        '
-        '
-        Me.swVentaMecanico.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swVentaMecanico.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swVentaMecanico.Location = New System.Drawing.Point(1299, 120)
-        Me.swVentaMecanico.Margin = New System.Windows.Forms.Padding(4)
-        Me.swVentaMecanico.Name = "swVentaMecanico"
-        Me.swVentaMecanico.OffBackColor = System.Drawing.Color.Black
-        Me.swVentaMecanico.OffText = "NO"
-        Me.swVentaMecanico.OffTextColor = System.Drawing.Color.White
-        Me.swVentaMecanico.OnBackColor = System.Drawing.Color.Gold
-        Me.swVentaMecanico.OnText = "ASIGNADO"
-        Me.swVentaMecanico.Size = New System.Drawing.Size(133, 27)
-        Me.swVentaMecanico.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swVentaMecanico.TabIndex = 249
-        Me.swVentaMecanico.ValueFalse = "0"
-        Me.swVentaMecanico.ValueObject = "0"
-        Me.swVentaMecanico.ValueTrue = "1"
-        '
-        'LabelX15
-        '
-        Me.LabelX15.AutoSize = True
-        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX15.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX15.Location = New System.Drawing.Point(1087, 120)
-        Me.LabelX15.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX15.Name = "LabelX15"
-        Me.LabelX15.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX15.Size = New System.Drawing.Size(175, 20)
-        Me.LabelX15.TabIndex = 248
-        Me.LabelX15.Text = "Prec. Venta Mecanico:"
-        '
-        'swVentaMayorista
-        '
-        '
-        '
-        '
-        Me.swVentaMayorista.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swVentaMayorista.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.swVentaMayorista.Location = New System.Drawing.Point(1299, 155)
-        Me.swVentaMayorista.Margin = New System.Windows.Forms.Padding(4)
-        Me.swVentaMayorista.Name = "swVentaMayorista"
-        Me.swVentaMayorista.OffBackColor = System.Drawing.Color.Black
-        Me.swVentaMayorista.OffText = "NO"
-        Me.swVentaMayorista.OffTextColor = System.Drawing.Color.White
-        Me.swVentaMayorista.OnBackColor = System.Drawing.Color.Gold
-        Me.swVentaMayorista.OnText = "ASIGNADO"
-        Me.swVentaMayorista.Size = New System.Drawing.Size(133, 27)
-        Me.swVentaMayorista.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swVentaMayorista.TabIndex = 251
-        Me.swVentaMayorista.ValueFalse = "0"
-        Me.swVentaMayorista.ValueObject = "0"
-        Me.swVentaMayorista.ValueTrue = "1"
-        '
-        'LabelX16
-        '
-        Me.LabelX16.AutoSize = True
-        Me.LabelX16.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX16.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX16.Location = New System.Drawing.Point(1087, 155)
-        Me.LabelX16.Margin = New System.Windows.Forms.Padding(4)
-        Me.LabelX16.Name = "LabelX16"
-        Me.LabelX16.SingleLineColor = System.Drawing.SystemColors.Control
-        Me.LabelX16.Size = New System.Drawing.Size(179, 20)
-        Me.LabelX16.TabIndex = 250
-        Me.LabelX16.Text = "Prec. Venta Mayorista:"
+        Me.swPrecio.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.swPrecio.Location = New System.Drawing.Point(1602, 20)
+        Me.swPrecio.Margin = New System.Windows.Forms.Padding(4)
+        Me.swPrecio.Name = "swPrecio"
+        Me.swPrecio.OffBackColor = System.Drawing.Color.Black
+        Me.swPrecio.OffText = "NO"
+        Me.swPrecio.OffTextColor = System.Drawing.Color.White
+        Me.swPrecio.OnBackColor = System.Drawing.Color.Gold
+        Me.swPrecio.OnText = "SI"
+        Me.swPrecio.Size = New System.Drawing.Size(133, 27)
+        Me.swPrecio.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swPrecio.TabIndex = 252
+        Me.swPrecio.ValueFalse = "0"
+        Me.swPrecio.ValueTrue = "1"
         '
         'F0_Usuarios
         '
@@ -988,10 +1031,10 @@ Partial Class F0_Usuarios
         CType(Me.JMC_Categoria, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.tbDescuento, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbSuc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel1.ResumeLayout(False)
         CType(Me.JGr_Buscador, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tbDescuento, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1032,4 +1075,6 @@ Partial Class F0_Usuarios
     Friend WithEvents LabelX14 As DevComponents.DotNetBar.LabelX
     Friend WithEvents swVentaFacturado As DevComponents.DotNetBar.Controls.SwitchButton
     Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents LabelX17 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents swPrecio As DevComponents.DotNetBar.Controls.SwitchButton
 End Class

@@ -115,6 +115,7 @@ Module P_Global
     Public gi_userFuente As Integer = 8
     Public gs_user As String = "DEFAULT"
     Public gs_DescuentoProducto As Double = 0
+    Public gs_PuedeModificarPrecio As Integer = 0
     Public gs_VentaFacturado As Integer = 0
     Public gs_VentaNormal As Integer = 0
     Public gs_VentaMecanico As Integer = 0

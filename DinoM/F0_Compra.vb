@@ -611,7 +611,7 @@ Public Class F0_Compra
         Dim Bin As New MemoryStream
         Dim img As New Bitmap(My.Resources.delete, 28, 28)
         img.Save(Bin, Imaging.ImageFormat.Png)
-        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", 0, 0, 0, "",
+        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, "", "", "", "", "", 0, "", 0, 0, 0, "",
                                                         0, 0, 0, 0, "", Now.Date, "", "", 0, Bin.GetBuffer)
     End Sub
 

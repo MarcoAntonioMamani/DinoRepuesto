@@ -90,11 +90,55 @@ Public Class F0_DetalleCompras
         End With
 
         With grProductoSeleccionado.RootTable.Columns("producto")
-            .Caption = "PRODUCTOS"
+            .Caption = "Descripcion"
             .Width = 400
+            .Visible = True
+            .WordWrap = True
+            .MaxLines = 2
+        End With
+        With grProductoSeleccionado.RootTable.Columns("CodigoFabrica")
+            .Caption = "Cod.Fabrica"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
             .Visible = True
 
         End With
+        With grProductoSeleccionado.RootTable.Columns("CodigoMarca")
+            .Caption = "Cod.Fabrica"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
+        With grProductoSeleccionado.RootTable.Columns("Medida")
+            .Caption = "Medida"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
+        With grProductoSeleccionado.RootTable.Columns("Marca")
+            .Caption = "Marca"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+        With grProductoSeleccionado.RootTable.Columns("Procedencia")
+            .Caption = "Procedencia"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
         With grProductoSeleccionado.RootTable.Columns("cbest")
             .Width = 50
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
@@ -226,7 +270,7 @@ Public Class F0_DetalleCompras
             ColAL(grProductos, "yfnumi", "Item", 50)
             ColAL(grProductos, "Categoria", "Categoria", 150)
             ColAL(grProductos, "CodigoFabrica", "Cod. Fabrica", 150)
-            ColAL(grProductos, "Marca", "Cod. Marca", 150)
+            ColAL(grProductos, "CodigoMarca", "Cod. Marca", 150)
             ColAL(grProductos, "Medida", "Medida", 150)
             ColAL(grProductos, "yfcdprod1", "Producto", 350)
             ColAL(grProductos, "grupo1", "Marca", 150)
@@ -299,7 +343,7 @@ Public Class F0_DetalleCompras
         Dim Bin As New MemoryStream
         Dim img As New Bitmap(My.Resources.delete, 28, 28)
         img.Save(Bin, Imaging.ImageFormat.Png)
-        CType(grProductoSeleccionado.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", 0, 0, 0, "",
+        CType(grProductoSeleccionado.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, "", "", "", "", "", 0, "", 0, 0, 0, "",
                                                         0, "20500101", CDate("2050/01/01"), 0, 0, 0, "", Now.Date, "", "", 0, Bin.GetBuffer, 0, 0)
     End Sub
     Public Function _fnSiguienteNumi()
@@ -330,6 +374,12 @@ Public Class F0_DetalleCompras
                 _fnObtenerFilaDetalle(pos, grProductoSeleccionado.GetValue("cbnumi"))
                 If (pos >= 0) Then ''And (Not existe))
 
+
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("CodigoFabrica") = grProductos.GetValue("CodigoFabrica")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("CodigoMarca") = grProductos.GetValue("CodigoMarca")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("Medida") = grProductos.GetValue("Medida")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("Marca") = grProductos.GetValue("grupo1")
+                    CType(grProductoSeleccionado.DataSource, DataTable).Rows(pos).Item("Procedencia") = grProductos.GetValue("grupo2")
 
 
 

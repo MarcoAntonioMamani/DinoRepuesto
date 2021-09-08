@@ -2254,16 +2254,21 @@ Public Class F0_Ventas
         If (_fnAccesible()) Then
             'Habilitar solo las columnas de Precio, %, Monto y Observación
             'If (e.Column.Index = grdetalle.RootTable.Columns("yfcbarra").Index Or
-            If (e.Column.Index = grdetalle.RootTable.Columns("tbcmin").Index Or
-                e.Column.Index = grdetalle.RootTable.Columns("tbporc").Index Or
-                e.Column.Index = grdetalle.RootTable.Columns("tbpbas").Index Or
-                e.Column.Index = grdetalle.RootTable.Columns("tbdesc").Index) Then
+            If (gs_PuedeModificarPrecio = 1 And e.Column.Index = grdetalle.RootTable.Columns("tbpbas").Index) Then
                 e.Cancel = False
+
             Else
-                e.Cancel = True
+                If (e.Column.Index = grdetalle.RootTable.Columns("tbcmin").Index Or
+              e.Column.Index = grdetalle.RootTable.Columns("tbporc").Index Or
+              e.Column.Index = grdetalle.RootTable.Columns("tbdesc").Index) Then
+                    e.Cancel = False
+                Else
+                    e.Cancel = True
+                End If
             End If
+
         Else
-            e.Cancel = True
+                e.Cancel = True
         End If
 
     End Sub

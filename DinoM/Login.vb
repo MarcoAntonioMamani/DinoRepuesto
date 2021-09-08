@@ -90,6 +90,9 @@ Public Class Login
             gi_NumiVenedor = dtUsuario.Rows(0).Item("yd_numiVend")
             gi_DescuentoGeneral = dtUsuario.Rows(0).Item("ydDescuentoGeneral")
             gs_DescuentoProducto = IIf(IsDBNull(dtUsuario.Rows(0).Item("DescuentoProducto")), 0, dtUsuario.Rows(0).Item("DescuentoProducto"))
+
+            gs_PuedeModificarPrecio = IIf(IsDBNull(dtUsuario.Rows(0).Item("PuedeModificarPrecio")), 0, dtUsuario.Rows(0).Item("PuedeModificarPrecio"))
+
             gs_VentaFacturado = IIf(IsDBNull(dtUsuario.Rows(0).Item("PrecioVentaFacturado")), 0, dtUsuario.Rows(0).Item("PrecioVentaFacturado"))
             gs_VentaNormal = IIf(IsDBNull(dtUsuario.Rows(0).Item("PrecioVentaNormal")), 0, dtUsuario.Rows(0).Item("PrecioVentaNormal"))
             gs_VentaMecanico = IIf(IsDBNull(dtUsuario.Rows(0).Item("PrecioMecanico")), 0, dtUsuario.Rows(0).Item("PrecioMecanico"))

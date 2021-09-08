@@ -409,12 +409,55 @@ Public Class F0_MCompras
             .Width = 90
             .Visible = False
         End With
-
-        With grdetalle.RootTable.Columns("producto")
-            .Caption = "PRODUCTOS"
-            .Width = 400
+        With grdetalle.RootTable.Columns("CodigoFabrica")
+            .Caption = "Cod.Fabrica"
+            .Width = 120
             .WordWrap = True
             .MaxLines = 2
+            .Visible = True
+
+        End With
+        With grdetalle.RootTable.Columns("CodigoMarca")
+            .Caption = "Cod.Fabrica"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
+        With grdetalle.RootTable.Columns("Medida")
+            .Caption = "Medida"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
+        With grdetalle.RootTable.Columns("Marca")
+            .Caption = "Marca"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+        With grdetalle.RootTable.Columns("Procedencia")
+            .Caption = "Procedencia"
+            .Width = 120
+            .WordWrap = True
+            .MaxLines = 2
+            .Visible = True
+
+        End With
+
+
+        With grdetalle.RootTable.Columns("producto")
+            .Caption = "Descripcion"
+            .Width = 400
+            .WordWrap = True
+            .MaxLines = 3
             .Visible = True
 
         End With
@@ -820,7 +863,7 @@ Public Class F0_MCompras
         Dim Bin As New MemoryStream
         Dim img As New Bitmap(My.Resources.delete, 28, 28)
         img.Save(Bin, Imaging.ImageFormat.Png)
-        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, 0, "", 0, 0, 0, "",
+        CType(grdetalle.DataSource, DataTable).Rows.Add(_fnSiguienteNumi() + 1, 0, "", "", "", "", "", 0, "", 0, 0, 0, "",
                                                         0, "20500101", CDate("2050/01/01"), 0, 0, 0, "", Now.Date, "", "", 0, Bin.GetBuffer, 0, 0)
     End Sub
 
