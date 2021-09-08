@@ -12,12 +12,26 @@ Public Class F0_DetalleVenta
     Public precio As Decimal
     Public CategoriaPrecio As Integer
 
+    Public Bandera As Boolean = False
     Public Sub IniciarTodod()
         CargarProductos()
         CargarProductosVentas()
 
         tbProducto.Focus()
     End Sub
+
+    Private Sub grdetalle_ColumnHeaderClick(sender As Object, e As ColumnActionEventArgs) Handles grProductos.ColumnHeaderClick
+
+        Try
+            tbProducto.Focus()
+            Bandera = True
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
 
     Public Sub New(dtp As DataTable, dtv As DataTable, dtn As DataTable, _CategoriaPrecio As Integer)
         InitializeComponent()
@@ -743,6 +757,13 @@ Public Class F0_DetalleVenta
     End Sub
 
     Private Sub grProductos_DoubleClick(sender As Object, e As EventArgs) Handles grProductos.DoubleClick
+
+        If (Bandera = True) Then
+            Bandera = False
+            Return
+
+        End If
+
 
         Dim f, c As Integer
         c = grProductos.Col

@@ -65,6 +65,8 @@ Public Class F0_Ventas
         _prValidadFactura()
         _prCargarNameLabel()
 
+
+        tbFechaVenta.IsInputReadOnly = True
     End Sub
     Public Sub _prCargarNameLabel()
         Dim dt As DataTable = L_fnNameLabel()
@@ -201,7 +203,7 @@ Public Class F0_Ventas
         tbCliente.ReadOnly = True
         tbVendedor.ReadOnly = True
         tbObservacion.ReadOnly = True
-        tbFechaVenta.IsInputReadOnly = True
+        'tbFechaVenta.IsInputReadOnly = True
         tbFechaVenc.IsInputReadOnly = True
         swMoneda.IsReadOnly = True
         swTipoVenta.IsReadOnly = True
@@ -248,7 +250,7 @@ Public Class F0_Ventas
         ''  tbCliente.ReadOnly = False  por que solo podra seleccionar Cliente
         ''  tbVendedor.ReadOnly = False
         tbObservacion.ReadOnly = False
-        tbFechaVenta.IsInputReadOnly = False
+        'tbFechaVenta.IsInputReadOnly = False
         tbFechaVenc.IsInputReadOnly = False
         swMoneda.IsReadOnly = False
         swTipoVenta.IsReadOnly = False
@@ -1108,7 +1110,7 @@ Public Class F0_Ventas
         Return 1
     End Function
     Public Function _fnAccesible()
-        Return tbFechaVenta.IsInputReadOnly = False
+        Return tbObservacion.ReadOnly = False
     End Function
     Private Sub _HabilitarProductos(idCategoria As Integer)
         'GPanelProductos.Visible = True
@@ -1371,7 +1373,7 @@ Public Class F0_Ventas
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "Código de Venta ".ToUpper + tbCodigo.Text + " Grabado con Exito.".ToUpper,
-                                      img, 2000,
+                                      img, 4500,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter
                                       )
@@ -1388,7 +1390,7 @@ Public Class F0_Ventas
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Venta no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, "La Venta no pudo ser insertado".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
         End If
 
@@ -1434,7 +1436,7 @@ Public Class F0_Ventas
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
             ToastNotification.Show(Me, "Código de Venta ".ToUpper + tbCodigo.Text + " Modificado con Exito.".ToUpper,
-                                      img, 2000,
+                                      img, 4500,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter
                                       )
@@ -1447,7 +1449,7 @@ Public Class F0_Ventas
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Venta no pudo ser Modificada".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, "La Venta no pudo ser Modificada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
         End If
     End Sub
