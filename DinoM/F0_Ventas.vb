@@ -2626,7 +2626,7 @@ salirIf:
                     Dim lin As Integer = grdetalle.GetValue("tbnumi")
                     Dim pos As Integer = -1
                     _fnObtenerFilaDetalle(pos, lin)
-                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 0
+                    'CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 0
                     CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot") = 0
                     _prCalcularPrecioTotal()
                     'grdetalle.SetValue("tbcmin", 1)
