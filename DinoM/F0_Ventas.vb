@@ -2586,13 +2586,14 @@ salirIf:
                 Dim lin As Integer = grdetalle.GetValue("tbnumi")
                 Dim pos As Integer = -1
                 _fnObtenerFilaDetalle(pos, lin)
-                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 1
-                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot") = CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpbas")
+                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 0
+                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot") = 0
 
                 CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbporc") = 0
                 CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbdesc") = 0
-                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbtotdesc") = CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpbas")
+                CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbtotdesc") = 0
                 CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot2") = CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpcos")
+                _prCalcularPrecioTotal()
                 'grdetalle.SetValue("tbcmin", 1)
                 'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
             Else
@@ -2625,8 +2626,8 @@ salirIf:
                     Dim lin As Integer = grdetalle.GetValue("tbnumi")
                     Dim pos As Integer = -1
                     _fnObtenerFilaDetalle(pos, lin)
-                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 1
-                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot") = CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbpbas")
+                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbcmin") = 0
+                    CType(grdetalle.DataSource, DataTable).Rows(pos).Item("tbptot") = 0
                     _prCalcularPrecioTotal()
                     'grdetalle.SetValue("tbcmin", 1)
                     'grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
@@ -2805,11 +2806,11 @@ salirIf:
         If (e.Column.Index = grdetalle.RootTable.Columns("tbcmin").Index) Then
             If (Not IsNumeric(grdetalle.GetValue("tbcmin")) Or grdetalle.GetValue("tbcmin").ToString = String.Empty) Then
 
-                grdetalle.SetValue("tbcmin", 1)
-                grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
+                grdetalle.SetValue("tbcmin", 0)
+                grdetalle.SetValue("tbptot", 0)
                 grdetalle.SetValue("tbporc", 0)
                 grdetalle.SetValue("tbdesc", 0)
-                grdetalle.SetValue("tbtotdesc", grdetalle.GetValue("tbpbas"))
+                grdetalle.SetValue("tbtotdesc", 0)
 
 
             Else
@@ -2847,11 +2848,11 @@ salirIf:
 
                 Else
 
-                    grdetalle.SetValue("tbcmin", 1)
-                    grdetalle.SetValue("tbptot", grdetalle.GetValue("tbpbas"))
+                    grdetalle.SetValue("tbcmin", 0)
+                    grdetalle.SetValue("tbptot", 0)
                     grdetalle.SetValue("tbporc", 0)
                     grdetalle.SetValue("tbdesc", 0)
-                    grdetalle.SetValue("tbtotdesc", grdetalle.GetValue("tbpbas"))
+                    grdetalle.SetValue("tbtotdesc", 0)
 
                 End If
             End If
