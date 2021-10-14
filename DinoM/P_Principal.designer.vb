@@ -101,6 +101,7 @@ Partial Class P_Principal
         Me.MetroTileItem23 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btComTiendas = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btComPrestamos = New DevComponents.DotNetBar.Metro.MetroTileItem()
+        Me.btComEstadoCuentasPrestamos = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.MetroTilePanel1 = New DevComponents.DotNetBar.Metro.MetroTilePanel()
         Me.btConfRoles = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btConfUsuarios = New DevComponents.DotNetBar.Metro.MetroTileItem()
@@ -166,7 +167,7 @@ Partial Class P_Principal
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.MetroTileItem11 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.MetroTileItem12 = New DevComponents.DotNetBar.Metro.MetroTileItem()
-        Me.btComEstadoCuentasPrestamos = New DevComponents.DotNetBar.Metro.MetroTileItem()
+        Me.btComPagosPrestamos = New DevComponents.DotNetBar.Metro.MetroTileItem()
         MetroTileFrame1 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         MetroTileFrame2 = New DevComponents.DotNetBar.Metro.MetroTileFrame()
         Me.SideNav1.SuspendLayout()
@@ -1002,7 +1003,7 @@ Partial Class P_Principal
         Me.MetroTilePanel7.ContainerControlProcessDialogKey = True
         Me.MetroTilePanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MetroTilePanel7.DragDropSupport = True
-        Me.MetroTilePanel7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btComProveedor, Me.btComCompra, Me.btComPagosCredito, Me.btComEstadoCuentas, Me.btEstadoCuentasProveedores, Me.MetroTileItem22, Me.MetroTileItem23, Me.btComTiendas, Me.btComPrestamos, Me.btComEstadoCuentasPrestamos})
+        Me.MetroTilePanel7.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btComProveedor, Me.btComCompra, Me.btComPagosCredito, Me.btComEstadoCuentas, Me.btEstadoCuentasProveedores, Me.MetroTileItem22, Me.MetroTileItem23, Me.btComTiendas, Me.btComPrestamos, Me.btComEstadoCuentasPrestamos, Me.btComPagosPrestamos})
         Me.MetroTilePanel7.ItemSpacing = 10
         Me.MetroTilePanel7.Location = New System.Drawing.Point(0, 0)
         Me.MetroTilePanel7.Margin = New System.Windows.Forms.Padding(4)
@@ -1164,7 +1165,7 @@ Partial Class P_Principal
         '
         '
         '
-        Me.btComTiendas.TileStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.btComTiendas.TileStyle.BackColor = System.Drawing.Color.Black
         Me.btComTiendas.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(105, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btComTiendas.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.btComTiendas.TileStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1185,13 +1186,34 @@ Partial Class P_Principal
         '
         '
         '
-        Me.btComPrestamos.TileStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btComPrestamos.TileStyle.BackColor = System.Drawing.Color.DarkTurquoise
         Me.btComPrestamos.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(158, Byte), Integer), CType(CType(47, Byte), Integer), CType(CType(79, Byte), Integer), CType(CType(79, Byte), Integer))
         Me.btComPrestamos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.btComPrestamos.TileStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btComPrestamos.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
         Me.btComPrestamos.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btComPrestamos.TitleTextColor = System.Drawing.Color.Red
+        '
+        'btComEstadoCuentasPrestamos
+        '
+        Me.btComEstadoCuentasPrestamos.Image = Global.DinoM.My.Resources.Resources.rp_estadoCuentas
+        Me.btComEstadoCuentasPrestamos.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btComEstadoCuentasPrestamos.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
+        Me.btComEstadoCuentasPrestamos.Name = "btComEstadoCuentasPrestamos"
+        Me.btComEstadoCuentasPrestamos.SymbolColor = System.Drawing.Color.Empty
+        Me.btComEstadoCuentasPrestamos.Text = "ESTADO DE CUENTAS PRESTAMOS"
+        Me.btComEstadoCuentasPrestamos.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Teal
+        Me.btComEstadoCuentasPrestamos.TileSize = New System.Drawing.Size(250, 135)
+        '
+        '
+        '
+        Me.btComEstadoCuentasPrestamos.TileStyle.BackColor = System.Drawing.Color.Blue
+        Me.btComEstadoCuentasPrestamos.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(178, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btComEstadoCuentasPrestamos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.btComEstadoCuentasPrestamos.TileStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btComEstadoCuentasPrestamos.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
+        Me.btComEstadoCuentasPrestamos.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btComEstadoCuentasPrestamos.TitleTextColor = System.Drawing.Color.Red
         '
         'MetroTilePanel1
         '
@@ -2458,26 +2480,26 @@ Partial Class P_Principal
         Me.MetroTileItem12.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.MetroTileItem12.TitleTextColor = System.Drawing.Color.Red
         '
-        'btComEstadoCuentasPrestamos
+        'btComPagosPrestamos
         '
-        Me.btComEstadoCuentasPrestamos.Image = Global.DinoM.My.Resources.Resources.rp_estadoCuentas
-        Me.btComEstadoCuentasPrestamos.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btComEstadoCuentasPrestamos.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
-        Me.btComEstadoCuentasPrestamos.Name = "btComEstadoCuentasPrestamos"
-        Me.btComEstadoCuentasPrestamos.SymbolColor = System.Drawing.Color.Empty
-        Me.btComEstadoCuentasPrestamos.Text = "ESTADO DE CUENTAS PRESTAMOS"
-        Me.btComEstadoCuentasPrestamos.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Teal
-        Me.btComEstadoCuentasPrestamos.TileSize = New System.Drawing.Size(250, 135)
+        Me.btComPagosPrestamos.Image = Global.DinoM.My.Resources.Resources.precio
+        Me.btComPagosPrestamos.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btComPagosPrestamos.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
+        Me.btComPagosPrestamos.Name = "btComPagosPrestamos"
+        Me.btComPagosPrestamos.SymbolColor = System.Drawing.Color.Empty
+        Me.btComPagosPrestamos.Text = "PAGOS PRESTAMOS"
+        Me.btComPagosPrestamos.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Blueish
+        Me.btComPagosPrestamos.TileSize = New System.Drawing.Size(250, 135)
         '
         '
         '
-        Me.btComEstadoCuentasPrestamos.TileStyle.BackColor = System.Drawing.Color.Blue
-        Me.btComEstadoCuentasPrestamos.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(178, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btComEstadoCuentasPrestamos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.btComEstadoCuentasPrestamos.TileStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btComEstadoCuentasPrestamos.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
-        Me.btComEstadoCuentasPrestamos.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btComEstadoCuentasPrestamos.TitleTextColor = System.Drawing.Color.Red
+        Me.btComPagosPrestamos.TileStyle.BackColor = System.Drawing.Color.Gold
+        Me.btComPagosPrestamos.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(187, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.btComPagosPrestamos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.btComPagosPrestamos.TileStyle.Font = New System.Drawing.Font("Georgia", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btComPagosPrestamos.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
+        Me.btComPagosPrestamos.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btComPagosPrestamos.TitleTextColor = System.Drawing.Color.Red
         '
         'P_Principal
         '
@@ -2659,4 +2681,5 @@ Partial Class P_Principal
     Friend WithEvents btComTiendas As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btComPrestamos As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btComEstadoCuentasPrestamos As DevComponents.DotNetBar.Metro.MetroTileItem
+    Friend WithEvents btComPagosPrestamos As DevComponents.DotNetBar.Metro.MetroTileItem
 End Class

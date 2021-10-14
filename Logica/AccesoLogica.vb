@@ -3087,13 +3087,14 @@ Public Class AccesoLogica
 #End Region
 
 #Region "PAGOS DE LAS COMPRAS CON CHEQUE"
-    Public Shared Function L_fnCobranzasGeneralCompra() As DataTable
+    Public Shared Function L_fnCobranzasGeneralCompra(TipoPrestamo As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
 
         _listParam.Add(New Datos.DParametro("@tipo", 3))
         _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TipoCompraPrestamo", TipoPrestamo))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TC00121Cheque", _listParam)
 
         Return _Tabla
@@ -3122,13 +3123,14 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
-    Public Shared Function L_fnCobranzasObtenerLasVentasACreditoCompras() As DataTable
+    Public Shared Function L_fnCobranzasObtenerLasVentasACreditoCompras(TipoPrestamoCompra As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
 
         _listParam.Add(New Datos.DParametro("@tipo", 6))
         _listParam.Add(New Datos.DParametro("@teuact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TipoCompraPrestamo", TipoPrestamoCompra))
         _Tabla = D_ProcedimientoConParam("sp_Mam_TC00121Cheque", _listParam)
 
         Return _Tabla

@@ -1,6 +1,4 @@
-﻿Imports GMap.NET.WindowsForms
-Imports GMap.NET.WindowsForms.ToolTips
-Imports System.Drawing
+﻿
 Imports DevComponents.DotNetBar.Controls
 Imports System.Threading
 Imports System.Drawing.Text
@@ -8,13 +6,7 @@ Imports Logica.AccesoLogica
 Imports Janus.Windows.GridEX
 Imports DevComponents.DotNetBar
 Imports System.IO
-Imports DevComponents.DotNetBar.SuperGrid
-Imports GMap.NET.MapProviders
-Imports GMap.NET
-Imports GMap.NET.WindowsForms.Markers
-Imports System.Reflection
-Imports System.Runtime.InteropServices
-Public Class F0_PagosCreditoCompraUlt
+Public Class F0_PagosCreditoTienda
     Dim _Inter As Integer = 0
 #Region "Variables Globales"
     Dim precio As DataTable
@@ -35,7 +27,7 @@ Public Class F0_PagosCreditoCompraUlt
 
         'Me.WindowState = FormWindowState.Maximized
         _prAsignarPermisos()
-        Me.Text = "PAGO DE COMPRAS A CREDITOS"
+        Me.Text = "PAGO DE PRESTAMOS A CREDITOS"
         Dim blah As New Bitmap(New Bitmap(My.Resources.cobro), 20, 20)
         Dim ico As Icon = Icon.FromHandle(blah.GetHicon())
         Me.Icon = ico
@@ -100,7 +92,7 @@ Public Class F0_PagosCreditoCompraUlt
         btnGrabar.Enabled = True
     End Sub
     Public Sub _prCargarCobranza()
-        Dim dt As DataTable = L_fnCobranzasGeneralCompra(3)
+        Dim dt As DataTable = L_fnCobranzasGeneralCompra(4)
         grcobranza.DataSource = dt
         grcobranza.RetrieveStructure()
         grcobranza.AlternatingColors = True
@@ -219,7 +211,7 @@ Public Class F0_PagosCreditoCompraUlt
         grfactura.DataSource = dt
         grfactura.RetrieveStructure()
         grfactura.AlternatingColors = True
-         '       numidetalle,proveedor.yddesc as proveedor, NroDoc,  numiCredito, numiCobranza
+        '       numidetalle,proveedor.yddesc as proveedor, NroDoc,  numiCredito, numiCobranza
         ',a.tctc1numi ,a.tcty4prov  ,detalle.tdfechaPago, pendiente,PagoAc,NumeroRecibo, DescBanco, banco, detalle.tdnrocheque, img , estado 
         With grfactura.RootTable.Columns("numidetalle")
             .Width = 100
@@ -258,12 +250,12 @@ Public Class F0_PagosCreditoCompraUlt
         With grfactura.RootTable.Columns("NroDoc")
             .Width = 90
             .Visible = True
-            .Caption = "Nro Compra"
+            .Caption = "Nro Prestamo"
             .TextAlignment = TextAlignment.Far
         End With
-  
+
         With grfactura.RootTable.Columns("proveedor")
-            .Caption = "Proveedor"
+            .Caption = "Tienda"
             .Width = 350
             .Visible = True
         End With
@@ -339,7 +331,7 @@ Public Class F0_PagosCreditoCompraUlt
     End Sub
 
     Public Sub _prMostrarRegistro(_N As Integer)
-       '      a.tenumi ,a.tefdoc ,a.tety4vend,vendedor .yddesc as vendedor,
+        '      a.tenumi ,a.tefdoc ,a.tety4vend,vendedor .yddesc as vendedor,
         'a.teobs ,a.tefact ,a.tehact ,a.teuact  ,Sum(detalle .tdmonto) as total 
 
         With grcobranza
@@ -393,7 +385,7 @@ Public Class F0_PagosCreditoCompraUlt
         '       A.tcnumi, sucursal, NroDoc
         ',a.tctc1numi ,a.tcty4prov  ,proveedor,a.tcfdoc , totalfactura,pendiente,PagoAc,NumeroRecibo
         Dim dt As New DataTable
-        dt = L_fnCobranzasObtenerLasVentasACreditoCompras(3)
+        dt = L_fnCobranzasObtenerLasVentasACreditoCompras(4)
         _prEliminarExistente(dt)
 
         grPendiente.DataSource = dt
@@ -415,19 +407,19 @@ Public Class F0_PagosCreditoCompraUlt
             .Width = 100
             .Visible = False
         End With
-        
+
         '       A.tcnumi, sucursal, NroDoc
         ',a.tctc1numi ,a.tcty4prov  ,proveedor,a.tcfdoc , totalfactura,pendiente,PagoAc,NumeroRecibo
 
         With grPendiente.RootTable.Columns("NroDoc")
-            .Caption = "Nro Compra"
+            .Caption = "Nro Prestamo"
             .Width = 90
             .TextAlignment = TextAlignment.Far
             .Visible = True
         End With
-  
+
         With grPendiente.RootTable.Columns("proveedor")
-            .Caption = "Proveedor"
+            .Caption = "Tienda"
             .Width = 350
             .Visible = True
         End With
@@ -499,7 +491,7 @@ Public Class F0_PagosCreditoCompraUlt
             .Visible = False
         End With
         With grpagos.RootTable.Columns("tdnrodoc")
-            .Caption = "Nro Compra"
+            .Caption = "Nro Prestamo"
             .TextAlignment = TextAlignment.Far
             .Width = 90
             .Visible = True
@@ -657,7 +649,7 @@ Public Class F0_PagosCreditoCompraUlt
         If res Then
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-            ToastNotification.Show(Me, "Código de cobranza ".ToUpper + tbnrodoc.Text + " Modificado con Exito.".ToUpper,
+            ToastNotification.Show(Me, "Código de pago ".ToUpper + tbnrodoc.Text + " Modificado con Exito.".ToUpper,
                                       img, 2000,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter
@@ -669,7 +661,7 @@ Public Class F0_PagosCreditoCompraUlt
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Compra no pudo ser Modificada".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, "El Pago no pudo ser Modificada".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
         End If
     End Sub
@@ -745,7 +737,7 @@ Public Class F0_PagosCreditoCompraUlt
         If res Then
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-            ToastNotification.Show(Me, "Código de Compra ".ToUpper + tbnrodoc.Text + " Grabado con Exito.".ToUpper,
+            ToastNotification.Show(Me, "Código de Pago ".ToUpper + tbnrodoc.Text + " Grabado con Exito.".ToUpper,
                                       img, 2000,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter
@@ -756,7 +748,7 @@ Public Class F0_PagosCreditoCompraUlt
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Compra no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, "El Pago no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
         End If
 
@@ -896,13 +888,13 @@ Public Class F0_PagosCreditoCompraUlt
 
 
     End Sub
-   
+
     Private Sub grpagos_MouseClick(sender As Object, e As MouseEventArgs) Handles grpagos.MouseClick
         'If (grpagos.CurrentColumn.Index = grpagos.RootTable.Columns("img").Index) Then
         '    _prELiminarFila()
         'End If
     End Sub
-  
+
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         _Limpiar()
         _prhabilitar()
@@ -926,47 +918,47 @@ Public Class F0_PagosCreditoCompraUlt
             _prCargarIconELiminar()
         End If
     End Sub
-   
+
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim result As Boolean = L_fnVerificarSiSeContabilizoPagoCompra(tbnrodoc.Text)
         If result Then
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "El Pago de la Compra no puede ser Eliminada porque ya fue contabilizada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.TopCenter)
+            ToastNotification.Show(Me, "El Pago del Prestamo no puede ser Eliminada porque ya fue contabilizada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.TopCenter)
         End If
         Dim ef = New Efecto
-            ef.tipo = 2
-            ef.Context = "¿esta seguro de eliminar el registro?".ToUpper
-            ef.Header = "mensaje principal".ToUpper
-            ef.ShowDialog()
-            Dim bandera As Boolean = False
-            bandera = ef.band
-            If (bandera = True) Then
-                Dim mensajeError As String = ""
-                Dim res As Boolean = L_fnEliminarCobranzaCompras(tbnrodoc.Text, mensajeError)
-                If res Then
+        ef.tipo = 2
+        ef.Context = "¿esta seguro de eliminar el registro?".ToUpper
+        ef.Header = "mensaje principal".ToUpper
+        ef.ShowDialog()
+        Dim bandera As Boolean = False
+        bandera = ef.band
+        If (bandera = True) Then
+            Dim mensajeError As String = ""
+            Dim res As Boolean = L_fnEliminarCobranzaCompras(tbnrodoc.Text, mensajeError)
+            If res Then
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
 
-                    ToastNotification.Show(Me, "Código de COBRANZA ".ToUpper + tbnrodoc.Text + " eliminado con Exito.".ToUpper,
+                ToastNotification.Show(Me, "Código de COBRANZA ".ToUpper + tbnrodoc.Text + " eliminado con Exito.".ToUpper,
                                           img, 2000,
                                           eToastGlowColor.Green,
                                           eToastPosition.TopCenter)
 
-                    _prFiltrar()
+                _prFiltrar()
 
-                Else
-                    Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-                    ToastNotification.Show(Me, mensajeError, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-                End If
+            Else
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, mensajeError, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
             End If
+        End If
 
 
     End Sub
 
     Private Sub grfactura_Enter(sender As Object, e As EventArgs) Handles grfactura.Enter
         If (_fnAccesible()) Then
-          
+
             grfactura.Select()
             grfactura.Col = 1
             grfactura.Row = 0
@@ -999,7 +991,7 @@ Public Class F0_PagosCreditoCompraUlt
         End If
 
     End Sub
-   
+
     Private Sub grPendiente_KeyDown(sender As Object, e As KeyEventArgs) Handles grPendiente.KeyDown
         If (Not _fnAccesible()) Then
             Return
@@ -1040,7 +1032,7 @@ Public Class F0_PagosCreditoCompraUlt
                     '_DesHabilitarProductos()
                 Else
                     If (existe) Then
-                        Dim img As Bitmap = New Bitmap(My.Resources.Mensaje, 50, 50)
+                        Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
                         ToastNotification.Show(Me, "El PAGO DE ESTE COBRANZA ya existe en el detalle".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
                     End If
                 End If
@@ -1052,7 +1044,7 @@ Public Class F0_PagosCreditoCompraUlt
     End Sub
 
 
-    
+
     Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
         If _ValidarCampos() = False Then
             Exit Sub
@@ -1068,7 +1060,7 @@ Public Class F0_PagosCreditoCompraUlt
             End If
         End If
     End Sub
-   
+
 
     Private Sub grcobranza_SelectionChanged(sender As Object, e As EventArgs) Handles grcobranza.SelectionChanged
         If (grcobranza.RowCount >= 0 And grcobranza.Row >= 0) Then
@@ -1107,11 +1099,11 @@ Public Class F0_PagosCreditoCompraUlt
     Private Sub btnPrimero_Click(sender As Object, e As EventArgs) Handles btnPrimero.Click
         _PrimerRegistro()
     End Sub
-   
+
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         _prSalir()
     End Sub
-  
+
 
     Private Sub grfactura_MouseClick(sender As Object, e As MouseEventArgs) Handles grfactura.MouseClick
         If (Not _fnAccesible()) Then
@@ -1142,7 +1134,7 @@ Public Class F0_PagosCreditoCompraUlt
 
         End If
     End Sub
-   
+
 
     Private Sub tbObservacion_Leave(sender As Object, e As EventArgs) Handles tbObservacion.Leave
         grfactura.Select()
@@ -1151,13 +1143,12 @@ Public Class F0_PagosCreditoCompraUlt
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         _Inter = _Inter + 1
         If _Inter = 1 Then
-            Me.WindowState = FormWindowState.Normal
+            Me.WindowState = FormWindowState.Maximized
 
         Else
             Me.Opacity = 100
             Timer1.Enabled = False
         End If
-
     End Sub
 
 #End Region
