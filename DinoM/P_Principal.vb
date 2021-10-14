@@ -1133,6 +1133,14 @@ Public Class P_Principal
         FSearchProductos.Visible = True
     End Sub
 
+    Private Sub btComTiendas_Click(sender As Object, e As EventArgs) Handles btComTiendas.Click
+        Dim frm As New F1Tienda
+        frm._Tipo = 4
+        frm._nameButton = btComProveedor.Name
+        frm._modulo = FP_COMPRAS
+        frm.Show()
+    End Sub
+
     'Private Sub btnCredPagoCliente_Click(sender As Object, e As EventArgs) Handles btnCredPagoCliente.Click
     '    SideNav1.IsMenuExpanded = False
     '    Ventana.Select()
