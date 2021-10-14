@@ -1,7 +1,7 @@
 ﻿Imports Logica.AccesoLogica
 Imports DevComponents.DotNetBar
 Imports DevComponents.DotNetBar.Controls
-Public Class R_KardexCreditoPagos
+Public Class R_KardexEstadoCuentaTienda
     Dim _Inter As Integer = 0
 
     'gb_FacturaIncluirICE
@@ -15,7 +15,7 @@ Public Class R_KardexCreditoPagos
         tbFechaI.Value = Now.Date
         tbFechaF.Value = Now.Date
         _PMIniciarTodo()
-        Me.Text = "REPORTE DE ESTADOS DE CUENTAS POR PAGAR"
+        Me.Text = "ESTADOS DE CUENTAS POR PAGAR PRESTAMOS"
         MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         _IniciarComponentes()
     End Sub
@@ -32,10 +32,10 @@ Public Class R_KardexCreditoPagos
     End Sub
     Public Sub _prInterpretarDatos(ByRef _dt As DataTable)
         If (swCreditoCliente.Value = True) Then
-            _dt = L_prReporteCreditoGeneralCompras(tbFechaI.Value.ToString("yyyy/MM/dd"), tbFechaF.Value.ToString("yyyy/MM/dd"), 3)
+            _dt = L_prReporteCreditoGeneralCompras(tbFechaI.Value.ToString("yyyy/MM/dd"), tbFechaF.Value.ToString("yyyy/MM/dd"), 4)
         Else
             If (CheckTodosCuenta.Checked And tbCodigoCliente.Text.Length > 0) Then
-                _dt = L_prReporteCreditoProveedoresTodosCuentas(tbFechaI.Value.ToString("yyyy/MM/dd"), tbFechaF.Value.ToString("yyyy/MM/dd"), tbCodigoCliente.Text, 3)
+                _dt = L_prReporteCreditoProveedoresTodosCuentas(tbFechaI.Value.ToString("yyyy/MM/dd"), tbFechaF.Value.ToString("yyyy/MM/dd"), tbCodigoCliente.Text, 4)
             End If
             If (CheckUnaCuenta.Checked And tbCodigoCliente.Text.Length > 0 And tbcodCuenta.Text.Length > 0) Then
                 _dt = L_prReporteCreditoProveedorUnaCuentas(tbcodCuenta.Text)
@@ -88,8 +88,8 @@ Public Class R_KardexCreditoPagos
             objrep.SetParameterValue("Empresa1", ParEmp2)
             objrep.SetParameterValue("Empresa2", ParEmp3)
             objrep.SetParameterValue("Empresa3", ParEmp4)
-            objrep.SetParameterValue("Name", "Proveedor:")
-            objrep.SetParameterValue("Total", "Total Compra:")
+            objrep.SetParameterValue("Name", "Tienda:")
+            objrep.SetParameterValue("Total", "Total Prestamo:")
             MReportViewer.ReportSource = objrep
             MReportViewer.Show()
             MReportViewer.BringToFront()
@@ -134,13 +134,13 @@ Public Class R_KardexCreditoPagos
         If (swCreditoCliente.Value = False) Then
             If e.KeyData = Keys.Control + Keys.Enter Then
                 Dim dt As DataTable
-                dt = L_fnListarProveedoresCreditos()
+                dt = L_fnListarProveedoresCreditosTiendas()
                 '              a.ydnumi, a.ydcod, a.yddesc, a.yddctnum, a.yddirec
                 ',a.ydtelf1 ,a.ydfnac 
                 Dim listEstCeldas As New List(Of Modelo.Celda)
                 listEstCeldas.Add(New Modelo.Celda("ydnumi,", False, "ID", 50))
                 listEstCeldas.Add(New Modelo.Celda("ydcod", True, "ID", 50))
-                listEstCeldas.Add(New Modelo.Celda("yddesc", True, "NOMBRE", 280))
+                listEstCeldas.Add(New Modelo.Celda("yddesc", True, "TIENDA", 280))
                 listEstCeldas.Add(New Modelo.Celda("yddctnum", True, "N. Documento".ToUpper, 150))
                 listEstCeldas.Add(New Modelo.Celda("yddirec", True, "DIRECCION", 220))
                 listEstCeldas.Add(New Modelo.Celda("ydtelf1", True, "Telefono".ToUpper, 200))
@@ -152,7 +152,7 @@ Public Class R_KardexCreditoPagos
                 ef.listEstCeldas = listEstCeldas
                 ef.alto = 50
                 ef.ancho = 350
-                ef.Context = "Seleccione Proveedor".ToUpper
+                ef.Context = "Seleccione Tienda".ToUpper
                 ef.ShowDialog()
                 Dim bandera As Boolean = False
                 bandera = ef.band
@@ -251,7 +251,8 @@ Public Class R_KardexCreditoPagos
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         _Inter = _Inter + 1
         If _Inter = 1 Then
-            Me.WindowState = FormWindowState.Normal
+            Me.WindowState = FormWindowState.Maximized
+
 
         Else
             Me.Opacity = 100

@@ -4613,7 +4613,7 @@ Public Class AccesoLogica
     End Function
 
 
-    Public Shared Function L_prReporteCreditoGeneralCompras(fechaI As String, fechaF As String) As DataTable
+    Public Shared Function L_prReporteCreditoGeneralCompras(fechaI As String, fechaF As String, Tipo As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
@@ -4622,7 +4622,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@fechaI", fechaI))
         _listParam.Add(New Datos.DParametro("@fechaF", fechaF))
         _listParam.Add(New Datos.DParametro("@yduact", L_Usuario))
-
+        _listParam.Add(New Datos.DParametro("@TipoPersona", Tipo))
         _Tabla = D_ProcedimientoConParam("sp_Mam_VentasCredito", _listParam)
 
         Return _Tabla
@@ -4779,7 +4779,7 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
-    Public Shared Function L_prReporteCreditoProveedoresTodosCuentas(fechaI As String, fechaF As String, _numiCliente As String) As DataTable
+    Public Shared Function L_prReporteCreditoProveedoresTodosCuentas(fechaI As String, fechaF As String, _numiCliente As String, Tipo As Integer) As DataTable
         Dim _Tabla As DataTable
 
         Dim _listParam As New List(Of Datos.DParametro)
@@ -4788,6 +4788,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@fechaI", fechaI))
         _listParam.Add(New Datos.DParametro("@fechaF", fechaF))
         _listParam.Add(New Datos.DParametro("@yduact", L_Usuario))
+        _listParam.Add(New Datos.DParametro("@TipoPersona", Tipo))
         _listParam.Add(New Datos.DParametro("@cliente", _numiCliente))
         _Tabla = D_ProcedimientoConParam("sp_Mam_VentasCredito", _listParam)
 
@@ -4861,6 +4862,16 @@ Public Class AccesoLogica
 
         Dim _listParam As New List(Of Datos.DParametro)
         _listParam.Add(New Datos.DParametro("@tipo", 17))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_VentasCredito", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_fnListarProveedoresCreditosTiendas() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 19))
         _Tabla = D_ProcedimientoConParam("sp_Mam_VentasCredito", _listParam)
 
         Return _Tabla
