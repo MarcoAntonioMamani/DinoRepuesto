@@ -37,7 +37,7 @@ Public Class F0_CompraTienda
         _prInhabiliitar()
         grCompra.Focus()
         _prAsignarPermisos()
-        Me.Text = "COMPRAS"
+        Me.Text = "PRESTAMOS"
         PanelDetalle.Height = 250
         MSuperTabControl.SelectedTabIndex = 0
     End Sub
@@ -131,11 +131,17 @@ Public Class F0_CompraTienda
 
         grCompra.Enabled = True
         PanelNavegacion.Enabled = True
-        grdetalle.RootTable.Columns("img").Visible = False
+
         If (GPanelProductos.Visible = True) Then
             _DesHabilitarProductos()
         End If
         btnAgregar.Visible = False
+
+        Try
+            grdetalle.RootTable.Columns("img").Visible = False
+        Catch ex As Exception
+
+        End Try
     End Sub
     Private Sub _prhabilitar()
         grCompra.Enabled = False
@@ -151,7 +157,7 @@ Public Class F0_CompraTienda
             cbSucursal.ReadOnly = False
         End If
 
-        swTipoVenta.IsReadOnly = False
+        swTipoVenta.IsReadOnly = True
         btnGrabar.Enabled = True
 
 
@@ -200,6 +206,7 @@ Public Class F0_CompraTienda
         swTipoVenta.Value = False
         _CodProveedor = 0
         tbFechaVenta.Value = Now.Date
+        tbFechaVenc.Value = Now.Date
         tbFechaVenc.Visible = True
         lbCredito.Visible = True
         tbCodProv.Clear()
@@ -214,7 +221,7 @@ Public Class F0_CompraTienda
         tbCodControl.Clear()
         tbNDui.Clear()
         tbSACF.Clear()
-
+        tbNFactura.Text = "0"
         _prCargarDetalleVenta(-1)
         CType(grdetalle.DataSource, DataTable).Rows.Clear()
         MSuperTabControl.SelectedTabIndex = 0
@@ -1084,7 +1091,7 @@ Public Class F0_CompraTienda
             If res Then
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-                ToastNotification.Show(Me, "Código de Compra ".ToUpper + tbCodigo.Text + " Grabado con Exito.".ToUpper,
+                ToastNotification.Show(Me, "Código de Prestamo ".ToUpper + tbCodigo.Text + " Grabado con Exito.".ToUpper,
                                           img, 2000,
                                           eToastGlowColor.Green,
                                           eToastPosition.TopCenter
@@ -1094,7 +1101,7 @@ Public Class F0_CompraTienda
                 _Limpiar()
             Else
                 Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-                ToastNotification.Show(Me, "La Compra no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                ToastNotification.Show(Me, "El Prestamo no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
             End If
         Catch ex As Exception
@@ -1184,7 +1191,7 @@ Public Class F0_CompraTienda
         If res Then
 
             Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-            ToastNotification.Show(Me, "Código de Compra ".ToUpper + tbCodigo.Text + " Modificado con Exito.".ToUpper,
+            ToastNotification.Show(Me, "Código de Prestamo ".ToUpper + tbCodigo.Text + " Modificado con Exito.".ToUpper,
                                       img, 2000,
                                       eToastGlowColor.Green,
                                       eToastPosition.TopCenter
@@ -1196,7 +1203,7 @@ Public Class F0_CompraTienda
 
         Else
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Compra no pudo ser Modificada".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            ToastNotification.Show(Me, "El Prestamo no pudo ser Modificada".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
 
         End If
     End Sub
@@ -1327,7 +1334,7 @@ Public Class F0_CompraTienda
                     End If
                     Dim listEstCeldas As New List(Of Modelo.Celda)
                     listEstCeldas.Add(New Modelo.Celda("ydnumi,", True, "COD ORIG.", 90))
-                    listEstCeldas.Add(New Modelo.Celda("ydcod", True, "COD PROV.", 90))
+                    listEstCeldas.Add(New Modelo.Celda("ydcod", True, "COD Tienda.", 90))
                     listEstCeldas.Add(New Modelo.Celda("yddesc", True, "NOMBRE", 280))
                     listEstCeldas.Add(New Modelo.Celda("yddctnum", True, "N. Documento".ToUpper, 150))
                     listEstCeldas.Add(New Modelo.Celda("yddirec", True, "DIRECCION", 220))
@@ -1760,7 +1767,7 @@ salirIf:
         Dim res As Boolean = L_fnVerificarSiSeContabilizo(tbCodigo.Text)
         If res Then
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Compra no puede ser Modificada porque ya fue contabilizada".ToUpper, img, 3500, eToastGlowColor.Red, eToastPosition.TopCenter)
+            ToastNotification.Show(Me, "El Prestamo no puede ser Modificada porque ya fue contabilizada".ToUpper, img, 3500, eToastGlowColor.Red, eToastPosition.TopCenter)
         Else
             If (grCompra.RowCount > 0) Then
                 _prhabilitar()
@@ -1810,7 +1817,7 @@ salirIf:
             Dim res1 As Boolean = L_fnVerificarPagosCompras(tbCodigo.Text)
             If res1 Then
                 Dim img As Bitmap = New Bitmap(My.Resources.WARNING, 50, 50)
-                ToastNotification.Show(Me, "No se puede eliminar la Compra con código ".ToUpper + tbCodigo.Text + ", porque tiene pagos realizados, por favor primero elimine los pagos correspondientes a esta compra".ToUpper,
+                ToastNotification.Show(Me, "No se puede eliminar el Prestamo con código ".ToUpper + tbCodigo.Text + ", porque tiene pagos realizados, por favor primero elimine los pagos correspondientes a esta compra".ToUpper,
                                           img, 5000,
                                           eToastGlowColor.Green,
                                           eToastPosition.TopCenter)
@@ -1823,7 +1830,7 @@ salirIf:
         Dim result As Boolean = L_fnVerificarSiSeContabilizo(tbCodigo.Text)
         If result Then
             Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-            ToastNotification.Show(Me, "La Compra no puede ser Eliminada porque ya fue contabilizada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.TopCenter)
+            ToastNotification.Show(Me, "El Prestamo no puede ser Eliminada porque ya fue contabilizada".ToUpper, img, 4500, eToastGlowColor.Red, eToastPosition.TopCenter)
         End If
         Dim ef = New Efecto
         ef.tipo = 2
@@ -1838,7 +1845,7 @@ salirIf:
             If res Then
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
-                ToastNotification.Show(Me, "Código de Compra ".ToUpper + tbCodigo.Text + " eliminado con Exito.".ToUpper,
+                ToastNotification.Show(Me, "Código de Prestamo ".ToUpper + tbCodigo.Text + " eliminado con Exito.".ToUpper,
                                           img, 2000,
                                           eToastGlowColor.Green,
                                           eToastPosition.TopCenter)
@@ -1959,7 +1966,15 @@ salirIf:
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        _Inter = _Inter + 1
+        If _Inter = 1 Then
+            Me.WindowState = FormWindowState.Maximized
 
+
+        Else
+            Me.Opacity = 100
+            Timer1.Enabled = False
+        End If
     End Sub
 
     Private Sub swMoneda_ValueChanged(sender As Object, e As EventArgs) Handles swMoneda.ValueChanged

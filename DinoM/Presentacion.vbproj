@@ -186,6 +186,12 @@
     <Compile Include="Control\UCLavadero.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Creditos\F0_CompraTienda.Designer.vb">
+      <DependentUpon>F0_CompraTienda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Creditos\F0_CompraTienda.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Creditos\F1Tienda.Designer.vb">
       <DependentUpon>F1Tienda.vb</DependentUpon>
     </Compile>
@@ -904,6 +910,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Control\UCLavadero.resx">
       <DependentUpon>UCLavadero.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creditos\F0_CompraTienda.resx">
+      <DependentUpon>F0_CompraTienda.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Creditos\F1Tienda.resx">
       <DependentUpon>F1Tienda.vb</DependentUpon>

@@ -1141,6 +1141,16 @@ Public Class P_Principal
         frm.Show()
     End Sub
 
+    Private Sub btComPrestamos_Click(sender As Object, e As EventArgs) Handles btComPrestamos.Click
+        Dim frm As New F0_CompraTienda
+        frm._nameButton = btComPrestamos.Name
+        Dim tab3 As SuperTabItem = superTabControl3.CreateTab(frm.Text)
+        frm._tab = tab3
+        frm._modulo = FP_COMPRAS
+
+        frm.Show()
+    End Sub
+
     'Private Sub btnCredPagoCliente_Click(sender As Object, e As EventArgs) Handles btnCredPagoCliente.Click
     '    SideNav1.IsMenuExpanded = False
     '    Ventana.Select()

@@ -747,6 +747,7 @@ Partial Class F0_CompraTienda
         Me.lbTipoCambio.Size = New System.Drawing.Size(140, 28)
         Me.lbTipoCambio.TabIndex = 675
         Me.lbTipoCambio.Text = "Tipo de Cambio:"
+        Me.lbTipoCambio.Visible = False
         '
         'tbTipoCambio
         '
@@ -762,6 +763,7 @@ Partial Class F0_CompraTienda
         Me.tbTipoCambio.Name = "tbTipoCambio"
         Me.tbTipoCambio.Size = New System.Drawing.Size(176, 26)
         Me.tbTipoCambio.TabIndex = 674
+        Me.tbTipoCambio.Visible = False
         '
         'LabelX14
         '
@@ -779,6 +781,7 @@ Partial Class F0_CompraTienda
         Me.LabelX14.Size = New System.Drawing.Size(120, 28)
         Me.LabelX14.TabIndex = 673
         Me.LabelX14.Text = "Tipo Moneda:"
+        Me.LabelX14.Visible = False
         '
         'swMoneda
         '
@@ -799,6 +802,7 @@ Partial Class F0_CompraTienda
         Me.swMoneda.TabIndex = 672
         Me.swMoneda.Value = True
         Me.swMoneda.ValueObject = "Y"
+        Me.swMoneda.Visible = False
         '
         'swRetencion
         '
@@ -954,6 +958,7 @@ Partial Class F0_CompraTienda
         Me.GroupPanelFactura2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanelFactura2.TabIndex = 366
         Me.GroupPanelFactura2.Text = "DATOS FACTURACIÓN"
+        Me.GroupPanelFactura2.Visible = False
         '
         'lbNFactura
         '
@@ -1264,7 +1269,7 @@ Partial Class F0_CompraTienda
         Me.LabelX5.SingleLineColor = System.Drawing.SystemColors.Control
         Me.LabelX5.Size = New System.Drawing.Size(172, 28)
         Me.LabelX5.TabIndex = 232
-        Me.LabelX5.Text = "Tipo Compra:"
+        Me.LabelX5.Text = "Tipo Prestamo:"
         '
         'LabelX4
         '
@@ -1348,8 +1353,6 @@ Partial Class F0_CompraTienda
         Me.swTipoVenta.Size = New System.Drawing.Size(160, 27)
         Me.swTipoVenta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.swTipoVenta.TabIndex = 5
-        Me.swTipoVenta.Value = True
-        Me.swTipoVenta.ValueObject = "Y"
         '
         'tbFechaVenta
         '
@@ -1537,7 +1540,7 @@ Partial Class F0_CompraTienda
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 761.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 726.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1159, 726)
         Me.TableLayoutPanel1.TabIndex = 3
         '
