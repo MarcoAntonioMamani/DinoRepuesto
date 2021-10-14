@@ -138,7 +138,11 @@ Public Class F0_CompraTienda
         btnAgregar.Visible = False
 
         Try
-            grdetalle.RootTable.Columns("img").Visible = False
+            If (Not IsNothing(grdetalle.DataSource)) Then
+                grdetalle.RootTable.Columns("img").Visible = False
+            End If
+
+
         Catch ex As Exception
 
         End Try
@@ -1861,6 +1865,9 @@ salirIf:
     End Sub
 
     Private Sub grVentas_SelectionChanged(sender As Object, e As EventArgs) Handles grCompra.SelectionChanged
+        If (grCompra.RowCount >= 0 And grCompra.Row >= 0) Then
+            _prMostrarRegistro(grCompra.Row)
+        End If
 
     End Sub
 
