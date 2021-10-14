@@ -9,7 +9,8 @@ Imports System.Threading
 Imports System.Drawing.Text
 Imports System.Reflection
 Imports System.Runtime.InteropServices
-Public Class F0_MCompras
+
+Public Class F0_CompraTienda
     Dim _Inter As Integer = 0
 
 #Region "Variables Globales"
@@ -598,7 +599,7 @@ Public Class F0_MCompras
 
     Private Sub _prCargarCompra()
         Dim dt As New DataTable
-        dt = L_fnGeneralCompras(0)
+        dt = L_fnGeneralCompras(1)
         grCompra.DataSource = dt
         grCompra.RetrieveStructure()
         grCompra.AlternatingColors = True
@@ -1079,7 +1080,7 @@ Public Class F0_MCompras
                                                   tbtotal.Value, CType(grdetalle.DataSource, DataTable),
                                                   _detalleCompras, IIf(swEmision.Value = True, 1, 0),
                                                   tbNFactura.Text, IIf(swConsigna.Value = True, 1, 0),
-                                                  IIf(swRetencion.Value = True, 1, 0), IIf(swMoneda.Value = True, 1, tbTipoCambio.Value), 0)
+                                                  IIf(swRetencion.Value = True, 1, 0), IIf(swMoneda.Value = True, 1, tbTipoCambio.Value), 1)
             If res Then
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
@@ -1318,11 +1319,11 @@ Public Class F0_MCompras
 
                     Dim dt As DataTable
 
-                    dt = L_fnListarProveedores()
+                    dt = L_fnListarTiendas()
                     '              a.ydnumi, a.ydcod, a.yddesc, a.yddctnum, a.yddirec
                     ',a.ydtelf1 ,a.ydfnac 
                     If dt.Rows.Count = 0 Then
-                        Throw New Exception("Lista de proveedores vacia")
+                        Throw New Exception("Lista de Tiendas vacia")
                     End If
                     Dim listEstCeldas As New List(Of Modelo.Celda)
                     listEstCeldas.Add(New Modelo.Celda("ydnumi,", True, "COD ORIG.", 90))
@@ -1339,7 +1340,7 @@ Public Class F0_MCompras
                     ef.listEstCeldas = listEstCeldas
                     ef.alto = 50
                     ef.ancho = 350
-                    ef.Context = "Seleccione Proveedor".ToUpper
+                    ef.Context = "Seleccione Tienda".ToUpper
                     ef.ShowDialog()
                     Dim bandera As Boolean = False
                     bandera = ef.band
@@ -1853,10 +1854,6 @@ salirIf:
     End Sub
 
     Private Sub grVentas_SelectionChanged(sender As Object, e As EventArgs) Handles grCompra.SelectionChanged
-        If (grCompra.RowCount >= 0 And grCompra.Row >= 0) Then
-            _prMostrarRegistro(grCompra.Row)
-        End If
-
 
     End Sub
 
@@ -1891,11 +1888,7 @@ salirIf:
         _PrimerRegistro()
     End Sub
     Private Sub grVentas_KeyDown(sender As Object, e As KeyEventArgs) Handles grCompra.KeyDown
-        If e.KeyData = Keys.Enter Then
-            MSuperTabControl.SelectedTabIndex = 0
-            grdetalle.Focus()
 
-        End If
     End Sub
 
 
@@ -1966,14 +1959,7 @@ salirIf:
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        _Inter = _Inter + 1
-        If _Inter = 1 Then
-            Me.WindowState = FormWindowState.Normal
 
-        Else
-            Me.Opacity = 100
-            Timer1.Enabled = False
-        End If
     End Sub
 
     Private Sub swMoneda_ValueChanged(sender As Object, e As EventArgs) Handles swMoneda.ValueChanged
@@ -1999,8 +1985,5 @@ salirIf:
     End Sub
 
 #End Region
-
-
-
 
 End Class
