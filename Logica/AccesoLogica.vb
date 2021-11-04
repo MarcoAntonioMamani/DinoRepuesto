@@ -1918,6 +1918,18 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 
+    Public Shared Function L_fnObtenerStockAlmacen(dtProducto As DataTable) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@TV0011", "", dtProducto))
+
+        _Tabla = D_ProcedimientoConParam("ValidarStock", _listParam)
+
+        Return _Tabla
+    End Function
+
     Public Shared Function L_fnGrabarCompra(_canumi As String, _caalm As Integer, _cafdoc As String, _caTy4prov As Integer, _catven As Integer, _cafvcr As String,
                                            _camon As Integer, _caobs As String,
                                            _cadesc As Double, _catotal As Double, detalle As DataTable, detalleCompra As DataTable, _emision As Integer, _numemision As Integer,
