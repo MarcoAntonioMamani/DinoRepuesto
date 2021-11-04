@@ -1518,9 +1518,9 @@ Partial Class F1_Productos
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox, Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.CloseBox})
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel1)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel2)
-        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl_Imagenes_DetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl_Imagenes_DetalleProducto.Location = New System.Drawing.Point(0, 0)
@@ -1681,10 +1681,10 @@ Partial Class F1_Productos
         Me.SuperTabControlPanel3.Controls.Add(Me.Panel6)
         Me.SuperTabControlPanel3.Controls.Add(Me.Panel5)
         Me.SuperTabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 33)
+        Me.SuperTabControlPanel3.Location = New System.Drawing.Point(0, 31)
         Me.SuperTabControlPanel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SuperTabControlPanel3.Name = "SuperTabControlPanel3"
-        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(573, 393)
+        Me.SuperTabControlPanel3.Size = New System.Drawing.Size(587, 396)
         Me.SuperTabControlPanel3.TabIndex = 0
         Me.SuperTabControlPanel3.TabItem = Me.SuperTabItem1
         '
@@ -1695,7 +1695,7 @@ Partial Class F1_Productos
         Me.Panel6.Location = New System.Drawing.Point(0, 121)
         Me.Panel6.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(573, 272)
+        Me.Panel6.Size = New System.Drawing.Size(587, 275)
         Me.Panel6.TabIndex = 1
         '
         'GroupPanel4
@@ -1709,7 +1709,7 @@ Partial Class F1_Productos
         Me.GroupPanel4.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(573, 272)
+        Me.GroupPanel4.Size = New System.Drawing.Size(587, 275)
         '
         '
         '
@@ -1752,7 +1752,7 @@ Partial Class F1_Productos
         Me.JGr_Descuentos.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.JGr_Descuentos.Name = "JGr_Descuentos"
         Me.JGr_Descuentos.RowFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.JGr_Descuentos.Size = New System.Drawing.Size(567, 249)
+        Me.JGr_Descuentos.Size = New System.Drawing.Size(581, 252)
         Me.JGr_Descuentos.TabIndex = 0
         '
         'Panel5
@@ -1772,7 +1772,7 @@ Partial Class F1_Productos
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(573, 121)
+        Me.Panel5.Size = New System.Drawing.Size(587, 121)
         Me.Panel5.TabIndex = 0
         '
         'btGrabarP
