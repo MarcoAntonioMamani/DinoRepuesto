@@ -3431,6 +3431,15 @@ Public Class AccesoLogica
         _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
         Return _Tabla
     End Function
+    Public Shared Function l_ReporteMovimiento(MovimientoId As Integer) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+        _listParam.Add(New Datos.DParametro("@tipo", 7))
+        _listParam.Add(New Datos.DParametro("@Id", MovimientoId))
+        _listParam.Add(New Datos.DParametro("@usuarioReg", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("sp_Mam_Movimiento", _listParam)
+        Return _Tabla
+    End Function
 #End Region
 
 #Region "TI002 MOVIMIENTOS "

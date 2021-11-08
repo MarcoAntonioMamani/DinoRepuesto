@@ -592,6 +592,27 @@ Public Class F0_MovimientoNuevo
         End If
 
     End Sub
+
+    Private Sub P_GenerarReporte()
+        Dim dt As DataTable = l_ReporteMovimiento(tbCodigo.Text)
+
+
+        If Not IsNothing(P_Global.Visualizador) Then
+            P_Global.Visualizador.Close()
+        End If
+
+        P_Global.Visualizador = New Visualizador
+
+        Dim objrep As New R_Movimiento
+        objrep.SetDataSource(dt)
+        objrep.SetParameterValue("usuario", L_Usuario)
+
+        P_Global.Visualizador.CrGeneral.ReportSource = objrep 'Comentar
+        P_Global.Visualizador.ShowDialog() 'Comentar
+        P_Global.Visualizador.BringToFront()
+
+
+    End Sub
 #End Region
 
 #Region "Eventos Formulario"
@@ -1276,6 +1297,10 @@ Public Class F0_MovimientoNuevo
         End Try
 
 
+    End Sub
+
+    Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
+        P_GenerarReporte()
     End Sub
 
 #End Region
