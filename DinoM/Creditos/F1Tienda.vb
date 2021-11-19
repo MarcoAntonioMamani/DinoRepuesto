@@ -53,7 +53,7 @@ Public Class F1Tienda
         Dim ico As Icon = Icon.FromHandle(blah.GetHicon())
         Me.Icon = ico
         cbZona.ReadOnly = True
-
+        SuperTabControl1.SelectedTabIndex = 1
     End Sub
     Private Sub P_IniciarMap()
         Gmc_Cliente.DragButton = MouseButtons.Left
@@ -497,6 +497,39 @@ Public Class F1Tienda
             tbNombre.BackColor = Color.White
             MEP.SetError(tbNombre, "")
         End If
+        If tbDireccion.Text = String.Empty Then
+            tbDireccion.BackColor = Color.Red
+            MEP.SetError(tbDireccion, "ingrese la Direccion de la Tienda!".ToUpper)
+            _ok = False
+        Else
+            tbDireccion.BackColor = Color.White
+            MEP.SetError(tbDireccion, "")
+        End If
+        If tbTelf1.Text = String.Empty Then
+            tbTelf1.BackColor = Color.Red
+            MEP.SetError(tbTelf1, "ingrese el teléfono de la Tienda!".ToUpper)
+            _ok = False
+        Else
+            tbTelf1.BackColor = Color.White
+            MEP.SetError(tbTelf1, "")
+        End If
+        If tbTelf2.Text = String.Empty Then
+            tbTelf2.BackColor = Color.Red
+            MEP.SetError(tbTelf2, "ingrese Num. Cta. de la Tienda!".ToUpper)
+            _ok = False
+        Else
+            tbTelf2.BackColor = Color.White
+            MEP.SetError(tbTelf2, "")
+        End If
+        If tbObs.Text = String.Empty Then
+            tbObs.BackColor = Color.Red
+            MEP.SetError(tbObs, "ingrese Condiciones de Pago!".ToUpper)
+            _ok = False
+        Else
+            tbObs.BackColor = Color.White
+            MEP.SetError(tbObs, "")
+        End If
+
         If (cbZona.SelectedIndex < 0) Then
 
             If (CType(cbZona.DataSource, DataTable).Rows.Count > 0) Then
@@ -508,6 +541,14 @@ Public Class F1Tienda
             If (CType(cbTipoDoc.DataSource, DataTable).Rows.Count > 0) Then
                 cbTipoDoc.SelectedIndex = 0
             End If
+        End If
+        If tbNdoc.Text = String.Empty Then
+            tbNdoc.BackColor = Color.Red
+            MEP.SetError(tbNdoc, "Ingrese Nro. de Documento!".ToUpper)
+            _ok = False
+        Else
+            tbNdoc.BackColor = Color.White
+            MEP.SetError(tbNdoc, "")
         End If
 
         MHighlighterFocus.UpdateHighlights()
@@ -542,11 +583,11 @@ Public Class F1Tienda
         listEstCeldas.Add(New Modelo.Celda("ydlongi", False))
         listEstCeldas.Add(New Modelo.Celda("ydprconsu", False))
         listEstCeldas.Add(New Modelo.Celda("ydobs", True, "Observacion".ToUpper, 180))
-        listEstCeldas.Add(New Modelo.Celda("ydfnac", True, "Fecha Nacimiento".ToUpper, 150))
+        listEstCeldas.Add(New Modelo.Celda("ydfnac", False, "Fecha Nacimiento".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("ydnomfac", False, "Factura".ToUpper, 200))
         listEstCeldas.Add(New Modelo.Celda("ydtip", False))
         listEstCeldas.Add(New Modelo.Celda("ydnit", False, "Nit".ToUpper, 120))
-        listEstCeldas.Add(New Modelo.Celda("ydfecing", False))
+        listEstCeldas.Add(New Modelo.Celda("ydfecing", True, "Fecha Registro".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("ydultvent", False))
         listEstCeldas.Add(New Modelo.Celda("ydimg", False))
         listEstCeldas.Add(New Modelo.Celda("ydfact", False))
@@ -554,7 +595,7 @@ Public Class F1Tienda
         listEstCeldas.Add(New Modelo.Celda("yduact", False))
         listEstCeldas.Add(New Modelo.Celda("ydrut", False))
         listEstCeldas.Add(New Modelo.Celda("visita", False, "FRECUENCIA DE VISITA", 120))
-        listEstCeldas.Add(New Modelo.Celda("zona", True, "ZONA".ToUpper, 150))
+        listEstCeldas.Add(New Modelo.Celda("zona", False, "ZONA".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("documento".ToUpper, True, "Tipo Documento".ToUpper, 150))
         listEstCeldas.Add(New Modelo.Celda("ydnumivend", False))
         listEstCeldas.Add(New Modelo.Celda("vendedor", False))
@@ -776,5 +817,9 @@ Public Class F1Tienda
             Me.Opacity = 100
             Timer1.Enabled = False
         End If
+    End Sub
+
+    Private Sub lbgrupo1_Click(sender As Object, e As EventArgs) Handles lbgrupo1.Click
+
     End Sub
 End Class

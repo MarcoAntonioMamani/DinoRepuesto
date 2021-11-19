@@ -418,7 +418,7 @@ Public Class F0_MCompras
 
         End With
         With grdetalle.RootTable.Columns("CodigoMarca")
-            .Caption = "Cod.Fabrica"
+            .Caption = "Cod.Marca"
             .Width = 120
             .WordWrap = True
             .MaxLines = 2

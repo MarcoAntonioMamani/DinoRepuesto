@@ -482,7 +482,7 @@ Public Class F0_DetalleCompras
                 Dim nombre As String = dt.Rows(i).Item("yfnumi").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Categoria").ToString.ToUpper +
                     " " + dt.Rows(i).Item("CodigoFabrica").ToString.ToUpper +
-                    " " + dt.Rows(i).Item("Marca").ToString.ToUpper +
+                    " " + dt.Rows(i).Item("CodigoMarca").ToString.ToUpper +
                     " " + dt.Rows(i).Item("Medida").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo2").ToString.ToUpper +
                     " " + dt.Rows(i).Item("grupo1").ToString.ToUpper +

@@ -158,7 +158,7 @@ Public Class F0_CompraTienda
         If (tbCodigo.Text.Length > 0) Then
             cbSucursal.ReadOnly = True
         Else
-            cbSucursal.ReadOnly = False
+            'cbSucursal.ReadOnly = False
         End If
 
         swTipoVenta.IsReadOnly = True
@@ -283,6 +283,16 @@ Public Class F0_CompraTienda
         Else
             lbTipoCambio.Visible = True
             tbTipoCambio.Visible = True
+        End If
+
+        If (gi_userSuc > 0) Then
+            Dim dt As DataTable = CType(cbSucursal.DataSource, DataTable)
+            For i As Integer = 0 To dt.Rows.Count - 1 Step 1
+
+                If (dt.Rows(i).Item("aanumi") = gi_userSuc) Then
+                    cbSucursal.SelectedIndex = i
+                End If
+            Next
         End If
     End Sub
     Public Sub _prMostrarRegistro(_N As Integer)
@@ -430,7 +440,7 @@ Public Class F0_CompraTienda
 
         End With
         With grdetalle.RootTable.Columns("CodigoMarca")
-            .Caption = "Cod.Fabrica"
+            .Caption = "Cod.Marca"
             .Width = 120
             .WordWrap = True
             .MaxLines = 2
