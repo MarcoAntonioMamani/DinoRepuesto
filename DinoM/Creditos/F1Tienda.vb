@@ -513,17 +513,10 @@ Public Class F1Tienda
             tbTelf1.BackColor = Color.White
             MEP.SetError(tbTelf1, "")
         End If
-        If tbTelf2.Text = String.Empty Then
-            tbTelf2.BackColor = Color.Red
-            MEP.SetError(tbTelf2, "ingrese Num. Cta. de la Tienda!".ToUpper)
-            _ok = False
-        Else
-            tbTelf2.BackColor = Color.White
-            MEP.SetError(tbTelf2, "")
-        End If
+
         If tbObs.Text = String.Empty Then
             tbObs.BackColor = Color.Red
-            MEP.SetError(tbObs, "ingrese Condiciones de Pago!".ToUpper)
+            MEP.SetError(tbObs, "Ingrese Observaciones!".ToUpper)
             _ok = False
         Else
             tbObs.BackColor = Color.White

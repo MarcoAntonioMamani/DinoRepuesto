@@ -857,18 +857,18 @@ Public Class F1_Productos
             End If
 
         End If
-        If cbgrupo1.SelectedIndex < 0 Then
+        If cbgrupo1.SelectedIndex <= 0 Then
             cbgrupo1.BackColor = Color.Red
-            MEP.SetError(cbgrupo1, "Selecciones grupo del producto!".ToUpper)
+            MEP.SetError(cbgrupo1, "Seleccione Marca del producto diferente a No Existe!".ToUpper)
             _ok = False
         Else
             cbgrupo1.BackColor = Color.White
             MEP.SetError(cbgrupo1, "")
         End If
 
-        If cbgrupo2.SelectedIndex < 0 Then
+        If cbgrupo2.SelectedIndex <= 0 Then
             cbgrupo2.BackColor = Color.Red
-            MEP.SetError(cbgrupo2, "Selecciones grupo del producto!".ToUpper)
+            MEP.SetError(cbgrupo2, "Seleccione Procedencia del producto diferente a No Existe!".ToUpper)
             _ok = False
         Else
             cbgrupo2.BackColor = Color.White
@@ -898,6 +898,7 @@ Public Class F1_Productos
             cbUMed.BackColor = Color.White
             MEP.SetError(cbUMed, "")
         End If
+
 
 
         MHighlighterFocus.UpdateHighlights()
@@ -1557,9 +1558,6 @@ Public Class F1_Productos
 
     End Sub
 
-    Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
-
-    End Sub
 
     Private Sub cbgrupo5_ValueChanged(sender As Object, e As EventArgs) Handles cbgrupo5.ValueChanged
         If cbgrupo5.SelectedIndex < 0 And cbgrupo5.Text <> String.Empty Then
